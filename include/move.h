@@ -153,7 +153,7 @@ struct MoveInfo
     bool32 alwaysHitsInHailSnow:1;
     bool32 alwaysHitsOnSameType:1; // Always hits if user is of same type as move
     bool32 noAffectOnSameTypeTarget:1; // Fails if target is of same type as move
-    bool32 accIncreaseByTenOnSameType:1; // Accuracy is increased by 10% if user is of same type as move
+    bool32 accDecreaseIfUserNotSameType:1; // Accuracy is increased by 10% if user is of same type as move
     bool32 ignoreGhostImmunity:1;
     bool32 stabbingMove:1;
     bool32 padding1:13;
