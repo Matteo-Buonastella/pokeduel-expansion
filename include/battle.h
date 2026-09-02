@@ -530,7 +530,7 @@ struct BattlerState
     u32 canPickupItem:1;
     u32 ateBoost:1;
     u32 wasAboveHalfHp:1; // For Berserk, Emergency Exit, Wimp Out and Anger Shell.
-    enum Species commanderSpecies:11;
+    enum Species commanderSpecies:12;
     u32 selectionScriptFinished:1;
     u32 lastMoveTarget:3; // The last target on which each mon used a move, for the sake of Instruct
     // End of Word
@@ -539,7 +539,7 @@ struct BattlerState
     u16 notOnField:1;
     u16 originalBattlerPartyId:4;
     u16 isFirstTurn:2; // Starts at 2 on switch in and counts down during end turn
-    u16 padding:8;
+    u16 padding:7;
     // End of Word
 };
 
@@ -552,11 +552,11 @@ struct PartyState
     u32 transformZeroToHero:1;
     u32 supersweetSyrup:1;
     u32 timesGotHit:8;
-    enum Species changedSpecies:11; // For forms when multiple mons can change into the same Pokémon.
+    enum Species changedSpecies:12; // For forms when multiple mons can change into the same Pokémon.
     u32 sentOut:1;
     u32 isKnockedOff:1;
     u32 freezeTurns:2;
-    u32 padding:3;
+    u32 padding:2;
     enum Item usedHeldItem;
 };
 
