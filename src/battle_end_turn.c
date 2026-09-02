@@ -74,8 +74,8 @@ static bool32 HandleEndTurnVarious(enum BattlerId battler)
         if(gBattleMons[i].volatiles.metalmorphTimer > 0)
             gBattleMons[i].volatiles.metalmorphTimer--;
 
-        if (gBattleMons[i].volatiles.laserFocusTimer > 0 && --gBattleMons[i].volatiles.laserFocusTimer == 0)
-            gBattleMons[i].volatiles.laserFocus = FALSE;
+        if (gBattleMons[i].volatiles.laserFocusTimer > 0)
+            gBattleMons[i].volatiles.laserFocusTimer--;
 
         gBattleStruct->battlerState[i].wasAboveHalfHp = gBattleMons[i].hp > gBattleMons[i].maxHP / 2;
     }
