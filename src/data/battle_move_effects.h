@@ -1905,6 +1905,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+    [EFFECT_REST] =
+    {
+        .battleScript = BattleScript_EffectNapTime,
+        .battleTvScore = 7,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE,
+        .encourageEncore = TRUE,
+    },
+
 
     [EFFECT_SECRET_POWER] =
     {
