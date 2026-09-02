@@ -745,4 +745,7 @@ extern const u8 BattleScript_Stockpile[];
 extern const u8 BattleScript_Memento[];
 extern const u8 BattleScript_TakeHeart[];
 
+//Pokeduel Battlescripts
+extern const u8 BattleScript_EffectNapTime[];
+
 #endif // GUARD_BATTLE_SCRIPTS_H

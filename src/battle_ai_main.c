@@ -2254,6 +2254,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (IS_BATTLER_OF_TYPE(battlerAtk, GetMoveType(gBattleMons[battlerAtk].moves[0])))
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_NAP_TIME:
+        if (!CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE)
+        || !AI_CanPutToSleep(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], move, gAiLogicData->partnerMove))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_REST:
         if (!CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE))
             ADJUST_SCORE(-10);
@@ -4650,6 +4655,50 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                 ADJUST_SCORE(DECENT_EFFECT);
         }
         break;
+    case EFFECT_NAP_TIME:
+        //Check if Nap Time can be used
+        if (!(CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE))
+        || !AI_CanPutToSleep(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], move, gAiLogicData->partnerMove))
+        {
+            break;
+        }
+        //Specifc check for Truant users
+        else if(CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE)
+        && AI_CanPutToSleep(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], move, gAiLogicData->partnerMove)
+        && aiData->abilities[battlerAtk] == ABILITY_TRUANT
+        && HasMoveUsableWhileAsleep(battlerAtk))
+        {
+            ADJUST_SCORE(BEST_EFFECT);
+        }
+        //Check if user benefits from Nap Time recovery
+        else if(ShouldRecover(battlerAtk, battlerDef, move, 100))
+        {
+            if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_CURE_SLP
+             || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_CURE_STATUS
+             || (AI_GetWeather() & B_WEATHER_RAIN && gBattleStruct->weatherDuration != 1 && aiData->abilities[battlerAtk] == ABILITY_HYDRATION && aiData->holdEffects[battlerAtk] != HOLD_EFFECT_UTILITY_UMBRELLA))
+            {
+                ADJUST_SCORE(BEST_EFFECT);
+            }
+            else if (HasMoveUsableWhileAsleep(battlerAtk))
+            {
+                ADJUST_SCORE(GOOD_EFFECT);
+            }
+            else if (aiData->abilities[battlerAtk] == ABILITY_SHED_SKIN
+                  || aiData->abilities[battlerAtk] == ABILITY_EARLY_BIRD)
+            {
+                ADJUST_SCORE(DECENT_EFFECT);
+            }
+        }
+        //Only check benefits of putting enemy to sleep if user can cure its own sleep or can use moves in its sleep
+        else if(aiData->holdEffects[battlerAtk] == HOLD_EFFECT_CURE_SLP
+        || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_CURE_STATUS
+        || (AI_GetWeather() & B_WEATHER_RAIN && gBattleStruct->weatherDuration != 1 && aiData->abilities[battlerAtk] == ABILITY_HYDRATION && aiData->holdEffects[battlerAtk] != HOLD_EFFECT_UTILITY_UMBRELLA)
+        || HasMoveUsableWhileAsleep(battlerAtk))
+        {
+            IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
+        }
+    break;
+
     case EFFECT_REST:
         if (!(CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE)))
         {

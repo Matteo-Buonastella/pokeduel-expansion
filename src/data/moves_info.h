@@ -23315,6 +23315,33 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_BellyDrum,
     },
 
+    [MOVE_NAP_TIME] =
+    {
+        .name = COMPOUND_STRING("Nap Time"),
+        .description = COMPOUND_STRING(
+            "The presence of\n"
+            "Mokey Mokey causes\n"
+            "everone to get\n"
+            "tired. User and foe\n"
+            "goes to sleep."),
+        .effect = EFFECT_NAP_TIME,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .nonVolatileStatus = MOVE_EFFECT_SLEEP },
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        //Move Categories
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .healingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_Rest,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

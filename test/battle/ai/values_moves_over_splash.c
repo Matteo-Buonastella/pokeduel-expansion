@@ -116,6 +116,7 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 101-200")
         case EFFECT_STAT_CHANGE:
         case EFFECT_HAZE:
         case EFFECT_REST:
+        case EFFECT_NAP_TIME:
         case EFFECT_SNORE:
         case EFFECT_MINIMIZE:
 

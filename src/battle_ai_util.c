@@ -295,6 +295,7 @@ bool32 ShouldRecordStatusMove(enum Move move)
         case EFFECT_DOODLE:
         case EFFECT_ENCORE:
         case EFFECT_HAZE:
+        case EFFECT_NAP_TIME:
         case EFFECT_PARTING_SHOT:
         case EFFECT_PROTECT:
         case EFFECT_REST:

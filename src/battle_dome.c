@@ -4067,6 +4067,7 @@ static bool32 IsDomeComboMove(enum Move move)
     case EFFECT_STICKY_WEB:
     case EFFECT_YAWN:
     case EFFECT_DREAM_EATER:
+    case EFFECT_NAP_TIME:
     case EFFECT_NIGHTMARE:
     case EFFECT_REST:
     case EFFECT_SLEEP_TALK:
