@@ -33163,10 +33163,10 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
 
 [SPECIES_DIVINE_SERPENT_GEH] =
 {
-    .baseHP        = 85,
-    .baseAttack    = 120,
+    .baseHP        = 90,
+    .baseAttack    = 130,
     .baseDefense   = 90,
-    .baseSpAttack  = 75,
+    .baseSpAttack  = 65,
     .baseSpDefense = 80,
     .baseSpeed     = 70,
     .types = MON_TYPES(TYPE_POISON),

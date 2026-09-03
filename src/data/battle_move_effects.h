@@ -1905,7 +1905,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_REST] =
+    [EFFECT_NAP_TIME] =
     {
         .battleScript = BattleScript_EffectNapTime,
         .battleTvScore = 7,
