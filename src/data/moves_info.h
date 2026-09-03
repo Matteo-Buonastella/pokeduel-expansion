@@ -23346,6 +23346,219 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Rest,
     },
 
+    [MOVE_OJAMA_DELTA_HURRICANE] =
+    {
+        .name = COMPOUND_STRING("Ojama D Hurricane"),
+        .description = COMPOUND_STRING(
+            "User spins quickly\n"
+            "creating a hurricane.\n"
+            "This move is both\n"
+            "Normal and Flying\n"
+            "type and hits ghost\n"
+            "monsters."),
+        .effect = EFFECT_TWO_TYPED_MOVE,
+        .power = 100,
+        .type = TYPE_NORMAL,
+        .accuracy = 95,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .type = TYPE_FLYING },
+        //Move Categories
+        .ignoreGhostImmunity = TRUE,
+        .windMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_DragonPulse,
+    },
+
+    [MOVE_TRANSCENDENT_WINGS] =
+    {
+        .name = COMPOUND_STRING("Transcend Wings"),
+        .description = COMPOUND_STRING(
+            "Transcendent Wings\n"
+            "blasts an enormous\n"
+            "wave of air at the foe."),
+        .effect = EFFECT_HIT,
+        .power = 110,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        //Move Categories
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_DragonPulse,
+    },
+
+    [MOVE_PARALYZING_PELLET_BARRAGE] =
+    {
+        .name = COMPOUND_STRING("Pellet Barrage"),
+        .description = COMPOUND_STRING(
+            "Paralyzing Pellet\n"
+            "Barrage hits the\n"
+            "foe with a thousand\n"
+            "blood pellets. It\n"
+            "may paralyze the\n"
+            "foe (10%)."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 10,
+        }),
+        //Move Categories
+        .battleAnimScript = gBattleAnimMove_DragonPulse,
+    },
+
+    [MOVE_CLOCK_PRISON] =
+    {
+        .name = COMPOUND_STRING("Clock Prison"),
+        .description = COMPOUND_STRING(
+            "Lock yourself in\n"
+            "a clock tower prison.\n"
+            "Raises the user's\n"
+            "Defense, Sp.Defense\n"
+            "and Speed."),
+        .effect = EFFECT_STAT_CHANGE,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
+            .defense = 1,
+            .spDef = 1,
+            .speed = 1,
+        }),
+        //Move Cateogories
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_QuiverDance,
+    },
+
+    [MOVE_ULTIMATE_POUND] =
+    {
+        .name = COMPOUND_STRING("Ultimate Pound"),
+        .description = COMPOUND_STRING(
+            "Pummel the foe\n"
+            "with an ultimate\n"
+            "pound. Ignores the\n"
+            "target's stat\n"
+            "changes and bypasses\n"
+            "Protect."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_FIGHTING,
+        .accuracy = 90,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 10,
+        }),
+        //Move Categories
+        .punchingMove = TRUE,
+        .minimizeDoubleDamage = TRUE,
+        .ignoresTargetDefenseEvasionStages = TRUE,
+        .ignoresProtect = TRUE,
+        .battleAnimScript = gBattleAnimMove_DragonPulse,
+    },
+
+    [MOVE_RAINBOW_REFRACTION] =
+    {
+        .name = COMPOUND_STRING("Rainbow Refract"),
+        .description = COMPOUND_STRING(
+            "Rainbow Refraction.\n
+            Use the power of\n
+            the rainbow to\n
+            blast the foe."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        //Move Categories
+        .battleAnimScript = gBattleAnimMove_DragonPulse,
+    },
+
+    [MOVE_NEOS_FORCE] =
+    {
+        .name = COMPOUND_STRING("Neos Force"),
+        .description = COMPOUND_STRING(
+            "Strike the foe with\n"
+            "Neos. The user's\n"
+            "type determines this\n"
+            "move's type. May\n"
+            "raise the user's Atk\n"
+            "(20%)."),
+        .effect = EFFECT_NEOS_FORCE,
+        .power = 90,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_PLUS,
+            .self = TRUE,
+            .attack = 1,
+            .chance = 20,
+        }),
+        .makesContact = TRUE,
+        .metronomeBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_RagingBull,
+    },
+
+    //TODO: AI_GetAdjustedStatStage and AI logic
+    [MOVE_MEGAMORPH] =
+    {
+        .name = COMPOUND_STRING("Megamorph"),
+        .description = COMPOUND_STRING(
+            "If the attacker\n
+            has <= HP than the\n
+            target, Atk/Sp.Atk\n
+            is sharply raised.\n
+            Otherwise, Atk/Sp.Atk\n
+            is sharply lowered."),
+        .effect = EFFECT_MEGAMORPH,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 15,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
+            .attack = 2,
+            .spAtk = 2,
+        }),
+        //Move Categories
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .snatchAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_SwordsDance,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

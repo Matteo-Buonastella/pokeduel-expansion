@@ -797,6 +797,9 @@ static void AdjustStatStage(struct BattleCalcValues *cv, struct StatChange *st)
     if (cv->moveEffect == EFFECT_GROWTH && GetAttackerWeather(cv->holdEffects[cv->battlerDef], cv->abilities[cv->battlerDef], GetWeather()) & B_WEATHER_SUN)
         st->stage = 2;
 
+    if(cv->moveEffect == EFFECT_MEGAMORPH && gBattleMons[cv->battlerAtk].hp > gBattleMons[cv->battlerDef].hp)
+        st->stage = -1 * st->stage;
+    
     if (st->stage == STAT_CHANGE_FORCE_MAX)
         st->stage = 12;
 

@@ -5725,6 +5725,24 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
         if (state == MON_IN_BATTLE)
             return GetMoveType(GetNaturePowerMove());
         break;
+    case EFFECT_NEOS_FORCE:
+        switch (species)
+        {
+        case SPECIES_NEOS:
+        case SPECIES_AQUA_NEOS:
+        case SPECIES_FLARE_NEOS:
+        case SPECIES_GLOW_NEOS:
+        case SPECIES_AIR_NEOS:
+        case SPECIES_GRAND_NEOS:
+        case SPECIES_DARK_NEOS:
+        case SPECIES_HONEST_NEOS:
+        case SPECIES_RAINBOW_NEOS:
+            return GetSpeciesType(species, 1);
+        default:
+            break;
+        }
+        break;
+        
     default:
         break;
     }
