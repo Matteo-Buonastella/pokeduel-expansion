@@ -6328,6 +6328,10 @@ s32 AI_GetAdjustedStatStage(enum BattlerId battler, enum Move move, s32 stage)
      && GetAttackerWeather(gAiLogicData->holdEffects[battler], gAiLogicData->abilities[battler], AI_GetWeather()) & B_WEATHER_SUN)
         stage = 2;
 
+    //TODO:
+    //if(GetMoveEffect(move) == EFFECT_MEGAMORPH && gBattleMons[cv->battlerAtk].hp > gBattleMons[cv->battlerDef].hp)
+       // st->stage = -1 * st->stage;
+
     if (stage == STAT_CHANGE_FORCE_MAX)
         stage = 12;
 

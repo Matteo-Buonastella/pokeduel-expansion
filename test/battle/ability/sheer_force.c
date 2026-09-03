@@ -494,6 +494,8 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_NEUTRON_BLAST:
         case MOVE_MYSTICAL_FIRE:
         case MOVE_MYSTICAL_SPACE_TYPHOON:
+        case MOVE_NEOS_FORCE:
+        case MOVE_PARALYZING_PELLET_BARRAGE:
         case MOVE_PHOENIX_FORM:
         case MOVE_PLAY_ROUGH:
         case MOVE_POISON_FANG:
