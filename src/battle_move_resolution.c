@@ -1309,9 +1309,9 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
               || cv->abilities[cv->battlerAtk] == ABILITY_VITAL_SPIRIT
               || cv->abilities[cv->battlerAtk] == ABILITY_PURIFYING_SALT)
             battleScript = BattleScript_InsomniaProtects;
-        else if(IsElectricTerrainAffected(gBattlerAttacker, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
+        else if(IsElectricTerrainAffected(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
             gBattlescriptCurrInstr = BattleScript_ElectricTerrainPrevents;
-        else if(IsMistyTerrainAffected(gBattlerAttacker, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
+        else if(IsMistyTerrainAffected(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
             gBattlescriptCurrInstr = BattleScript_MistyTerrainPrevents;
         break;
     case EFFECT_SNORE:
@@ -2628,7 +2628,7 @@ static enum CancelerResult CancelerPreAttackMoveEffect(struct BattleCalcValues *
             if (!isSelf && ShouldSkipFailureCheckOnBattler(cv->battlerAtk, gEffectBattler))
                 continue;
 
-            u32 percentChance = CalcSecondaryEffectChance(cv->battlerAtk, cv->abilities[cv->battlerAtk], additionalEffect);
+            u32 percentChance = CalcSecondaryEffectChance(cv->battlerAtk, cv->abilities[cv->battlerAtk], additionalEffect, cv->move);
 
             // Activate effect if it's primary (chance == 0) or if RNGesus says so
             if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))

@@ -22563,7 +22563,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "from the foe to\n"
             "restore 75% of the\n"
             "damage as HP."),
-        .effect = EFFECT_ABSORB,
+        .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_DARK,
         .accuracy = 100,
@@ -22571,7 +22571,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .argument = { .absorbPercentage = 75 },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ABSORB,
+            .argument.absorbPercentage = 75,
+        }),
         .healingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_Absorb,
     },
@@ -22956,11 +22959,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_RESET_STATS },
-        .additionalEffects = ADDITIONAL_EFFECTS({
+        .additionalEffects = ADDITIONAL_EFFECTS(
         {
             .moveEffect = STAT_CHANGE_EFFECT_MINUS,
             .attack = 1,
         },
+        {
             .moveEffect = STAT_CHANGE_EFFECT_PLUS,
             .self = TRUE,
             .evasion = 1,
@@ -23004,7 +23008,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Slice the foe with\n"
             "Celestial Sword. May\n"
-            "raise Atk (10% * num\n"
+            "raise Atk (10% x num\n"
             "of fainted cards foe\n"
             "has. Minimum chance\n"
             "is 10%)."),
@@ -23256,7 +23260,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 10,
-        }),,
+        }),
         .battleAnimScript = gBattleAnimMove_Thunderbolt,
     },
 

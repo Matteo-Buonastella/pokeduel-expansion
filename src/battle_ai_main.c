@@ -1756,7 +1756,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         else if(GetBattlerSecondaryDamage(battlerAtk) > 0)
             ADJUST_SCORE(-10);
-        else if(CanEndureHit(battlerAtk, battlerDef, moves[moveSlot1]) && !IsBattlerIncapacitated(battlerDef, abilityDef))
+        else if(CanEndureHit(battlerAtk, battlerDef, move) && !IsBattlerIncapacitated(battlerDef, abilityDef))
             ADJUST_SCORE(-10);
         else if (gBattleMons[battlerAtk].speed < gBattleMons[battlerDef].speed && !IsBattlerIncapacitated(battlerDef, abilityDef))
             ADJUST_SCORE(-5);

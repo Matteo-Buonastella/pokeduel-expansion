@@ -6468,23 +6468,22 @@ BattleScript_BelchFails::
 BattleScript_EffectNapTime::
 	attackcanceler
 	trynonvolatilestatus
-	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
-	jumpifability BS_ATTACKER, ABILITY_COMATOSE, BattleScript_RestIsAlreadyAsleep
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_RestIsAlreadyAsleep
 	jumpifuproarwakes BattleScript_RestCantSleep
-	jumpifability BS_ATTACKER, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
-	jumpifability BS_ATTACKER, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
-	jumpifability BS_ATTACKER, ABILITY_PURIFYING_SALT, BattleScript_InsomniaProtects
+	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
+	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
+	jumpifability BS_TARGET, ABILITY_PURIFYING_SALT, BattleScript_InsomniaProtects
 	jumpifabilitypreventsrest ABILITY_INSOMNIA, BattleScript_AbilityPreventsRest
 	attackanimation
 	waitanimation
 	setnonvolatilestatus TRIGGER_ON_MOVE
 	clearmoveresultflags MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_MOSTLY_INEFFECTIVE | MOVE_RESULT_EXTREMELY_EFFECTIVE
 	resultmessage
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_SHORTEST
 	trysetrest
-	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSLEPTHEALTHY
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_SHORTEST
 	updatestatusicon BS_ATTACKER
 	waitstate
 	goto BattleScript_HealAttackerContinue
