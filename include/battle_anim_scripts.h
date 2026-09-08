@@ -1025,4 +1025,23 @@ extern const u8 gBattleAnimSpecial_MonToSubstitute[];
 extern const u8 gBattleAnimSpecial_CriticalCaptureBallThrow[];
 extern const u8 gBattleAnimGeneral_ProtectedItself[];
 
+//Pokeduel Animations
+extern const u8 gBattleAnimMove_DarkMagicAttack[];
+extern const u8 gBattleAnimMove_WhiteLightning[];
+extern const u8 gBattleAnimMove_Skyscraper[];
+extern const u8 gBattleAnimMove_Obliterate[];
+extern const u8 gBattleAnimMove_DarkBurningAttack[];
+extern const u8 gBattleAnimMove_BurstStreamOfDestruction[];
+extern const u8 gBattleAnimMove_DragonSword[];
+extern const u8 gBattleAnimMove_SkydiveScorcher[];
+extern const u8 gBattleAnimMove_FlameSword[];
+extern const u8 gBattleAnimMove_ChaosBlade[];
+extern const u8 gBattleAnimMove_SpiralSpear[];
+extern const u8 gBattleAnimMove_ThunderSword[];
+extern const u8 gBattleAnimMove_InfernoBlast[];
+extern const u8 gBattleAnimMove_AxeSlam[];
+extern const u8 gBattleAnimMove_MetalThrust[];
+extern const u8 gBattleAnimMove_CyberSlash[];
+extern const u8 gBattleAnimMove_CyberEnergyShock[];
+
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_H

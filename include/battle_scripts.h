@@ -746,5 +746,6 @@ extern const u8 BattleScript_TakeHeart[];
 
 //Pokeduel Battlescripts
 extern const u8 BattleScript_EffectNapTime[];
+extern const u8 BattleScript_Megamorph[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -22138,7 +22138,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_Psychic,
+        .battleAnimScript = gBattleAnimMove_DarkMagicAttack,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -22160,7 +22160,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+        .battleAnimScript = gBattleAnimMove_WhiteLightning,
     },
 
     [MOVE_SKYSCRAPER] =
@@ -22185,7 +22185,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = STAT_CHANGE_EFFECT_PLUS,
             .attack = 2,
         }),
-        .battleAnimScript = gBattleAnimMove_SwordsDance,
+        .battleAnimScript = gBattleAnimMove_Skyscraper,
     },
 
     [MOVE_OBLITERATE] =
@@ -22206,7 +22206,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .skyBattleBanned = TRUE,
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_Fissure,
+        .battleAnimScript = gBattleAnimMove_Obliterate,
     },
 
     [MOVE_DARK_BURNING_ATTACK] =
@@ -22228,7 +22228,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_Flamethrower,
+        .battleAnimScript = gBattleAnimMove_DarkBurningAttack,
     },
 
     [MOVE_BURST_STREAM_OF_DESTRUCTION] =
@@ -22245,7 +22245,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_BurstStreamOfDestruction,
     },
 
     [MOVE_DRAGON_SWORD] =
@@ -22267,7 +22267,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_DragonSword,
     },
 
     [MOVE_SKYDIVE_SCORCHER] =
@@ -22294,7 +22294,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .damagesAirborne = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_SkydiveScorcher,
     },
 
     [MOVE_FLAME_SWORD] =
@@ -22319,7 +22319,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_FlameSword,
     },
 
     [MOVE_CHAOS_BLADE] =
@@ -22348,7 +22348,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .slicingMove = TRUE,
         .ignoreGhostImmunity = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_ChaosBlade,
     },
 
     [MOVE_SPIRAL_SPEAR] =
@@ -22375,7 +22375,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .stabbingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_SpiralSpear,
     },
 
     [MOVE_THUNDER_SWORD] =
@@ -22400,7 +22400,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_ThunderSword,
     },
 
     [MOVE_INFERNO_BLAST] =
@@ -22423,7 +22423,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         //Move Categories
         .thawsUser = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_InfernoBlast,
     },
 
     [MOVE_AXE_SLAM] =
@@ -22449,7 +22449,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .minimizeDoubleDamage = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_AxeSlam,
     },
 
     [MOVE_METAL_THRUST] =
@@ -22471,7 +22471,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .multiHit = TRUE,
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_ArmThrust,
+        .battleAnimScript = gBattleAnimMove_MetalThrust,
     },
 
     [MOVE_CYBER_SLASH] =
@@ -22493,7 +22493,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_ArmThrust,
+        .battleAnimScript = gBattleAnimMove_CyberSlash,
     },
     
     //TODO: confirm damage scales
@@ -22517,7 +22517,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .strikeCount = 3,
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_ArmThrust,
+        .battleAnimScript = gBattleAnimMove_Cut,
     },
 
     [MOVE_CYBER_ENERGY_SHOCK] =
@@ -22541,7 +22541,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 10,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_ArmThrust,
+        .battleAnimScript = gBattleAnimMove_CyberEnergyShock,
     },
 
     [MOVE_CELTIC_BLADE] =
@@ -22761,7 +22761,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .snatchAffected = TRUE,
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_Thunder,
+        .battleAnimScript = gBattleAnimMove_Withdraw,
     },
 
     [MOVE_BOMBARDMENT] =
@@ -23496,10 +23496,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Rainbow Refract"),
         .description = COMPOUND_STRING(
-            "Rainbow Refraction.\n
-            Use the power of\n
-            the rainbow to\n
-            blast the foe."),
+            "Rainbow Refraction.\n"
+            "Use the power of\n"
+            "the rainbow to\n"
+            "blast the foe."),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_DRAGON,
@@ -23546,12 +23546,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Megamorph"),
         .description = COMPOUND_STRING(
-            "If the attacker\n
-            has <= HP than the\n
-            target, Atk/Sp.Atk\n
-            is sharply raised.\n
-            Otherwise, Atk/Sp.Atk\n
-            is sharply lowered."),
+            "If the attacker\n"
+            "has <= HP than the\n"
+            "target, Atk/Sp.Atk\n"
+            "is sharply raised.\n"
+            "Otherwise, Atk/Sp.Atk\n"
+            "is sharply lowered."),
         .effect = EFFECT_MEGAMORPH,
         .power = 0,
         .type = TYPE_NORMAL,

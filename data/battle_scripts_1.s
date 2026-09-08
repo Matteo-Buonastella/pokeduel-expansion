@@ -6492,3 +6492,8 @@ BattleScript_EffectNapTime::
 	updatestatusicon BS_ATTACKER
 	waitstate
 	goto BattleScript_HealAttackerContinue
+
+BattleScript_Megamorph::
+	attackcanceler
+	trymovestatchanges
+	goto BattleScript_MoveEnd
