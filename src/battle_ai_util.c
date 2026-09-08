@@ -2137,7 +2137,7 @@ bool32 ShouldTryOHKO(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
         return FALSE;
 
     bool32 sureHit = (gBattleMons[battlerAtk].volatiles.battlerWithSureHit == battlerDef + 1) || atkAbility == ABILITY_NO_GUARD || defAbility == ABILITY_NO_GUARD;
-    if (sureHit && gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level)
+    if (sureHit && ((gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level) || move == MOVE_OBLITERATE))
     {
         return TRUE;
     }
@@ -6328,9 +6328,17 @@ s32 AI_GetAdjustedStatStage(enum BattlerId battler, enum Move move, s32 stage)
      && GetAttackerWeather(gAiLogicData->holdEffects[battler], gAiLogicData->abilities[battler], AI_GetWeather()) & B_WEATHER_SUN)
         stage = 2;
 
-    //TODO:
-    //if(GetMoveEffect(move) == EFFECT_MEGAMORPH && gBattleMons[cv->battlerAtk].hp > gBattleMons[cv->battlerDef].hp)
-       // st->stage = -1 * st->stage;
+    if(GetMoveEffect(move) == EFFECT_MEGAMORPH)
+    {
+        u8 leftFoe = GetBattlerLeftFoe(battler);
+        u8 rightFoe = GetBattlerRightFoe(battler);
+
+        if ((!IsBattlerAlive(leftFoe) || gBattleMons[battler].hp > gBattleMons[leftFoe].hp)
+        && (!IsBattlerAlive(rightFoe) || gBattleMons[battler].hp > gBattleMons[rightFoe].hp))
+        {
+            stage *= -1;
+        }
+    }
 
     if (stage == STAT_CHANGE_FORCE_MAX)
         stage = 12;

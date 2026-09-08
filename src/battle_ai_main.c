@@ -3036,6 +3036,20 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (gBattleMons[battlerAtk].species != SPECIES_HOOPA_UNBOUND)
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_MEGAMORPH:
+        {
+            u8 leftFoe = GetBattlerLeftFoe(battlerAtk);
+            u8 rightFoe = GetBattlerRightFoe(battlerAtk);
+
+            if ((!IsBattlerAlive(leftFoe) || gBattleMons[battlerAtk].hp > gBattleMons[leftFoe].hp)
+            && (!IsBattlerAlive(rightFoe) || gBattleMons[battlerAtk].hp > gBattleMons[rightFoe].hp))
+            {
+                if(aiData->abilities[battlerAtk] != ABILITY_CONTRARY)
+                    ADJUST_SCORE(-10);
+            }
+        }
+        
+
     case EFFECT_PLACEHOLDER:
         return 0;   // cannot even select
     } // move effect checks
@@ -5783,6 +5797,26 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             break;
         }
         break;
+
+    case EFFECT_MEGAMORPH:
+        {
+            u8 leftFoe = GetBattlerLeftFoe(battlerAtk);
+            u8 rightFoe = GetBattlerRightFoe(battlerAtk);
+
+            if ((!IsBattlerAlive(leftFoe) || gBattleMons[battlerAtk].hp > gBattleMons[leftFoe].hp)
+            && (!IsBattlerAlive(rightFoe) || gBattleMons[battlerAtk].hp > gBattleMons[rightFoe].hp))
+            {
+                if(aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
+                    ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+            }
+            else
+            {
+                ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move)); //Your HP is lower than one of the foe's
+            }
+        }
+        break;
+
+
     default:
         break;
     } // move effect checks

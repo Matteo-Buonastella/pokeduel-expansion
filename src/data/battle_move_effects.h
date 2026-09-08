@@ -1921,7 +1921,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MEGAMORPH] =
     {
-        .battleScript = BattleScript_EffectStatChange,
+        .battleScript = BattleScript_Megamorph,
         .battleTvScore = 0, // TODO: Assign points
     },
     

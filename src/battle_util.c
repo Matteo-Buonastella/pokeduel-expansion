@@ -10573,7 +10573,7 @@ bool32 DoesOHKOMoveMissTarget(struct BattleCalcValues *cv)
         u32 odds = GetMoveAccuracy(cv->move) + (gBattleMons[cv->battlerAtk].level - gBattleMons[cv->battlerDef].level);
         if (MoveDecreasesAccIfUserNotSameType(cv->move) && !IS_BATTLER_OF_TYPE(cv->battlerAtk, GetBattleMoveType(cv->move)))
             odds -= 10;
-        if (RandomPercentage(RNG_ACCURACY, odds) && gBattleMons[cv->battlerAtk].level >= gBattleMons[cv->battlerDef].level)
+        if (RandomPercentage(RNG_ACCURACY, odds) && ((gBattleMons[cv->battlerAtk].level >= gBattleMons[cv->battlerDef].level) || cv->move == MOVE_OBLITERATE))
             lands = SURE_HIT;
     }
 
