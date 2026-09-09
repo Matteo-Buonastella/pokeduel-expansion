@@ -22566,7 +22566,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_CelticBlade,
     },
 
     [MOVE_DARK_LIGHT] =
@@ -22590,7 +22590,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .argument.absorbPercentage = 75,
         }),
         .healingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_Absorb,
+        .battleAnimScript = gBattleAnimMove_DarkLight,
     },
 
     [MOVE_VENGEANCE] =
@@ -22642,7 +22642,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_MetalClaw,
+        .battleAnimScript = gBattleAnimMove_MagnetSword,
     },
 
     [MOVE_FIST_OF_FATE] =
@@ -22673,7 +22673,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .minimizeDoubleDamage = TRUE,
-        .battleAnimScript = gBattleAnimMove_GigaImpact,
+        .battleAnimScript = gBattleAnimMove_FistOFate,
     },
 
     //TODO: Confirm increased paralysis in rain works
@@ -22702,7 +22702,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .damagesAirborne = TRUE,
         .alwaysHitsInRain = TRUE,
-        .battleAnimScript = gBattleAnimMove_Thunder,
+        .battleAnimScript = gBattleAnimMove_ThunderForce,
 
     },
 
@@ -22734,7 +22734,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         //Move Categories
         .thawsUser = TRUE,
-        .battleAnimScript = gBattleAnimMove_Thunder,
+        .battleAnimScript = gBattleAnimMove_PhoenixForm,
     },
 
     [MOVE_DEFENSE_MODE] =
@@ -22783,7 +22783,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .damagesAirborneDoubleDamage = TRUE,
         .ballisticMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_HydroCannon,
+        .battleAnimScript = gBattleAnimMove_Bombardment,
     },
 
     //TODO: Rework effect

@@ -1043,5 +1043,12 @@ extern const u8 gBattleAnimMove_AxeSlam[];
 extern const u8 gBattleAnimMove_MetalThrust[];
 extern const u8 gBattleAnimMove_CyberSlash[];
 extern const u8 gBattleAnimMove_CyberEnergyShock[];
+extern const u8 gBattleAnimMove_CelticBlade[];
+extern const u8 gBattleAnimMove_DarkLight[];
+extern const u8 gBattleAnimMove_MagnetSword[];
+extern const u8 gBattleAnimMove_FistOFate[];
+extern const u8 gBattleAnimMove_ThunderForce[];
+extern const u8 gBattleAnimMove_PhoenixForm[];
+extern const u8 gBattleAnimMove_Bombardment[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_H
