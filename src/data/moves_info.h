@@ -22841,7 +22841,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 20,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_SkyAttack,
+        .battleAnimScript = gBattleAnimMove_BubbleBlaster,
     },
 
     [MOVE_SCRAP_FIST] =
@@ -22861,7 +22861,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         //Move Categories
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_ExtremeSpeed,
+        .punchingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_ScrapFist,
     },
 
     [MOVE_TOXIC_BREATH] =
@@ -22883,7 +22884,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_TOXIC,
             .chance = 40,
         }),
-        .battleAnimScript = gBattleAnimMove_SludgeWave,
+        .battleAnimScript = gBattleAnimMove_Smog,
     },
 
     [MOVE_SILENT_BURN] =
@@ -22906,7 +22907,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         //Move Categories
         .thawsUser = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_SilentBurn,
     },
     
     [MOVE_NEUTRON_BLAST] =
