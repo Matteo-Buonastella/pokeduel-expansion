@@ -22919,7 +22919,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 10,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_NeutronBlast,
     },
 
     [MOVE_NEGATE] =
@@ -22940,7 +22940,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .zMove = { .effect = Z_EFFECT_SPATK_UP_1 },
         //Move Categories
         .magicCoatAffected = TRUE,
-        .battleAnimScript = gBattleAnimMove_ConfuseRay,
+        .battleAnimScript = gBattleAnimMove_Block,
     },
 
     //TODO: Test Effects
@@ -22999,7 +22999,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .punchingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_MeteorMash,
+        .battleAnimScript = gBattleAnimMove_MechanizedMelee,
     },
 
     //TODO: Implement Effect
@@ -23030,7 +23030,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_MeteorMash,
+        .battleAnimScript = gBattleAnimMove_CelestialSword,
     },
 
     [MOVE_SPARK_BLASTER] =
