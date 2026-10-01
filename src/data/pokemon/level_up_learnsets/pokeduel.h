@@ -996,6 +996,7 @@ static const struct LevelUpMove sDKPaladinLevelUpLearnset[] = {
 
 //Catapult Turtle
 static const struct LevelUpMove sCatapultTLevelUpLearnset[] = {
+	LEVEL_UP_MOVE(1, MOVE_LOCK_ON),
 	LEVEL_UP_MOVE(1, MOVE_METAL_CLAW),
 	LEVEL_UP_MOVE(1, MOVE_SMOKESCREEN),
  	LEVEL_UP_MOVE(1, MOVE_DEFENSE_MODE),
@@ -7817,6 +7818,7 @@ static const struct LevelUpMove sWarriorOfZeraLevelUpLearnset[] = {
 //Electromagnetic Turtle
 static const struct LevelUpMove sElectromagneticTurtleLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_MAGNET_RISE),
+	LEVEL_UP_MOVE(1, MOVE_LOCK_ON),
 	LEVEL_UP_MOVE(1, MOVE_MAGNET_BOMB),
 	LEVEL_UP_MOVE(1, MOVE_SMOKESCREEN),
  	LEVEL_UP_MOVE(1, MOVE_DEFENSE_MODE),
@@ -9842,6 +9844,7 @@ static const struct LevelUpMove sUltimateBaseballKidLearnset[] = {
 	LEVEL_UP_MOVE(1, MOVE_LEER),
 	LEVEL_UP_MOVE(7, MOVE_QUICK_ATTACK),
 	LEVEL_UP_MOVE(10, MOVE_BATON_PASS),
+	LEVEL_UP_MOVE(12, MOVE_BONE_CLUB),
 	LEVEL_UP_MOVE(14, MOVE_BRUTAL_SWING),
 	LEVEL_UP_MOVE(16, MOVE_ROCK_THROW),
 	LEVEL_UP_MOVE(18, MOVE_CIRCLE_THROW),
