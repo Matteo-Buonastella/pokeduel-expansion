@@ -22124,7 +22124,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_DarkMagicAttack,
+        .battleAnimScript = gBattleAnimMove_ParasiteParacide,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -22600,7 +22600,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 10,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_Vengeance,
     },
 
     [MOVE_MAGNET_SWORD] =
@@ -23054,7 +23054,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_MeteorMash,
+        .battleAnimScript = gBattleAnimMove_SparkBlaster,
     },
 
     [MOVE_MYSTICAL_SPACE_TYPHOON] =
@@ -23080,7 +23080,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         //Move Categories
         .windMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_WaterPulse,
+        .battleAnimScript = gBattleAnimMove_MysticalSpaceTyphoon,
     },
 
     [MOVE_PARASITE_PARACIDE] =
@@ -23090,7 +23090,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Stick a parasite onto\n"
             "the target. The foe\n"
             "is now Bug type as\nwell."),
-        .effect = EFFECT_THIRD_TYPE,
+        .effect = EFFECT_SOAK,
         .power = 0,
         .type = TYPE_BUG,
         .accuracy = 100,
@@ -23105,7 +23105,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestCategory = CONTEST_CATEGORY_CUTE,
         .contestComboStarterId = 0,
         .contestComboMoves = {0},
-        .battleAnimScript = gBattleAnimMove_TrickOrTreat,
+        .battleAnimScript = gBattleAnimMove_ParasiteParacide,
     },
 
     [MOVE_SWORDS_OF_REVEALING_LIGHT] =
