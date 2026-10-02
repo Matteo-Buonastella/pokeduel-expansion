@@ -22138,7 +22138,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_ParasiteParacide,
+        .battleAnimScript = gBattleAnimMove_StridentBlaze,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -23140,7 +23140,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .argument = { .nonVolatileStatus = MOVE_EFFECT_FREEZE_OR_FROSTBITE },
         .zMove = { .effect = Z_EFFECT_SPD_UP_1 },
         .magicCoatAffected = TRUE,
-        .battleAnimScript = gBattleAnimMove_Sing,
+        .battleAnimScript = gBattleAnimMove_SwordsOfRevealingLight,
     },
 
     [MOVE_STRIDENT_BLAZE] =
@@ -23165,7 +23165,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 30,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_StridentBlaze,
     },
 
     //TODO: Bonus to Steel moves
