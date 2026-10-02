@@ -36120,3 +36120,93 @@ gBattleAnimMove_ParasiteParacide::
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
+
+gBattleAnimMove_SwordsOfRevealingLight::
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	playsewithpan SE_M_SWORDS_DANCE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 16, 6, 1, 4
+	createsprite gSwordsDanceBladeSpriteTemplate, ANIM_ATTACKER, 2, -20, 0
+	createsprite gSwordsDanceBladeSpriteTemplate, ANIM_ATTACKER, 2, 0, 0
+	createsprite gSwordsDanceBladeSpriteTemplate, ANIM_ATTACKER, 2, 20, 0
+	delay 22
+	flash_anim_tag_with_color tag=ANIM_TAG_SWORD, delay=2, num_blends=2, color1=RGB(18, 31, 31), blend_y1=16, color2=0, blend_y2=0
+	waitforvisualfinish
+	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_Flash, 2
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	blendoff
+	delay 1
+	end
+
+gBattleAnimMove_StridentBlaze::
+	panse SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	createvisualtask AnimTask_CreateSmallSolarBeamOrbs, 5
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=0
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 10, RGB(25, 31, 0)
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=2
+	delay 4
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 65, 1
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=3
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=4
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=5
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=6
+	delay 4
+
+	@;Part 1
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=0
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=1
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=2
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=16, duration=20, animation=1
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=3
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=16, duration=20, animation=2
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=16, duration=20, animation=3
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=5
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=16, duration=20, animation=4
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=6
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=16, duration=20, animation=5
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=-16, duration=20, animation=0
+	delay 4
+
+	@;Part 2
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=0
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=16, duration=20, animation=6
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=-16, duration=20, animation=1
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=1
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=-16, duration=20, animation=2
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=2
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15,y=-16, duration=20, animation=3
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=3
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=-16, duration=20, animation=4
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=-16, duration=20, animation=5
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=5
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=-16, duration=20, animation=6
+	delay 4
+	create_solar_beam_big_orb_sprite ANIM_TARGET, 3, x=15, y=0, duration=20, animation=6
+	delay 4
+
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(25, 31, 0)
+	waitforvisualfinish
+	call ElectricityEffect
+	end

@@ -1060,5 +1060,7 @@ extern const u8 gBattleAnimMove_CelestialSword[];
 extern const u8 gBattleAnimMove_SparkBlaster[];
 extern const u8 gBattleAnimMove_MysticalSpaceTyphoon[];
 extern const u8 gBattleAnimMove_ParasiteParacide[];
+extern const u8 gBattleAnimMove_SwordsOfRevealingLight[];
+extern const u8 gBattleAnimMove_StridentBlaze[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_H
