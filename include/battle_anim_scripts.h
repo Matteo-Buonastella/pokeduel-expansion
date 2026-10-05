@@ -1062,5 +1062,14 @@ extern const u8 gBattleAnimMove_MysticalSpaceTyphoon[];
 extern const u8 gBattleAnimMove_ParasiteParacide[];
 extern const u8 gBattleAnimMove_SwordsOfRevealingLight[];
 extern const u8 gBattleAnimMove_StridentBlaze[];
+extern const u8 gBattleAnimMove_Metalmorph[];
+extern const u8 gBattleAnimMove_MirrorWall[];
+extern const u8 gBattleAnimMove_RingOfDestruction[];
+extern const u8 gBattleAnimMove_ChaosScepterBlast[];
+extern const u8 gBattleAnimMove_SilentSlash[];
+extern const u8 gBattleAnimMove_PointToPoint[];
+extern const u8 gBattleAnimMove_NapTime[];
+extern const u8 gBattleAnimMove_OjamaDeltaHurricane[];
 
-#endif // GUARD_BATTLE_ANIM_SCRIPTS_H
+#endif // GUARD_BATTLE_ANIM_SCRIPTS_
+ 
