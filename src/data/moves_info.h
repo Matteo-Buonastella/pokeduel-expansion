@@ -22124,7 +22124,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_StridentBlaze,
+        .battleAnimScript = gBattleAnimMove_OjamaDeltaHurricane,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -23186,7 +23186,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .snatchAffected = TRUE,
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_ShellSmash,
+        .battleAnimScript = gBattleAnimMove_Metalmorph,
     },
 
     //TODO: Test Effect and AI
@@ -23216,7 +23216,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .metronomeBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_BellyDrum,
+        .battleAnimScript = gBattleAnimMove_MirrorWall,
     },
 
     [MOVE_RING_OF_DESTRUCTION] =
@@ -23238,7 +23238,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .argument = { .recoilPercentage = 100 },
         //Move Categories
         .thawsUser = TRUE,
-        .battleAnimScript = gBattleAnimMove_FlareBlitz,
+        .battleAnimScript = gBattleAnimMove_RingOfDestruction,
     },
 
     [MOVE_CHAOS_SCEPTER_BLAST] =
@@ -23262,7 +23262,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+        .battleAnimScript = gBattleAnimMove_ChaosScepterBlast,
     },
 
     [MOVE_SILENT_SLASH] =
@@ -23284,7 +23284,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+        .battleAnimScript = gBattleAnimMove_SilentSlash,
     },
 
     //TODO: Test Effect and AI
@@ -23317,7 +23317,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .metronomeBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_BellyDrum,
+        .battleAnimScript = gBattleAnimMove_PointToPoint,
     },
 
     [MOVE_NAP_TIME] =
@@ -23344,7 +23344,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .healingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_Rest,
+        .battleAnimScript = gBattleAnimMove_NapTime,
     },
 
     [MOVE_OJAMA_DELTA_HURRICANE] =
@@ -23369,7 +23369,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .ignoreGhostImmunity = TRUE,
         .windMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_OjamaDeltaHurricane,
     },
 
     [MOVE_TRANSCENDENT_WINGS] =
