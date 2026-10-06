@@ -22138,7 +22138,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_OjamaDeltaHurricane,
+        .battleAnimScript = gBattleAnimMove_UltimatePound,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -23403,7 +23403,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         //Move Categories
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_TranscendentWings,
     },
 
     [MOVE_PARALYZING_PELLET_BARRAGE] =
@@ -23429,7 +23429,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 10,
         }),
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_ParalyzingPelletBarrage,
     },
 
     [MOVE_CLOCK_PRISON] =
@@ -23460,7 +23460,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .snatchAffected = TRUE,
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_QuiverDance,
+        .battleAnimScript = gBattleAnimMove_ClockPrison,
     },
 
     [MOVE_ULTIMATE_POUND] =
@@ -23490,7 +23490,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .minimizeDoubleDamage = TRUE,
         .ignoresTargetDefenseEvasionStages = TRUE,
         .ignoresProtect = TRUE,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_UltimatePound,
     },
 
     [MOVE_RAINBOW_REFRACTION] =
