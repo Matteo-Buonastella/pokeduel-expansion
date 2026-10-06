@@ -1070,6 +1070,10 @@ extern const u8 gBattleAnimMove_SilentSlash[];
 extern const u8 gBattleAnimMove_PointToPoint[];
 extern const u8 gBattleAnimMove_NapTime[];
 extern const u8 gBattleAnimMove_OjamaDeltaHurricane[];
+extern const u8 gBattleAnimMove_TranscendentWings[];
+extern const u8 gBattleAnimMove_ParalyzingPelletBarrage[];
+extern const u8 gBattleAnimMove_ClockPrison[];
+extern const u8 gBattleAnimMove_UltimatePound[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  
