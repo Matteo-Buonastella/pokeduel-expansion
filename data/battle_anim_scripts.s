@@ -36515,3 +36515,90 @@ gBattleAnimMove_UltimatePound::
 	blendoff
 	delay 1
 	end
+
+gBattleAnimMove_RainbowRefraction::
+	delay 10
+	playsewithpan SE_M_HYPER_BEAM, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 4, 1
+	waitforvisualfinish
+	delay 30
+	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_HYPER_BEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 1, 15, 0, 5
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 4, 50, 1
+	flash_anim_tag_with_color tag=ANIM_TAG_ORBS, delay=1, num_blends=12, color1=RGB_RED, blend_y1=16, color2=0, blend_y2=0
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(31, 0, 0)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(31, 16, 0)
+	call HyperBeamOrbs
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 50, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 11, RGB(25, 25, 25)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(31, 31, 0)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(0, 31, 0)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(0, 8, 31)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(10, 0, 26)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 12, RGB(24, 8, 31)
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	call HyperBeamOrbs
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 11, 0, RGB(25, 25, 25)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 12, 0, RGB(24, 8, 31)
+	waitforvisualfinish
+	end
+
+gBattleAnimMove_NeosForce::
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ELECTRIC_ORBS, 0, 12, 12, RGB(14, 26, 31)
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_CIRCLE_OF_LIGHT, 0, 12, 12, RGB(14, 26, 31)
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 20, 0, 2
+	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
+	delay 12
+	createsprite gGrowingShockWaveOrbSpriteTemplate, ANIM_ATTACKER, 2
+	delay 20
+	clearmonbg ANIM_ATTACKER
+	delay 18
+	monbg ANIM_DEF_PARTNER
+	createvisualtask AnimTask_WindUpLunge, 5, ANIM_ATTACKER, -24, 8, 23, 10, 40, 10
+	delay 35
+	create_fist_sprite ANIM_ATTACKER, 3, x=-10, y=0, duration=8, initPosition=1
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 4, x=-10, y=0, relative_to=ANIM_TARGET, animation=0
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	delay 1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, -16, 0, 0, 4
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
+	waitforvisualfinish
+	delay 2
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 5
+	delay 3
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+
+gBattleAnimMove_Megamorph::
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -4, -4, 30, ANIM_ATTACKER, 0
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	end

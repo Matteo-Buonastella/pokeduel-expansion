@@ -1074,6 +1074,9 @@ extern const u8 gBattleAnimMove_TranscendentWings[];
 extern const u8 gBattleAnimMove_ParalyzingPelletBarrage[];
 extern const u8 gBattleAnimMove_ClockPrison[];
 extern const u8 gBattleAnimMove_UltimatePound[];
+extern const u8 gBattleAnimMove_RainbowRefraction[];
+extern const u8 gBattleAnimMove_NeosForce[];
+extern const u8 gBattleAnimMove_Megamorph[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

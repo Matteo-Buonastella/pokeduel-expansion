@@ -22124,7 +22124,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_UltimatePound,
+        .battleAnimScript = gBattleAnimMove_Megamorph,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -22319,7 +22319,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "hit Ghost types."),
         .effect = EFFECT_HIT,
         .power = 100,
-        .type = TYPE_FIRE,
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
         .target = TARGET_SELECTED,
@@ -23496,7 +23496,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         //Move Categories
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_RainbowRefraction,
     },
 
     [MOVE_NEOS_FORCE] =
@@ -23525,7 +23525,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_RagingBull,
+        .battleAnimScript = gBattleAnimMove_NeosForce,
     },
 
     //TODO: AI_GetAdjustedStatStage and AI logic
@@ -23557,7 +23557,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .snatchAffected = TRUE,
-        .battleAnimScript = gBattleAnimMove_SwordsDance,
+        .battleAnimScript = gBattleAnimMove_Megamorph,
     },
 
     // Z-Moves
