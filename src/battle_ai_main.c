@@ -1777,6 +1777,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             }
         }
         break;
+    case EFFECT_SHRINK:
+        // Still worth using for the Evasion boost if the target's Attack can't drop
+        if (!AI_CanAnyStatChange(battlerAtk, battlerDef, move)
+         && !BattlerStatCanRise(battlerAtk, abilityAtk, STAT_EVASION))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_ACUPRESSURE:
         if (DoesSubstituteBlockMove(battlerAtk, battlerDef, move) || AreBattlersStatsMaxed(battlerDef))
             ADJUST_SCORE(-10);
@@ -4493,6 +4499,10 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_AUTOTOMIZE:
     case EFFECT_STAT_CHANGE:
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        break;
+    case EFFECT_SHRINK:
+        ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move)); // Foe's Attack drop
+        ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_EVASION, 1)); // User's Evasion boost
         break;
     case EFFECT_STOCKPILE:
         if (HasMoveWithEffect(battlerAtk, EFFECT_SWALLOW) || HasMoveWithEffect(battlerAtk, EFFECT_SPIT_UP))

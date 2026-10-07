@@ -1553,6 +1553,13 @@
 	jumpifmoveresultflags MOVE_RESULT_NO_EFFECT, \jumpInstr
 	.endm
 
+	.macro queuestatchange battler:req, stat:req, stage:req
+	callnative BS_QueueStatChange
+	.byte \battler
+	.byte \stat
+	.byte \stage
+	.endm
+
 	.macro jumpifside battler:req, side:req, equalJumpInstr:req
 	getbattlerside \battler
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \side, \equalJumpInstr

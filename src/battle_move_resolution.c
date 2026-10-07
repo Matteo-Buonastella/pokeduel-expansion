@@ -5630,6 +5630,16 @@ static enum MoveResult StatChangeBeforeChange(struct BattleCalcValues *cv)
             return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
         }
         break;
+    case EFFECT_SHRINK:
+        // The user's Evasion boost still happens if the target's Attack can't drop
+        if (WillAnyStatChange()
+         || (!(gBattleStruct->moveResultFlags[cv->battlerDef] & MOVE_RESULT_NO_EFFECT)
+          && CompareStat(cv->battlerAtk, STAT_EVASION, MAX_STAT_STAGE, CMP_LESS_THAN, cv->abilities[cv->battlerAtk])))
+        {
+            BattleScriptCall(BattleScript_PlayMoveAnim);
+            return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
+        }
+        break;
     case EFFECT_CLANGOROUS_SOUL:
         if (WillAnyStatChange() && CutThirdOfHp(cv->battlerAtk))
         {

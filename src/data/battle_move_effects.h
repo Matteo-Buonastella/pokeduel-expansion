@@ -1924,6 +1924,13 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_Megamorph,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_SHRINK] =
+    {
+        .battleScript = BattleScript_EffectShrink,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
     
 
 };

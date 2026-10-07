@@ -12397,3 +12397,11 @@ void BS_TryDoMoveEffectsBeforeMoves(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// Queues a stat change on a battler, to be applied with trybattlerstatchange
+void BS_QueueStatChange(void)
+{
+    NATIVE_ARGS(u8 battler, u8 stat, s8 stage);
+    SetStatChange(GetBattlerForBattleScript(cmd->battler), cmd->stat, cmd->stage);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}

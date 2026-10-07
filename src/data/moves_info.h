@@ -22951,7 +22951,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Shrink yourself to\n"
             "lower the foe's attack.\n"
             "and raise your evasiveness"),
-        .effect = EFFECT_MINIMIZE,
+        .effect = EFFECT_SHRINK,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 90,
@@ -22960,15 +22960,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_RESET_STATS },
-        .additionalEffects = ADDITIONAL_EFFECTS(
-        {
+        // The user's Evasion boost is applied in BattleScript_EffectShrink
+        .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = STAT_CHANGE_EFFECT_MINUS,
             .attack = 1,
-        },
-        {
-            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
-            .self = TRUE,
-            .evasion = 1,
         }),
         //Move Categories
         .mirrorMoveBanned = TRUE,
