@@ -6497,3 +6497,12 @@ BattleScript_Megamorph::
 	attackcanceler
 	trymovestatchanges
 	goto BattleScript_MoveEnd
+
+@ Lowers the target's Attack (via the move's additional effects), then raises the user's Evasion
+BattleScript_EffectShrink::
+	attackcanceler
+	trymovestatchanges
+	jumpifmovehadnoeffect BattleScript_MoveEnd
+	queuestatchange BS_ATTACKER, STAT_EVASION, 1
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
