@@ -1431,7 +1431,6 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             case MOVE_EFFECT_POISON:
             case MOVE_EFFECT_TOXIC:
             case MOVE_EFFECT_BURN:
-            case MOVE_EFFECT_FREEZE:
                 ADJUST_SCORE(-5);
                 break;
             default:
