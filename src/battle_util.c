@@ -5394,7 +5394,7 @@ bool32 CanSetNonVolatileStatus(enum BattlerId battlerAtk, enum BattlerId battler
     case MOVE_EFFECT_FROSTBITE:
         if (gBattleMons[battlerDef].status1 & STATUS1_ICY_ANY)
         {
-            battleScript = BattleScript_AlreadyBurned;
+            battleScript = BattleScript_AlreadyFrozen;
         }
         else if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) || IsBattlerWeatherAffected(GetBattlerHoldEffect(battlerDef), GetWeather(), B_WEATHER_SUN))
         {

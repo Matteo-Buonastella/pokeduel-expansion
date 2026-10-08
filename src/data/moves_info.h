@@ -22662,7 +22662,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_FistOFate,
     },
 
-    //TODO: Confirm increased paralysis in rain works
     [MOVE_THUNDER_FORCE] =
     {
         .name = COMPOUND_STRING("Thunder Force"),

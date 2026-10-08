@@ -905,6 +905,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LOSTSOMEOFITSHP]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} lost some of its HP!"),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} hasn't eaten any held Berries, so it can't possibly belch!\p"),
     [STRINGID_PKMNCUTHPMAXEDDEFENSE]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} cut its own HP and maximized its Defense!"),
+    [STRINGID_PKMNALREADYHASFREEZE]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} is already frozen!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

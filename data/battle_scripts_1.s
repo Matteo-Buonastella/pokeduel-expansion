@@ -2477,6 +2477,13 @@ BattleScript_AlreadyBurned::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_AlreadyFrozen::
+	setalreadystatusedmoveattempt
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNALREADYHASFREEZE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_FocusPunchLostFocus::
 	printstring STRINGID_PKMNLOSTFOCUS
 	waitmessage B_WAIT_TIME_LONG
