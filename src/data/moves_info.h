@@ -22471,6 +22471,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .multiHit = TRUE,
         .makesContact = TRUE,
+        .punchingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_MetalThrust,
     },
 
@@ -22648,8 +22649,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Fist of Fate"),
         .description = COMPOUND_STRING(
-            "An screen shattering\n"
-            "punch that requies\n"
+            "A screen shattering\n"
+            "punch that requires\n"
             "the user to recharge\n"
             "on the next turn."),
         .effect = EFFECT_HIT,
@@ -22819,7 +22820,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "strikes the foe. It\n"
             "may lower the foe's\n"
             "accuracy and raise your\n"
-            "your Sp.Atk (20%)."),
+            "Sp.Atk (20%)."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_WATER,
@@ -22836,6 +22837,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         {
             .moveEffect = MOVE_EFFECT_STAT_PLUS,
             .self = TRUE,
+            .spAtk = 1,
             .chance = 20,
         }),
         //Move Categories
@@ -22848,7 +22850,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "A blindingly fast\n"
             "punch that is sure\n"
-            "o hit first."),
+            "to hit first."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_STEEL,
@@ -22891,7 +22893,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "A silent strike that\n"
             "may burn the foe\n"
-            "10%)."),
+            "(10%)."),
         .effect = EFFECT_HIT,
         .power = 85,
         .type = TYPE_FIRE,
@@ -22987,7 +22989,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Mechanized Melee"),
         .description = COMPOUND_STRING(
             "The foe is punched\n"
-            "with a mechanzized\n"
+            "with a mechanized\n"
             "fist. May paralyze\n"
             "the foe (10%)."),
         .effect = EFFECT_HIT,
@@ -23045,7 +23047,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Targets the foe\n"
             "and shocks them\n"
-            "sensless. which lowers\n"
+            "senseless. which lowers\n"
             "the foe's Sp.Def."),
         .effect = EFFECT_HIT,
         .power = 65,
@@ -23095,7 +23097,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Stick a parasite onto\n"
             "the target. The foe\n"
-            "is now Bug type as\nwell."),
+            "is now Bug type."),
         .effect = EFFECT_SOAK,
         .power = 0,
         .type = TYPE_BUG,
@@ -23331,7 +23333,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "The presence of\n"
             "Mokey Mokey causes\n"
-            "everone to get\n"
+            "everyone to get\n"
             "tired. User and foe\n"
             "goes to sleep."),
         .effect = EFFECT_NAP_TIME,
@@ -23346,7 +23348,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .zMove = { .effect = Z_EFFECT_RESET_STATS },
         //Move Categories
         .snatchAffected = TRUE,
-        .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .healingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_NapTime,
@@ -23463,7 +23464,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "pound. Ignores the\n"
             "target's stat\n"
             "changes and bypasses\n"
-            "Protect."),
+            "Protect. May paralyze."),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_FIGHTING,
@@ -23477,6 +23478,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 10,
         }),
         //Move Categories
+        .makesContact = TRUE,
         .punchingMove = TRUE,
         .minimizeDoubleDamage = TRUE,
         .ignoresTargetDefenseEvasionStages = TRUE,
