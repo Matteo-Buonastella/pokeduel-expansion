@@ -341,14 +341,10 @@ static enum StatChangeResult DecreaseStat(struct BattleCalcValues *cv, struct St
 
         if (cv->moveEffect == EFFECT_BELLY_DRUM)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_CHANGED_BELLY_DRUM;
-        else
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_WONT_CHANGE;
-
-        if (cv->moveEffect == EFFECT_MIRROR_WALL)
+        else if (cv->moveEffect == EFFECT_MIRROR_WALL)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_CHANGED_MIRROR_WALL;
         else
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_WONT_CHANGE;
-
 
         gBattleScripting.battler = cv->battlerDef;
         st->script = BattleScript_DecreaseStatChangeMessageMinStat;

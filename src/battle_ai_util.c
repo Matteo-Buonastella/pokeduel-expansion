@@ -1500,6 +1500,26 @@ bool32 CanTargetFaintAi(enum BattlerId battlerDef, enum BattlerId battlerAtk)
     return FALSE;
 }
 
+// Check if target has a move of the given category that can damage ai mon.
+bool32 CanTargetDamageAiWithCategory(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCategory category)
+{
+    struct AiLogicData *aiData = gAiLogicData;
+    enum Move *moves = GetMovesArray(battlerDef);
+    u32 moveLimitations = aiData->moveLimitations[battlerDef];
+
+    for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+    {
+        if (IsMoveUnusable(moveIndex, moves[moveIndex], moveLimitations)
+         || GetBattleMoveCategory(moves[moveIndex]) != category)
+            continue;
+
+        if (AI_GetDamage(battlerDef, battlerAtk, moveIndex, AI_DEFENDING, aiData) > 0)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure)
 {
     u32 currNumberOfHits;
@@ -2143,10 +2163,14 @@ bool32 ShouldTryOHKO(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
     }
     else    // test the odds
     {
-        u32 odds = accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
+        // Signed so Obliterate's odds against higher levelled targets can't wrap around
+        s32 odds = (s32)accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
         if (MoveDecreasesAccIfUserNotSameType(move) && !IS_BATTLER_OF_TYPE(battlerAtk, GetMoveType(move)))
             odds -= 10;
-        if (Random() % 100 + 1 < odds && gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level)
+        if (odds < 0)
+            odds = 0;
+        if ((s32)(Random() % 100 + 1) < odds
+         && (gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level || move == MOVE_OBLITERATE))
             return TRUE;
     }
     return FALSE;
@@ -3436,6 +3460,65 @@ u32 GetBattlerSecondaryDamage(enum BattlerId battlerId)
      + GetWeatherDamage(battlerId);
 
     return secondaryDamage;
+}
+
+// Wider than GetBattlerSecondaryDamage: anything that would hurt a 1 HP battler at the end of the turn
+bool32 IsBattlerHurtAtEndOfTurn(enum BattlerId battler)
+{
+    enum Ability ability = gAiLogicData->abilities[battler];
+    enum HoldEffect holdEffect = gAiLogicData->holdEffects[battler];
+
+    if (ability == ABILITY_MAGIC_GUARD)
+        return FALSE;
+
+    if (GetBattlerSecondaryDamage(battler) > 0)
+        return TRUE;
+
+    if (gBattleMons[battler].status1 & (STATUS1_BURN | STATUS1_FROSTBITE))
+        return TRUE;
+
+    if (gBattleMons[battler].volatiles.saltCure)
+        return TRUE;
+
+    if (gBattleMons[battler].status1 & STATUS1_SLEEP && AI_IsAbilityOnSide(GetBattlerLeftFoe(battler), ABILITY_BAD_DREAMS))
+        return TRUE;
+
+    switch (holdEffect)
+    {
+    case HOLD_EFFECT_STICKY_BARB:
+        return TRUE;
+    case HOLD_EFFECT_BLACK_SLUDGE:
+        return !IS_BATTLER_OF_TYPE(battler, TYPE_POISON);
+    case HOLD_EFFECT_FLAME_ORB:
+    case HOLD_EFFECT_TOXIC_ORB:
+        return gBattleMons[battler].status1 == STATUS1_NONE; // Orb will activate this turn
+    default:
+        break;
+    }
+
+    return FALSE;
+}
+
+// Check if target has a damaging priority move that can hit ai mon.
+bool32 HasDamagingPriorityMoveAgainstAi(enum BattlerId battlerDef, enum BattlerId battlerAtk)
+{
+    struct AiLogicData *aiData = gAiLogicData;
+    enum Move *moves = GetMovesArray(battlerDef);
+    u32 moveLimitations = aiData->moveLimitations[battlerDef];
+
+    for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+    {
+        if (IsMoveUnusable(moveIndex, moves[moveIndex], moveLimitations)
+         || IsBattleMoveStatus(moves[moveIndex])
+         || GetBattleMovePriority(battlerDef, aiData->abilities[battlerDef], moves[moveIndex]) <= 0
+         || Ai_IsPriorityBlocked(battlerDef, battlerAtk, moves[moveIndex], aiData))
+            continue;
+
+        if (AI_GetDamage(battlerDef, battlerAtk, moveIndex, AI_DEFENDING, aiData) > 0)
+            return TRUE;
+    }
+
+    return FALSE;
 }
 
 bool32 BattlerWillFaintFromWeather(enum BattlerId battler, enum Ability ability)
