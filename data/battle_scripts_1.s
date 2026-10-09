@@ -6472,16 +6472,12 @@ BattleScript_BelchFails::
 
 @@@@@@@@@@@; POKEDUEL SCRIPTS @@@@@@@@@@@@;
 
+@ The target's sleep checks are done by trynonvolatilestatus, the user's in the attack canceler
 BattleScript_EffectNapTime::
 	attackcanceler
 	trynonvolatilestatus
-	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
-	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_RestIsAlreadyAsleep
 	jumpifuproarwakes BattleScript_RestCantSleep
-	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
-	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
-	jumpifability BS_TARGET, ABILITY_PURIFYING_SALT, BattleScript_InsomniaProtects
-	jumpifabilitypreventsrest ABILITY_INSOMNIA, BattleScript_AbilityPreventsRest
+	jumpifabilitypreventsrest BS_ATTACKER, BattleScript_AbilityPreventsRest
 	attackanimation
 	waitanimation
 	setnonvolatilestatus TRIGGER_ON_MOVE

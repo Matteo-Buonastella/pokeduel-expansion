@@ -1309,10 +1309,10 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
               || cv->abilities[cv->battlerAtk] == ABILITY_VITAL_SPIRIT
               || cv->abilities[cv->battlerAtk] == ABILITY_PURIFYING_SALT)
             battleScript = BattleScript_InsomniaProtects;
-        else if(IsElectricTerrainAffected(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
-            gBattlescriptCurrInstr = BattleScript_ElectricTerrainPrevents;
-        else if(IsMistyTerrainAffected(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
-            gBattlescriptCurrInstr = BattleScript_MistyTerrainPrevents;
+        else if (IsElectricTerrainAffected(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
+            battleScript = BattleScript_ElectricTerrainPrevents;
+        else if (IsMistyTerrainAffected(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], gFieldTimers.terrain))
+            battleScript = BattleScript_MistyTerrainPrevents;
         break;
     case EFFECT_SNORE:
         if (!(gBattleMons[cv->battlerAtk].status1 & STATUS1_SLEEP)

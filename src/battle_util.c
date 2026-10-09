@@ -9597,6 +9597,20 @@ u32 CalcSecondaryEffectChance(enum BattlerId battler, enum Ability battlerAbilit
     u16 secondaryEffectChance = additionalEffect->chance;
     u32 attackerWeather = GetAttackerWeather(GetBattlerHoldEffect(battler), battlerAbility, GetWeather());
 
+    // Celestial Sword: chance is multiplied by the number of the foe's fainted mons (minimum x1)
+    if (move == MOVE_CELESTIAL_SWORD)
+    {
+        enum BattlerId leftFoe = GetBattlerLeftFoe(battler);
+        enum BattlerId rightFoe = GetBattlerRightFoe(battler);
+        u32 faintedFoes = gBattleStruct->faintCounter[GetBattlerTrainer(leftFoe)];
+
+        // Multi battles can have two opposing trainers
+        if (IsDoubleBattle() && GetBattlerTrainer(rightFoe) != GetBattlerTrainer(leftFoe))
+            faintedFoes += gBattleStruct->faintCounter[GetBattlerTrainer(rightFoe)];
+
+        secondaryEffectChance *= max(1, faintedFoes);
+    }
+
     if (hasRainbow && hasSereneGrace && additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
         return secondaryEffectChance * 2;
 

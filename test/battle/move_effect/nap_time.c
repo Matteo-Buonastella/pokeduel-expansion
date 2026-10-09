@@ -102,3 +102,46 @@ SINGLE_BATTLE_TEST("Nap Time fails if grounded in Electric/Misty Terrain")
         EXPECT(!(opponent->status1 & STATUS1_SLEEP));
     }
 }
+SINGLE_BATTLE_TEST("Nap Time is blocked by Protect")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_PROTECT) == EFFECT_PROTECT);
+        PLAYER(SPECIES_MOKEY_KING) { MaxHP(100); HP(40); Speed(1); }
+        OPPONENT(SPECIES_LITTLE_WINGUARD) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_NAP_TIME); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_NAP_TIME, player);
+            STATUS_ICON(opponent, sleep: TRUE);
+            STATUS_ICON(player, sleep: TRUE);
+            HP_BAR(player);
+        }
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+        EXPECT_EQ(opponent->status1, STATUS1_NONE);
+        EXPECT_EQ(player->hp, 40);
+    }
+}
+
+SINGLE_BATTLE_TEST("Nap Time fails if the user has Insomnia")
+{
+    GIVEN {
+        PLAYER(SPECIES_MOKEY_KING) { Ability(ABILITY_INSOMNIA); MaxHP(100); HP(40); }
+        OPPONENT(SPECIES_ZUBAT) { Ability(ABILITY_MOXIE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_NAP_TIME); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_NAP_TIME, player);
+            STATUS_ICON(opponent, sleep: TRUE);
+            STATUS_ICON(player, sleep: TRUE);
+            HP_BAR(player);
+        }
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+        EXPECT_EQ(opponent->status1, STATUS1_NONE);
+        EXPECT_EQ(player->hp, 40);
+    }
+}
