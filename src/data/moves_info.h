@@ -22482,7 +22482,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_CyberSlash,
     },
     
-    //TODO: confirm damage scales
     [MOVE_TRIPLE_SLICE] =
     {
         .name = COMPOUND_STRING("Triple Slice"),
@@ -22942,7 +22941,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Block,
     },
 
-    //TODO: Test Effects
     [MOVE_SHRINK] =
     {
         .name = COMPOUND_STRING("Shrink"),
@@ -23148,7 +23146,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_StridentBlaze,
     },
 
-    //TODO: Bonus to Steel moves
     [MOVE_METALMORPH] =
     {
         .name = COMPOUND_STRING("Metalmorph"),
@@ -23159,7 +23156,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Spd is lowered. Steel\n"
             "moves are powered up\n"
             "by 50% next turn."),
-        .effect = EFFECT_STAT_CHANGE,
+        .effect = EFFECT_METALMORPH,
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,

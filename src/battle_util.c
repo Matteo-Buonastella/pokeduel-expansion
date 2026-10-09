@@ -10570,9 +10570,12 @@ bool32 DoesOHKOMoveMissTarget(struct BattleCalcValues *cv)
 
     if (lands == CALC_ACC)
     {
-        u32 odds = GetMoveAccuracy(cv->move) + (gBattleMons[cv->battlerAtk].level - gBattleMons[cv->battlerDef].level);
+        // Signed so Obliterate's odds against higher levelled targets can't wrap around
+        s32 odds = (s32)GetMoveAccuracy(cv->move) + (gBattleMons[cv->battlerAtk].level - gBattleMons[cv->battlerDef].level);
         if (MoveDecreasesAccIfUserNotSameType(cv->move) && !IS_BATTLER_OF_TYPE(cv->battlerAtk, GetBattleMoveType(cv->move)))
             odds -= 10;
+        if (odds < 0)
+            odds = 0;
         if (RandomPercentage(RNG_ACCURACY, odds) && ((gBattleMons[cv->battlerAtk].level >= gBattleMons[cv->battlerDef].level) || cv->move == MOVE_OBLITERATE))
             lands = SURE_HIT;
     }

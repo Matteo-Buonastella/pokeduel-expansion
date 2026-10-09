@@ -1744,6 +1744,8 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         else if (!HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL) && !HasMoveWithEffect(battlerAtk, EFFECT_BODY_PRESS)) //No point in setting up Mirror Wall
             ADJUST_SCORE(-10);
+        else if (CanTargetDamageAiWithCategory(battlerDef, battlerAtk, DAMAGE_CATEGORY_SPECIAL)) // Defense doesn't help against special attacks
+            ADJUST_SCORE(-10);
         break;
 
     case EFFECT_POINT_TO_POINT:
@@ -1753,12 +1755,14 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         else if (!AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
             ADJUST_SCORE(-10);
-        else if(GetBattlerSecondaryDamage(battlerAtk) > 0)
+        else if (IsBattlerHurtAtEndOfTurn(battlerAtk)) // Would faint at 1 HP
             ADJUST_SCORE(-10);
-        else if(CanEndureHit(battlerAtk, battlerDef, move) && !IsBattlerIncapacitated(battlerDef, abilityDef))
-            ADJUST_SCORE(-10);
-        else if (gBattleMons[battlerAtk].speed < gBattleMons[battlerDef].speed && !IsBattlerIncapacitated(battlerDef, abilityDef))
-            ADJUST_SCORE(-5);
+        else if (AI_IsSlower(battlerAtk, battlerDef, move, predictedMove, DONT_CONSIDER_PRIORITY) && !IsBattlerIncapacitated(battlerDef, abilityDef))
+            ADJUST_SCORE(-5); // Foe outspeeds the 1 HP user next turn
+
+        if (HasDamagingPriorityMoveAgainstAi(battlerDef, battlerAtk)
+         && !IsPsychicTerrainAffected(battlerAtk, abilityAtk, aiData->holdEffects[battlerAtk], gFieldTimers.terrain)) // Psychic Terrain blocks priority moves
+            ADJUST_SCORE(-3);
         break;
 
     case EFFECT_AUTOTOMIZE:
@@ -4482,11 +4486,14 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         if (HasHPForDamagingSetup(battlerAtk, battlerDef, 50))
             ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
-    case EFFECT_MIRROR_WALL: //TODO: Only setup if they have physical moves only or you have a move that uses defense as an attack stat
+    case EFFECT_MIRROR_WALL: // CheckBadMove handles when Mirror Wall isn't worth setting up
+        if (HasHPForDamagingSetup(battlerAtk, battlerDef, 50))
+            ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
     case EFFECT_POINT_TO_POINT:
         if (HasHPForDamagingSetup(battlerAtk, battlerDef, 50))
             ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        break;
     case EFFECT_CLANGOROUS_SOUL:
         if (HasHPForDamagingSetup(battlerAtk, battlerDef, 33))
             ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
@@ -4514,7 +4521,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
     case EFFECT_METALMORPH:
-        if (HasDamagingMoveOfType(battlerAtk, TYPE_STEEL) && gBattleMons[battlerAtk].volatiles.metalmorphTimer > 0)
+        if (HasDamagingMoveOfType(battlerAtk, TYPE_STEEL) && gBattleMons[battlerAtk].volatiles.metalmorphTimer == 0)
             ADJUST_SCORE(WEAK_EFFECT);
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
