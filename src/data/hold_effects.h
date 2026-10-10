@@ -589,4 +589,16 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_SHANK] =
     {
     },
+
+    [HOLD_EFFECT_HORN_OF_THE_UNICORN] = 
+    {
+    },
+
+    [HOLD_EFFECT_AXE_OF_DESPAIR] = 
+    {
+    },
+
+    [HOLD_EFFECT_DARK_ORB] = 
+    {
+    },
 };

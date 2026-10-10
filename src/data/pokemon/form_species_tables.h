@@ -2602,3 +2602,45 @@ static const u16 sFortuneLadyEveryFormSpeciesIdTable[] = {
     SPECIES_FORTUNE_LADY_EVERY_DARK,
     FORM_SPECIES_END,
 };
+
+static const u16 sEarthboundImmortalCcapacApuFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_CCAPAC_APU,
+    SPECIES_EARTHBOUND_IMMORTAL_CCAPAC_APU_AWAKENED,
+    FORM_SPECIES_END,
+};
+
+static const u16 sEarthboundImmortalCusilluFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_CUSILLU,
+    SPECIES_EARTHBOUND_IMMORTAL_CUSILLU_AWAKENED,
+    FORM_SPECIES_END,
+};
+
+static const u16 sEarthboundImmortalCcarayhuaFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_CCARAYHUA,
+    SPECIES_EARTHBOUND_IMMORTAL_CCARAYHUA_AWAKENED,
+    FORM_SPECIES_END,
+};
+
+static const u16 sEarthboundImmortalUruFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_URU,
+    SPECIES_EARTHBOUND_IMMORTAL_URU_AWAKENED,
+    FORM_SPECIES_END,
+};
+
+static const u16 sEarthboundImmortalChacuChallhuaFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_CHACU_CHALLHUA,
+    SPECIES_EARTHBOUND_IMMORTAL_CHACU_CHALLHUA_AWAKENED,
+    FORM_SPECIES_END,
+};
+
+static const u16 sEarthboundImmortalAsllaPiscuFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_ASLLA_PISCU,
+    SPECIES_EARTHBOUND_IMMORTAL_ASLLA_PISCU_AWAKENED,
+    FORM_SPECIES_END,
+};
+
+static const u16 sEarthboundImmortalWiraqochaRascaFormSpeciesIdTable[] = {
+    SPECIES_EARTHBOUND_IMMORTAL_WIRAQOCHA_RASCA,
+    SPECIES_EARTHBOUND_IMMORTAL_WIRAQOCHA_RASCA_AWAKENED,
+    FORM_SPECIES_END,
+};

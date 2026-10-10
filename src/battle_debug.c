@@ -2285,6 +2285,9 @@ static const u8 *const sHoldEffectNames[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_OGERPON_MASK]     = COMPOUND_STRING("Ogerpon Mask"),
     [HOLD_EFFECT_BERSERK_GENE]     = COMPOUND_STRING("Berserk Gene"),
     [HOLD_EFFECT_SHANK]            = COMPOUND_STRING("Shank"),
+    [HOLD_EFFECT_HORN_OF_THE_UNICORN] = COMPOUND_STRING("Horn of the Unicorn"),
+    [HOLD_EFFECT_AXE_OF_DESPAIR]    = COMPOUND_STRING("Axe of Despair"),
+    [HOLD_EFFECT_DARK_ORB]          = COMPOUND_STRING("Dark Orb"),
 };
 
 static const u8 *GetHoldEffectName(enum HoldEffect holdEffect)

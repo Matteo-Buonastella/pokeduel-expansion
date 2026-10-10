@@ -3439,4 +3439,23 @@ extern const u16 gBattleIcons_Pal2[];
 extern const u32 gGhostFrontPic[];
 extern const u16 gGhostPalette[];
 
+//Pokeduel Items
+extern const u32 gItemIcon_ToonStone[];
+extern const u16 gItemIconPalette_ToonStone[];
+
+extern const u32 gItemIcon_LinkStone[];
+extern const u16 gItemIconPalette_LinkStone[];
+
+extern const u32 gItemIcon_Shank[];
+extern const u16 gItemIconPalette_Shank[];
+
+extern const u32 gItemIcon_HornOfTheUnicorn[];
+extern const u16 gItemIconPalette_HornOfTheUnicorn[];
+
+extern const u32 gItemIcon_AxeOfDespair[];
+extern const u16 gItemIconPalette_AxeOfDespair[];
+
+extern const u32 gItemIcon_DarkOrb[];
+extern const u16 gItemIconPalette_DarkOrb[];
+
 #endif //GUARD_GRAPHICS_H

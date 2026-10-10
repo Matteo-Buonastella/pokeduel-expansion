@@ -22124,7 +22124,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_Megamorph,
+        .battleAnimScript = gBattleAnimMove_CelestialSword,
     },
 
     [MOVE_WHITE_LIGHTNING] =

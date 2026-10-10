@@ -6457,6 +6457,30 @@ static bool32 DmgCalc_IsAbilityOnField(enum Ability ability, enum Ability abilit
     return FALSE;
 }
 
+bool32 IsEarthboundImmortal(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_EARTHBOUND_IMMORTAL_CCAPAC_APU:
+    case SPECIES_EARTHBOUND_IMMORTAL_CUSILLU:
+    case SPECIES_EARTHBOUND_IMMORTAL_CCARAYHUA:
+    case SPECIES_EARTHBOUND_IMMORTAL_URU:
+    case SPECIES_EARTHBOUND_IMMORTAL_CHACU_CHALLHUA:
+    case SPECIES_EARTHBOUND_IMMORTAL_ASLLA_PISCU:
+    case SPECIES_EARTHBOUND_IMMORTAL_WIRAQOCHA_RASCA:
+    case SPECIES_EARTHBOUND_IMMORTAL_CCAPAC_APU_AWAKENED:
+    case SPECIES_EARTHBOUND_IMMORTAL_CUSILLU_AWAKENED:
+    case SPECIES_EARTHBOUND_IMMORTAL_CCARAYHUA_AWAKENED:
+    case SPECIES_EARTHBOUND_IMMORTAL_URU_AWAKENED:
+    case SPECIES_EARTHBOUND_IMMORTAL_CHACU_CHALLHUA_AWAKENED:
+    case SPECIES_EARTHBOUND_IMMORTAL_ASLLA_PISCU_AWAKENED:
+    case SPECIES_EARTHBOUND_IMMORTAL_WIRAQOCHA_RASCA_AWAKENED:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
 {
     u32 holdEffectParamAtk;
@@ -6762,6 +6786,11 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
     case HOLD_EFFECT_OGERPON_MASK:
         if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_OGERPON)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
+        break;
+    case HOLD_EFFECT_DARK_ORB:
+        if (IsEarthboundImmortal(gBattleMons[battlerAtk].species)
+         && IS_BATTLER_OF_TYPE(battlerAtk, moveType))
+            modifier = uq4_12_multiply(modifier, holdEffectModifier);
         break;
     case HOLD_EFFECT_SHANK:
         if (IsSlicingMove(move))
@@ -7092,6 +7121,14 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
     case HOLD_EFFECT_CHOICE_SPECS:
         if (IsBattleMoveSpecial(move) && GetActiveGimmick(battlerAtk) != GIMMICK_DYNAMAX)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_HORN_OF_THE_UNICORN:
+        if ((atkBaseSpeciesId == SPECIES_BEAVER_WARRIOR 
+            || atkBaseSpeciesId == SPECIES_JERRY_BEANS_MAN
+            || atkBaseSpeciesId == SPECIES_FERAL_IMP
+            || atkBaseSpeciesId == SPECIES_CRYSTAL_BEAST_SAPHIRE_PEGASUS
+            || atkBaseSpeciesId == SPECIES_SUNLIGHT_UNICORN) && IsBattleMovePhysical(move))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     default:
         break;
@@ -7922,6 +7959,13 @@ static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum H
         break;
     case HOLD_EFFECT_LEEK:
         if (IsBattlerLeekAffected(battler, holdEffect))
+            critStageIncrease = 2;
+        break;
+    case HOLD_EFFECT_AXE_OF_DESPAIR:
+        if (gBattleMons[battler].species == SPECIES_AXE_RAIDER 
+        || gBattleMons[battler].species == SPECIES_VORSE_RAIDER
+        || gBattleMons[battler].species == SPECIES_BATTLE_OX
+        || gBattleMons[battler].species == SPECIES_RABID_HORSEMAN)
             critStageIncrease = 2;
         break;
     default:

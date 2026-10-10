@@ -36011,7 +36011,6 @@ ExplodeTarget::
 
 gBattleAnimMove_CelestialSword::
 	monbg ANIM_ATTACKER
-	monbg ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_M_SWORDS_DANCE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 16, 6, 1, 4
@@ -36019,8 +36018,10 @@ gBattleAnimMove_CelestialSword::
 	delay 22
 	flash_anim_tag_with_color tag=ANIM_TAG_SWORD, delay=2, num_blends=2, color1=RGB(18, 31, 31), blend_y1=16, color2=0, blend_y2=0
 	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
 	blendoff
 	delay 1
+	monbg ANIM_TARGET
 	setalpha 12, 8
 	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 24, 6, 1, 5
 	createvisualtask AnimTask_TraceMonBlended, 2, 0, 4, 7, 3
@@ -36032,8 +36033,8 @@ gBattleAnimMove_CelestialSword::
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
-	clearmonbg ANIM_ATTACKER
 	blendoff
+	delay 1
 	end
 
 gBattleAnimMove_SparkBlaster::

@@ -16117,8 +16117,8 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
         .effect = gItemEffect_EvoItem,
         .flingPower = 30,
-        .iconPic = gItemIcon_SunStone,
-        .iconPalette = gItemIconPalette_SunStone,
+        .iconPic = gItemIcon_ToonStone,
+        .iconPalette = gItemIconPalette_ToonStone,
     },
 
     [ITEM_LINK_STONE] =
@@ -16136,27 +16136,81 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
         .effect = gItemEffect_EvoItem,
         .flingPower = 30,
-        .iconPic = gItemIcon_SunStone,
-        .iconPalette = gItemIconPalette_SunStone,
+        .iconPic = gItemIcon_LinkStone,
+        .iconPalette = gItemIconPalette_LinkStone,
     },
 
-    //Todo fix description
     [ITEM_SHANK] =
     {
         .name = ITEM_NAME("Shank"),
         .price = 100,
         .holdEffect = HOLD_EFFECT_SHANK,
         .description = COMPOUND_STRING(
-            "Powers up punching\n"
-            "moves and removes\n"
-            "their contact."),
+            "A handcrafted blade resembling\n"
+            "a knife. Boosts the power of\n"
+            "jabbing/stabbing moves by 50%."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_HELD_ITEM,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
-        .iconPic = gItemIcon_PunchingGlove,
-        .iconPalette = gItemIconPalette_PunchingGlove,
+        .iconPic = gItemIcon_Shank,
+        .iconPalette = gItemIconPalette_Shank,
+    },
+
+    [ITEM_HORN_OF_THE_UNICORN] =
+    {
+        .name = ITEM_NAME("Horn of the Unicorn"),
+        .price = 1000,
+        .holdEffect = HOLD_EFFECT_HORN_OF_THE_UNICORN,
+        .description = COMPOUND_STRING(
+            "2x Attack if held by Beaver W,\n"
+            "Jerry Bean, Feral Imp,\n"
+            "S Pegaus or Sunlight Unicorn."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HELD_ITEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 90,
+        .iconPic = gItemIcon_HornOfTheUnicorn,
+        .iconPalette = gItemIconPalette_HornOfTheUnicorn,
+    },
+
+    [ITEM_AXE_OF_DESPAIR] =
+    {
+        .name = ITEM_NAME("Axe of Despair"),
+        .price = 1000,
+        .holdEffect = HOLD_EFFECT_AXE_OF_DESPAIR,
+        .description = COMPOUND_STRING(
+            "If equipped to Axe Raider\n"
+            "or Battle Ox family, crit\n"
+            "ratio is increased."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HELD_ITEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_AxeOfDespair,
+        .iconPalette = gItemIconPalette_AxeOfDespair,
+    },
+
+    [ITEM_DARK_ORB] =
+    {
+        .name = ITEM_NAME("Dark Orb"),
+        .price = 10000,
+        .holdEffect = HOLD_EFFECT_DARK_ORB,
+        .holdEffectParam = 20,
+        .description = COMPOUND_STRING(
+            "Awakens the equipped Earthbound\n"
+            "Immortal. Dark type is added and\n"
+            "STAB moves are powered up by 20%."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SPECIAL_HELD_ITEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 60,
+        .iconPic = gItemIcon_DarkOrb,
+        .iconPalette = gItemIconPalette_DarkOrb,
     },
 
 };
