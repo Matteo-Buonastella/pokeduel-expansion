@@ -995,6 +995,7 @@ BattleScript_HitSwitchTargetForceRandomSwitchFailed:
 BattleScript_EffectSoak::
 	attackcanceler
 	jumpifability BS_TARGET, ABILITY_MULTITYPE, BattleScript_ButItFailed
+	jumpifability BS_TARGET, ABILITY_EVERY_TYPE, BattleScript_ButItFailed
 	jumpifability BS_TARGET, ABILITY_RKS_SYSTEM, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
