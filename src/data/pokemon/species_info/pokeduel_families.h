@@ -9778,7 +9778,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_RevivalRose,
     .shinyPalette = gMonShinyPalette_RevivalRose,
     .iconSprite = gMonIcon_RevivalRose,
-    .iconPalIndex = 0,
+    .iconPalIndex = 1,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -9855,7 +9855,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_RegeneratingRose,
     .shinyPalette = gMonShinyPalette_RegeneratingRose,
     .iconSprite = gMonIcon_RegeneratingRose,
-    .iconPalIndex = 0,
+    .iconPalIndex = 1,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -9929,7 +9929,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_RoseTentacles,
     .shinyPalette = gMonShinyPalette_RoseTentacles,
     .iconSprite = gMonIcon_RoseTentacles,
-    .iconPalIndex = 0,
+    .iconPalIndex = 1,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -17213,7 +17213,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .catchRate = 190,
     .expYield = 85,
     .evYield_Speed = 2,
-    //.itemCommon = ITEM_AXE_DESPAIR,
+    .itemCommon = ITEM_AXE_OF_DESPAIR,
     .itemRare = ITEM_NONE,
     .genderRatio = PERCENT_FEMALE(50),
     .eggCycles = 4,
@@ -29067,7 +29067,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .evYield_Speed = 1,
     .evYield_SpAttack = 1,
     .itemCommon = ITEM_NONE,
-    //.itemRare = ITEM_HORN_OF_THE_UNICORN,
+    .itemRare = ITEM_HORN_OF_THE_UNICORN,
     .genderRatio = PERCENT_FEMALE(75),
     .eggCycles = 5,
     .friendship = STANDARD_FRIENDSHIP,
@@ -29329,7 +29329,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_MontageDragon,
     .shinyPalette = gMonShinyPalette_MontageDragon,
     .iconSprite = gMonIcon_MontageDragon,
-    .iconPalIndex = 0,
+    .iconPalIndex = 2,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -30319,7 +30319,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .expYield = 75,
     .evYield_Attack = 1,
     .evYield_Speed = 1,
-    //.itemCommon = ITEM_HORN_OF_THE_UNICORN,
+    .itemCommon = ITEM_HORN_OF_THE_UNICORN,
     .itemRare = ITEM_NONE,
     .genderRatio = PERCENT_FEMALE(50),
     .eggCycles = 15,
@@ -35730,6 +35730,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalCcapacApuFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalCcapacApuFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalCcapacApuLearnset,
     .teachableLearnset = sEarthboundImmortalCcapacApuTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalCcapacApuEggMoveLearnset,
@@ -35806,6 +35808,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalCusilluFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalCusilluFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalCusilluLearnset,
     .teachableLearnset = sEarthboundImmortalCusilluTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalCusilluEggMoveLearnset,
@@ -35882,6 +35886,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalCcarayhuaFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalCcarayhuaFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalCcarayhuaLearnset,
     .teachableLearnset = sEarthboundImmortalCcarayhuaTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalCcarayhuaEggMoveLearnset,
@@ -35958,6 +35964,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalUruFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalUruFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalUruLearnset,
     .teachableLearnset = sEarthboundImmortalUruTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalUruEggMoveLearnset,
@@ -36034,6 +36042,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalChacuChallhuaFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalChacuChallhuaFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalChacuChallhuaLearnset,
     .teachableLearnset = sEarthboundImmortalChacuChallhuaTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalChacuChallhuaEggMoveLearnset,
@@ -36110,6 +36120,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalAsllaPiscuFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalAsllaPiscuFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalAsllaPiscuLearnset,
     .teachableLearnset = sEarthboundImmortalAsllaPiscuTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalAsllaPiscuEggMoveLearnset,
@@ -36187,6 +36199,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalWiraqochaRascaFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalWiraqochaRascaFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalWiraqochaRascaLearnset,
     .teachableLearnset = sEarthboundImmortalWiraqochaRascaTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalWiraqochaRascaEggMoveLearnset,
@@ -36262,6 +36276,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalCcapacApuFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalCcapacApuFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalCcapacApuLearnset,
     .teachableLearnset = sEarthboundImmortalCcapacApuAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalCcapacApuAwakenedEggMoveLearnset,
@@ -36338,6 +36354,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalCusilluFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalCusilluFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalCusilluLearnset,
     .teachableLearnset = sEarthboundImmortalCusilluAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalCusilluAwakenedEggMoveLearnset,
@@ -36414,6 +36432,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalCcarayhuaFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalCcarayhuaFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalCcarayhuaLearnset,
     .teachableLearnset = sEarthboundImmortalCcarayhuaAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalCcarayhuaAwakenedEggMoveLearnset,
@@ -36490,6 +36510,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalUruFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalUruFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalUruLearnset,
     .teachableLearnset = sEarthboundImmortalUruAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalUruAwakenedEggMoveLearnset,
@@ -36566,6 +36588,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalChacuChallhuaFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalChacuChallhuaFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalChacuChallhuaLearnset,
     .teachableLearnset = sEarthboundImmortalChacuChallhuaAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalChacuChallhuaAwakenedEggMoveLearnset,
@@ -36642,6 +36666,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalAsllaPiscuFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalAsllaPiscuFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalAsllaPiscuLearnset,
     .teachableLearnset = sEarthboundImmortalAsllaPiscuAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalAsllaPiscuAwakenedEggMoveLearnset,
@@ -36719,6 +36745,8 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     )
     .isUltraBeast = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
+    .formChangeTable = sEarthboundImmortalWiraqochaRascaFormChangeTable,
+    .formSpeciesIdTable = sEarthboundImmortalWiraqochaRascaFormSpeciesIdTable,
     .levelUpLearnset = sEarthboundImmortalWiraqochaRascaLearnset,
     .teachableLearnset = sEarthboundImmortalWiraqochaRascaAwakenedTeachableLearnset,
     .eggMoveLearnset = sEarthboundImmortalWiraqochaRascaAwakenedEggMoveLearnset,
@@ -37371,7 +37399,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_RuddyRoseDragon,
     .shinyPalette = gMonShinyPalette_RuddyRoseDragon,
     .iconSprite = gMonIcon_RuddyRoseDragon,
-    .iconPalIndex = 1,
+    .iconPalIndex = 0,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)

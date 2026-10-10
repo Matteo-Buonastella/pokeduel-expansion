@@ -2112,3 +2112,22 @@ const u16 gItemIconPalette_SwapSnack[] = INCGFX_U16("graphics/items/icon_palette
 
 const u32 gItemIcon_TwiceSpicedRadish[] = INCGFX_U32("graphics/items/icons/twice_spiced_radish.png", ".4bpp.smol");
 const u16 gItemIconPalette_TwiceSpicedRadish[] = INCGFX_U16("graphics/items/icon_palettes/twice_spiced_radish.pal", ".gbapal");
+
+//Pokeduel 
+const u32 gItemIcon_ToonStone[] = INCGFX_U32("graphics/items/icons/toon_stone.png", ".4bpp.smol");
+const u16 gItemIconPalette_ToonStone[] = INCGFX_U16("graphics/items/icon_palettes/toon_stone.pal", ".gbapal");
+
+const u32 gItemIcon_LinkStone[] = INCGFX_U32("graphics/items/icons/link_stone.png", ".4bpp.smol");
+const u16 gItemIconPalette_LinkStone[] = INCGFX_U16("graphics/items/icon_palettes/link_stone.pal", ".gbapal");
+
+const u32 gItemIcon_Shank[] = INCGFX_U32("graphics/items/icons/shank.png", ".4bpp.smol");
+const u16 gItemIconPalette_Shank[] = INCGFX_U16("graphics/items/icon_palettes/shank.pal", ".gbapal");
+
+const u32 gItemIcon_HornOfTheUnicorn[] = INCGFX_U32("graphics/items/icons/horn_of_the_unicorn.png", ".4bpp.smol");
+const u16 gItemIconPalette_HornOfTheUnicorn[] = INCGFX_U16("graphics/items/icon_palettes/horn_of_the_unicorn.pal", ".gbapal");
+
+const u32 gItemIcon_AxeOfDespair[] = INCGFX_U32("graphics/items/icons/axe_of_despair.png", ".4bpp.smol");
+const u16 gItemIconPalette_AxeOfDespair[] = INCGFX_U16("graphics/items/icon_palettes/axe_of_despair.pal", ".gbapal");
+
+const u32 gItemIcon_DarkOrb[] = INCGFX_U32("graphics/items/icons/dark_orb.png", ".4bpp.smol");
+const u16 gItemIconPalette_DarkOrb[] = INCGFX_U16("graphics/items/icon_palettes/dark_orb.pal", ".gbapal");
