@@ -2551,6 +2551,19 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Burns the foe when damaged."),
     },
 
+    [ABILITY_EVERY_TYPE] =
+    {
+        .name = _("Every Type"),
+        .description = COMPOUND_STRING("Matches Plate."),
+        .aiRating = 8,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .cantBeSuppressed = TRUE,
+        .cantBeOverwritten = TRUE,
+        .failsOnImposter = TRUE,
+    },
+
     [ABILITY_AURA_GUARD] =
     {
         .name = _("Aura Guard"),

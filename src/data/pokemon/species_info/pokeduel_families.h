@@ -15711,7 +15711,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -15787,7 +15787,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -15863,7 +15863,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -15939,7 +15939,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16015,7 +16015,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16091,7 +16091,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16167,7 +16167,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16243,7 +16243,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16319,7 +16319,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16395,7 +16395,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16471,7 +16471,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16547,7 +16547,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16623,7 +16623,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16699,7 +16699,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16775,7 +16775,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16851,7 +16851,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
@@ -16927,7 +16927,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED),
     .abilities = {
-        ABILITY_MULTITYPE,
+        ABILITY_EVERY_TYPE,
         ABILITY_NONE,
         ABILITY_SYNCHRONIZE
 },
