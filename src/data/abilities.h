@@ -878,6 +878,20 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = -2,
     },
 
+    [ABILITY_HONEST_POWER] =
+    {
+        .name = _("Honest Power"),
+        .description = COMPOUND_STRING("Doubles Sp. Atk."),
+        .aiRating = 10,
+    },
+
+    [ABILITY_SLOW_START_2] =
+    {
+        .name = _("Slow Start 2"),
+        .description = COMPOUND_STRING("Takes 2 turns to get going."),
+        .aiRating = -2,
+    },
+
     [ABILITY_SCRAPPY] =
     {
         .name = _("Scrappy"),
@@ -2554,7 +2568,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_EVERY_TYPE] =
     {
         .name = _("Every Type"),
-        .description = COMPOUND_STRING("Matches Plate."),
+        .description = COMPOUND_STRING("Adds type from plate."),
         .aiRating = 8,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,

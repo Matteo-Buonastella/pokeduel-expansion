@@ -15564,7 +15564,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_SLOW,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FIELD),
     .abilities = {
-        ABILITY_SLOW_START, ///slowstart2
+        ABILITY_SLOW_START_2, 
         ABILITY_NONE,
         ABILITY_NONE
 },
@@ -23302,7 +23302,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .growthRate = GROWTH_MEDIUM_FAST,
     .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FAIRY),
     .abilities = {
-        //ABILITY_HONEST_POWER,
+        ABILITY_HONEST_POWER,
         ABILITY_MISTY_SURGE,
         ABILITY_NONE
 },

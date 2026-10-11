@@ -3184,9 +3184,10 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             }
             break;
         case ABILITY_SLOW_START:
+        case ABILITY_SLOW_START_2:
             if (shouldAbilityTrigger)
             {
-                gBattleMons[battler].volatiles.slowStartTimer = B_SLOW_START_TIMER;
+                gBattleMons[battler].volatiles.slowStartTimer = (ability == ABILITY_SLOW_START_2) ? 2 : B_SLOW_START_TIMER; //Slow Start 5 turns, new Slow Start 2 turns
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_SLOWSTART;
                 BattleScriptCall(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3736,6 +3737,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 gBattleMons[gBattlerAttacker].volatiles.truantCounter ^= 1;
                 break;
             case ABILITY_SLOW_START:
+            case ABILITY_SLOW_START_2:
                 if (gBattleMons[battler].volatiles.slowStartTimer > 0 && --gBattleMons[battler].volatiles.slowStartTimer == 0)
                 {
                     BattleScriptCall(BattleScript_SlowStartEnds);
@@ -6963,7 +6965,12 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         if (IsBattleMovePhysical(move))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
+    case ABILITY_HONEST_POWER:
+        if (IsBattleMoveSpecial(move))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
+        break;
     case ABILITY_SLOW_START:
+    case ABILITY_SLOW_START_2:
         if (gBattleMons[battlerAtk].volatiles.slowStartTimer > 0 && IsBattleMovePhysical(move))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.5));
         break;
