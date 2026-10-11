@@ -878,6 +878,14 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = -2,
     },
 
+    [ABILITY_FLAME_MAW] =
+    {
+        .name = _("Flame Maw"),
+        .description = COMPOUND_STRING("Ups Fire moves by 50%.\nPrevents burns."),
+        .aiRating = 6,
+        .breakable = TRUE,
+    },
+
     [ABILITY_HONEST_POWER] =
     {
         .name = _("Honest Power"),
