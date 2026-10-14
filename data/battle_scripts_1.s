@@ -4991,6 +4991,13 @@ BattleScript_GrassyTerrainHeals::
 	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
 	return
 
+BattleScript_ForestTerrainCuresStatus::
+	playanimation BS_ATTACKER, B_ANIM_SIMPLE_HEAL
+	printstring STRINGID_FORESTTERRAINCURESSTATUS
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_ATTACKER
+	return
+
 BattleScript_StickyHoldActivates::
 	call BattleScript_StickyHoldActivatesRet
 	goto BattleScript_MoveEnd

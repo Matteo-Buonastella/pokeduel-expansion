@@ -414,6 +414,22 @@ static bool32 HandleEndTurnFirstEventBlock(enum BattlerId battler)
         }
         gBattleStruct->eventState.endTurnBlock++;
         break;
+    case FIRST_EVENT_BLOCK_FOREST_TERRAIN_CURE:
+        if (gBattleMons[battler].status1 & STATUS1_ANY
+         && gFieldTimers.terrain == B_TERRAIN_FOREST
+         && (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS) || IS_BATTLER_OF_TYPE(battler, TYPE_BUG)))
+        {
+            if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+                TryDeactivateSleepClause(battler, gBattlerPartyIndexes[battler]);
+            gBattleMons[battler].status1 = 0;
+            gBattleMons[battler].volatiles.nightmare = FALSE;
+            BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
+            MarkBattlerForControllerExec(battler);
+            BattleScriptCall(BattleScript_ForestTerrainCuresStatus);
+            effect = TRUE;
+        }
+        gBattleStruct->eventState.endTurnBlock++;
+        break;
     case FIRST_EVENT_BLOCK_ABILITIES:
     {
         enum Ability ability = GetBattlerAbility(battler);

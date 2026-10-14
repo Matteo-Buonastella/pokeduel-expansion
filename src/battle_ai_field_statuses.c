@@ -42,6 +42,7 @@ static enum FieldEffectOutcome BenefitsFromElectricTerrain(enum BattlerId battle
 static enum FieldEffectOutcome BenefitsFromGrassyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromMistyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -115,6 +116,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_PSYCHIC:
             result = BenefitsFromPsychicTerrain(battlerIndex);
+            break;
+        case B_TERRAIN_FOREST:
+            result = BenefitsFromForestTerrain(battlerIndex);
             break;
         default:
             break;
@@ -202,7 +206,10 @@ static bool32 DoesAbilityBenefitFromTerrain(enum Ability ability, enum BattleTer
     case ABILITY_SURGE_SURFER:
         return terrain == B_TERRAIN_ELECTRIC;
     case ABILITY_GRASS_PELT:
-        return terrain == B_TERRAIN_GRASSY;
+        return terrain == B_TERRAIN_GRASSY || terrain == B_TERRAIN_FOREST;
+    case ABILITY_SWARM:
+    case ABILITY_OVERGROW:
+        return terrain == B_TERRAIN_FOREST;
     // no abilities inherently benefit from Misty or Psychic Terrains
     // return terrain == B_TERRAIN_MISTY;
     // return terrain == B_TERRAIN_PSYCHIC;
@@ -385,6 +392,25 @@ static enum FieldEffectOutcome BenefitsFromGrassyTerrain(enum BattlerId battler)
     if (HasBattlerSideMoveWithEffect(GetBattlerLeftFoe(battler), EFFECT_GRASSY_GLIDE))
         return FIELD_EFFECT_NEGATIVE;
 
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler)
+{
+    if (DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_FOREST))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasDamagingMoveOfType(battler, TYPE_GRASS) || HasDamagingMoveOfType(battler, TYPE_BUG))
+        return FIELD_EFFECT_POSITIVE;
+
+    if ((IS_BATTLER_OF_TYPE(battler, TYPE_GRASS) || IS_BATTLER_OF_TYPE(battler, TYPE_BUG))
+     && gBattleMons[battler].status1 & STATUS1_ANY)
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_GRASS) || HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_BUG)
+     || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_GRASS) || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_BUG))
+        return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
 }

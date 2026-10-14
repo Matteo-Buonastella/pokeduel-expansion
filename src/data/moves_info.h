@@ -23567,6 +23567,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Megamorph,
     },
 
+    [MOVE_FOREST_TERRAIN] =
+    {
+        .name = COMPOUND_STRING("Forest"),
+        .description = COMPOUND_STRING(
+            "Field turns into a\n"
+            "forest for 5 turns,\n"
+            "powering up Bug &\n"
+            "Grass moves, also\n"
+            "healing status of\n"
+            "Bug/Grass types."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_FOREST },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_ForestTerrain,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

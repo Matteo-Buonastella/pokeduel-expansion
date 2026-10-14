@@ -347,6 +347,18 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .startMessage = B_MSG_TERRAIN_SET_PSYCHIC,
         .endMessage = B_MSG_TERRAIN_END_PSYCHIC,
     },
+
+    [B_TERRAIN_FOREST] = {
+        .type = TYPE_GRASS,
+        .secretPowerAnimation = gBattleAnimMove_NeedleArm,
+        .secretPowerEffect = MOVE_EFFECT_SLEEP,
+        .naturePowerMove = MOVE_ENERGY_BALL,
+        .battleBackground = BG_SNUGGLE_FOREVER,
+        .seedStat = STAT_DEF,
+        .seedHoldEffect = HOLD_EFFECT_PARAM_GRASSY_TERRAIN, // Grassy Seed also activates in Forest Terrain
+        .startMessage = B_MSG_TERRAIN_SET_FOREST,
+        .endMessage = B_MSG_TERRAIN_END_FOREST,
+    },
 };
 
 bool32 EndOrContinueWeather(void)
@@ -6579,6 +6591,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, (B_TERRAIN_TYPE_BOOST >= GEN_8 ? UQ_4_12(1.3) : UQ_4_12(1.5)));
     if (IsPsychicTerrainAffected(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk], ctx->terrain) && moveType == TYPE_PSYCHIC)
         modifier = uq4_12_multiply(modifier, (B_TERRAIN_TYPE_BOOST >= GEN_8 ? UQ_4_12(1.3) : UQ_4_12(1.5)));
+    if (ctx->terrain == B_TERRAIN_FOREST && (moveType == TYPE_GRASS || moveType == TYPE_BUG)) // Forest Terrain ignores grounding
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     if (IsFieldMudSportAffected(ctx->moveType))
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
     if (IsFieldWaterSportAffected(ctx->moveType))
@@ -7268,11 +7282,20 @@ static inline u32 CalcDefenseStat(struct DamageContext *ctx)
         }
         break;
     case ABILITY_GRASS_PELT:
-        if (ctx->terrain == B_TERRAIN_GRASSY && usesDefStat)
+        if ((ctx->terrain == B_TERRAIN_GRASSY || ctx->terrain == B_TERRAIN_FOREST) && usesDefStat)
         {
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
             if (ctx->updateFlags)
                 RecordAbilityBattle(battlerDef, ABILITY_GRASS_PELT);
+        }
+        break;
+    case ABILITY_SWARM:
+    case ABILITY_OVERGROW:
+        if (ctx->terrain == B_TERRAIN_FOREST && usesDefStat)
+        {
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.3));
+            if (ctx->updateFlags)
+                RecordAbilityBattle(battlerDef, ctx->abilities[ctx->battlerDef]);
         }
         break;
     case ABILITY_FLOWER_GIFT:
