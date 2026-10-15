@@ -151,6 +151,7 @@ enum HoldEffect
 #define HOLD_EFFECT_PARAM_GRASSY_TERRAIN    1
 #define HOLD_EFFECT_PARAM_MISTY_TERRAIN     2
 #define HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN   3
+#define HOLD_EFFECT_PARAM_MOUNTAIN_TERRAIN  4 // No seed item uses this
 
 enum ItemActivationState
 {

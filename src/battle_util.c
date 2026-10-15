@@ -359,6 +359,18 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .startMessage = B_MSG_TERRAIN_SET_FOREST,
         .endMessage = B_MSG_TERRAIN_END_FOREST,
     },
+
+    [B_TERRAIN_MOUNTAIN] = {
+        .type = TYPE_DRAGON,
+        .secretPowerAnimation = gBattleAnimMove_DragonBreath,
+        .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
+        .naturePowerMove = MOVE_DRAGON_PULSE,
+        .battleBackground = BG_ZMOVE_MOUNTAIN,
+        .seedStat = STAT_DEF,
+        .seedHoldEffect = HOLD_EFFECT_PARAM_MOUNTAIN_TERRAIN,
+        .startMessage = B_MSG_TERRAIN_SET_MOUNTAIN,
+        .endMessage = B_MSG_TERRAIN_END_MOUNTAIN,
+    },
 };
 
 bool32 EndOrContinueWeather(void)
@@ -6593,6 +6605,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, (B_TERRAIN_TYPE_BOOST >= GEN_8 ? UQ_4_12(1.3) : UQ_4_12(1.5)));
     if (ctx->terrain == B_TERRAIN_FOREST && (moveType == TYPE_GRASS || moveType == TYPE_BUG)) // Forest Terrain ignores grounding
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+    if (ctx->terrain == B_TERRAIN_MOUNTAIN && (moveType == TYPE_DRAGON || moveType == TYPE_FLYING)) // Mountain Terrain ignores grounding
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     if (IsFieldMudSportAffected(ctx->moveType))
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
     if (IsFieldWaterSportAffected(ctx->moveType))
@@ -10546,6 +10560,9 @@ bool32 CanMoveSkipAccuracyCalc(struct BattleCalcValues *cv, u32 weather, enum Re
         if ((attackerWeather & B_WEATHER_RAIN) && MoveAlwaysHitsInRain(cv->move))
             effect = TRUE;
         else if ((attackerWeather & B_WEATHER_ICY_ANY) && MoveAlwaysHitsInHailSnow(cv->move))
+            effect = TRUE;
+        else if (gFieldTimers.terrain == B_TERRAIN_MOUNTAIN
+              && (option == AI_CHECK ? GetMoveType(cv->move) : GetBattleMoveType(cv->move)) == TYPE_ELECTRIC)
             effect = TRUE;
 
         if (effect)

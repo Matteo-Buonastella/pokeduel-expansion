@@ -23593,6 +23593,59 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_ForestTerrain,
     },
 
+    [MOVE_MOUNTAIN_TERRAIN] =
+    {
+        .name = COMPOUND_STRING("Mountain"),
+        .description = COMPOUND_STRING(
+            "Field turns into a\n"
+            "mountain for 5 turns,\n"
+            "powering up\n"
+            "Dragon/Flying moves.\n"
+            "100% accuracy for\n"
+            "Electric moves."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_DRAGON,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_MOUNTAIN },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_MountainTerrain,
+    },
+
+    [MOVE_WASTELAND_TERRAIN] =
+    {
+        .name = COMPOUND_STRING("Wasteland"),
+        .description = COMPOUND_STRING(
+            "Field turns into\n"
+            "a wasteland for 5\n"
+            "turns, powering up\n"
+            "Ground/Rock/Ghost\n"
+            "moves. Grass moves\n"
+            "are weakened (50%)."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_GROUND,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_WASTELAND },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_WastelandTerrain,
+    },
+    
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

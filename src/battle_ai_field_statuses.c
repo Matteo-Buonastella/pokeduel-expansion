@@ -43,6 +43,7 @@ static enum FieldEffectOutcome BenefitsFromGrassyTerrain(enum BattlerId battler)
 static enum FieldEffectOutcome BenefitsFromMistyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -119,6 +120,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_FOREST:
             result = BenefitsFromForestTerrain(battlerIndex);
+            break;
+        case B_TERRAIN_MOUNTAIN:
+            result = BenefitsFromMountainTerrain(battlerIndex);
             break;
         default:
             break;
@@ -410,6 +414,19 @@ static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler)
 
     if (HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_GRASS) || HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_BUG)
      || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_GRASS) || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_BUG))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battler)
+{
+    if (HasDamagingMoveOfType(battler, TYPE_DRAGON) || HasDamagingMoveOfType(battler, TYPE_FLYING)
+     || HasDamagingMoveOfType(battler, TYPE_ELECTRIC))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_DRAGON) || HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_FLYING)
+     || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_DRAGON) || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_FLYING))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;

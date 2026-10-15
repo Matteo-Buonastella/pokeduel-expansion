@@ -1078,6 +1078,7 @@ extern const u8 gBattleAnimMove_RainbowRefraction[];
 extern const u8 gBattleAnimMove_NeosForce[];
 extern const u8 gBattleAnimMove_Megamorph[];
 extern const u8 gBattleAnimMove_ForestTerrain[];
+extern const u8 gBattleAnimMove_MountainTerrain[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  
