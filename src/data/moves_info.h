@@ -23644,8 +23644,59 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .skyBattleBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_WastelandTerrain,
     },
-    
 
+    [MOVE_YAMI_TERRAIN] =
+    {
+        .name = COMPOUND_STRING("Yami"),
+        .description = COMPOUND_STRING(
+            "The field gets dark\n"
+            "for five turns,\n"
+            "boosting Dark moves\n"
+            "(30%) and weakening\n"
+            "Fairy moves (50%)."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_YAMI },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_YamiTerrain,
+    },
+
+    [MOVE_ZOMBIE_WORLD] =
+    {
+        .name = COMPOUND_STRING("Zombie World"),
+        .description = COMPOUND_STRING(
+            "Zombie World consumes\n"
+            "the field for 5\n"
+            "turns. All monsters\n"
+            "become Ghost type.\n"
+            "Ghost moves are\n"
+            "powered by 10%."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_GHOST,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_ZOMBIE_WORLD },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_ZombieWorld,
+    },
+
+    
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

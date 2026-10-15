@@ -45,6 +45,7 @@ static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler
 static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromYamiTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -127,6 +128,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_WASTELAND:
             result = BenefitsFromWastelandTerrain(battlerIndex);
+            break;
+        case B_TERRAIN_YAMI:
+            result = BenefitsFromYamiTerrain(battlerIndex);
             break;
         default:
             break;
@@ -461,6 +465,26 @@ static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battl
 
     if (HasDamagingMoveOfType(leftFoe, TYPE_GROUND) || HasDamagingMoveOfType(leftFoe, TYPE_ROCK) || HasDamagingMoveOfType(leftFoe, TYPE_GHOST)
      || HasDamagingMoveOfType(rightFoe, TYPE_GROUND) || HasDamagingMoveOfType(rightFoe, TYPE_ROCK) || HasDamagingMoveOfType(rightFoe, TYPE_GHOST))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+static enum FieldEffectOutcome BenefitsFromYamiTerrain(enum BattlerId battler)
+{
+    // Fairy moves are halved
+    if (HasDamagingMoveOfType(battler, TYPE_FAIRY))
+        return FIELD_EFFECT_NEGATIVE;
+
+    if (HasDamagingMoveOfType(battler, TYPE_DARK))
+        return FIELD_EFFECT_POSITIVE;
+
+    enum BattlerId leftFoe = GetBattlerLeftFoe(battler);
+    enum BattlerId rightFoe = GetBattlerRightFoe(battler);
+    if (HasDamagingMoveOfType(leftFoe, TYPE_FAIRY) || HasDamagingMoveOfType(rightFoe, TYPE_FAIRY))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasDamagingMoveOfType(leftFoe, TYPE_DARK) || HasDamagingMoveOfType(rightFoe, TYPE_DARK))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;

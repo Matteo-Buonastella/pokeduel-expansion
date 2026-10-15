@@ -1703,6 +1703,11 @@ const u32 gBattleAnimBgImage_Wasteland[] = INCGFX_U32("graphics/battle_anims/bac
 const u16 gBattleAnimBGPalette_Wasteland[] = INCGFX_U16("graphics/battle_anims/backgrounds/wasteland.png", ".gbapal");
 const u32 gBattleAnimBgTilemap_Wasteland[] = INCGFX_U32("graphics/battle_anims/backgrounds/wasteland.bin", ".smolTM");
 
+// Yami Terrain: tileset and 2-screen tilemap generated from yami.png
+const u32 gBattleAnimBgImage_YamiTerrain[] = INCGFX_U32("graphics/battle_anims/backgrounds/yami_terrain.png", ".4bpp.smol");
+const u16 gBattleAnimBgPalette_YamiTerrain[] = INCGFX_U16("graphics/battle_anims/backgrounds/yami_terrain.png", ".gbapal");
+const u32 gBattleAnimBgTilemap_YamiTerrain[] = INCGFX_U32("graphics/battle_anims/backgrounds/yami_terrain.bin", ".smolTM");
+
 const u32 gPartyMenuBg_Gfx[] = INCGFX_U32("graphics/party_menu/bg.png", ".4bpp.smol", "-num_tiles 62 -Wnum_tiles");
 const u16 gPartyMenuBg_Pal[] = INCGFX_U16("graphics/party_menu/bg.png", ".gbapal");
 const u32 gPartyMenuBg_Tilemap[] = INCGFX_U32("graphics/party_menu/bg.bin", ".smolTM");

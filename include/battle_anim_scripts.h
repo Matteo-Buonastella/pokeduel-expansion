@@ -1080,6 +1080,7 @@ extern const u8 gBattleAnimMove_Megamorph[];
 extern const u8 gBattleAnimMove_ForestTerrain[];
 extern const u8 gBattleAnimMove_MountainTerrain[];
 extern const u8 gBattleAnimMove_WastelandTerrain[];
+extern const u8 gBattleAnimMove_YamiTerrain[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

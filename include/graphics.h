@@ -3245,6 +3245,11 @@ extern const u32 gBattleAnimBgImage_Wasteland[];
 extern const u16 gBattleAnimBGPalette_Wasteland[];
 extern const u32 gBattleAnimBgTilemap_Wasteland[];
 
+// Yami Terrain
+extern const u32 gBattleAnimBgImage_YamiTerrain[];
+extern const u16 gBattleAnimBgPalette_YamiTerrain[];
+extern const u32 gBattleAnimBgTilemap_YamiTerrain[];
+
 // Pokédex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];

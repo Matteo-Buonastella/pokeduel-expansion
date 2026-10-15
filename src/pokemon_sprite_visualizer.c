@@ -434,6 +434,7 @@ const u8 gMoveBackgroundNames[BG_COUNT][MOVE_BACKGROUND_NAME_LENGTH] =
     [BG_RAINBOW_OPPONENT]          = _("Rainbow - Opponent"),
     [BG_SWAMP]                     = _("Swamp"),
     [BG_WASTELAND]                 = _("Wasteland"),
+    [BG_YAMI_TERRAIN]              = _("Yami Terrain"),
 };
 
 const u8 sShadowSizeLabels[][4] =
