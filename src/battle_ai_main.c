@@ -1310,6 +1310,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     if (gBattleStruct->battlerState[battlerDef].commandingDondozo)
         RETURN_SCORE_MINUS(20);
 
+    if (IsWastelandPreventingMove(move))
+        RETURN_SCORE_MINUS(20);
+
     if (IsPowderMove(move) && !IsAffectedByPowderMove(battlerDef, aiData->abilities[battlerDef], aiData->holdEffects[battlerDef]))
         RETURN_SCORE_MINUS(10);
 

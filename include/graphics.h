@@ -3240,6 +3240,11 @@ extern const u32 gBattleAnimBgImage_Swamp[];
 extern const u16 gBattleAnimBGPalette_Swamp[];
 extern const u32 gBattleAnimBgTilemap_Swamp[];
 
+// Wasteland Terrain
+extern const u32 gBattleAnimBgImage_Wasteland[];
+extern const u16 gBattleAnimBGPalette_Wasteland[];
+extern const u32 gBattleAnimBgTilemap_Wasteland[];
+
 // Pokédex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];

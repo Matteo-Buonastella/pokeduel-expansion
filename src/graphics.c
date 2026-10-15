@@ -1698,6 +1698,11 @@ const u32 gBattleAnimBgImage_Swamp[] = INCGFX_U32("graphics/battle_anims/backgro
 const u16 gBattleAnimBGPalette_Swamp[] = INCGFX_U16("graphics/battle_anims/backgrounds/swampswizzle.pal", ".gbapal");
 const u32 gBattleAnimBgTilemap_Swamp[] = INCGFX_U32("graphics/battle_anims/backgrounds/swampswizzle.bin", ".smolTM");
 
+// Wasteland Terrain
+const u32 gBattleAnimBgImage_Wasteland[] = INCGFX_U32("graphics/battle_anims/backgrounds/wasteland.png", ".4bpp.smol");
+const u16 gBattleAnimBGPalette_Wasteland[] = INCGFX_U16("graphics/battle_anims/backgrounds/wasteland.png", ".gbapal");
+const u32 gBattleAnimBgTilemap_Wasteland[] = INCGFX_U32("graphics/battle_anims/backgrounds/wasteland.bin", ".smolTM");
+
 const u32 gPartyMenuBg_Gfx[] = INCGFX_U32("graphics/party_menu/bg.png", ".4bpp.smol", "-num_tiles 62 -Wnum_tiles");
 const u16 gPartyMenuBg_Pal[] = INCGFX_U16("graphics/party_menu/bg.png", ".gbapal");
 const u32 gPartyMenuBg_Tilemap[] = INCGFX_U32("graphics/party_menu/bg.bin", ".smolTM");

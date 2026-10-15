@@ -276,6 +276,7 @@ extern const u8 BattleScript_SelectingCantUseMove[];
 extern const u8 BattleScript_SelectingCantUseMoveInPalace[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGravity[];
 extern const u8 BattleScript_MoveUsedGravityPrevents[];
+extern const u8 BattleScript_MoveUsedWastelandPrevents[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGravityInPalace[];
 extern const u8 BattleScript_SelectingNotAllowedMoveHealBlock[];
 extern const u8 BattleScript_MoveUsedHealBlockPrevents[];

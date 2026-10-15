@@ -371,6 +371,18 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .startMessage = B_MSG_TERRAIN_SET_MOUNTAIN,
         .endMessage = B_MSG_TERRAIN_END_MOUNTAIN,
     },
+
+    [B_TERRAIN_WASTELAND] = {
+        .type = TYPE_GROUND,
+        .secretPowerAnimation = gBattleAnimMove_MudSlap,
+        .secretPowerEffect = SECRET_POWER_ACC_MINUS_1,
+        .naturePowerMove = MOVE_EARTH_POWER,
+        .battleBackground = BG_WASTELAND,
+        .seedStat = STAT_DEF,
+        .seedHoldEffect = HOLD_EFFECT_PARAM_WASTELAND_TERRAIN,
+        .startMessage = B_MSG_TERRAIN_SET_WASTELAND,
+        .endMessage = B_MSG_TERRAIN_END_WASTELAND,
+    },
 };
 
 bool32 EndOrContinueWeather(void)
@@ -1403,6 +1415,22 @@ bool32 IsGravityPreventingMove(enum Move move)
         return FALSE;
 
     return IsMoveGravityBanned(move);
+}
+
+bool32 IsWastelandPreventingMove(enum Move move)
+{
+    if (gFieldTimers.terrain != B_TERRAIN_WASTELAND)
+        return FALSE;
+
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_GROWTH:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_INGRAIN:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }
 
 bool32 IsHealBlockPreventingMove(enum BattlerId battler, enum Move move)
@@ -6607,6 +6635,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     if (ctx->terrain == B_TERRAIN_MOUNTAIN && (moveType == TYPE_DRAGON || moveType == TYPE_FLYING)) // Mountain Terrain ignores grounding
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+    if (ctx->terrain == B_TERRAIN_WASTELAND && (moveType == TYPE_GROUND || moveType == TYPE_ROCK || moveType == TYPE_GHOST)) // Wasteland Terrain ignores grounding
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+    if (ctx->terrain == B_TERRAIN_WASTELAND && moveType == TYPE_GRASS)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(0.5));
     if (IsFieldMudSportAffected(ctx->moveType))
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
     if (IsFieldWaterSportAffected(ctx->moveType))

@@ -360,6 +360,13 @@ static enum CancelerResult CancelerVolatileBlocked(struct BattleCalcValues *cv)
         gBattlescriptCurrInstr = BattleScript_MoveUsedGravityPrevents;
         result = CANCELER_RESULT_FAILURE;
     }
+    else if (IsWastelandPreventingMove(GetActiveGimmick(cv->battlerAtk) == GIMMICK_Z_MOVE ? gBattleStruct->baseMove : cv->move))
+    {
+        gBattleScripting.battler = cv->battlerAtk;
+        CancelMultiTurnMoves(cv->battlerAtk);
+        gBattlescriptCurrInstr = BattleScript_MoveUsedWastelandPrevents;
+        result = CANCELER_RESULT_FAILURE;
+    }
     else if (GetActiveGimmick(cv->battlerAtk) != GIMMICK_Z_MOVE && gBattleMons[cv->battlerAtk].volatiles.throatChopTimer > 0 && IsSoundMove(cv->move))
     {
         CancelMultiTurnMoves(cv->battlerAtk);

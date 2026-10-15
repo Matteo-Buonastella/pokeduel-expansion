@@ -3744,6 +3744,11 @@ BattleScript_MoveUsedGravityPrevents::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_MoveUsedWastelandPrevents::
+	printstring STRINGID_WASTELANDPREVENTSUSAGE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_SelectingNotAllowedMoveGravityInPalace::
 	printstring STRINGID_GRAVITYPREVENTSUSAGE
 	goto BattleScript_SelectingUnusableMoveInPalace

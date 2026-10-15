@@ -36652,3 +36652,28 @@ gBattleAnimMove_MountainTerrain::
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 4, 0, RGB(20, 15, 9)
 	waitforvisualfinish
 	end
+
+@ Placeholder: Grassy Terrain's animation with the orbs, sparkles and blends recoloured to dusty tan
+gBattleAnimMove_WastelandTerrain::
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ORBS, 0, 12, 12, RGB(25, 20, 12)
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_GREEN_SPARKLE, 0, 12, 12, RGB(25, 20, 12)
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	waitforvisualfinish
+	delay 30
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(25, 20, 12), 12, 5, 1
+	delay 4
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_ATTACKER
+	create_particle_ring sprite=gGrassyTerrainOrbsTemplate, anim_battler=ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 0, 4, RGB(25, 20, 12)
+	delay 52
+	setarg 7, -1
+	playsewithpan SE_M_HEAL_BELL, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	create_scattered_particle_ring sprite=gGrassyTerrainStarTemplate, anim_battler=ANIM_TARGET
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 4, 0, RGB(25, 20, 12)
+	waitforvisualfinish
+	end

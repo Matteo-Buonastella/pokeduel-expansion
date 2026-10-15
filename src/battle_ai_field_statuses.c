@@ -44,6 +44,7 @@ static enum FieldEffectOutcome BenefitsFromMistyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -123,6 +124,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_MOUNTAIN:
             result = BenefitsFromMountainTerrain(battlerIndex);
+            break;
+        case B_TERRAIN_WASTELAND:
+            result = BenefitsFromWastelandTerrain(battlerIndex);
             break;
         default:
             break;
@@ -427,6 +431,36 @@ static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battle
 
     if (HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_DRAGON) || HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_FLYING)
      || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_DRAGON) || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_FLYING))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+static bool32 HasMoveBlockedByWasteland(enum BattlerId battler)
+{
+    return HasMoveWithEffect(battler, EFFECT_GROWTH)
+        || HasMoveWithEffect(battler, EFFECT_LEECH_SEED)
+        || HasMoveWithEffect(battler, EFFECT_INGRAIN);
+}
+
+static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battler)
+{
+    // Grass moves are halved and Growth/Leech Seed/Ingrain fail
+    if (HasDamagingMoveOfType(battler, TYPE_GRASS) || HasMoveBlockedByWasteland(battler))
+        return FIELD_EFFECT_NEGATIVE;
+
+    if (HasDamagingMoveOfType(battler, TYPE_GROUND) || HasDamagingMoveOfType(battler, TYPE_ROCK)
+     || HasDamagingMoveOfType(battler, TYPE_GHOST))
+        return FIELD_EFFECT_POSITIVE;
+
+    enum BattlerId leftFoe = GetBattlerLeftFoe(battler);
+    enum BattlerId rightFoe = GetBattlerRightFoe(battler);
+    if (HasDamagingMoveOfType(leftFoe, TYPE_GRASS) || HasMoveBlockedByWasteland(leftFoe)
+     || HasDamagingMoveOfType(rightFoe, TYPE_GRASS) || HasMoveBlockedByWasteland(rightFoe))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasDamagingMoveOfType(leftFoe, TYPE_GROUND) || HasDamagingMoveOfType(leftFoe, TYPE_ROCK) || HasDamagingMoveOfType(leftFoe, TYPE_GHOST)
+     || HasDamagingMoveOfType(rightFoe, TYPE_GROUND) || HasDamagingMoveOfType(rightFoe, TYPE_ROCK) || HasDamagingMoveOfType(rightFoe, TYPE_GHOST))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
