@@ -407,6 +407,18 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .startMessage = B_MSG_TERRAIN_SET_ZOMBIE_WORLD,
         .endMessage = B_MSG_TERRAIN_END_ZOMBIE_WORLD,
     },
+
+    [B_TERRAIN_HARPIES_HUNTING_GROUND] = {
+        .type = TYPE_FLYING,
+        .secretPowerAnimation = gBattleAnimMove_Gust,
+        .secretPowerEffect = MOVE_EFFECT_FLINCH,
+        .naturePowerMove = MOVE_AIR_SLASH,
+        .battleBackground = BG_SKY,
+        .seedStat = STAT_DEF,
+        .seedHoldEffect = HOLD_EFFECT_PARAM_HARPIES_HUNTING_GROUND,
+        .startMessage = B_MSG_TERRAIN_SET_HARPIES_HUNTING_GROUND,
+        .endMessage = B_MSG_TERRAIN_END_HARPIES_HUNTING_GROUND,
+    },
 };
 
 bool32 EndOrContinueWeather(void)
@@ -1887,6 +1899,44 @@ void UpdateZombieWorldTypes(enum BattleTerrain oldTerrain, enum BattleTerrain ne
             RESTORE_BATTLER_TYPE(battler);
         }
     }
+}
+
+bool32 IsHarpieSpecies(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_HARPIE_LADY:
+    case SPECIES_HARPIE_LADY_SISTERS:
+    case SPECIES_CYBER_HARPIE_LADY:
+    case SPECIES_CYBER_SLASH_HARPIE_LADY:
+    case SPECIES_HARPIES_PET_DRAGON:
+    case SPECIES_HARPIE_BROTHER:
+    case SPECIES_HARPIE_QUEEN:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+// When a Harpie switches into Harpies' Hunting Ground, every foe on the field gets -1 Def and -1 Sp. Def
+bool32 TryHarpiesHuntingGroundOnSwitchIn(enum BattlerId battler)
+{
+    if (gFieldTimers.terrain != B_TERRAIN_HARPIES_HUNTING_GROUND
+     || !gBattleStruct->battlerState[battler].switchIn
+     || !IsHarpieSpecies(gBattleMons[battler].species)
+     || IsOpposingSideEmpty(battler))
+        return FALSE;
+
+    gEffectBattler = battler;
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+    {
+        if (IsBattlerAlly(battler, i) || !IsBattlerAlive(i))
+            continue;
+        SetStatChange(i, STAT_DEF, -1);
+        SetStatChange(i, STAT_SPDEF, -1);
+    }
+    BattleScriptCall(BattleScript_HarpiesHuntingGroundActivates);
+    return TRUE;
 }
 
 void TryToRevertMimicryAndFlags(void)
@@ -6697,6 +6747,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, UQ_4_12(0.5));
     if (ctx->terrain == B_TERRAIN_ZOMBIE_WORLD && moveType == TYPE_GHOST) // Zombie World ignores grounding
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.1));
+    if (ctx->terrain == B_TERRAIN_HARPIES_HUNTING_GROUND && moveType == TYPE_FLYING) // Harpies' Hunting Ground ignores grounding
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     if (IsFieldMudSportAffected(ctx->moveType))
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
     if (IsFieldWaterSportAffected(ctx->moveType))

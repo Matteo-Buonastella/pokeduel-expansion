@@ -155,6 +155,7 @@ enum HoldEffect
 #define HOLD_EFFECT_PARAM_WASTELAND_TERRAIN 5 // No seed item uses this
 #define HOLD_EFFECT_PARAM_YAMI_TERRAIN      6 // No seed item uses this
 #define HOLD_EFFECT_PARAM_ZOMBIE_WORLD      7 // No seed item uses this
+#define HOLD_EFFECT_PARAM_HARPIES_HUNTING_GROUND 8 // No seed item uses this
 
 enum ItemActivationState
 {

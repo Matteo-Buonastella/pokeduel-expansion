@@ -272,6 +272,11 @@ static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
             }
         }
         break;
+    case FIRST_EVENT_BLOCK_HARPIES_HUNTING_GROUND:
+        if (TryHarpiesHuntingGroundOnSwitchIn(battler))
+            effect = TRUE;
+        gBattleStruct->eventState.battlerSwitchIn++;
+        break;
     case FIRST_EVENT_BLOCK_GENERAL_ABILITIES:
         if (TryPrimalReversion(battler)
          || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, calcValues->abilities[battler], MOVE_NONE, gBattleStruct->battlerState[battler].switchIn)

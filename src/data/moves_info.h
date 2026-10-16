@@ -23696,6 +23696,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_ZombieWorld,
     },
 
+    [MOVE_HARPIES_HUNTING_GROUND] =
+    {
+        .name = COMPOUND_STRING("Harpies H Ground"),
+        .description = COMPOUND_STRING(
+            "Play Harpies Hunting\n"
+            "Ground for 5 turns,\n"
+            "boosting Flying moves\n"
+            "(30%). If a Harpie\n"
+            "switches in, foe's\n"
+           " defenses are lowered."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_FLYING,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_HARPIES_HUNTING_GROUND },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_HarpiesHuntingGround,
+    },
+
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

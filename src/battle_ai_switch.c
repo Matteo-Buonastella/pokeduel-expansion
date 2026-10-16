@@ -45,6 +45,7 @@ static void GetIncomingHealInfo(enum BattlerId battler, struct IncomingHealInfo 
 static u32 GetWishHealAmountForBattler(enum BattlerId battler);
 static void SetBattlerStatusForSwitchin(enum BattlerId battler);
 static void SetBattlerStatStagesForSwitchin(enum BattlerId battler, enum BattlerId opposingBattler, u32 fieldStatus);
+static void SetHarpiesHuntingGroundStatStagesForSwitchin(enum BattlerId battler, enum BattlerId opposingBattler, u32 fieldStatus, s8 *appliedChanges);
 static void SetBattlerHPChangeForSwitch(enum BattlerId battler, enum BattlerId opposingBattler);
 static void SetBattlerVolatilesForSwitchin(enum BattlerId battler, u32 weather, u32 fieldStatus);
 bool32 IsSwitchinTSpikesAffected(enum BattlerId battler);
@@ -101,10 +102,15 @@ static void InitializeSwitchinCandidate(enum BattlerId switchinBattler, u32 monI
     {
         if (switchinBattler == battlerIndex || !IsBattlerAlive(battlerIndex))
             continue;
+        s8 harpieStatChanges[NUM_BATTLE_STATS] = {0};
         SetBattlerStatStagesForSwitchin(switchinBattler, battlerIndex, switchinTerrain);
+        SetHarpiesHuntingGroundStatStagesForSwitchin(switchinBattler, battlerIndex, switchinTerrain, harpieStatChanges);
         SetBattlerHPChangeForSwitch(switchinBattler, battlerIndex);
         CalcBattlerAiMovesData(gAiLogicData, switchinBattler, battlerIndex, switchinWeather, switchinTerrain);
         CalcBattlerAiMovesData(gAiLogicData, battlerIndex, switchinBattler, switchinWeather, switchinTerrain);
+        // The damage is cached now, so undo the drop to keep it from carrying over to the next candidate
+        for (enum Stat stat = 0; stat < NUM_BATTLE_STATS; stat++)
+            gBattleMons[battlerIndex].statStages[stat] -= harpieStatChanges[stat];
     }
 
     gAiLogicData->switchInCalc = FALSE;
@@ -2875,6 +2881,48 @@ static void SetBattlerStatStagesForSwitchin(enum BattlerId battler, enum Battler
     // Hazard stat changes
     if (isStickyWebsAffected && aiHoldEffect != HOLD_EFFECT_WHITE_HERB)
         gBattleMons[battler].statStages[STAT_SPEED] -= 1;
+}
+
+// A Harpie switching into Harpies' Hunting Ground lowers the foe's Defense and Sp. Def by 1.
+// The changes actually applied are written to appliedChanges so the caller can undo them
+static void SetHarpiesHuntingGroundStatStagesForSwitchin(enum BattlerId battler, enum BattlerId opposingBattler, u32 fieldStatus, s8 *appliedChanges)
+{
+    static const enum Stat loweredStats[] = {STAT_DEF, STAT_SPDEF};
+    enum Ability opposingAbility = gAiLogicData->abilities[opposingBattler];
+    s8 changes[NUM_BATTLE_STATS] = {0};
+    bool32 statDropped = FALSE;
+
+    if (fieldStatus != B_TERRAIN_HARPIES_HUNTING_GROUND
+     || IsBattlerAlly(battler, opposingBattler)
+     || !IsHarpieSpecies(gBattleMons[battler].species))
+        return;
+
+    for (u32 i = 0; i < ARRAY_COUNT(loweredStats); i++)
+    {
+        if (!CanLowerStat(battler, opposingBattler, gAiLogicData, loweredStats[i]))
+            continue;
+        if (opposingAbility == ABILITY_CONTRARY)
+        {
+            changes[loweredStats[i]] += 1;
+        }
+        else
+        {
+            changes[loweredStats[i]] -= 1;
+            statDropped = TRUE;
+        }
+    }
+    if (statDropped && opposingAbility == ABILITY_DEFIANT)
+        changes[STAT_ATK] += 2;
+    if (statDropped && opposingAbility == ABILITY_COMPETITIVE)
+        changes[STAT_SPATK] += 2;
+
+    for (enum Stat stat = 0; stat < NUM_BATTLE_STATS; stat++)
+    {
+        s32 oldStage = gBattleMons[opposingBattler].statStages[stat];
+        s32 newStage = min(max(oldStage + changes[stat], MIN_STAT_STAGE), MAX_STAT_STAGE);
+        gBattleMons[opposingBattler].statStages[stat] = newStage;
+        appliedChanges[stat] = newStage - oldStage;
+    }
 }
 
 static void SetBattlerHPChangeForSwitch(enum BattlerId battler, enum BattlerId opposingBattler)

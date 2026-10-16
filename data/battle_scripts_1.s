@@ -3506,6 +3506,12 @@ BattleScript_StickyWebOnSwitchIn::
 	setbyte sSTICKY_WEB_STAT_DROP, 0
 	return
 
+BattleScript_HarpiesHuntingGroundActivates::
+	printstring STRINGID_HARPIESHUNTINGGROUNDACTIVATES
+	waitmessage B_WAIT_TIME_LONG
+	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
+	return
+
 BattleScript_PerishSongTakesLife::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage B_WAIT_TIME_LONG

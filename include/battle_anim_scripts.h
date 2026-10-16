@@ -1082,6 +1082,7 @@ extern const u8 gBattleAnimMove_MountainTerrain[];
 extern const u8 gBattleAnimMove_WastelandTerrain[];
 extern const u8 gBattleAnimMove_YamiTerrain[];
 extern const u8 gBattleAnimMove_ZombieWorld[];
+extern const u8 gBattleAnimMove_HarpiesHuntingGround[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

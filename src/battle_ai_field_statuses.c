@@ -47,6 +47,7 @@ static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battle
 static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromYamiTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromZombieWorld(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromHarpiesHuntingGround(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -135,6 +136,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_ZOMBIE_WORLD:
             result = BenefitsFromZombieWorld(battlerIndex);
+            break;
+        case B_TERRAIN_HARPIES_HUNTING_GROUND:
+            result = BenefitsFromHarpiesHuntingGround(battlerIndex);
             break;
         default:
             break;
@@ -550,6 +554,39 @@ static enum FieldEffectOutcome BenefitsFromZombieWorld(enum BattlerId battler)
 
     // Only bad if we'd lock ourselves out: we can attack now, but nothing we have can hit a Ghost
     if (HasDamagingMove(battler) && !CanDamageGhostTypes(battler))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+// Flying moves are boosted, and Harpies switching in lower the foes' defenses
+static bool32 BenefitsFromHarpiesHuntingGroundDirectly(enum BattlerId battler)
+{
+    return HasDamagingMoveOfType(battler, TYPE_FLYING) || IsHarpieSpecies(gBattleMons[battler].species);
+}
+
+// A healthy Harpie waiting in the party can switch in later to drop the foes' defenses
+static bool32 HasHarpieInParty(enum BattlerId battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        if (GetMonData(&party[partyIndex], MON_DATA_HP) != 0
+         && !GetMonData(&party[partyIndex], MON_DATA_IS_EGG)
+         && IsHarpieSpecies(GetMonData(&party[partyIndex], MON_DATA_SPECIES)))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static enum FieldEffectOutcome BenefitsFromHarpiesHuntingGround(enum BattlerId battler)
+{
+    if (BenefitsFromHarpiesHuntingGroundDirectly(battler) || HasHarpieInParty(battler))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (BenefitsFromHarpiesHuntingGroundDirectly(GetBattlerLeftFoe(battler))
+     || BenefitsFromHarpiesHuntingGroundDirectly(GetBattlerRightFoe(battler)))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
