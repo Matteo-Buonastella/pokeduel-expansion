@@ -46,6 +46,7 @@ static enum FieldEffectOutcome BenefitsFromForestTerrain(enum BattlerId battler)
 static enum FieldEffectOutcome BenefitsFromMountainTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromYamiTerrain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromZombieWorld(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -131,6 +132,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_YAMI:
             result = BenefitsFromYamiTerrain(battlerIndex);
+            break;
+        case B_TERRAIN_ZOMBIE_WORLD:
+            result = BenefitsFromZombieWorld(battlerIndex);
             break;
         default:
             break;
@@ -485,6 +489,67 @@ static enum FieldEffectOutcome BenefitsFromYamiTerrain(enum BattlerId battler)
         return FIELD_EFFECT_POSITIVE;
 
     if (HasDamagingMoveOfType(leftFoe, TYPE_DARK) || HasDamagingMoveOfType(rightFoe, TYPE_DARK))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+// Everything on the field turns pure Ghost, so Ghost and Dark moves hit everyone super effectively
+// while Normal and Fighting moves stop working
+static bool32 HasGoodZombieWorldMove(enum BattlerId battler)
+{
+    return HasDamagingMoveOfType(battler, TYPE_GHOST) || HasDamagingMoveOfType(battler, TYPE_DARK);
+}
+
+// Whether any of the battler's damaging moves can hit a Ghost type (anything but Normal/Fighting, unless Scrappy/Mind's Eye)
+static bool32 CanDamageGhostTypes(enum BattlerId battler)
+{
+    enum Move *moves = GetMovesArray(battler);
+    enum Ability ability = gAiLogicData->abilities[battler];
+    enum HoldEffect holdEffect = gAiLogicData->holdEffects[battler];
+
+    if (ability == ABILITY_SCRAPPY || ability == ABILITY_MINDS_EYE)
+        return HasDamagingMove(battler);
+
+    for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+    {
+        enum Move move = moves[moveIndex];
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || GetMovePower(move) == 0)
+            continue;
+
+        enum Type moveType = GetDynamicMoveType(GetBattlerMon(battler), move, battler, ability, holdEffect, MON_IN_BATTLE);
+        if (moveType == TYPE_NONE)
+            moveType = GetMoveType(move);
+        if (moveType != TYPE_NORMAL && moveType != TYPE_FIGHTING)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static enum FieldEffectOutcome BenefitsFromZombieWorld(enum BattlerId battler)
+{
+    enum BattlerId leftFoe = GetBattlerLeftFoe(battler);
+    enum BattlerId rightFoe = GetBattlerRightFoe(battler);
+
+    // Lock the foes out completely: once everyone is a Ghost, none of their attacks can land but ours can
+    if ((IsBattlerAlive(leftFoe) || IsBattlerAlive(rightFoe))
+     && (!IsBattlerAlive(leftFoe) || !CanDamageGhostTypes(leftFoe))
+     && (!IsBattlerAlive(rightFoe) || !CanDamageGhostTypes(rightFoe))
+     && CanDamageGhostTypes(battler))
+        return FIELD_EFFECT_POSITIVE;
+
+    bool32 foesBenefit = HasGoodZombieWorldMove(leftFoe) || HasGoodZombieWorldMove(rightFoe);
+    bool32 userBenefits = HasGoodZombieWorldMove(battler);
+
+    if (foesBenefit && userBenefits) // Both sides gain super effective hits, so it favours neither
+        return FIELD_EFFECT_NEUTRAL;
+    if (foesBenefit)
+        return FIELD_EFFECT_NEGATIVE;
+    if (userBenefits)
+        return FIELD_EFFECT_POSITIVE;
+
+    // Only bad if we'd lock ourselves out: we can attack now, but nothing we have can hit a Ghost
+    if (HasDamagingMove(battler) && !CanDamageGhostTypes(battler))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;

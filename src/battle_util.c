@@ -395,6 +395,18 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .startMessage = B_MSG_TERRAIN_SET_YAMI,
         .endMessage = B_MSG_TERRAIN_END_YAMI,
     },
+
+    [B_TERRAIN_ZOMBIE_WORLD] = {
+        .type = TYPE_GHOST,
+        .secretPowerAnimation = gBattleAnimMove_Astonish,
+        .secretPowerEffect = MOVE_EFFECT_FLINCH,
+        .naturePowerMove = MOVE_SHADOW_BALL,
+        .battleBackground = BG_NEVERENDING_NIGHTMARE,
+        .seedStat = STAT_DEF,
+        .seedHoldEffect = HOLD_EFFECT_PARAM_ZOMBIE_WORLD,
+        .startMessage = B_MSG_TERRAIN_SET_ZOMBIE_WORLD,
+        .endMessage = B_MSG_TERRAIN_END_ZOMBIE_WORLD,
+    },
 };
 
 bool32 EndOrContinueWeather(void)
@@ -1850,6 +1862,33 @@ bool32 MoodyCantLowerStat(u32 stat)
         || CompareStat(gBattlerAttacker, stat, MIN_STAT_STAGE, CMP_EQUAL, GetBattlerAbility(gBattlerAttacker));
 }
 
+// Zombie World turns every battler on the field, and anything switching in, into a pure Ghost type
+void TryApplyZombieWorldType(enum BattlerId battler)
+{
+    if (gFieldTimers.terrain == B_TERRAIN_ZOMBIE_WORLD)
+        SET_BATTLER_TYPE(battler, TYPE_GHOST);
+}
+
+// Call whenever the terrain changes. When Zombie World leaves the field, every battler goes back
+// to its species types, which also undoes type changes made during it (Soak, Forest's Curse, ...)
+void UpdateZombieWorldTypes(enum BattleTerrain oldTerrain, enum BattleTerrain newTerrain)
+{
+    if (oldTerrain == newTerrain)
+        return;
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (newTerrain == B_TERRAIN_ZOMBIE_WORLD)
+        {
+            SET_BATTLER_TYPE(battler, TYPE_GHOST);
+        }
+        else if (oldTerrain == B_TERRAIN_ZOMBIE_WORLD)
+        {
+            RESTORE_BATTLER_TYPE(battler);
+        }
+    }
+}
+
 void TryToRevertMimicryAndFlags(void)
 {
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
@@ -2184,6 +2223,7 @@ bool32 TryChangeBattleTerrain(enum BattlerId battler, enum BattleTerrain terrain
 
     if (gFieldTimers.terrain != terrain)
     {
+        UpdateZombieWorldTypes(gFieldTimers.terrain, terrain);
         gFieldTimers.terrain = terrain;
         gBattleCommunication[MULTISTRING_CHOOSER] = gBattleTerrainInfo[terrain].startMessage;
 
@@ -6655,6 +6695,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     if (ctx->terrain == B_TERRAIN_YAMI && moveType == TYPE_FAIRY)
         modifier = uq4_12_multiply(modifier, UQ_4_12(0.5));
+    if (ctx->terrain == B_TERRAIN_ZOMBIE_WORLD && moveType == TYPE_GHOST) // Zombie World ignores grounding
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.1));
     if (IsFieldMudSportAffected(ctx->moveType))
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
     if (IsFieldWaterSportAffected(ctx->moveType))
@@ -9744,6 +9786,7 @@ void CopyMonAbilityAndTypesToBattleMon(enum BattlerId battler, struct Pokemon *m
     gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0);
     gBattleMons[battler].types[1] = GetSpeciesType(gBattleMons[battler].species, 1);
     gBattleMons[battler].types[2] = TYPE_MYSTERY;
+    TryApplyZombieWorldType(battler);
 }
 
 void RecalcBattlerStats(enum BattlerId battler, struct Pokemon *mon, bool32 isDynamaxing)

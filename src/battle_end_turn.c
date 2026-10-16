@@ -1278,6 +1278,7 @@ static bool32 HandleEndTurnTerrain(enum BattlerId battler)
         gBattleCommunication[MULTISTRING_CHOOSER] = gBattleTerrainInfo[gFieldTimers.terrain].endMessage;
         gBattleScripting.battler = gBattlerAttacker;
         BattleScriptCall(BattleScript_TerrainEnds);
+        UpdateZombieWorldTypes(gFieldTimers.terrain, B_TERRAIN_NONE);
         gFieldTimers.terrain = B_TERRAIN_NONE;
         return TRUE;
     }

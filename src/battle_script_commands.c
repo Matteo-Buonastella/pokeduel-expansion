@@ -3239,6 +3239,7 @@ static void Cmd_switchindataupdate(void)
     gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0);
     gBattleMons[battler].types[1] = GetSpeciesType(gBattleMons[battler].species, 1);
     gBattleMons[battler].types[2] = TYPE_MYSTERY;
+    TryApplyZombieWorldType(battler);
     gBattleMons[battler].ability = GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
     #if TESTING
     if (gTestRunnerEnabled)
@@ -4889,6 +4890,7 @@ static void RemoveAllTerrains(void)
     else
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_COUNT;  // failsafe
 
+    UpdateZombieWorldTypes(gFieldTimers.terrain, B_TERRAIN_NONE);
     gFieldTimers.terrain = B_TERRAIN_NONE;
     TryToRevertMimicryAndFlags();
 }

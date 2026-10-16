@@ -924,6 +924,7 @@ static u32 PpStallReduction(enum Move move, enum BattlerId battlerAtk, enum Batt
         if (currentStallValue == 0 || GetMonData(&party[partyIndex], MON_DATA_HP) == 0)
             continue;
         PokemonToBattleMon(&party[partyIndex], &gBattleMons[tempBattleMonIndex]);
+        TryApplyZombieWorldType(tempBattleMonIndex);
         ctx.battlerDef = tempBattleMonIndex;
         ctx.abilities[ctx.battlerDef] = AI_DecideKnownAbilityForTurn(ctx.battlerDef);
         ctx.holdEffects[ctx.battlerDef] = AI_DecideHoldEffectForTurn(ctx.battlerDef);
@@ -1195,6 +1196,7 @@ void BattleAI_DoAIProcessing_PredictedSwitchin(struct AiThinkingStruct *aiThink,
     // Get battler and move data for predicted switchin
     PokemonToBattleMon(&party[aiData->mostSuitableMonId[battlerDef]], &switchinCandidate);
     gBattleMons[battlerDef] = switchinCandidate;
+    TryApplyZombieWorldType(battlerDef);
     gAiThinkingStruct->saved[battlerDef].saved = TRUE;
     SetBattlerAiData(battlerDef, aiData);
     CalcBattlerAiMovesData(aiData, battlerAtk, battlerDef, AI_GetWeather(), gFieldTimers.terrain);

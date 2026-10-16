@@ -82,6 +82,15 @@ static void InitializeSwitchinCandidate(enum BattlerId switchinBattler, u32 monI
     SetBattlerAiData(switchinBattler, gAiLogicData);
     u32 switchinWeather = AI_GetSwitchinWeather(switchinBattler);
     u32 switchinTerrain = AI_GetSwitchinTerrain(switchinBattler);
+    // The candidate becomes a pure Ghost type in Zombie World, unless its own surge ability replaces it
+    if (switchinTerrain == B_TERRAIN_ZOMBIE_WORLD)
+    {
+        SET_BATTLER_TYPE(switchinBattler, TYPE_GHOST);
+    }
+    else if (gFieldTimers.terrain == B_TERRAIN_ZOMBIE_WORLD)
+    {
+        RESTORE_BATTLER_TYPE(switchinBattler);
+    }
     SetBattlerVolatilesForSwitchin(switchinBattler, switchinWeather, switchinTerrain);
 
     SetBattlerStatusForSwitchin(switchinBattler);

@@ -768,8 +768,8 @@ struct TerrainInfo
     u8 battleBackground;
     enum Stat seedStat:4;
     u8 seedHoldEffect:4;
-    u8 startMessage:4;
-    u8 endMessage:4;
+    u8 startMessage;
+    u8 endMessage;
 };
 
 extern const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT];
