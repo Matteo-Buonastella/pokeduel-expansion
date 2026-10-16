@@ -419,6 +419,18 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .startMessage = B_MSG_TERRAIN_SET_HARPIES_HUNTING_GROUND,
         .endMessage = B_MSG_TERRAIN_END_HARPIES_HUNTING_GROUND,
     },
+
+    [B_TERRAIN_VENOM_SWAMP] = {
+        .type = TYPE_POISON,
+        .secretPowerAnimation = gBattleAnimMove_PoisonSting,
+        .secretPowerEffect = MOVE_EFFECT_POISON,
+        .naturePowerMove = MOVE_SLUDGE_BOMB,
+        .battleBackground = BG_POISON,
+        .seedStat = STAT_DEF,
+        .seedHoldEffect = HOLD_EFFECT_PARAM_VENOM_SWAMP,
+        .startMessage = B_MSG_TERRAIN_SET_VENOM_SWAMP,
+        .endMessage = B_MSG_TERRAIN_END_VENOM_SWAMP,
+    },
 };
 
 bool32 EndOrContinueWeather(void)
@@ -1937,6 +1949,30 @@ bool32 TryHarpiesHuntingGroundOnSwitchIn(enum BattlerId battler)
     }
     BattleScriptCall(BattleScript_HarpiesHuntingGroundActivates);
     return TRUE;
+}
+
+// Poison types and monsters with poison-related abilities don't have their Atk/Sp. Atk lowered by Venom Swamp
+bool32 IsBattlerImmuneToVenomSwamp(enum BattlerId battler, enum Ability ability)
+{
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
+        return TRUE;
+
+    switch (ability)
+    {
+    case ABILITY_PASTEL_VEIL:
+    case ABILITY_IMMUNITY:
+    case ABILITY_POISON_POINT:
+    case ABILITY_POISON_TOUCH:
+    case ABILITY_POISON_HEAL:
+    case ABILITY_TOXIC_BOOST:
+    case ABILITY_MERCILESS:
+    case ABILITY_CORROSION:
+    case ABILITY_TOXIC_CHAIN:
+    case ABILITY_TOXIC_DEBRIS:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }
 
 void TryToRevertMimicryAndFlags(void)
@@ -6769,7 +6805,12 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         break;
     case ABILITY_TOXIC_BOOST:
         if (gBattleMons[battlerAtk].status1 & STATUS1_PSN_ANY && IsBattleMovePhysical(move))
-           modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        {
+            if (ctx->terrain == B_TERRAIN_VENOM_SWAMP) // Venom Swamp doubles the boost
+                modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+            else
+                modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        }
         break;
     case ABILITY_RECKLESS:
         if (moveEffect == EFFECT_RECOIL || moveEffect == EFFECT_RECOIL_IF_MISS)
@@ -10706,6 +10747,9 @@ bool32 CanMoveSkipAccuracyCalc(struct BattleCalcValues *cv, u32 weather, enum Re
             effect = TRUE;
         else if (gFieldTimers.terrain == B_TERRAIN_MOUNTAIN
               && (option == AI_CHECK ? GetMoveType(cv->move) : GetBattleMoveType(cv->move)) == TYPE_ELECTRIC)
+            effect = TRUE;
+        else if (gFieldTimers.terrain == B_TERRAIN_VENOM_SWAMP
+              && (option == AI_CHECK ? GetMoveType(cv->move) : GetBattleMoveType(cv->move)) == TYPE_POISON)
             effect = TRUE;
 
         if (effect)

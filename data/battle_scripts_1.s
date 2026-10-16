@@ -3512,6 +3512,12 @@ BattleScript_HarpiesHuntingGroundActivates::
 	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
 	return
 
+BattleScript_VenomSwampLowersStats::
+	printstring STRINGID_VENOMSWAMPWEAKENS
+	waitmessage B_WAIT_TIME_LONG
+	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_IGNORE_MIRROR_ARMOR
+	return
+
 BattleScript_PerishSongTakesLife::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage B_WAIT_TIME_LONG

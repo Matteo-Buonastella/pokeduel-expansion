@@ -1790,7 +1790,7 @@ static u32 GetSwitchinRecurringHealing(enum BattlerId battler)
     // Abilities
     if (ability == ABILITY_POISON_HEAL && (gBattleMons[battler].status1 & STATUS1_POISON))
     {
-        u32 healing = maxHP / 8;
+        u32 healing = maxHP / (gFieldTimers.terrain == B_TERRAIN_VENOM_SWAMP ? 4 : 8); // Venom Swamp doubles Poison Heal
         if (healing == 0)
             healing = 1;
         recurringHealing += healing;

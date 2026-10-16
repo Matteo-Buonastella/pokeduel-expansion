@@ -568,7 +568,8 @@ static bool32 HandleEndTurnPoison(enum BattlerId battler)
 
             if (!IsBattlerAtMaxHp(battler) && !gBattleMons[battler].volatiles.healBlockTimer)
             {
-                SetHealAmount(battler, GetNonDynamaxMaxHP(battler) / 8);
+                // Venom Swamp doubles Poison Heal's recovery
+                SetHealAmount(battler, GetNonDynamaxMaxHP(battler) / (gFieldTimers.terrain == B_TERRAIN_VENOM_SWAMP ? 4 : 8));
                 BattleScriptCall(BattleScript_PoisonHealActivates);
                 effect = TRUE;
             }
@@ -588,6 +589,70 @@ static bool32 HandleEndTurnPoison(enum BattlerId battler)
             BattleScriptCall(BattleScript_PoisonTurnDmg);
             effect = TRUE;
         }
+    }
+
+    return effect;
+}
+
+// Checks the drop would actually do something, so blocked drops don't print a message every turn
+static bool32 CanVenomSwampLowerStat(enum BattlerId battler, enum Ability ability, enum Stat stat)
+{
+    if (ability == ABILITY_CONTRARY) // Stat goes up instead
+        return CompareStat(battler, stat, MIN_STAT_STAGE, CMP_GREATER_THAN, ability);
+
+    struct BattleCalcValues cv = {
+        .battlerAtk = battler,
+        .battlerDef = battler,
+        .move = MOVE_NONE,
+    };
+
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+    {
+        cv.abilities[i] = GetBattlerAbility(i);
+        cv.holdEffects[i] = GetBattlerHoldEffect(i);
+    }
+
+    struct StatChange st = {
+        .onlyChecking = TRUE,
+        .stat = stat,
+        .stage = -1,
+    };
+
+    return CanStatChange(&cv, &st);
+}
+
+// Poisoned monsters have their Atk and Sp. Atk lowered by 1 stage each turn in Venom Swamp
+static bool32 HandleEndTurnVenomSwamp(enum BattlerId battler)
+{
+    bool32 effect = FALSE;
+
+    gBattleStruct->eventState.endTurnBattler++;
+
+    if (gFieldTimers.terrain != B_TERRAIN_VENOM_SWAMP
+     || !IsBattlerAlive(battler)
+     || !(gBattleMons[battler].status1 & STATUS1_PSN_ANY))
+        return effect;
+
+    enum Ability ability = GetBattlerAbility(battler);
+
+    if (IsBattlerImmuneToVenomSwamp(battler, ability))
+        return effect;
+
+    if (CanVenomSwampLowerStat(battler, ability, STAT_ATK))
+    {
+        SetStatChange(battler, STAT_ATK, -1);
+        effect = TRUE;
+    }
+    if (CanVenomSwampLowerStat(battler, ability, STAT_SPATK))
+    {
+        SetStatChange(battler, STAT_SPATK, -1);
+        effect = TRUE;
+    }
+
+    if (effect)
+    {
+        gEffectBattler = battler;
+        BattleScriptCall(BattleScript_VenomSwampLowersStats);
     }
 
     return effect;
@@ -1593,6 +1658,7 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
     [ENDTURN_INGRAIN] = HandleEndTurnIngrain,
     [ENDTURN_LEECH_SEED] = HandleEndTurnLeechSeed,
     [ENDTURN_POISON] = HandleEndTurnPoison,
+    [ENDTURN_VENOM_SWAMP] = HandleEndTurnVenomSwamp,
     [ENDTURN_BURN] = HandleEndTurnBurn,
     [ENDTURN_FROSTBITE] = HandleEndTurnFrostbite,
     [ENDTURN_NIGHTMARE] = HandleEndTurnNightmare,

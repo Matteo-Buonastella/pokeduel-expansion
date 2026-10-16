@@ -181,6 +181,7 @@ void TryApplyZombieWorldType(enum BattlerId battler);
 void UpdateZombieWorldTypes(enum BattleTerrain oldTerrain, enum BattleTerrain newTerrain);
 bool32 IsHarpieSpecies(enum Species species);
 bool32 TryHarpiesHuntingGroundOnSwitchIn(enum BattlerId battler);
+bool32 IsBattlerImmuneToVenomSwamp(enum BattlerId battler, enum Ability ability);
 bool32 IsBelchPreventingMove(enum BattlerId battler, enum Move move);
 bool32 HasEnoughHpToEatBerry(enum BattlerId battler, enum Ability ability, u32 hpFraction, enum Item itemId);
 bool32 IsPartnerMonFromSameTrainer(enum BattlerId battler);

@@ -23722,6 +23722,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_HarpiesHuntingGround,
     },
 
+    [MOVE_VENOM_SWAMP] =
+    {
+        .name = COMPOUND_STRING("Venom Swamp"),
+        .description = COMPOUND_STRING(
+            "The field becomes a\n"
+            "venomous swamp.\n"
+            "Poisoned cards have\n"
+            "their Atk/Sp.Atk\n"
+            "lowered each turn."),
+        .effect = EFFECT_TERRAIN,
+        .power = 0,
+        .type = TYPE_POISON,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .terrainType = B_TERRAIN_VENOM_SWAMP },
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Venom_Swamp,
+    },
+
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

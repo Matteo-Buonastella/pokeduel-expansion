@@ -4972,6 +4972,13 @@ void IncreasePoisonScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, e
             ADJUST_SCORE_PTR(DECENT_EFFECT);
         else
             ADJUST_SCORE_PTR(WEAK_EFFECT);
+
+        // Poisoned foes lose Atk/Sp. Atk every turn in Venom Swamp, so poison before (or while) it's up
+        if (!IsBattlerImmuneToVenomSwamp(battlerDef, gAiLogicData->abilities[battlerDef])
+         && (gFieldTimers.terrain == B_TERRAIN_VENOM_SWAMP
+          || HasMove(battlerAtk, MOVE_VENOM_SWAMP)
+          || (HasPartnerIgnoreFlags(battlerAtk) && HasMove(GetPartnerBattler(battlerAtk), MOVE_VENOM_SWAMP))))
+            ADJUST_SCORE_PTR(WEAK_EFFECT);
     }
 }
 

@@ -48,6 +48,7 @@ static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battl
 static enum FieldEffectOutcome BenefitsFromYamiTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromZombieWorld(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromHarpiesHuntingGround(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromVenomSwamp(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -139,6 +140,9 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
             break;
         case B_TERRAIN_HARPIES_HUNTING_GROUND:
             result = BenefitsFromHarpiesHuntingGround(battlerIndex);
+            break;
+        case B_TERRAIN_VENOM_SWAMP:
+            result = BenefitsFromVenomSwamp(battlerIndex);
             break;
         default:
             break;
@@ -587,6 +591,45 @@ static enum FieldEffectOutcome BenefitsFromHarpiesHuntingGround(enum BattlerId b
 
     if (BenefitsFromHarpiesHuntingGroundDirectly(GetBattlerLeftFoe(battler))
      || BenefitsFromHarpiesHuntingGroundDirectly(GetBattlerRightFoe(battler)))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+// Poisoned and not immune, so Venom Swamp will lower its Atk and Sp. Atk every turn
+static bool32 IsHurtByVenomSwamp(enum BattlerId battler)
+{
+    return IsBattlerAlive(battler)
+        && (gBattleMons[battler].status1 & STATUS1_PSN_ANY)
+        && !IsBattlerImmuneToVenomSwamp(battler, gAiLogicData->abilities[battler]);
+}
+
+// Poisoned with Poison Heal or Toxic Boost, whose effects Venom Swamp doubles
+static bool32 IsBoostedByVenomSwamp(enum BattlerId battler)
+{
+    enum Ability ability = gAiLogicData->abilities[battler];
+
+    if (!IsBattlerAlive(battler) || !(gBattleMons[battler].status1 & STATUS1_PSN_ANY))
+        return FALSE;
+    return ability == ABILITY_POISON_HEAL
+        || (ability == ABILITY_TOXIC_BOOST && HasMoveWithCategory(battler, DAMAGE_CATEGORY_PHYSICAL));
+}
+
+// Only worth setting once a foe is already poisoned, so the AI poisons first and sets the swamp after
+static enum FieldEffectOutcome BenefitsFromVenomSwamp(enum BattlerId battler)
+{
+    enum BattlerId leftFoe = GetBattlerLeftFoe(battler);
+    enum BattlerId rightFoe = GetBattlerRightFoe(battler);
+    bool32 foesHurt = IsHurtByVenomSwamp(leftFoe) || IsHurtByVenomSwamp(rightFoe);
+    bool32 foesBoosted = IsBoostedByVenomSwamp(leftFoe) || IsBoostedByVenomSwamp(rightFoe);
+
+    if (IsHurtByVenomSwamp(battler))
+        return foesHurt ? FIELD_EFFECT_NEUTRAL : FIELD_EFFECT_NEGATIVE;
+
+    if (foesHurt || IsBoostedByVenomSwamp(battler))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (foesBoosted)
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
