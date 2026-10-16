@@ -1975,6 +1975,26 @@ bool32 IsBattlerImmuneToVenomSwamp(enum BattlerId battler, enum Ability ability)
     }
 }
 
+// Levia Stream stops normal rain after hitting. Primordial Sea is too strong to be washed away
+bool32 TryStopRainFromLeviaStream(void)
+{
+    if (!(gBattleWeather & B_WEATHER_RAIN) || (gBattleWeather & B_WEATHER_RAIN_PRIMAL))
+        return FALSE;
+
+    enum BattleWeather currBattleWeather = GetBattleWeather(gBattleWeather);
+
+    gBattleWeather = B_WEATHER_NONE;
+    gBattleStruct->weatherDuration = 0;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        gBattleMons[battler].volatiles.weatherAbilityDone = FALSE;
+        ResetParadoxWeatherStat(battler);
+    }
+    gBattleCommunication[MULTISTRING_CHOOSER] = gBattleWeatherInfo[currBattleWeather].endMessage;
+    BattleScriptCall(BattleScript_WeatherFaded);
+    return TRUE;
+}
+
 void TryToRevertMimicryAndFlags(void)
 {
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)

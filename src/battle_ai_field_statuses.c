@@ -344,6 +344,10 @@ static enum FieldEffectOutcome BenefitsFromHailOrSnow(enum BattlerId battler, u3
 // Rain
 static enum FieldEffectOutcome BenefitsFromRain(enum BattlerId battler)
 {
+    // Levia Stream only works in rain, Utility Umbrella or not
+    if (HasMoveWithEffect(battler, EFFECT_LEVIA_STREAM))
+        return FIELD_EFFECT_POSITIVE;
+
     if (gAiLogicData->holdEffects[battler] == HOLD_EFFECT_UTILITY_UMBRELLA)
         return FIELD_EFFECT_NEUTRAL;
 
@@ -784,6 +788,8 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
             score += DECENT_EFFECT;
 
             if (HasBattlerSideMoveWithEffect(battlerAtk, EFFECT_WEATHER_BALL))
+                score += WEAK_EFFECT;
+            if (HasBattlerSideMoveWithEffect(battlerAtk, EFFECT_LEVIA_STREAM)) // Rain unlocks Levia Stream
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_DAMP_ROCK)
                 score += WEAK_EFFECT;

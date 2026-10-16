@@ -645,6 +645,10 @@ bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
         if (gFieldTimers.terrain == B_TERRAIN_NONE)
             return TRUE;
         break;
+    case EFFECT_LEVIA_STREAM:
+        if (!(ctx->weather & B_WEATHER_RAIN))
+            return TRUE;
+        break;
     case EFFECT_POLTERGEIST:
         if (gAiLogicData->items[ctx->battlerDef] == ITEM_NONE || !IsBattlerItemEnabled(ctx->battlerDef))
             return TRUE;
@@ -1201,6 +1205,11 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
         break;
     case EFFECT_DREAM_EATER:
         if (abilityDef == ABILITY_LIQUID_OOZE && GetConfig(B_DREAM_EATER_LIQUID_OOZE) >= GEN_5)
+            return TRUE;
+        break;
+    case EFFECT_LEVIA_STREAM:
+        // Stopping the rain is a drawback unless the rain is hurting our side, so a move that KOs just as fast is preferred
+        if (!(AI_GetWeather() & B_WEATHER_RAIN_PRIMAL) && !ShouldClearWeather(battlerAtk, B_WEATHER_RAIN))
             return TRUE;
         break;
     default:

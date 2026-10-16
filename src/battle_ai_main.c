@@ -2732,6 +2732,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
          || (HasPartner(battlerAtk) && AreMovesEquivalent(battlerAtk, GetPartnerBattler(battlerAtk), move, aiData->partnerMove)))
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_LEVIA_STREAM:
+        if (!(weather & B_WEATHER_RAIN))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_PLEDGE:
         if (hasPartner && gBattleMons[GetPartnerBattler(battlerAtk)].hp > 0)
         {

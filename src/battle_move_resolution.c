@@ -1331,6 +1331,10 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
         if (gFieldTimers.terrain == B_TERRAIN_NONE)
             battleScript = BattleScript_ButItFailed;
         break;
+    case EFFECT_LEVIA_STREAM:
+        if (!(GetWeather() & B_WEATHER_RAIN))
+            battleScript = BattleScript_ButItFailed;
+        break;
     case EFFECT_STOCKPILE:
         if (gBattleMons[cv->battlerAtk].volatiles.stockpileCounter >= 3)
             battleScript = BattleScript_ButItFailed;
@@ -5001,6 +5005,10 @@ static enum MoveEndResult MoveEndThirdMoveBlock(struct BattleCalcValues *cv)
             BattleScriptCall(BattleScript_RemoveTerrain);
             result = MOVEEND_RESULT_RUN_SCRIPT;
         }
+        break;
+    case EFFECT_LEVIA_STREAM:
+        if (IsAnyTargetTurnDamaged(cv->battlerAtk, INCLUDING_SUBSTITUTES) && TryStopRainFromLeviaStream())
+            result = MOVEEND_RESULT_RUN_SCRIPT;
         break;
     case EFFECT_ICE_SPINNER:
         if (gFieldTimers.terrain != B_TERRAIN_NONE

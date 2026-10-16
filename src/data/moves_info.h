@@ -23747,6 +23747,26 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Venom_Swamp,
     },
 
+    [MOVE_LEVIA_STREAM] =
+    {
+        .name = COMPOUND_STRING("Levia Stream"),
+        .description = COMPOUND_STRING(
+            "Fails if it's not.\n"
+            "raining. Blast\n"
+            "everything on the\n"
+            "field. Afterwards,\n"
+            "rain disappears."),
+        .effect = EFFECT_LEVIA_STREAM,
+        .power = 175,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .battleAnimScript = gBattleAnimMove_HydroPump,
+    },
+
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

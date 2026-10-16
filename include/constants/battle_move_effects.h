@@ -292,6 +292,7 @@ enum  BattleMoveEffects
     EFFECT_MEGAMORPH,
     EFFECT_SHRINK,
     EFFECT_SECRET_POWER,
+    EFFECT_LEVIA_STREAM, // Fails unless it's raining, then stops the rain (but not Primordial Sea)
     NUM_BATTLE_MOVE_EFFECTS,
 };
 
