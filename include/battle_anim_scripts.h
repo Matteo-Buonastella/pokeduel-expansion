@@ -1084,6 +1084,7 @@ extern const u8 gBattleAnimMove_YamiTerrain[];
 extern const u8 gBattleAnimMove_ZombieWorld[];
 extern const u8 gBattleAnimMove_HarpiesHuntingGround[];
 extern const u8 gBattleAnimMove_Venom_Swamp[];
+extern const u8 gBattleAnimMove_LeviaStream[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

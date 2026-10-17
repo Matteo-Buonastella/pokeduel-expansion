@@ -7850,6 +7850,12 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
     ball->flatBonus = 0;
     ball->guaranteedCapture = FALSE;
 
+    if(gSpeciesInfo[battleMon->species].isEarthboundImmortal && ballId == BALL_BEAST)
+    {
+        ball->multiplier = 500;
+        return;
+    }
+
     if (gSpeciesInfo[battleMon->species].isUltraBeast)
     {
         if (ballId == BALL_BEAST)
@@ -8008,7 +8014,7 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
         break;
     case BALL_DREAM:
         if (B_DREAM_BALL_MODIFIER >= GEN_8 && (battleMon->status1 & STATUS1_SLEEP || (GetBattlerAbilityIgnoreMoldBreaker(wildMonBattler) == ABILITY_COMATOSE)))
-            ball->multiplier = 400;
+            ball->multiplier = 500;
         break;
     case BALL_SAFARI:
         if (B_SAFARI_BALL_MODIFIER == GEN_1)

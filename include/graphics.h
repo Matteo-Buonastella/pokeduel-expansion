@@ -3250,6 +3250,16 @@ extern const u32 gBattleAnimBgImage_YamiTerrain[];
 extern const u16 gBattleAnimBgPalette_YamiTerrain[];
 extern const u32 gBattleAnimBgTilemap_YamiTerrain[];
 
+// Sky Day (Harpies' Hunting Ground)
+extern const u32 gBattleAnimBgImage_SkyDay[];
+extern const u16 gBattleAnimBgPalette_SkyDay[];
+extern const u32 gBattleAnimBgTilemap_SkyDay[];
+
+// Venom Swamp Terrain
+extern const u32 gBattleAnimBgImage_VenomSwamp[];
+extern const u16 gBattleAnimBgPalette_VenomSwamp[];
+extern const u32 gBattleAnimBgTilemap_VenomSwamp[];
+
 // Pokédex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];

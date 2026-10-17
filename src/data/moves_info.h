@@ -22138,7 +22138,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_CelestialSword,
+        .battleAnimScript = gBattleAnimMove_LeviaStream,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -23698,7 +23698,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
 
     [MOVE_HARPIES_HUNTING_GROUND] =
     {
-        .name = COMPOUND_STRING("Harpies H Ground"),
+        .name = COMPOUND_STRING("Harpies Hunting Ground"),
         .description = COMPOUND_STRING(
             "Play Harpies Hunting\n"
             "Ground for 5 turns,\n"
@@ -23764,7 +23764,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_HydroPump,
+        .battleAnimScript = gBattleAnimMove_LeviaStream,
     },
 
     

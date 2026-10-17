@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Harpies' Hunting Ground lasts for 5 turns")
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HARPIES_HUNTING_GROUND, player);
-        MESSAGE("The battlefield became the Harpies' Hunting Ground!");
-        MESSAGE("The Harpies' Hunting Ground faded away.");
+        MESSAGE("Harpies Hunting Ground activated!\nFlying moves are powered up!");
+        MESSAGE("Harpies Hunting Ground faded away.");
     }
 }

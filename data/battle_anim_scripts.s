@@ -36703,20 +36703,20 @@ gBattleAnimMove_YamiTerrain::
 	waitforvisualfinish
 	end
 
-@ Placeholder: Grassy Terrain's animation with the orbs, sparkles and blends recoloured to a sickly green
+@ Placeholder: Grassy Terrain's animation with the orbs, sparkles and blends recoloured to purple
 gBattleAnimMove_ZombieWorld::
-	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ORBS, 0, 12, 12, RGB(12, 20, 8)
-	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_GREEN_SPARKLE, 0, 12, 12, RGB(12, 20, 8)
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ORBS, 0, 14, 14, RGB(18, 6, 24)
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_GREEN_SPARKLE, 0, 14, 14, RGB(18, 6, 24)
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	waitforvisualfinish
 	delay 30
-	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(12, 20, 8), 12, 5, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(18, 6, 24), 12, 5, 1
 	delay 4
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
 	create_particle_ring sprite=gGrassyTerrainOrbsTemplate, anim_battler=ANIM_ATTACKER
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 0, 4, RGB(12, 20, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 0, 4, RGB(18, 6, 24)
 	delay 52
 	setarg 7, -1
 	playsewithpan SE_M_HEAL_BELL, SOUND_PAN_ATTACKER
@@ -36724,7 +36724,7 @@ gBattleAnimMove_ZombieWorld::
 	create_scattered_particle_ring sprite=gGrassyTerrainStarTemplate, anim_battler=ANIM_TARGET
 	waitforvisualfinish
 	delay 4
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 4, 0, RGB(12, 20, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 4, 0, RGB(18, 6, 24)
 	waitforvisualfinish
 	end
 
@@ -36776,4 +36776,48 @@ gBattleAnimMove_Venom_Swamp::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 4, 0, RGB(20, 8, 24)
 	waitforvisualfinish
+	end
+
+@ Ported from the CFRU version: Hydro Pump on the Water Pulse background, then Hydro Vortex's blue tornados and whirlpools
+gBattleAnimMove_LeviaStream::
+	fadetobg BG_WATER_PULSE
+	waitbgfadeout
+	delay 8
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 40, 1
+	delay 6
+	panse SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	createvisualtask AnimTask_StartSinAnimTimer, 5, 100
+	call HydroPumpBeams
+	call HydroPumpBeams
+	call HydroPumpBeams
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 37, 1
+	call HydroPumpHitSplats
+	call HydroPumpBeams
+	call HydroPumpBeams
+	call HydroPumpHitSplats
+	call HydroPumpBeams
+	call HydroPumpBeams
+	call HydroPumpHitSplats
+	call HydroPumpBeams
+	call HydroPumpBeams
+	call HydroPumpHitSplats
+	call HydroPumpBeams
+	call HydroPumpBeams
+	call HydroPumpHitSplats
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 16, RGB(0, 13, 23)
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 8, 60
+	call HydroVortexWhirlpoolHurricane
+	call HydroVortexWhirlpoolHurricane
+	call HydroVortexWhirlpoolHurricane
+	call HydroVortexWhirlpoolHurricane
+	delay 1
+	delay 1
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 16, 0, RGB(0, 13, 23)
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	call UnsetBackground
 	end

@@ -1708,6 +1708,16 @@ const u32 gBattleAnimBgImage_YamiTerrain[] = INCGFX_U32("graphics/battle_anims/b
 const u16 gBattleAnimBgPalette_YamiTerrain[] = INCGFX_U16("graphics/battle_anims/backgrounds/yami_terrain.png", ".gbapal");
 const u32 gBattleAnimBgTilemap_YamiTerrain[] = INCGFX_U32("graphics/battle_anims/backgrounds/yami_terrain.bin", ".smolTM");
 
+// Sky Day (Harpies' Hunting Ground): same 256x112 layout as wasteland, so it shares its tilemap layout
+const u32 gBattleAnimBgImage_SkyDay[] = INCGFX_U32("graphics/battle_anims/backgrounds/sky_day.png", ".4bpp.smol");
+const u16 gBattleAnimBgPalette_SkyDay[] = INCGFX_U16("graphics/battle_anims/backgrounds/sky_day.png", ".gbapal");
+const u32 gBattleAnimBgTilemap_SkyDay[] = INCGFX_U32("graphics/battle_anims/backgrounds/sky_day.bin", ".smolTM");
+
+// Venom Swamp Terrain: same 256x112 layout as wasteland, so it shares its tilemap layout
+const u32 gBattleAnimBgImage_VenomSwamp[] = INCGFX_U32("graphics/battle_anims/backgrounds/venom_swamp.png", ".4bpp.smol");
+const u16 gBattleAnimBgPalette_VenomSwamp[] = INCGFX_U16("graphics/battle_anims/backgrounds/venom_swamp.png", ".gbapal");
+const u32 gBattleAnimBgTilemap_VenomSwamp[] = INCGFX_U32("graphics/battle_anims/backgrounds/venom_swamp.bin", ".smolTM");
+
 const u32 gPartyMenuBg_Gfx[] = INCGFX_U32("graphics/party_menu/bg.png", ".4bpp.smol", "-num_tiles 62 -Wnum_tiles");
 const u16 gPartyMenuBg_Pal[] = INCGFX_U16("graphics/party_menu/bg.png", ".gbapal");
 const u32 gPartyMenuBg_Tilemap[] = INCGFX_U32("graphics/party_menu/bg.bin", ".smolTM");

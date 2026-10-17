@@ -35728,7 +35728,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalCcapacApuFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalCcapacApuFormSpeciesIdTable,
@@ -35806,7 +35806,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalCusilluFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalCusilluFormSpeciesIdTable,
@@ -35884,7 +35884,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalCcarayhuaFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalCcarayhuaFormSpeciesIdTable,
@@ -35962,7 +35962,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalUruFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalUruFormSpeciesIdTable,
@@ -36040,7 +36040,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalChacuChallhuaFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalChacuChallhuaFormSpeciesIdTable,
@@ -36118,7 +36118,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalAsllaPiscuFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalAsllaPiscuFormSpeciesIdTable,
@@ -36197,7 +36197,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalWiraqochaRascaFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalWiraqochaRascaFormSpeciesIdTable,
@@ -36274,7 +36274,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalCcapacApuFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalCcapacApuFormSpeciesIdTable,
@@ -36352,7 +36352,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalCusilluFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalCusilluFormSpeciesIdTable,
@@ -36430,7 +36430,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalCcarayhuaFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalCcarayhuaFormSpeciesIdTable,
@@ -36508,7 +36508,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalUruFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalUruFormSpeciesIdTable,
@@ -36586,7 +36586,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalChacuChallhuaFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalChacuChallhuaFormSpeciesIdTable,
@@ -36664,7 +36664,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalAsllaPiscuFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalAsllaPiscuFormSpeciesIdTable,
@@ -36743,7 +36743,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
-    .isUltraBeast = TRUE,
+    .isEarthboundImmortal = TRUE,
     .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
     .formChangeTable = sEarthboundImmortalWiraqochaRascaFormChangeTable,
     .formSpeciesIdTable = sEarthboundImmortalWiraqochaRascaFormSpeciesIdTable,

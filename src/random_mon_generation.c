@@ -34,8 +34,9 @@ struct RandomSpeciesGeneratorOptions
     u32 banUltraBeast:1;
     u32 banParadox:1;
     u32 randomizeForms:1;
+    u32 banEarthboundImmortal:1;
     enum RandomSpeciesDexMode dexMode:1;
-    u32 padding:3;
+    u32 padding:2;
 };
 
 struct RandomItemGeneratorOptions
@@ -88,6 +89,8 @@ static bool32 IsSpeciesBannedByRandomSpeciesOptions(enum Species species, const 
     if (options->banParadox && speciesInfo->isParadox)
         return TRUE;
     if (options->filterFunc != NULL && !options->filterFunc(species, filterFuncArgs))
+        return TRUE;
+    if (options->banEarthboundImmortal && speciesInfo->isEarthboundImmortal)
         return TRUE;
 
     return FALSE;

@@ -413,7 +413,7 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .secretPowerAnimation = gBattleAnimMove_Gust,
         .secretPowerEffect = MOVE_EFFECT_FLINCH,
         .naturePowerMove = MOVE_AIR_SLASH,
-        .battleBackground = BG_SKY,
+        .battleBackground = BG_SKY_DAY,
         .seedStat = STAT_DEF,
         .seedHoldEffect = HOLD_EFFECT_PARAM_HARPIES_HUNTING_GROUND,
         .startMessage = B_MSG_TERRAIN_SET_HARPIES_HUNTING_GROUND,
@@ -425,7 +425,7 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .secretPowerAnimation = gBattleAnimMove_PoisonSting,
         .secretPowerEffect = MOVE_EFFECT_POISON,
         .naturePowerMove = MOVE_SLUDGE_BOMB,
-        .battleBackground = BG_POISON,
+        .battleBackground = BG_VENOM_SWAMP,
         .seedStat = STAT_DEF,
         .seedHoldEffect = HOLD_EFFECT_PARAM_VENOM_SWAMP,
         .startMessage = B_MSG_TERRAIN_SET_VENOM_SWAMP,
@@ -6688,30 +6688,6 @@ static bool32 DmgCalc_IsAbilityOnField(enum Ability ability, enum Ability abilit
     return FALSE;
 }
 
-bool32 IsEarthboundImmortal(enum Species species)
-{
-    switch (species)
-    {
-    case SPECIES_EARTHBOUND_IMMORTAL_CCAPAC_APU:
-    case SPECIES_EARTHBOUND_IMMORTAL_CUSILLU:
-    case SPECIES_EARTHBOUND_IMMORTAL_CCARAYHUA:
-    case SPECIES_EARTHBOUND_IMMORTAL_URU:
-    case SPECIES_EARTHBOUND_IMMORTAL_CHACU_CHALLHUA:
-    case SPECIES_EARTHBOUND_IMMORTAL_ASLLA_PISCU:
-    case SPECIES_EARTHBOUND_IMMORTAL_WIRAQOCHA_RASCA:
-    case SPECIES_EARTHBOUND_IMMORTAL_CCAPAC_APU_AWAKENED:
-    case SPECIES_EARTHBOUND_IMMORTAL_CUSILLU_AWAKENED:
-    case SPECIES_EARTHBOUND_IMMORTAL_CCARAYHUA_AWAKENED:
-    case SPECIES_EARTHBOUND_IMMORTAL_URU_AWAKENED:
-    case SPECIES_EARTHBOUND_IMMORTAL_CHACU_CHALLHUA_AWAKENED:
-    case SPECIES_EARTHBOUND_IMMORTAL_ASLLA_PISCU_AWAKENED:
-    case SPECIES_EARTHBOUND_IMMORTAL_WIRAQOCHA_RASCA_AWAKENED:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-}
-
 static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
 {
     u32 holdEffectParamAtk;
@@ -7040,7 +7016,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     case HOLD_EFFECT_DARK_ORB:
-        if (IsEarthboundImmortal(gBattleMons[battlerAtk].species)
+        if (gSpeciesInfo[gBattleMons[battlerAtk].species].isEarthboundImmortal
          && IS_BATTLER_OF_TYPE(battlerAtk, moveType))
             modifier = uq4_12_multiply(modifier, holdEffectModifier);
         break;
