@@ -293,6 +293,7 @@ enum  BattleMoveEffects
     EFFECT_SHRINK,
     EFFECT_SECRET_POWER,
     EFFECT_LEVIA_STREAM, // Fails unless it's raining, then stops the rain (but not Primordial Sea)
+    EFFECT_KO_STAT_UP, // Raises the user's argument.koStatUp.stat by argument.koStatUp.stages if it KOs the target
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

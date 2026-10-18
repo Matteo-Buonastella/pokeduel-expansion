@@ -36821,3 +36821,26 @@ gBattleAnimMove_LeviaStream::
 	blendoff
 	call UnsetBackground
 	end
+
+gBattleAnimMove_Sparks::
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	loopsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER, 5, 2
+	createsprite gFlamethrowerFlameSpriteTemplate, ANIM_ATTACKER, 3, 10, 10, 0, 16
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+
+gBattleAnimMove_FlameBlast::
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 2, 40, 1
+	waitforvisualfinish
+	loopsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_ATTACKER, 7, 5
+	create_dragon_breath_fire_sprite ANIM_TARGET, 2, initial_x=0, initial_y=0, target_x=0, target_y=0, duration=20
+	delay 16
+	blend_color_cycle selector=F_PAL_TARGET, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=12, color=RGB_RED
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 15, 1
+	call FireSpreadEffect
+	waitforvisualfinish
+	end

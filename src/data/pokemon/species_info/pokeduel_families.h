@@ -35129,7 +35129,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_UndergroundArachnid,
     .shinyPalette = gMonShinyPalette_UndergroundArachnid,
     .iconSprite = gMonIcon_UndergroundArachnid,
-    .iconPalIndex = 0,
+    .iconPalIndex = 2,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -35275,7 +35275,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_ZemanTheApeKing,
     .shinyPalette = gMonShinyPalette_ZemanTheApeKing,
     .iconSprite = gMonIcon_ZemanTheApeKing,
-    .iconPalIndex = 0,
+    .iconPalIndex = 2,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)

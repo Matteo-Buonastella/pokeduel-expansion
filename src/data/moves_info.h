@@ -7168,7 +7168,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Will-O-Wisp"),
         .description = COMPOUND_STRING(
             "Inflicts a burn on the foe\n"
-            "with intense fire."),
+            "with intense fire. Sure to\n"
+            "hit if user is Fire type."),
         .effect = EFFECT_NON_VOLATILE_STATUS,
         .power = 0,
         .type = TYPE_FIRE,
@@ -7180,6 +7181,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .argument = { .nonVolatileStatus = MOVE_EFFECT_BURN },
         .zMove = { .effect = Z_EFFECT_ATK_UP_1 },
         .magicCoatAffected = TRUE,
+        .alwaysHitsOnSameType = TRUE,
         .contestEffect = C_UPDATED_MOVE_EFFECTS >= GEN_6 ? CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION : CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = COMBO_STARTER_WILL_O_WISP,
@@ -22138,7 +22140,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_LeviaStream,
+        .battleAnimScript = gBattleAnimMove_FlameBlast
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -23767,6 +23769,55 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_LeviaStream,
     },
 
+    [MOVE_SPARKS] =
+    {
+        .name = COMPOUND_STRING("Sparks"),
+        .description = COMPOUND_STRING(
+            "Activate Sparks,\n"
+            "dealing minimal\n"
+            "damage to the foe,\n"
+            "but burning it."),
+        .effect = EFFECT_HIT,
+        .power = 20,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 100,
+        }),
+        .contestEffect = CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL,
+        .contestCategory = CONTEST_CATEGORY_CUTE,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_CHARGE},
+        .battleAnimScript = gBattleAnimMove_Sparks,
+    },
+
+    [MOVE_FLAME_BLAST] =
+    {
+        .name = COMPOUND_STRING("Flame Blast"),
+        .description = COMPOUND_STRING(
+            "Hit the foe with\n"
+            "a flame blast.\n"
+            "If this move knocks\n"
+            "out a target, the\n"
+            "user's Attack stat\n"
+            "rises."),
+        .effect = EFFECT_KO_STAT_UP,
+        .argument = { .koStatUp = { .stat = STAT_ATK, .stages = 1 } },
+        .power = 80,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        //Move Categories
+        .battleAnimScript = gBattleAnimMove_FlameBlast,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

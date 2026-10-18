@@ -5018,6 +5018,12 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         && CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, AI_ATTACKING))
             ADJUST_SCORE(BEST_EFFECT);
         break;
+    case EFFECT_KO_STAT_UP:
+        if (gBattleMons[battlerAtk].statStages[GetMoveKOStatUpStat(move)] < MAX_STAT_STAGE
+        && aiData->abilities[battlerAtk] != ABILITY_CONTRARY
+        && CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, AI_ATTACKING))
+            ADJUST_SCORE(BEST_EFFECT);
+        break;
     case EFFECT_DRAGON_SWORD:
         if (gBattleMons[battlerAtk].statStages[STAT_ATK] < MAX_STAT_STAGE
         && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DRAGON)

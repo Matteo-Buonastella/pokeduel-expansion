@@ -205,6 +205,10 @@ struct MoveInfo
             u16 comboMove;
             u16 resultMove;
         } pledge;
+        struct {
+            enum Stat stat:8;
+            u8 stages;
+        } koStatUp;
         u32 protectMethod;
         u32 status;
         u32 moveProperty;
@@ -781,6 +785,20 @@ static inline u32 GetMoveRecoil(enum Move moveId)
     moveId = SanitizeMoveId(moveId);
     assertf(gMovesInfo[moveId].effect == EFFECT_RECOIL, "not a recoil move: %S", gMovesInfo[moveId].name);
     return gMovesInfo[moveId].argument.recoilPercentage;
+}
+
+static inline enum Stat GetMoveKOStatUpStat(enum Move moveId)
+{
+    moveId = SanitizeMoveId(moveId);
+    assertf(gMovesInfo[moveId].effect == EFFECT_KO_STAT_UP, "not a stat up on KO move: %S", GetMoveName(moveId));
+    return gMovesInfo[moveId].argument.koStatUp.stat;
+}
+
+static inline u32 GetMoveKOStatUpStages(enum Move moveId)
+{
+    moveId = SanitizeMoveId(moveId);
+    assertf(gMovesInfo[moveId].effect == EFFECT_KO_STAT_UP, "not a stat up on KO move: %S", GetMoveName(moveId));
+    return gMovesInfo[moveId].argument.koStatUp.stages;
 }
 
 static inline u32 GetMoveSecondaryEffectChance(enum Move moveId)

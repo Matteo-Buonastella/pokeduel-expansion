@@ -4466,6 +4466,20 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
                 return MOVEEND_RESULT_RUN_SCRIPT;
             }
             break;
+        case EFFECT_KO_STAT_UP:
+            if (IsBattlerAlive(cv->battlerAtk)
+             && !IsBattlerAlive(battlerDef)
+             && IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
+             && !NoAliveMonsForEitherParty()
+             && CompareStat(cv->battlerAtk, GetMoveKOStatUpStat(cv->move), MAX_STAT_STAGE, CMP_LESS_THAN, cv->abilities[cv->battlerAtk]))
+            {
+                SetStatChange(gBattlerAttacker, GetMoveKOStatUpStat(cv->move), GetMoveKOStatUpStages(cv->move));
+                BattleScriptCall(BattleScript_MoveEffectStatChange);
+                gBattleStruct->eventState.moveEndBattler = 0;
+                gBattleScripting.moveendState++;
+                return MOVEEND_RESULT_RUN_SCRIPT;
+            }
+            break;
         case EFFECT_DRAGON_SWORD:
             if (IsBattlerAlive(cv->battlerAtk)
              && !IsBattlerAlive(battlerDef)
