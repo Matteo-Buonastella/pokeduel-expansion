@@ -931,6 +931,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_VENOMSWAMPENDS]                       = COMPOUND_STRING("The Venom Swamp dried up."),
     [STRINGID_ISAVENOMSWAMP]                        = COMPOUND_STRING("The battlefield is a Venom Swamp!"),
     [STRINGID_VENOMSWAMPWEAKENS]                    = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} is weakened by the Venom Swamp!"),
+    [STRINGID_PKMNEXCHANGEDFORMS]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} and {B_DEF_NAME_WITH_PREFIX2}\nexchanged forms!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1230,7 +1231,8 @@ const u16 gFocusEnergyUsedStringIds[] =
 const u16 gTransformUsedStringIds[] =
 {
     [B_MSG_TRANSFORMED]      = STRINGID_PKMNTRANSFORMEDINTO,
-    [B_MSG_TRANSFORM_FAILED] = STRINGID_BUTITFAILED
+    [B_MSG_TRANSFORM_FAILED] = STRINGID_BUTITFAILED,
+    [B_MSG_EXCHANGED]        = STRINGID_PKMNEXCHANGEDFORMS,
 };
 
 const u16 gSubstituteUsedStringIds[] =

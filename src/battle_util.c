@@ -5323,7 +5323,7 @@ enum Stat GetHighestStatId(enum BattlerId battler)
     return highestId;
 }
 
-static u32 GetStatValueWithStages(enum BattlerId battler, enum Stat stat)
+u32 GetStatValueWithStages(enum BattlerId battler, enum Stat stat)
 {
     u32 statValue;
 
@@ -11006,7 +11006,7 @@ static bool32 CanBreakThroughSemiInvulnerablityInternal(enum BattlerId battlerAt
     case STATE_PHANTOM_FORCE:
         return FALSE;
     case STATE_COMMANDER:
-        return GetMoveEffect(move) == EFFECT_TRANSFORM;
+        return GetMoveEffect(move) == EFFECT_TRANSFORM || GetMoveEffect(move) == EFFECT_EXCHANGE;
     case STATE_NONE:
     case SEMI_INVULNERABLE_COUNT:
         return TRUE;

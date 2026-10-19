@@ -2430,7 +2430,7 @@ static enum CancelerResult CancelerSubstitute(struct BattleCalcValues *cv)
 {
     if (!IsBattleMoveStatus(cv->move)
      || IsStatChangeMove(cv->move)
-     || (cv->moveEffect == EFFECT_TRANSFORM && GetConfig(B_TRANSFORM_SUBSTITUTE_FAIL) < GEN_5))
+     || ((cv->moveEffect == EFFECT_TRANSFORM || cv->moveEffect == EFFECT_EXCHANGE) && GetConfig(B_TRANSFORM_SUBSTITUTE_FAIL) < GEN_5))
         return CANCELER_RESULT_SUCCESS;
 
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
@@ -2793,6 +2793,7 @@ static enum CancelerResult CancelerMoveAnimation(struct BattleCalcValues *cv)
                           || gBattleStruct->attackAnimPlayed);
     if (isAnimDisabled
      && cv->moveEffect != EFFECT_TRANSFORM
+     && cv->moveEffect != EFFECT_EXCHANGE
      && cv->moveEffect != EFFECT_SUBSTITUTE
      && cv->moveEffect != EFFECT_ALLY_SWITCH
      // In a wild double battle gotta use the teleport animation if two wild Pokémon are alive.

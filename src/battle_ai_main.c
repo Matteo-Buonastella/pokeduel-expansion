@@ -1283,6 +1283,32 @@ void BattleAI_DoAIProcessing_PredictedSwitchin(struct AiThinkingStruct *aiThink,
 }
 
 // AI Score Functions
+// How much the user's stat total (including stat stages, excluding HP) grows by Exchanging with the target, as a percentage
+static s32 GetExchangeStatGainPercent(enum BattlerId battlerAtk, enum BattlerId battlerDef)
+{
+    s32 atkTotal = 0, defTotal = 0;
+
+    for (enum Stat stat = STAT_ATK; stat < NUM_STATS; stat++)
+    {
+        atkTotal += GetStatValueWithStages(battlerAtk, stat);
+        defTotal += GetStatValueWithStages(battlerDef, stat);
+    }
+
+    if (atkTotal == 0)
+        return 0;
+
+    return (defTotal - atkTotal) * 100 / atkTotal;
+}
+
+// Exchange as a last ditch effort: the foe is about to KO us, we move first, and we can't KO it ourselves.
+// Only worth it if the foe is stronger, which AI_CheckBadMove already requires.
+static bool32 IsExchangeLastResort(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Move predictedMove)
+{
+    return CanTargetFaintAi(battlerDef, battlerAtk)
+        && AI_IsFaster(battlerAtk, battlerDef, move, predictedMove, CONSIDER_PRIORITY)
+        && !CanAIFaintTarget(battlerAtk, battlerDef, 0);
+}
+
 // AI_FLAG_CHECK_BAD_MOVE - decreases move scores
 static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {
@@ -2336,6 +2362,16 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
           || gBattleMons[battlerDef].volatiles.transformed
           || gBattleMons[battlerDef].volatiles.substitute) //Leave out Illusion b/c AI is supposed to be fooled
             ADJUST_SCORE(-10);
+        break;
+    case EFFECT_EXCHANGE:
+        if (gBattleMons[battlerAtk].volatiles.transformed
+          || gBattleMons[battlerDef].volatiles.transformed
+          || gBattleMons[battlerDef].volatiles.substitute
+          || GetExchangeStatGainPercent(battlerAtk, battlerDef) <= 0)
+            ADJUST_SCORE(-10);
+        else if (GetExchangeStatGainPercent(battlerAtk, battlerDef) < 15
+              && !IsExchangeLastResort(battlerAtk, battlerDef, move, predictedMove))
+            ADJUST_SCORE(-6);
         break;
     case EFFECT_SPITE:
     case EFFECT_MIMIC:
@@ -5017,6 +5053,13 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         && aiData->abilities[battlerAtk] != ABILITY_CONTRARY
         && CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, AI_ATTACKING))
             ADJUST_SCORE(BEST_EFFECT);
+        break;
+    case EFFECT_EXCHANGE:
+        if (GetExchangeStatGainPercent(battlerAtk, battlerDef) >= 25)
+            ADJUST_SCORE(GOOD_EFFECT);
+        else if (GetExchangeStatGainPercent(battlerAtk, battlerDef) >= 10 
+        || IsExchangeLastResort(battlerAtk, battlerDef, move, predictedMove)) 
+            ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_KO_STAT_UP:
         if (gBattleMons[battlerAtk].statStages[GetMoveKOStatUpStat(move)] < MAX_STAT_STAGE

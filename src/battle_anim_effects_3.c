@@ -2551,6 +2551,18 @@ void AnimTask_TransformMon(u8 taskId)
     }
 }
 
+// Used by Exchange to run AnimTask_TransformMon on the target as well.
+// The move anim only loads the user's transformed personality, so load the new anim attacker's too.
+void AnimTask_ExchangeSwapAnimBattlers(u8 taskId)
+{
+    enum BattlerId temp;
+
+    SWAP(gBattleAnimAttacker, gBattleAnimTarget, temp);
+    gTransformedPersonalities[gBattleAnimAttacker] = gBattleMons[gBattleAnimAttacker].volatiles.transformedMonPID;
+    gTransformedShininess[gBattleAnimAttacker] = gBattleMons[gBattleAnimAttacker].volatiles.isTransformedMonShiny;
+    DestroyAnimVisualTask(taskId);
+}
+
 void AnimTask_MorningSunLightBeam(u8 taskId)
 {
     struct BattleAnimBgData animBg;

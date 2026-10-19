@@ -36844,3 +36844,24 @@ gBattleAnimMove_FlameBlast::
 	call FireSpreadEffect
 	waitforvisualfinish
 	end
+
+@ Transform on the user, then again on the target
+gBattleAnimMove_Exchange::
+	monbg ANIM_ATTACKER
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
+	createvisualtask AnimTask_TransformMon, 2, SPECIES_GFX_CHANGE_TRANSFORM
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	delay 1 @ let clearmonbg finish before the next monbg
+	createvisualtask AnimTask_ExchangeSwapAnimBattlers, 2
+	waitforvisualfinish
+	monbg ANIM_ATTACKER
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_TARGET
+	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET, 48
+	createvisualtask AnimTask_TransformMon, 2, SPECIES_GFX_CHANGE_TRANSFORM
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	createvisualtask AnimTask_ExchangeSwapAnimBattlers, 2
+	waitforvisualfinish
+	end

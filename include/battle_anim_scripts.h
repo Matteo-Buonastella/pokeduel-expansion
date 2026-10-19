@@ -1087,6 +1087,7 @@ extern const u8 gBattleAnimMove_Venom_Swamp[];
 extern const u8 gBattleAnimMove_LeviaStream[];
 extern const u8 gBattleAnimMove_Sparks[];
 extern const u8 gBattleAnimMove_FlameBlast[];
+extern const u8 gBattleAnimMove_Exchange[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

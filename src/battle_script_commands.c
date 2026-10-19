@@ -1128,6 +1128,7 @@ static void Cmd_attackanimation(void)
                           || gBattleStruct->attackAnimPlayed);
     if (isAnimDisabled
         && effect != EFFECT_TRANSFORM
+        && effect != EFFECT_EXCHANGE
         && effect != EFFECT_SUBSTITUTE
         && effect != EFFECT_ALLY_SWITCH
         // In a wild double battle gotta use the teleport animation if two wild Pokémon are alive.
@@ -5929,68 +5930,88 @@ static void Cmd_setfocusenergy(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+// Turns battler into a copy of source. source must not point to gBattleMons[battler].
+static void TransformBattlerInto(enum BattlerId battler, const struct BattlePokemon *source, enum Ability sourceAbility, u8 sourceTimesGotHit)
+{
+    s32 i;
+    u8 *battleMonDst = (u8 *)(&gBattleMons[battler]);
+    const u8 *battleMonSrc = (const u8 *)source;
+
+    gBattleMons[battler].volatiles.transformed = TRUE;
+    gBattleMons[battler].volatiles.disabledMove = MOVE_NONE;
+    gBattleMons[battler].volatiles.disableTimer = 0;
+    gBattleMons[battler].volatiles.transformedMonSpecies = gBattleMons[battler].species;
+    gBattleMons[battler].volatiles.transformedMonPID = source->personality;
+
+    if (B_TRANSFORM_SHINY >= GEN_4)
+        gBattleMons[battler].volatiles.isTransformedMonShiny = source->isShiny;
+    else
+        gBattleMons[battler].volatiles.isTransformedMonShiny = gBattleMons[battler].isShiny;
+    gBattleMons[battler].volatiles.mimickedMoves = 0;
+    gBattleMons[battler].volatiles.usedMoves = 0;
+
+    GetBattlerPartyState(battler)->timesGotHit = sourceTimesGotHit;
+
+    for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
+        battleMonDst[i] = battleMonSrc[i];
+
+    gBattleMons[battler].volatiles.overwrittenAbility = sourceAbility;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u32 pp = GetMovePP(gBattleMons[battler].moves[i]);
+        if (pp < 5)
+            gBattleMons[battler].pp[i] = pp;
+        else
+            gBattleMons[battler].pp[i] = 5;
+    }
+
+    // update AI knowledge
+    RecordAllMoves(battler);
+    RecordAbilityBattle(battler, gBattleMons[battler].ability);
+
+    BtlController_EmitResetActionMoveSelection(battler, B_COMM_TO_CONTROLLER, RESET_MOVE_SELECTION);
+    MarkBattlerForControllerExec(battler);
+}
+
 static void Cmd_transformdataexecution(void)
 {
     CMD_ARGS();
+
+    bool32 isExchange = GetMoveEffect(gCurrentMove) == EFFECT_EXCHANGE;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
     if ((GetConfig(B_TRANSFORM_SEMI_INV_FAIL) >= GEN_2 && IsSemiInvulnerable(gBattlerTarget, EXCLUDE_COMMANDER))
         || (GetConfig(B_TRANSFORM_TARGET_FAIL) >= GEN_2 && gBattleMons[gBattlerTarget].volatiles.transformed)
         || (GetConfig(B_TRANSFORM_USER_FAIL) >= GEN_5 && gBattleMons[gBattlerAttacker].volatiles.transformed)
-        || gBattleStruct->illusion[gBattlerTarget].state == ILLUSION_ON)
+        || gBattleStruct->illusion[gBattlerTarget].state == ILLUSION_ON
+        || (isExchange && (gBattleMons[gBattlerAttacker].volatiles.transformed
+                        || gBattleMons[gBattlerTarget].volatiles.transformed
+                        || gBattleStruct->illusion[gBattlerAttacker].state == ILLUSION_ON)))
     {
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_FAILED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORM_FAILED;
     }
     else
     {
-        s32 i;
-        u8 *battleMonAttacker, *battleMonTarget;
-        u8 timesGotHit;
+        // Snapshot the user before it's overwritten, so Exchange can give it to the target
+        struct BattlePokemon attackerMon = gBattleMons[gBattlerAttacker];
+        enum Ability attackerAbility = GetBattlerAbility(gBattlerAttacker);
+        u8 attackerTimesGotHit = GetBattlerPartyState(gBattlerAttacker)->timesGotHit;
 
         gChosenMove = MOVE_UNAVAILABLE;
-        gBattleMons[gBattlerAttacker].volatiles.transformed = TRUE;
-        gBattleMons[gBattlerAttacker].volatiles.disabledMove = MOVE_NONE;
-        gBattleMons[gBattlerAttacker].volatiles.disableTimer = 0;
-        gBattleMons[gBattlerAttacker].volatiles.transformedMonSpecies = gBattleMons[gBattlerAttacker].species;
-        gBattleMons[gBattlerAttacker].volatiles.transformedMonPID = gBattleMons[gBattlerTarget].personality;
-
-        if (B_TRANSFORM_SHINY >= GEN_4)
-            gBattleMons[gBattlerAttacker].volatiles.isTransformedMonShiny = gBattleMons[gBattlerTarget].isShiny;
-        else
-            gBattleMons[gBattlerAttacker].volatiles.isTransformedMonShiny = gBattleMons[gBattlerAttacker].isShiny;
-        gBattleMons[gBattlerAttacker].volatiles.mimickedMoves = 0;
-        gBattleMons[gBattlerAttacker].volatiles.usedMoves = 0;
-
-        timesGotHit = GetBattlerPartyState(gBattlerTarget)->timesGotHit;
-        GetBattlerPartyState(gBattlerAttacker)->timesGotHit = timesGotHit;
-
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
 
-        battleMonAttacker = (u8 *)(&gBattleMons[gBattlerAttacker]);
-        battleMonTarget = (u8 *)(&gBattleMons[gBattlerTarget]);
-
-        for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
-            battleMonAttacker[i] = battleMonTarget[i];
-
-        gBattleMons[gBattlerAttacker].volatiles.overwrittenAbility = GetBattlerAbility(gBattlerTarget);
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        TransformBattlerInto(gBattlerAttacker, &gBattleMons[gBattlerTarget], GetBattlerAbility(gBattlerTarget), GetBattlerPartyState(gBattlerTarget)->timesGotHit);
+        if (isExchange)
         {
-            u32 pp = GetMovePP(gBattleMons[gBattlerAttacker].moves[i]);
-            if (pp < 5)
-                gBattleMons[gBattlerAttacker].pp[i] = pp;
-            else
-                gBattleMons[gBattlerAttacker].pp[i] = 5;
+            TransformBattlerInto(gBattlerTarget, &attackerMon, attackerAbility, attackerTimesGotHit);
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_EXCHANGED;
         }
-
-        // update AI knowledge
-        RecordAllMoves(gBattlerAttacker);
-        RecordAbilityBattle(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability);
+        else
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
+        }
         SortBattlersByRawSpeed(gBattlersByRawSpeed);
-
-        BtlController_EmitResetActionMoveSelection(gBattlerAttacker, B_COMM_TO_CONTROLLER, RESET_MOVE_SELECTION);
-        MarkBattlerForControllerExec(gBattlerAttacker);
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
     }
 }
 
@@ -7683,7 +7704,7 @@ bool32 IsSubstituteProtected(enum BattlerId battlerAtk, enum BattlerId battlerDe
         return FALSE;
     else if (GetConfig(B_INFILTRATOR_SUBSTITUTE) < GEN_6)
         return TRUE;
-    else if (GetMoveEffect(move) == EFFECT_TRANSFORM || GetMoveEffect(move) == EFFECT_SKY_DROP)
+    else if (GetMoveEffect(move) == EFFECT_TRANSFORM || GetMoveEffect(move) == EFFECT_EXCHANGE || GetMoveEffect(move) == EFFECT_SKY_DROP)
         return TRUE;
     else if (IsAbilityAndRecord(battlerAtk, abilityAtk, ABILITY_INFILTRATOR))
         return FALSE;
