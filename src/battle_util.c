@@ -6713,6 +6713,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         if (gBattleMons[battlerDef].hp <= (gBattleMons[battlerDef].maxHP / 2))
             modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
         break;
+    case EFFECT_GOAT_THRASH:
+        if (gBattleMons[battlerAtk].volatiles.substitute)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+        break;
     case EFFECT_RETALIATE:
     {
         u32 retaliateTimer = gSideTimers[atkSide].retaliateTimer;

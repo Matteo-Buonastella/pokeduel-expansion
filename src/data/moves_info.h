@@ -24027,6 +24027,50 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .copycatBanned = TRUE,
         .assistBanned = TRUE,
     },
+
+    [MOVE_HEAVY_STORM] =
+    {
+        .name = COMPOUND_STRING("Heavy Storm"),
+        .description = COMPOUND_STRING(
+            "Summon a heavy storm\n"
+            "dealing massive\n"
+            "damage. The field is\n"
+            "cleared of all\n"
+            "entry hazards."),
+        .effect = EFFECT_RAPID_SPIN,
+        .power = 80,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .battleAnimScript = gBattleAnimMove_WingAttack,
+        //Move Categories
+        .windMove = TRUE,
+    },
+
+    [MOVE_GOAT_THRASH] =
+    {
+        .name = COMPOUND_STRING("Goat Thrash"),
+        .description = COMPOUND_STRING(
+            "Sacrifice a goat\n"
+            "token and smash the\n"
+            "foe. Power is double\n"
+            "if user is behind\n"
+            "a Scapegoat."),
+        .effect = EFFECT_GOAT_THRASH,
+        .power = 70,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_WingAttack,
+        //Move Categories
+        .makesContact = TRUE,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

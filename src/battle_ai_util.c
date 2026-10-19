@@ -5776,6 +5776,8 @@ u32 IncreaseSubstituteMoveScore(enum BattlerId battlerAtk, enum BattlerId battle
     {
         if (HasAnyKnownMove(battlerDef) && GetBestDmgFromBattler(battlerDef, battlerAtk, AI_DEFENDING) < gBattleMons[battlerAtk].maxHP / 4)
             scoreIncrease += GOOD_EFFECT;
+        if (HasMoveWithEffect(battlerAtk, EFFECT_GOAT_THRASH)) // Substitute doubles Goat Thrash's power
+            scoreIncrease += WEAK_EFFECT;
     }
     else if (effect == EFFECT_SHED_TAIL) // Shed Tail specific
     {
