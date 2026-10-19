@@ -298,6 +298,7 @@ enum  BattleMoveEffects
     EFFECT_ECTOPLASMIC_FORTIFICATION, // Raises the user's stats like EFFECT_STAT_CHANGE and restores 1/6 of its max HP
     EFFECT_CARD_DESTRUCTION, // Every battler on the field is switched out for a random party member. Fails in wild battles
     EFFECT_GOAT_THRASH, // Power doubles if the user is behind a Substitute
+    EFFECT_GOAT_HEAL, // Restores 1/2 of the user's max HP, or 3/4 if the user is behind a Substitute
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

@@ -1895,6 +1895,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+    [EFFECT_GOAT_HEAL] =
+    {
+        .battleScript = BattleScript_EffectGoatHeal,
+        .battleTvScore = 3,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE,
+        .encourageEncore = TRUE,
+    },
+
     [EFFECT_STONE_AXE] =
     {
         .battleScript = BattleScript_EffectHit,

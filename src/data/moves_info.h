@@ -24071,6 +24071,58 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
     },
+
+    [MOVE_MELTED_ICE] =
+    {
+        .name = COMPOUND_STRING("Melted Ice"),
+        .description = COMPOUND_STRING(
+            "Launch slushy ice at\n"
+            "the foe which melts\n"
+            "on contact. Super\n"
+            "effective on Fire\n"
+            "types and may freeze\n"
+            "as well."),
+        .effect = EFFECT_SUPER_EFFECTIVE_ON_ARG,
+        .power = 80,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .type = TYPE_FIRE },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_FreezeDry,
+    },
+
+    [MOVE_GOAT_HEAL] =
+    {
+        .name = COMPOUND_STRING("Goat Heal"),
+        .description = COMPOUND_STRING(
+            "Tribute a sheep\n"
+            "token to heal half\n"
+            "your max HP. It\n"
+            "restores more HP if\n"
+            "user is behind a\n"
+            "Scapegoat."),
+        .pp = 5,
+        .effect = EFFECT_GOAT_HEAL,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .healingMove = TRUE,
+        .snatchAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_Recover,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

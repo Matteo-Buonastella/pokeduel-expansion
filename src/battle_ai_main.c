@@ -2378,6 +2378,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     case EFFECT_RESTORE_HP:
     case EFFECT_SOFTBOILED:
     case EFFECT_ROOST:
+    case EFFECT_GOAT_HEAL:
         if (AI_BattlerAtMaxHp(battlerAtk))
             ADJUST_SCORE(-10);
         else if (aiData->hpPercents[battlerAtk] >= 90)
@@ -4802,6 +4803,10 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         if (ShouldRecover(battlerAtk, battlerDef, move, 50))
             ADJUST_SCORE(GOOD_EFFECT);
         break;
+    case EFFECT_GOAT_HEAL:
+        if (ShouldRecover(battlerAtk, battlerDef, move, gBattleMons[battlerAtk].volatiles.substitute ? 75 : 50))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
     case EFFECT_LIFE_DEW:
         if (ShouldRecover(battlerAtk, battlerDef, move, 25))
             ADJUST_SCORE(GOOD_EFFECT);
@@ -6598,6 +6603,7 @@ static s32 AI_HPAware(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum
             switch (effect)
             {
             case EFFECT_RESTORE_HP:
+            case EFFECT_GOAT_HEAL:
             case EFFECT_REST:
             case EFFECT_DESTINY_BOND:
             case EFFECT_FLAIL:
@@ -6915,6 +6921,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_RESTORE_HP:
+    case EFFECT_GOAT_HEAL:
         if (gAiLogicData->hpPercents[battlerAtk] < 60)
             ADJUST_SCORE(GOOD_EFFECT);
         break;

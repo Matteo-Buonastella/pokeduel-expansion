@@ -12563,3 +12563,23 @@ void BS_CardDestructionNextTarget(void)
     gBattlerTarget = gBattlerAttacker;
     gBattlescriptCurrInstr = cmd->doneInstr;
 }
+
+// Goat Heal restores 1/2 of the user's max HP, or 3/4 if the user is behind a Substitute
+void BS_TryGoatHeal(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    u32 maxHP;
+
+    gBattlerTarget = gBattlerAttacker;
+    maxHP = GetNonDynamaxMaxHP(gBattlerTarget);
+
+    if (gBattleMons[gBattlerTarget].volatiles.substitute)
+        SetHealAmount(gBattlerTarget, maxHP * 3 / 4);
+    else
+        SetHealAmount(gBattlerTarget, maxHP / 2);
+
+    if (IsBattlerAtMaxHp(gBattlerTarget))
+        gBattlescriptCurrInstr = cmd->failInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}

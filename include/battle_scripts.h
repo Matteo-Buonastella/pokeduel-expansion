@@ -755,5 +755,6 @@ extern const u8 BattleScript_Megamorph[];
 extern const u8 BattleScript_EffectShrink[];
 extern const u8 BattleScript_EctoplasmicFortification[];
 extern const u8 BattleScript_EffectCardDestruction[];
+extern const u8 BattleScript_EffectGoatHeal[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

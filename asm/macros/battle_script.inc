@@ -1570,6 +1570,11 @@
 	.4byte \doneInstr
 	.endm
 
+	.macro trygoatheal failInstr:req
+	callnative BS_TryGoatHeal
+	.4byte \failInstr
+	.endm
+
 	.macro jumpifside battler:req, side:req, equalJumpInstr:req
 	getbattlerside \battler
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \side, \equalJumpInstr

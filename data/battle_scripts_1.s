@@ -6567,3 +6567,10 @@ BattleScript_CardDestructionLoop:
 BattleScript_CardDestructionEnd:
 	switchinevents
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectGoatHeal::
+	attackcanceler
+	trygoatheal BattleScript_AlreadyAtFullHp
+	attackanimation
+	waitanimation
+	goto BattleScript_RestoreHp
