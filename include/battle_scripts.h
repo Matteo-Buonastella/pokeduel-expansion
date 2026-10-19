@@ -753,5 +753,6 @@ extern const u8 BattleScript_TakeHeart[];
 extern const u8 BattleScript_EffectNapTime[];
 extern const u8 BattleScript_Megamorph[];
 extern const u8 BattleScript_EffectShrink[];
+extern const u8 BattleScript_EctoplasmicFortification[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

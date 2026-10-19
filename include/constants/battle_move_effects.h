@@ -295,6 +295,7 @@ enum  BattleMoveEffects
     EFFECT_LEVIA_STREAM, // Fails unless it's raining, then stops the rain (but not Primordial Sea)
     EFFECT_KO_STAT_UP, // Raises the user's argument.koStatUp.stat by argument.koStatUp.stages if it KOs the target
     EFFECT_EXCHANGE, // Transform, but the target also transforms into the user
+    EFFECT_ECTOPLASMIC_FORTIFICATION, // Raises the user's stats like EFFECT_STAT_CHANGE and restores 1/6 of its max HP
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

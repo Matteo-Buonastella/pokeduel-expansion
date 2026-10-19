@@ -524,6 +524,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_SLUDGE_WAVE:
         case MOVE_SNARL:
         case MOVE_SNORE:
+        case MOVE_SPARKS:
         case MOVE_SPARK_BLASTER:
         case MOVE_SPIRAL_SPEAR:
         case MOVE_STEEL_WING:
@@ -536,6 +537,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_THUNDER_FANG:
         case MOVE_THUNDER_FORCE:
         case MOVE_THUNDERBOLT:
+        case MOVE_THUNDERSTROKE:
         case MOVE_THUNDER_PUNCH:
         case MOVE_THUNDER_SWORD:
         case MOVE_TOXIC_BREATH:

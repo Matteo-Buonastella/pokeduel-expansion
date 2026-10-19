@@ -5697,6 +5697,20 @@ static enum MoveResult StatChangeBeforeChange(struct BattleCalcValues *cv)
             return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
         }
         break;
+    case EFFECT_ECTOPLASMIC_FORTIFICATION:
+        // Heal Block only prevents the healing, the stat changes still happen
+        if (!IsBattlerAtMaxHp(cv->battlerAtk) && !gBattleMons[cv->battlerAtk].volatiles.healBlockTimer)
+        {
+            SetHealAmount(cv->battlerAtk, GetNonDynamaxMaxHP(cv->battlerAtk) / 6);
+            BattleScriptCall(BattleScript_EctoplasmicFortification);
+            return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
+        }
+        else if (WillAnyStatChange())
+        {
+            BattleScriptCall(BattleScript_PlayMoveAnim);
+            return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
+        }
+        break;
     case EFFECT_MEMENTO:
         gBattleStruct->passiveHpUpdate[cv->battlerAtk] = gBattleMons[cv->battlerAtk].hp;
         BtlController_EmitHealthBarUpdate(cv->battlerAtk, B_COMM_TO_CONTROLLER, INSTANT_HP_BAR_DROP);

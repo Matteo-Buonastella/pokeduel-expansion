@@ -137,6 +137,15 @@ BattleScript_TakeHeart::
 	waitmessage B_WAIT_TIME_LONG
     return
 
+BattleScript_EctoplasmicFortification::
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
+	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+    return
+
 BattleScript_ToxicThread::
 	seteffectprimary BS_ATTACKER, BS_SCRIPTING, MOVE_EFFECT_POISON
 	trymovestatchanges

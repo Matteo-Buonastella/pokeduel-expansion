@@ -3069,6 +3069,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
          && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPDEF))
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_ECTOPLASMIC_FORTIFICATION:
+        if ((AI_BattlerAtMaxHp(battlerAtk) || gBattleMons[battlerAtk].volatiles.healBlockTimer)
+         && !AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_UPPER_HAND:
         {
             u32 defPrio = GetBattleMovePriority(battlerDef, aiData->abilities[battlerDef], incomingMove);
@@ -4554,6 +4559,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_AUTOTOMIZE:
     case EFFECT_STAT_CHANGE:
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        break;
+    case EFFECT_ECTOPLASMIC_FORTIFICATION:
+        ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        if (!gBattleMons[battlerAtk].volatiles.healBlockTimer && ShouldRecover(battlerAtk, battlerDef, move, 17))
+            ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_SHRINK:
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move)); // Foe's Attack drop

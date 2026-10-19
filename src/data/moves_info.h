@@ -23851,6 +23851,108 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Exchange,
         .validApprenticeMove = TRUE,
     },
+
+    [MOVE_THUNDERSTROKE] =
+    {
+        .name = COMPOUND_STRING("Thunderstroke"),
+        .description = COMPOUND_STRING(
+            "Stun the foe with a\n"
+            "series of electrical\n"
+            "blasts. The target\n"
+            "is left paralyzed\n"
+            "50% of the time.."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 90,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 50,
+        }),
+        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_CHARGE},
+        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+        .validApprenticeMove = TRUE,
+    },
+
+    [MOVE_COSMIC_FLARE] =
+    {
+        .name = COMPOUND_STRING("Cosmic Flare"),
+        .description = COMPOUND_STRING(
+            "Blast the foe with\n"
+            "a powerful burst\n"
+            "of energy, forcing\n"
+            "the target to switch\n"
+            "out. Low priority\n"
+            "move."),
+        .effect = EFFECT_HIT_SWITCH_TARGET,
+        .power = 95,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = -6,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .copycatBanned = TRUE,
+        .assistBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_CircleThrow,
+    },
+
+    [MOVE_HORN_OF_CHAOS] =
+    {
+        .name = COMPOUND_STRING("Horn of Chaos"),
+        .description = COMPOUND_STRING(
+            "User focuses all of\n"
+            "its negative energy\n"
+            "into its horn, then\n"
+            "stab the foe."),
+        .effect = EFFECT_HIT,
+        .power = 110,
+        .type = TYPE_DARK,
+        .accuracy = 85,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_DrillPeck,
+    },
+
+    [MOVE_ECTOPLASMIC_FORTIFICATION] =
+    {
+        .name = COMPOUND_STRING("Ectoplasmic Fortification"),
+        .description = COMPOUND_STRING(
+            "Ectoplasmic\n"
+            "Fortification raises\n"
+            "the users Sp.Atk &\n"
+            "Sp.Def, as well as\n"
+            "recovering 1/6 of\n"
+            "HP."),
+        .effect = EFFECT_ECTOPLASMIC_FORTIFICATION,
+        .power = 0,
+        .type = TYPE_GHOST,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
+            .spAtk = 1,
+            .spDef = 1,
+        }),
+        .battleAnimScript = gBattleAnimMove_Ingrain,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
