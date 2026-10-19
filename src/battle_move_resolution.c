@@ -3794,6 +3794,7 @@ static enum MoveEndResult MoveEndUpdateLastMoves(struct BattleCalcValues *cv)
     enum BattleMoveEffects originalEffect = GetMoveEffect(GetOriginallyUsedMove(gChosenMove));
     if (IsBattlerAlive(cv->battlerAtk) // Why do we need to check if user fainted? We just want to set with what move the target got hit
      && originalEffect != EFFECT_BATON_PASS
+     && originalEffect != EFFECT_CARD_DESTRUCTION
      && originalEffect != EFFECT_HEALING_WISH
      && originalEffect != EFFECT_LUNAR_DANCE)
     {

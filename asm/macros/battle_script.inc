@@ -1560,6 +1560,16 @@
 	.byte \stage
 	.endm
 
+	.macro trycarddestruction failInstr:req
+	callnative BS_TryCardDestruction
+	.4byte \failInstr
+	.endm
+
+	.macro carddestructionnexttarget doneInstr:req
+	callnative BS_CardDestructionNextTarget
+	.4byte \doneInstr
+	.endm
+
 	.macro jumpifside battler:req, side:req, equalJumpInstr:req
 	getbattlerside \battler
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \side, \equalJumpInstr

@@ -1309,6 +1309,62 @@ static bool32 IsExchangeLastResort(enum BattlerId battlerAtk, enum BattlerId bat
         && !CanAIFaintTarget(battlerAtk, battlerDef, 0);
 }
 
+// Card Destruction is high variance (random replacements on both sides),
+// so the AI only uses it when the net advantage is clearly in its favor
+#define CARD_DESTRUCTION_MIN_ADVANTAGE 3
+
+static bool32 CanCardDestructionSwitchBattler(enum BattlerId battler)
+{
+    return IsBattlerAlive(battler)
+        && GetActiveGimmick(battler) != GIMMICK_DYNAMAX
+        && gBattleStruct->battlerState[battler].commanderSpecies == SPECIES_NONE
+        && CountUsablePartyMons(battler) > 0;
+}
+
+static bool32 CanCardDestructionSwitchAnyBattler(void)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (CanCardDestructionSwitchBattler(battler))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// Card Destruction switches out every battler, clearing stat stages and volatiles on both sides.
+// Positive when that favors the AI's side, negative when it favors the foes.
+static s32 GetCardDestructionScore(enum BattlerId battlerAtk)
+{
+    s32 score = 0;
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (!CanCardDestructionSwitchBattler(battler))
+            continue;
+
+        // What this battler gains from being switched out
+        s32 gain = (s32)CountNegativeStatStages(battler) - (s32)CountPositiveStatStages(battler);
+        if (gBattleMons[battler].volatiles.leechSeed
+         || gBattleMons[battler].volatiles.cursed
+         || gBattleMons[battler].volatiles.perishSong
+         || gBattleMons[battler].volatiles.saltCure
+         || gBattleMons[battler].volatiles.yawn
+         || gBattleMons[battler].volatiles.wrapped)
+            gain += 2;
+        if (gBattleMons[battler].volatiles.substitute)
+            gain -= 2;
+        if (AreAnyHazardsOnSide(GetBattlerSide(battler)))
+            gain -= 1;
+
+        if (IsBattlerAlly(battlerAtk, battler))
+            score += gain;
+        else
+            score -= gain;
+    }
+
+    return score;
+}
+
 // AI_FLAG_CHECK_BAD_MOVE - decreases move scores
 static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {
@@ -1878,6 +1934,18 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
           || DoesSubstituteBlockMove(battlerAtk, GetPartnerBattler(battlerDef), incomingMove))
           && !(incomingMove == MOVE_NONE && (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_RISKY))) // Let Risky AI predict blindly based on stats
             ADJUST_SCORE(-10);
+        break;
+    case EFFECT_CARD_DESTRUCTION:
+        if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || !CanCardDestructionSwitchAnyBattler())
+            ADJUST_SCORE(-10); // Move fails
+        else if (HasPartner(battlerAtk) && AreMovesEquivalent(battlerAtk, GetPartnerBattler(battlerAtk), move, aiData->partnerMove))
+            ADJUST_SCORE(-9); // Partner is already shuffling the field
+        else if (CanTargetFaintAi(battlerDef, battlerAtk))
+            ADJUST_SCORE(-8); // -6 priority, we'd likely faint before shuffling
+        else if (GetCardDestructionScore(battlerAtk) < CARD_DESTRUCTION_MIN_ADVANTAGE)
+            ADJUST_SCORE(-6); // Not worth the gamble, but usable if nothing better
+        else if (CanAIFaintTarget(battlerAtk, battlerDef, 0))
+            ADJUST_SCORE(-6); // Just KO the target instead
         break;
     case EFFECT_ROAR:
         if (CountUsablePartyMons(battlerDef) == 0)
@@ -4681,6 +4749,12 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         else if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
             break;
         score += AI_TryToClearStats(battlerAtk, battlerDef, moveTargetsBothOpponents);
+        break;
+    case EFFECT_CARD_DESTRUCTION:
+        if (GetCardDestructionScore(battlerAtk) >= CARD_DESTRUCTION_MIN_ADVANTAGE + 2)
+            ADJUST_SCORE(GOOD_EFFECT);
+        else if (GetCardDestructionScore(battlerAtk) >= CARD_DESTRUCTION_MIN_ADVANTAGE)
+            ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_CONVERSION:
         if (!IS_BATTLER_OF_TYPE(battlerAtk, GetMoveType(gBattleMons[battlerAtk].moves[0])))

@@ -12452,3 +12452,114 @@ void BS_QueueStatChange(void)
     SetStatChange(GetBattlerForBattleScript(cmd->battler), cmd->stat, cmd->stage);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+static bool32 IsCardDestructionReplacement(enum BattlerId battler, u32 monId)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    if (GetMonData(&party[monId], MON_DATA_HP) == 0
+     || GetMonData(&party[monId], MON_DATA_SPECIES) == SPECIES_NONE
+     || GetMonData(&party[monId], MON_DATA_IS_EGG))
+        return FALSE;
+
+    // Mons currently on the field can't be drawn, but ones shuffled back in by this move can
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+    {
+        if (monId == gBattlerPartyIndexes[i] && BattlersShareParty(battler, i))
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static u32 GetCardDestructionReplacements(enum BattlerId battler, u8 *validMons)
+{
+    u32 count = 0;
+    u32 lastMonId;
+
+    if (!IsBattlerAlive(battler)
+     || gBattleStruct->battlerState[battler].commanderSpecies != SPECIES_NONE
+     || gBattleMons[battler].volatiles.semiInvulnerable == STATE_COMMANDER
+     || GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
+        return 0;
+
+    if (BattleSideHasTwoTrainers(GetBattlerSide(battler)) && !AreMultiPartiesFullTeams())
+        lastMonId = MULTI_PARTY_SIZE;
+    else
+        lastMonId = PARTY_SIZE;
+
+    for (u32 monId = 0; monId < lastMonId; monId++)
+    {
+        if (IsCardDestructionReplacement(battler, monId))
+        {
+            if (validMons != NULL)
+                validMons[count] = monId;
+            count++;
+        }
+    }
+
+    return count;
+}
+
+// Card Destruction fails in wild battles, or if no battler on the field has a party member to switch to
+void BS_TryCardDestruction(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    bool32 canSwitch = FALSE;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || (gBattleTypeFlags & BATTLE_TYPE_ARENA))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (GetCardDestructionReplacements(battler, NULL) != 0)
+        {
+            canSwitch = TRUE;
+            break;
+        }
+    }
+
+    if (!canSwitch)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        gBattleMons[battler].volatiles.tryEjectPack = FALSE; // Disable Eject Pack activations
+    gBattleStruct->cardDestructionBattler = 0;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+// Picks the next battler to switch out and its random replacement, or jumps to doneInstr once every battler was handled
+void BS_CardDestructionNextTarget(void)
+{
+    NATIVE_ARGS(const u8 *doneInstr);
+    u8 validMons[PARTY_SIZE];
+
+    while (gBattleStruct->cardDestructionBattler < gBattlersCount)
+    {
+        enum BattlerId battler = gBattleStruct->cardDestructionBattler++;
+        u32 validMonsCount = GetCardDestructionReplacements(battler, validMons);
+
+        if (validMonsCount == 0)
+            continue;
+
+        gBattlerTarget = battler;
+        gProtectStructs[battler].forcedSwitch = TRUE;
+        gBattleStruct->monToSwitchIntoId[battler] = validMons[RandomUniform(RNG_CARD_DESTRUCTION, 0, validMonsCount - 1)];
+        if (!IsMultiBattle())
+            SwitchPartyOrder(battler);
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+            SwitchPartyOrderInGameMulti(battler, gBattleStruct->monToSwitchIntoId[battler]);
+
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+
+    gBattlerTarget = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->doneInstr;
+}

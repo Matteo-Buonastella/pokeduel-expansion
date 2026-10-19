@@ -23953,6 +23953,80 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .battleAnimScript = gBattleAnimMove_Ingrain,
     },
+
+    [MOVE_SPELLBINDING_CIRCLE] =
+    {
+        .name = COMPOUND_STRING("Spellbinding Circle"),
+        .description = COMPOUND_STRING(
+            "Lock the target in\n"
+            "a spellbinding\n"
+            "circle. The target\n"
+            "cannot escape."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PREVENT_ESCAPE,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_SpiritShackle,
+    },
+
+    [MOVE_VENOM_VAPOR] =
+    {
+        .name = COMPOUND_STRING("Venom Vapor"),
+        .description = COMPOUND_STRING(
+            "The user engulfs the\n"
+            "field in a mist of\n"
+            "toxic venom. The\n"
+            "user's HP is restored\n"
+            "by half the damage."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .healingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_GigaDrain,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ABSORB,
+            .argument.absorbPercentage = 50,
+        }),
+    },
+
+    [MOVE_CARD_DESTRUCTION] =
+    {
+        .name = COMPOUND_STRING("Card Destruction"),
+        .description = COMPOUND_STRING(
+            "All monsters on the\n"
+            "field are shuffled\n"
+            "into the deck and\n"
+            "replaced by a random\n"
+            "monster."),
+        .effect = EFFECT_CARD_DESTRUCTION,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .priority = -6,
+        .pp = 20,
+        .target = TARGET_USER,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
+        .battleAnimScript = gBattleAnimMove_Whirlwind,
+        //Move Categories
+        .ignoresProtect = TRUE,
+        .ignoresSubstitute = TRUE,
+        .copycatBanned = TRUE,
+        .assistBanned = TRUE,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

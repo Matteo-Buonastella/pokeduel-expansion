@@ -296,6 +296,7 @@ enum  BattleMoveEffects
     EFFECT_KO_STAT_UP, // Raises the user's argument.koStatUp.stat by argument.koStatUp.stages if it KOs the target
     EFFECT_EXCHANGE, // Transform, but the target also transforms into the user
     EFFECT_ECTOPLASMIC_FORTIFICATION, // Raises the user's stats like EFFECT_STAT_CHANGE and restores 1/6 of its max HP
+    EFFECT_CARD_DESTRUCTION, // Every battler on the field is switched out for a random party member. Fails in wild battles
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

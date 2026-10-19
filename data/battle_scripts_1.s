@@ -6543,3 +6543,27 @@ BattleScript_EffectShrink::
 	queuestatchange BS_ATTACKER, STAT_EVASION, 1
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
+
+@ Every battler on the field (user included) is switched out for a random party member, one at a time
+BattleScript_EffectCardDestruction::
+	attackcanceler
+	trycarddestruction BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+BattleScript_CardDestructionLoop:
+	carddestructionnexttarget BattleScript_CardDestructionEnd
+	returntoball BS_TARGET, FALSE
+	waitstate
+	switchoutabilities BS_TARGET
+	getswitchedmondata BS_TARGET
+	switchindataupdate BS_TARGET
+	trytoclearprimalweather
+	flushtextbox
+	switchinanim BS_TARGET, FALSE, FALSE
+	waitstate
+	printstring STRINGID_PKMNWASDRAGGEDOUT
+	switchineffects BS_TARGET
+	goto BattleScript_CardDestructionLoop
+BattleScript_CardDestructionEnd:
+	switchinevents
+	goto BattleScript_MoveEnd
