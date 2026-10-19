@@ -24143,6 +24143,57 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .battleAnimScript = gBattleAnimMove_UTurn,
     },
+
+    [MOVE_MANA_BREAK] =
+    {
+        .name = COMPOUND_STRING("Mana Break"),
+        .description = COMPOUND_STRING(
+            "The user releases\n"
+            "the mana from its\n"
+            "body to attack the\n"
+            "foe. Deals Super\n"
+            "Effective damage to\n"
+            "Bug types."),
+        .effect = EFFECT_SUPER_EFFECTIVE_ON_ARG,
+        .power = 85,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .type = TYPE_BUG },
+        .battleAnimScript = gBattleAnimMove_FreezeDry,
+    },
+
+    [MOVE_CEMETARY_OF_FIRE] =
+    {
+        .name = COMPOUND_STRING("Grave of Fire"),
+        .description = COMPOUND_STRING(
+            "A two-turn attack\n"
+            "that surrounds the\n"
+            "foe in a cemetery\n"
+            "of fire. May burn\n"
+            "the foe (50%)."),
+        .effect = EFFECT_TWO_TURNS_ATTACK,
+        .power = 140,
+        .type = TYPE_FIRE,
+        .accuracy = 95,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument.twoTurnAttack = { .stringId = STRINGID_CEMETARYABLAZE },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 50,
+        }),
+        .battleAnimScript = gBattleAnimMove_IceBurn,
+        //Move Categories
+        .metronomeBanned = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

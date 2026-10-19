@@ -438,6 +438,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_BURNING_JEALOUSY:
         case MOVE_CELESTIAL_SWORD:
         case MOVE_CELTIC_BLADE:
+        case MOVE_CEMETARY_OF_FIRE:
         case MOVE_CHAOS_BLADE:
         case MOVE_CHAOS_SCEPTER_BLAST:
         case MOVE_CHARGE_BEAM:
