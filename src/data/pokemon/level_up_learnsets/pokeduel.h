@@ -2861,13 +2861,13 @@ static const struct LevelUpMove sMimicatLevelUpLearnset[] = {
 //Neos
 static const struct LevelUpMove sNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(1, MOVE_TACKLE),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
 	LEVEL_UP_MOVE(9, MOVE_QUICK_ATTACK),
 	LEVEL_UP_MOVE(13, MOVE_FOCUS_ENERGY),
 	LEVEL_UP_MOVE(19, MOVE_COMET_PUNCH),
 	LEVEL_UP_MOVE(25, MOVE_RETURN),
-// 	LEVEL_UP_MOVE(30, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(30, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(32, MOVE_MEGA_PUNCH),
 	LEVEL_UP_MOVE(35, MOVE_MEGA_KICK),
 	LEVEL_UP_MOVE(40, MOVE_SKY_UPPERCUT),
@@ -2881,7 +2881,7 @@ static const struct LevelUpMove sNeosLevelUpLearnset[] = {
 //Aqua Neos
 static const struct LevelUpMove sAquaNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_WATER_PULSE),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_AQUA_JET),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
 	LEVEL_UP_MOVE(5, MOVE_WATER_GUN),
@@ -2904,7 +2904,7 @@ static const struct LevelUpMove sAquaNeosLevelUpLearnset[] = {
 //Flare Neos
 static const struct LevelUpMove sFlareNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_INCINERATE),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_WING_ATTACK),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
 	LEVEL_UP_MOVE(5, MOVE_EMBER),
@@ -4013,7 +4013,7 @@ static const struct LevelUpMove sWKurLv10LevelUpLearnset[] = {
 //Glow Neos
 static const struct LevelUpMove sGlowNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_TRAILBLAZE),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_QUICK_ATTACK),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
 	LEVEL_UP_MOVE(5, MOVE_VINE_WHIP),
@@ -4925,7 +4925,7 @@ static const struct LevelUpMove sShunorosLevelUpLearnset[] = {
 //Rainbow Neos
 static const struct LevelUpMove sRainbowNeosLevelUpLearnset[] = {
  	LEVEL_UP_MOVE(1, MOVE_NEOS_FORCE),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_CONFUSION),
 	LEVEL_UP_MOVE(1, MOVE_AURA_SPHERE),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
@@ -7151,7 +7151,7 @@ static const struct LevelUpMove sDarkKingHaDesLevelUpLearnset[] = {
 //Air Neos
 static const struct LevelUpMove sAirNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_WING_ATTACK),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_PECK),
 	LEVEL_UP_MOVE(1, MOVE_GROWL),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
@@ -7200,7 +7200,7 @@ static const struct LevelUpMove sInfernoWingLevelUpLearnset[] = {
 //Grand Neos
 static const struct LevelUpMove sGrandNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_DIG),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_ROTOTILLER),
 	LEVEL_UP_MOVE(1, MOVE_DIG),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
@@ -7227,7 +7227,7 @@ static const struct LevelUpMove sGrandNeosLevelUpLearnset[] = {
 static const struct LevelUpMove sDarkNeosLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_FEINT_ATTACK),
 	LEVEL_UP_MOVE(1, MOVE_COPYCAT),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
  	LEVEL_UP_MOVE(1, MOVE_YAMI_TERRAIN),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
 	LEVEL_UP_MOVE(1, MOVE_SCRATCH),
@@ -8134,7 +8134,7 @@ static const struct LevelUpMove sHonestLearnset[] = {
 static const struct LevelUpMove sHonestNeosLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_MISTY_TERRAIN),
 	LEVEL_UP_MOVE(1, MOVE_HELPING_HAND),
-// 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
+ 	LEVEL_UP_MOVE(1, MOVE_FAKE_HERO),
 	LEVEL_UP_MOVE(1, MOVE_FAIRY_WIND),
  	LEVEL_UP_MOVE(1, MOVE_SKYSCRAPER),
 	LEVEL_UP_MOVE(10, MOVE_DISARMING_VOICE),

@@ -24123,6 +24123,26 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .snatchAffected = TRUE,
         .battleAnimScript = gBattleAnimMove_Recover,
     },
+
+    [MOVE_FAKE_HERO] =
+    {
+        .name = COMPOUND_STRING("Fake Hero"),
+        .description = COMPOUND_STRING(
+            "After attacking,\n"
+            "the user switches\n"
+            "places with a\n"
+            "card in your party."),
+        .effect = EFFECT_HIT_ESCAPE,
+        .power = 70,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_UTurn,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
