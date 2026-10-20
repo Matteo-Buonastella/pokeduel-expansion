@@ -65,6 +65,9 @@ static bool32 HandleEndTurnVarious(enum BattlerId battler)
                 gBattleMons[i].volatiles.uproarTurns = 1; // end the move this turn
         }
 
+        if (gBattleMons[i].volatiles.moonBlockTimer > 0)
+            gBattleMons[i].volatiles.moonBlockTimer--;
+
         if (gBattleMons[i].volatiles.lockOn > 0 && --gBattleMons[i].volatiles.lockOn == 0)
             gBattleMons[i].volatiles.battlerWithSureHit = 0;
 

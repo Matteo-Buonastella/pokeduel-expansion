@@ -15655,6 +15655,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
         .contestComboMoves = {0},
+        .moonMove = TRUE,
         .battleAnimScript = gBattleAnimMove_Moonblast,
     },
 
@@ -17824,6 +17825,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = 0,
         .contestComboMoves = {0},
+        .moonMove = TRUE,
         .battleAnimScript = gBattleAnimMove_MoongeistBeam,
     },
 
@@ -24193,6 +24195,38 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .metronomeBanned = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+    },
+
+    [MOVE_ROCK_CRUSH_SWORD] =
+    {
+        .name = COMPOUND_STRING("Rock Crush Sword"),
+        .description = COMPOUND_STRING(
+            "Crush the foe with a\n"
+            "sword made of rock.\n"
+            "May lower accuacy\n"
+            "(40%). Negates Moon\n"
+            "moves for 2 turns."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_ROCK,
+        .accuracy = 95,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .accuracy = 1,
+            .chance = 40,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_MOON_BLOCK,
+            .chance = 100,
+        }),
+        //Move Categories
+        .makesContact = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_HeavyStorm,
     },
     
     // Z-Moves

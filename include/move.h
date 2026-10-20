@@ -156,7 +156,8 @@ struct MoveInfo
     bool32 accDecreaseIfUserNotSameType:1; // Accuracy is increased by 10% if user is of same type as move
     bool32 ignoreGhostImmunity:1;
     bool32 stabbingMove:1;
-    bool32 padding1:13;
+    bool32 moonMove:1;
+    bool32 padding1:12;
     // end of word
 
     // Ban flags
@@ -430,6 +431,11 @@ static inline bool32 IsSlicingMove(enum Move moveId)
 static inline bool32 IsStabbingMove(enum Move moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].stabbingMove;
+}
+
+static inline bool32 IsMoonMove(enum Move moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].moonMove;
 }
 
 static inline bool32 IsHealingMove(enum Move moveId)

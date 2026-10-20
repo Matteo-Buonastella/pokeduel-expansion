@@ -3727,6 +3727,19 @@ BattleScript_SelectingNotAllowedMoveThroatChopInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVETHROATCHOP
 	goto BattleScript_SelectingUnusableMoveInPalace
 
+BattleScript_SelectingNotAllowedMoveMoonBlock::
+	printselectionstring STRINGID_PKMNCANTUSEMOVEMOONBLOCK
+	endselectionscript
+
+BattleScript_MoveUsedIsMoonBlockPrevented::
+	printstring STRINGID_PKMNCANTUSEMOVEMOONBLOCK
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_SelectingNotAllowedMoveMoonBlockInPalace::
+	printstring STRINGID_PKMNCANTUSEMOVEMOONBLOCK
+	goto BattleScript_SelectingUnusableMoveInPalace
+
 BattleScript_ThroatChopEndTurn::
 	printstring STRINGID_THROATCHOPENDS
 	waitmessage B_WAIT_TIME_LONG

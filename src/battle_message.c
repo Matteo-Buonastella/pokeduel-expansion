@@ -933,6 +933,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_VENOMSWAMPWEAKENS]                    = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} is weakened by the Venom Swamp!"),
     [STRINGID_PKMNEXCHANGEDFORMS]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} and {B_DEF_NAME_WITH_PREFIX2}\nexchanged forms!"),
     [STRINGID_CEMETARYABLAZE]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} set the cemetary ablaze!"),
+    [STRINGID_PKMNCANTUSEMOVEMOONBLOCK]             = COMPOUND_STRING("The effects of Rock Crush Sword prevent {B_ATK_NAME_WITH_PREFIX2} from using Moon moves!\p"),
 
 };
 

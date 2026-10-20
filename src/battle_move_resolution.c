@@ -373,6 +373,12 @@ static enum CancelerResult CancelerVolatileBlocked(struct BattleCalcValues *cv)
         gBattlescriptCurrInstr = BattleScript_MoveUsedIsThroatChopPrevented;
         result = CANCELER_RESULT_FAILURE;
     }
+    else if (GetActiveGimmick(cv->battlerAtk) != GIMMICK_Z_MOVE && gBattleMons[cv->battlerAtk].volatiles.moonBlockTimer > 0 && IsMoonMove(cv->move))
+    {
+        CancelMultiTurnMoves(cv->battlerAtk);
+        gBattlescriptCurrInstr = BattleScript_MoveUsedIsMoonBlockPrevented;
+        result = CANCELER_RESULT_FAILURE;
+    }
 
     if (gBattleStruct->snatchedMoveIsUsed)
         gBattleStruct->eventState.atkCanceler = CANCELER_SET_TARGETS - 1; // minus one since state is incremented on success by default

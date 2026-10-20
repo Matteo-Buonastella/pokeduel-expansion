@@ -1581,6 +1581,12 @@ u32 TrySetCantSelectMoveBattleScript(enum BattlerId battler)
             limitations++;
     }
 
+    if (dynamaxBypassCheck && zMoveBypassCheck && gBattleMons[battler].volatiles.moonBlockTimer > 0 && IsMoonMove(move))
+    {
+        if (SetCantSelectScript(battler, gCurrentMove, BattleScript_SelectingNotAllowedMoveMoonBlockInPalace, BattleScript_SelectingNotAllowedMoveMoonBlock))
+            limitations++;
+    }
+
     if (dynamaxBypassCheck && zMoveBypassCheck && GetImprisonedMovesCount(battler, move))
     {
         if (SetCantSelectScript(battler, gCurrentMove, BattleScript_SelectingImprisonedMoveInPalace, BattleScript_SelectingImprisonedMove))
@@ -1771,6 +1777,9 @@ u32 CheckMoveLimitations(enum BattlerId battler, u8 unusableMoves, u32 check)
             unusableMoves |= 1u << i;
         // Throat Chop
         else if (check & MOVE_LIMITATION_THROAT_CHOP && gBattleMons[battler].volatiles.throatChopTimer > 0 && IsSoundMove(move))
+            unusableMoves |= 1u << i;
+        // Rock Crush Sword
+        else if (check & MOVE_LIMITATION_MOON_BLOCK && gBattleMons[battler].volatiles.moonBlockTimer > 0 && IsMoonMove(move))
             unusableMoves |= 1u << i;
         // Stuff Cheeks
         else if (check & MOVE_LIMITATION_STUFF_CHEEKS && moveEffect == EFFECT_STUFF_CHEEKS && GetItemPocket(gBattleMons[battler].item) != POCKET_BERRIES && GetConfig(B_STUFF_CHEEKS_SELECTABLE) < GEN_CHAMPIONS)

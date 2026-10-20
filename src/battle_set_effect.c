@@ -447,6 +447,15 @@ static void HandleSetEffectThroatChop(struct BattleCalcValues *cv, struct SetEff
     }
 }
 
+static void HandleSetEffectMoonBlock(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (gBattleMons[se->effectBattler].volatiles.moonBlockTimer == 0)
+    {
+        gBattleMons[se->effectBattler].volatiles.moonBlockTimer = B_MOON_BLOCK_TIMER;
+        gBattlescriptCurrInstr = se->script;
+    }
+}
+
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -1414,6 +1423,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_STEAL_STATS] = HandleSetEffectStealStats,
     [MOVE_EFFECT_BEAT_UP_MESSAGE] = HandleSetEffectBeatUpMessage,
     [MOVE_EFFECT_ITEM_MESSAGE] = HandleSetEffectItemMessage,
+    [MOVE_EFFECT_MOON_BLOCK] = HandleSetEffectMoonBlock,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,

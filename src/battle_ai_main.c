@@ -1640,6 +1640,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     // throat chop check
     if (gBattleMons[battlerAtk].volatiles.throatChopTimer > 0 && IsSoundMove(move))
         return 0; // Can't even select move at all
+    // rock crush sword check
+    if (gBattleMons[battlerAtk].volatiles.moonBlockTimer > 0 && IsMoonMove(move))
+        return 0; // Can't even select move at all
     // heal block check
     if (IsHealBlockPreventingMove(battlerAtk, move))
         return 0; // Can't even select heal blocked move
@@ -6185,6 +6188,24 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                                 break;
                             }
                         }
+                    }
+                }
+                break;
+            case MOVE_EFFECT_MOON_BLOCK:
+                if (gBattleMons[battlerDef].volatiles.moonBlockTimer > 0)
+                    break;
+                for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+                {
+                    if (defBestMoves[moveIndex] == MOVE_NONE)
+                        break;
+                    if (IsMoonMove(defBestMoves[moveIndex]))
+                    {
+                        enum Move predictedMove = GetPredictedMove(battlerAtk, battlerDef, aiData);
+                        if (AI_IsFaster(battlerAtk, battlerDef, move, predictedMove, CONSIDER_PRIORITY))
+                            ADJUST_SCORE(GOOD_EFFECT);
+                        else
+                            ADJUST_SCORE(DECENT_EFFECT);
+                        break;
                     }
                 }
                 break;
