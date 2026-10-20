@@ -5002,6 +5002,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sFrogTJamLevelUpLearnset,
     .teachableLearnset = sFrogTheJamTeachableLearnset,
     .eggMoveLearnset = sFrogTheJamEggMoveLearnset,
@@ -5076,6 +5077,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sToadallyALevelUpLearnset,
     .teachableLearnset = sToadallyAwesomeTeachableLearnset,
     .eggMoveLearnset = sToadallyAwesomeEggMoveLearnset,
@@ -5149,6 +5151,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sTreebornFrogLevelUpLearnset,
     .teachableLearnset = sTreebornFrogTeachableLearnset,
     .eggMoveLearnset = sTreebornFrogEggMoveLearnset,
@@ -5221,6 +5224,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sTradetoadevelUpLearnset,
     .teachableLearnset = sTradetoadTeachableLearnset,
     .eggMoveLearnset = sTradetoadEggMoveLearnset,
@@ -5295,6 +5299,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sSubstitoadLevelUpLearnset,
     .teachableLearnset = sSubstitoadTeachableLearnset,
     .eggMoveLearnset = sSubstitoadEggMoveLearnset,
@@ -5368,6 +5373,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sDesFrogLevelUpLearnset,
     .teachableLearnset = sDesFrogTeachableLearnset,
     .eggMoveLearnset = sDesFrogEggMoveLearnset,
@@ -5442,6 +5448,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sD3sFrogLevelUpLearnset,
     .teachableLearnset = sD3sFrogTeachableLearnset,
     .eggMoveLearnset = sD3sFrogEggMoveLearnset,
@@ -5589,6 +5596,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sBeezleFrogLevelUpLearnset,
     .teachableLearnset = sBeelzeFrogTeachableLearnset,
     .eggMoveLearnset = sBeelzeFrogEggMoveLearnset,
@@ -5663,6 +5671,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sSwapFrogLevelUpLearnset,
     .teachableLearnset = sSwapFrogTeachableLearnset,
     .eggMoveLearnset = sSwapFrogEggMoveLearnset,
@@ -5737,6 +5746,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sRonintoadinLevelUpLearnset,
     .teachableLearnset = sRonintoadinTeachableLearnset,
     .eggMoveLearnset = sRonintoadinEggMoveLearnset,
@@ -5811,6 +5821,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
         gOverworldPalette_Mudkip,
         gShinyOverworldPalette_Mudkip
     )
+    .isFrog = TRUE,
     .levelUpLearnset = sDupeFrogLevelUpLearnset,
     .teachableLearnset = sDupeFrogTeachableLearnset,
     .eggMoveLearnset = sDupeFrogEggMoveLearnset,

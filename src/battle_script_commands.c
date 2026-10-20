@@ -5089,6 +5089,7 @@ void BS_CourtChangeSwapSideStatuses(void)
     COURTCHANGE_SWAP(SIDE_STATUS_RAINBOW, rainbowTimer, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_SEA_OF_FIRE, seaOfFireTimer, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_SWAMP, swampTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_DES_CROAKING, desCroakingTimer, temp);
 
     // Hazards
     u32 tempQueue[HAZARDS_MAX_COUNT] = {HAZARDS_NONE};
@@ -12582,4 +12583,24 @@ void BS_TryGoatHeal(void)
         gBattlescriptCurrInstr = cmd->failInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+// Des-Croaking boosts the user's side's Frogs for 5 turns, or 8 with Light Clay
+void BS_SetDesCroaking(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    enum BattleSide side = GetBattlerSide(gBattlerAttacker);
+
+    if (gSideStatuses[side] & SIDE_STATUS_DES_CROAKING)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    gSideStatuses[side] |= SIDE_STATUS_DES_CROAKING;
+    if (GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_LIGHT_CLAY)
+        gSideTimers[side].desCroakingTimer = 8;
+    else
+        gSideTimers[side].desCroakingTimer = 5;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }

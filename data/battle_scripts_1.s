@@ -6587,3 +6587,12 @@ BattleScript_EffectGoatHeal::
 	attackanimation
 	waitanimation
 	goto BattleScript_RestoreHp
+
+BattleScript_EffectDesCroaking::
+	attackcanceler
+	setdescroaking BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_DESCROAKINGSTARTS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

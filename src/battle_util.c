@@ -6760,6 +6760,9 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         break;
     }
 
+    if (gSideStatuses[atkSide] & SIDE_STATUS_DES_CROAKING && gSpeciesInfo[gBattleMons[battlerAtk].species].isFrog)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.33));
+
     // various effects
     for (u32 i = 0; i < gProtectStructs[battlerAtk].helpingHand; i++)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));

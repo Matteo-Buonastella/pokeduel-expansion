@@ -1846,6 +1846,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro setdescroaking failInstr:req
+	callnative BS_SetDesCroaking
+	.4byte \failInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

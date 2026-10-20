@@ -40,6 +40,8 @@
 #define AI_ACTION_WATCH         (1 << 2)
 #define AI_ACTION_DO_NOT_ATTACK (1 << 3)
 
+#define CARD_DESTRUCTION_MIN_ADVANTAGE 3
+
 struct ChosenAction
 {
     u8 moveIndex;
@@ -1309,9 +1311,30 @@ static bool32 IsExchangeLastResort(enum BattlerId battlerAtk, enum BattlerId bat
         && !CanAIFaintTarget(battlerAtk, battlerDef, 0);
 }
 
-// Card Destruction is high variance (random replacements on both sides),
-// so the AI only uses it when the net advantage is clearly in its favor
-#define CARD_DESTRUCTION_MIN_ADVANTAGE 3
+// Number of non-fainted Frogs in the battler's party, including any on the field
+static u32 CountUsableFrogs(enum BattlerId battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+    u32 count = 0;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        enum Species species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        if (species != SPECIES_NONE
+         && species != SPECIES_EGG
+         && GetMonData(&party[i], MON_DATA_HP) != 0
+         && gSpeciesInfo[species].isFrog)
+            count++;
+    }
+    return count;
+}
+
+static bool32 IsAttackingFrogOnField(enum BattlerId battler)
+{
+    return IsBattlerAlive(battler)
+        && gSpeciesInfo[gBattleMons[battler].species].isFrog
+        && HasDamagingMove(battler);
+}
 
 static bool32 CanCardDestructionSwitchBattler(enum BattlerId battler)
 {
@@ -3069,6 +3092,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
          || PartnerMoveEffectIs(GetPartnerBattler(battlerAtk), aiData->partnerMove, EFFECT_TAILWIND)
          || (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && gFieldTimers.trickRoomTimer == 1))
             ADJUST_SCORE(-10);
+        break;
+    case EFFECT_DES_CROAKING:
+        if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_DES_CROAKING
+          || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)
+          || CountUsableFrogs(battlerAtk) == 0)
+            ADJUST_SCORE(-10); // Fails, or there are no Frogs to power up
         break;
     case EFFECT_LUCKY_CHANT:
         if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_LUCKY_CHANT
@@ -5823,6 +5852,18 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         }
         break;
     }
+    case EFFECT_DES_CROAKING:
+        if (IsAttackingFrogOnField(battlerAtk)
+         || (HasPartner(battlerAtk) && IsAttackingFrogOnField(GetPartnerBattler(battlerAtk))))
+            ADJUST_SCORE(GOOD_EFFECT); // A Frog can cash in on the boost right away
+        else if (CountUsableFrogs(battlerAtk) >= 3)
+            ADJUST_SCORE(GOOD_EFFECT); // Lots of frogs in the party
+        else if (CountUsableFrogs(battlerAtk) > 0)
+            ADJUST_SCORE(DECENT_EFFECT); // Frogs in the back will benefit
+
+        if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_LIGHT_CLAY)
+            ADJUST_SCORE(WEAK_EFFECT);
+        break;
     case EFFECT_LUCKY_CHANT:
         if (isBattle1v1 && CountUsablePartyMons(battlerDef) > 0)
             ADJUST_SCORE(GOOD_EFFECT);

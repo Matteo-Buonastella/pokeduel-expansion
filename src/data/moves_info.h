@@ -24228,6 +24228,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .slicingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_HeavyStorm,
     },
+
+    [MOVE_DES_CROAKING] =
+    {
+        .name = COMPOUND_STRING("Des-Croaking"),
+        .description = COMPOUND_STRING(
+            "The user croaks a\n"
+            "beautiful song,\n"
+            "powering up all Frog\n"
+            "monsters for the next\n"
+            "5 turns by 33%."),
+        .effect = EFFECT_DES_CROAKING,
+        .power = 0,
+        .type = TYPE_WATER,
+        .accuracy = 0,
+        .pp = 15,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .soundMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_AquaRing,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

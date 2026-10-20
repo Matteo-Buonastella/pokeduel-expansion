@@ -1222,6 +1222,18 @@ static bool32 HandleEndTurnSecondEventBlock(enum BattlerId battler)
         }
         gBattleStruct->eventState.endTurnBlock++;
         break;
+    case SECOND_EVENT_BLOCK_DES_CROAKING:
+        if (gSideTimers[side].desCroakingTimer > 0 && --gSideTimers[side].desCroakingTimer == 0)
+        {
+            gBattleScripting.battler = GetBattlerSideForMessage(side);
+            gSideStatuses[side] &= ~SIDE_STATUS_DES_CROAKING;
+            BattleScriptCall(BattleScript_SideStatusWoreOff);
+            gBattleCommunication[MULTISTRING_CHOOSER] = side;
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_DES_CROAKING);
+            effect = TRUE;
+        }
+        gBattleStruct->eventState.endTurnBlock++;
+        break;
     case SECOND_EVENT_BLOCK_AURORA_VEIL:
         if (gSideTimers[side].auroraVeilTimer > 0 && --gSideTimers[side].auroraVeilTimer == 0)
         {

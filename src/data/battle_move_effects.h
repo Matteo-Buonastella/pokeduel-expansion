@@ -1903,6 +1903,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_DES_CROAKING] =
+    {
+        .battleScript = BattleScript_EffectDesCroaking,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
     [EFFECT_STONE_AXE] =
     {
         .battleScript = BattleScript_EffectHit,

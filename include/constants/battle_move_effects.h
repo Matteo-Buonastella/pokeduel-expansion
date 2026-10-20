@@ -299,6 +299,7 @@ enum  BattleMoveEffects
     EFFECT_CARD_DESTRUCTION, // Every battler on the field is switched out for a random party member. Fails in wild battles
     EFFECT_GOAT_THRASH, // Power doubles if the user is behind a Substitute
     EFFECT_GOAT_HEAL, // Restores 1/2 of the user's max HP, or 3/4 if the user is behind a Substitute
+    EFFECT_DES_CROAKING, // Boosts the damage of Frogs on the user's side by 33% for 5 turns (8 with Light Clay)
     NUM_BATTLE_MOVE_EFFECTS,
 };
 
