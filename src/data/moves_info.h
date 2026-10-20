@@ -24253,6 +24253,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .soundMove = TRUE,
         .battleAnimScript = gBattleAnimMove_AquaRing,
     },
+
+    [MOVE_FROGGY_FORCEFIELD] =
+    {
+        .name = COMPOUND_STRING("Froggy Forcefield"),
+        .description = COMPOUND_STRING(
+            "Set up a Froggy\n"
+            "Forcefield for five\n"
+            "turns, boosting the\n"
+            "Def & Sp.Def of all\n"
+            "frogs on your side\n"
+            "by 33%."),
+        .effect = EFFECT_FROGGY_FORCEFIELD,
+        .power = 0,
+        .type = TYPE_WATER,
+        .accuracy = 0,
+        .pp = 15,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_AquaRing,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

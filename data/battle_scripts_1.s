@@ -6596,3 +6596,12 @@ BattleScript_EffectDesCroaking::
 	printstring STRINGID_DESCROAKINGSTARTS
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectFroggyForcefield::
+	attackcanceler
+	setfroggyforcefield BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_FROGGYFORCEFIELDSTARTS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

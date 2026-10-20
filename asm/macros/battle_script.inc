@@ -1851,6 +1851,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro setfroggyforcefield failInstr:req
+	callnative BS_SetFroggyForcefield
+	.4byte \failInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

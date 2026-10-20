@@ -1336,6 +1336,11 @@ static bool32 IsAttackingFrogOnField(enum BattlerId battler)
         && HasDamagingMove(battler);
 }
 
+static bool32 IsFrogOnField(enum BattlerId battler)
+{
+    return IsBattlerAlive(battler) && gSpeciesInfo[gBattleMons[battler].species].isFrog;
+}
+
 static bool32 CanCardDestructionSwitchBattler(enum BattlerId battler)
 {
     return IsBattlerAlive(battler)
@@ -3098,6 +3103,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
           || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)
           || CountUsableFrogs(battlerAtk) == 0)
             ADJUST_SCORE(-10); // Fails, or there are no Frogs to power up
+        break;
+    case EFFECT_FROGGY_FORCEFIELD:
+        if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_FROGGY_FORCEFIELD
+          || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)
+          || CountUsableFrogs(battlerAtk) == 0)
+            ADJUST_SCORE(-10); // Fails, or there are no Frogs to protect
         break;
     case EFFECT_LUCKY_CHANT:
         if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_LUCKY_CHANT
@@ -5861,6 +5872,15 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         else if (CountUsableFrogs(battlerAtk) > 0)
             ADJUST_SCORE(DECENT_EFFECT); // Frogs in the back will benefit
 
+        if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_LIGHT_CLAY)
+            ADJUST_SCORE(WEAK_EFFECT);
+        break;
+    case EFFECT_FROGGY_FORCEFIELD:
+        if ((IsFrogOnField(battlerAtk) || (HasPartner(battlerAtk) && IsFrogOnField(GetPartnerBattler(battlerAtk))))
+         && HasDamagingMove(battlerDef))
+            ADJUST_SCORE(GOOD_EFFECT); // A Frog on the field is about to be attacked
+        else if (CountUsableFrogs(battlerAtk) > 0)
+            ADJUST_SCORE(DECENT_EFFECT); // Frogs in the back will benefit
         if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_LIGHT_CLAY)
             ADJUST_SCORE(WEAK_EFFECT);
         break;

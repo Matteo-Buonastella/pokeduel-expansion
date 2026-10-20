@@ -7589,6 +7589,10 @@ static inline u32 CalcDefenseStat(struct DamageContext *ctx)
 	 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE)
 	 && usesDefStat)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+    // Froggy Forcefield boosts both Def and Sp. Def of Frogs
+    if (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_FROGGY_FORCEFIELD
+     && gSpeciesInfo[gBattleMons[battlerDef].species].isFrog)
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.33));
 
     modifier = ApplyDefensiveBadgeBoost(modifier, battlerDef, move);
 

@@ -172,6 +172,7 @@ struct SideTimer
     u16 seaOfFireTimer;
     u16 swampTimer;
     u16 desCroakingTimer;
+    u16 froggyForcefieldTimer;
 };
 
 struct FieldTimer

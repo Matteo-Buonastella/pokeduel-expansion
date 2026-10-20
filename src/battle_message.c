@@ -935,6 +935,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_CEMETARYABLAZE]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} set the cemetary ablaze!"),
     [STRINGID_PKMNCANTUSEMOVEMOONBLOCK]             = COMPOUND_STRING("The effects of Rock Crush Sword prevent {B_ATK_NAME_WITH_PREFIX2} from using Moon moves!\p"),
     [STRINGID_DESCROAKINGSTARTS]                    = COMPOUND_STRING("The croaking powered up the Frogs on {B_ATK_TEAM2} team!"),
+    [STRINGID_FROGGYFORCEFIELDSTARTS]               = COMPOUND_STRING("A Froggy Forcefield is protecting the Frogs on {B_ATK_TEAM2} team!"),
 
 };
 

@@ -5090,6 +5090,7 @@ void BS_CourtChangeSwapSideStatuses(void)
     COURTCHANGE_SWAP(SIDE_STATUS_SEA_OF_FIRE, seaOfFireTimer, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_SWAMP, swampTimer, temp);
     COURTCHANGE_SWAP(SIDE_STATUS_DES_CROAKING, desCroakingTimer, temp);
+    COURTCHANGE_SWAP(SIDE_STATUS_FROGGY_FORCEFIELD, froggyForcefieldTimer, temp);
 
     // Hazards
     u32 tempQueue[HAZARDS_MAX_COUNT] = {HAZARDS_NONE};
@@ -12585,22 +12586,39 @@ void BS_TryGoatHeal(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-// Des-Croaking boosts the user's side's Frogs for 5 turns, or 8 with Light Clay
+// Frog side statuses last 5 turns, or 8 if the user holds Light Clay
+static bool32 TrySetFrogSideStatus(u32 sideStatus, u16 *timer)
+{
+    enum BattleSide side = GetBattlerSide(gBattlerAttacker);
+
+    if (gSideStatuses[side] & sideStatus)
+        return FALSE;
+
+    gSideStatuses[side] |= sideStatus;
+    *timer = (GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_LIGHT_CLAY) ? 8 : 5;
+    return TRUE;
+}
+
+// Des-Croaking boosts the damage of the user's side's Frogs
 void BS_SetDesCroaking(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
     enum BattleSide side = GetBattlerSide(gBattlerAttacker);
 
-    if (gSideStatuses[side] & SIDE_STATUS_DES_CROAKING)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
-
-    gSideStatuses[side] |= SIDE_STATUS_DES_CROAKING;
-    if (GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_LIGHT_CLAY)
-        gSideTimers[side].desCroakingTimer = 8;
+    if (TrySetFrogSideStatus(SIDE_STATUS_DES_CROAKING, &gSideTimers[side].desCroakingTimer))
+        gBattlescriptCurrInstr = cmd->nextInstr;
     else
-        gSideTimers[side].desCroakingTimer = 5;
-    gBattlescriptCurrInstr = cmd->nextInstr;
+        gBattlescriptCurrInstr = cmd->failInstr;
+}
+
+// Froggy Forcefield boosts the Def and Sp. Def of the user's side's Frogs
+void BS_SetFroggyForcefield(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    enum BattleSide side = GetBattlerSide(gBattlerAttacker);
+
+    if (TrySetFrogSideStatus(SIDE_STATUS_FROGGY_FORCEFIELD, &gSideTimers[side].froggyForcefieldTimer))
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    else
+        gBattlescriptCurrInstr = cmd->failInstr;
 }

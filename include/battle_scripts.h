@@ -760,5 +760,6 @@ extern const u8 BattleScript_EctoplasmicFortification[];
 extern const u8 BattleScript_EffectCardDestruction[];
 extern const u8 BattleScript_EffectGoatHeal[];
 extern const u8 BattleScript_EffectDesCroaking[];
+extern const u8 BattleScript_EffectFroggyForcefield[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
