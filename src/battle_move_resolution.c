@@ -5682,6 +5682,7 @@ static enum MoveResult StatChangeBeforeChange(struct BattleCalcValues *cv)
         }
         break;
     case EFFECT_TAKE_HEART:
+    case EFFECT_BOOK_OF_MOON:
         if (WillAnyStatChange() || gBattleMons[cv->battlerAtk].status1 != 0)
         {
             u32 status = gBattleMons[cv->battlerAtk].status1;

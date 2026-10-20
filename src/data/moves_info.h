@@ -24375,6 +24375,35 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .battleAnimScript = gBattleAnimMove_PhotonGeyser,
     },
+
+    [MOVE_BOOK_OF_MOON] =
+    {
+        .name = COMPOUND_STRING("Book of Moon"),
+        .description = COMPOUND_STRING(
+            "Ups users Defense\n"
+            "stat. If user has\n"
+            "a status condition,\n"
+            "Defense is sharply\n"
+            "increased and the\n"
+            "condition is cured."),
+        .effect = EFFECT_BOOK_OF_MOON,
+        .power = 0,
+        .type = TYPE_FAIRY,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
+            .defense = 1,
+        }),
+        //Move Categories
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .moonMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_Withdraw,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

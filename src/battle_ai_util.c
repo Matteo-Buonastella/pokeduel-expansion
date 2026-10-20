@@ -6455,6 +6455,9 @@ s32 AI_GetAdjustedStatStage(enum BattlerId battler, enum Move move, s32 stage)
      && GetAttackerWeather(gAiLogicData->holdEffects[battler], gAiLogicData->abilities[battler], AI_GetWeather()) & B_WEATHER_SUN)
         stage = 2;
 
+    if (GetMoveEffect(move) == EFFECT_BOOK_OF_MOON && gBattleMons[battler].status1 & STATUS1_ANY)
+        stage = 2;
+
     if(GetMoveEffect(move) == EFFECT_MEGAMORPH)
     {
         u8 leftFoe = GetBattlerLeftFoe(battler);

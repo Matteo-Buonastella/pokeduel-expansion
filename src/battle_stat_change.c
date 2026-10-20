@@ -793,6 +793,9 @@ static void AdjustStatStage(struct BattleCalcValues *cv, struct StatChange *st)
     if (cv->moveEffect == EFFECT_GROWTH && GetAttackerWeather(cv->holdEffects[cv->battlerDef], cv->abilities[cv->battlerDef], GetWeather()) & B_WEATHER_SUN)
         st->stage = 2;
 
+    if (cv->moveEffect == EFFECT_BOOK_OF_MOON && gBattleMons[cv->battlerAtk].status1 & STATUS1_ANY)
+        st->stage = 2;
+
     if(cv->moveEffect == EFFECT_MEGAMORPH)
     {
         u8 leftFoe = GetBattlerLeftFoe(cv->battlerAtk);

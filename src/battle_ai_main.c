@@ -3180,6 +3180,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     }
+    case EFFECT_BOOK_OF_MOON:
+        if (!(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
+         && !AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_TAKE_HEART:
         if ((!(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
          || PartnerMoveEffectIs(GetPartnerBattler(battlerAtk), aiData->partnerMove, EFFECT_JUNGLE_HEALING)
@@ -5541,6 +5546,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_REFRESH:
         if ((gBattleMons[battlerAtk].status1 & STATUS1_CAN_MOVE)
          && ShouldCureStatus(battlerAtk, battlerAtk, aiData))
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_BOOK_OF_MOON:
+        ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        if ((gBattleMons[battlerAtk].status1 & STATUS1_ANY) && ShouldCureStatus(battlerAtk, battlerAtk, aiData))
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_TAKE_HEART:
