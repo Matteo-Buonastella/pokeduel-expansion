@@ -1088,6 +1088,14 @@ extern const u8 gBattleAnimMove_LeviaStream[];
 extern const u8 gBattleAnimMove_Sparks[];
 extern const u8 gBattleAnimMove_FlameBlast[];
 extern const u8 gBattleAnimMove_Exchange[];
+extern const u8 gBattleAnimMove_CosmicFlare[];
+extern const u8 gBattleAnimMove_Thunderstroke[];
+extern const u8 gBattleAnimMove_HornOfChaos[];
+extern const u8 gBattleAnimMove_EctoplasmicFortification[];
+extern const u8 gBattleAnimMove_SpellbindingCircle[];
+extern const u8 gBattleAnimMove_VenomVapor[];
+extern const u8 gBattleAnimMove_CardDestruction[];
+extern const u8 gBattleAnimMove_HeavyStorm[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

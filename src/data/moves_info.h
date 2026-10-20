@@ -22140,7 +22140,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_FlameBlast
+        .battleAnimScript = gBattleAnimMove_HeavyStorm,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -23877,7 +23877,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
         .contestComboMoves = {COMBO_STARTER_CHARGE},
-        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+        .battleAnimScript = gBattleAnimMove_Thunderstroke,
         .validApprenticeMove = TRUE,
     },
 
@@ -23901,7 +23901,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .copycatBanned = TRUE,
         .assistBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_CircleThrow,
+        .battleAnimScript = gBattleAnimMove_CosmicFlare,
     },
 
     [MOVE_HORN_OF_CHAOS] =
@@ -23921,7 +23921,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_DrillPeck,
+        .battleAnimScript = gBattleAnimMove_HornOfChaos,
     },
 
     [MOVE_ECTOPLASMIC_FORTIFICATION] =
@@ -23951,7 +23951,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spAtk = 1,
             .spDef = 1,
         }),
-        .battleAnimScript = gBattleAnimMove_Ingrain,
+        .battleAnimScript = gBattleAnimMove_EctoplasmicFortification,
     },
 
     [MOVE_SPELLBINDING_CIRCLE] =
@@ -23974,7 +23974,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_PREVENT_ESCAPE,
             .chance = 100,
         }),
-        .battleAnimScript = gBattleAnimMove_SpiritShackle,
+        .battleAnimScript = gBattleAnimMove_SpellbindingCircle,
     },
 
     [MOVE_VENOM_VAPOR] =
@@ -23995,11 +23995,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .healingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_GigaDrain,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ABSORB,
             .argument.absorbPercentage = 50,
         }),
+        .battleAnimScript = gBattleAnimMove_VenomVapor,
     },
 
     [MOVE_CARD_DESTRUCTION] =
@@ -24020,12 +24020,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_USER,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
-        .battleAnimScript = gBattleAnimMove_Whirlwind,
         //Move Categories
         .ignoresProtect = TRUE,
         .ignoresSubstitute = TRUE,
         .copycatBanned = TRUE,
         .assistBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_CardDestruction,
     },
 
     [MOVE_HEAVY_STORM] =
@@ -24045,9 +24045,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_WingAttack,
         //Move Categories
         .windMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_HeavyStorm,
     },
 
     [MOVE_GOAT_THRASH] =
@@ -24067,9 +24067,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .battleAnimScript = gBattleAnimMove_WingAttack,
         //Move Categories
         .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_WingAttack,
     },
 
     [MOVE_MELTED_ICE] =

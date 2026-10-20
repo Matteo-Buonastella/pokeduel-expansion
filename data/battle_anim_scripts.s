@@ -36865,3 +36865,270 @@ gBattleAnimMove_Exchange::
 	createvisualtask AnimTask_ExchangeSwapAnimBattlers, 2
 	waitforvisualfinish
 	end
+
+gBattleAnimMove_CosmicFlare::
+	fadetobg BG_COSMIC
+	waitbgfadeout
+	delay 5
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	playsewithpan SE_M_PSYBEAM2, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 1, 0, 4, 1
+	delay 30
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_SMALL_EMBER, 0, 14, 14, RGB_WHITE
+	waitforvisualfinish
+	loopsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_ATTACKER, 7, 10
+	call CosmicFlareFire
+	call CosmicFlareFire
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB_WHITE
+	call CosmicFlareFire
+	call CosmicFlareFire
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 42, 1
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	call CosmicFlareFire
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB_WHITE
+	waitforvisualfinish
+	call UnsetBackground
+	end
+
+CosmicFlareFire:
+	create_dragon_breath_fire_sprite ANIM_TARGET, 2, initial_x=0, initial_y=0, target_x=0, target_y=0, duration=20
+	delay 2
+	return
+
+gBattleAnimMove_Thunderstroke::
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB_BLACK
+	waitforvisualfinish
+	delay 10
+	createvisualtask AnimTask_ElectricBolt, 5, 24, -52, 0
+	playsewithpan SE_M_THUNDERBOLT, SOUND_PAN_TARGET
+	delay 7
+	createvisualtask AnimTask_ElectricBolt, 5, -24, -52, 0
+	playsewithpan SE_M_THUNDERBOLT, SOUND_PAN_TARGET
+	delay 7
+	createvisualtask AnimTask_ElectricBolt, 5, 0, -60, 1
+	playsewithpan SE_M_THUNDERBOLT, SOUND_PAN_TARGET
+	delay 9
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB_BLACK
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB_BLACK
+	waitforvisualfinish
+	@ First thunder on the right
+	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_TARGET
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 16, -36
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 16, -20
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 16, 12
+	delay 20
+	@ Second thunder on the left
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 6, -16, -32
+	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_TARGET
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 6, -16, -16
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 6, -16, 16
+	delay 20
+	@ Third thunder in the middle
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, -32
+	playsewithpan SE_M_TRI_ATTACK2, SOUND_PAN_TARGET
+	delay 1
+	invert_screen_color scenery=1 | 2 | 4
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, -16
+	delay 1
+	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, 16
+	delay 10
+	invert_screen_color scenery=1 | 2 | 4
+	delay 1
+	createvisualtask AnimTask_ShakeTargetInPattern, 2, 30, 3, TRUE, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 6, 0, RGB_BLACK
+	waitforvisualfinish
+	end
+
+@ Drill Peck on the Dark background
+gBattleAnimMove_HornOfChaos::
+	fadetobg BG_DARK
+	waitbgfadeout
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	delay 2
+	loopsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET, 4, 8
+	createvisualtask AnimTask_DrillPeckHitSplats, 5
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	waitforvisualfinish
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	waitforvisualfinish
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 6
+	waitforvisualfinish
+	call UnsetBackground
+	end
+
+@ Ported from the CFRU version: Ingrain roots, then healing stars and a ring around the user
+gBattleAnimMove_EctoplasmicFortification::
+	create_ingrain_root_sprite ANIM_ATTACKER, 2, offset_x=16, offset_y=26, subpriority=-1, animation=2, duration=130
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
+	delay 10
+	create_ingrain_root_sprite ANIM_ATTACKER, 2, offset_x=-32, offset_y=20, subpriority=1, animation=1, duration=118
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
+	delay 10
+	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
+	call GrantingStarsEffect
+	delay 46
+	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
+	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0
+	waitforvisualfinish
+	call HealingEffect
+	waitforvisualfinish
+	end
+
+@ Ported from the CFRU version: a circle of hits around the target, then Curse's ghost
+gBattleAnimMove_SpellbindingCircle::
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=-11, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 21, 1
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=9, y=-1, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=11, y=7, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=9, y=13, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=19, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=-10, y=13, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=-12, y=7, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=-10, y=-1, relative_to=ANIM_TARGET, animation=3
+	delay 4
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=-8, relative_to=ANIM_TARGET, animation=3
+	waitforvisualfinish
+	monbg ANIM_TARGET
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
+	createsprite gCurseGhostSpriteTemplate, ANIM_TARGET, 2
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 14, 1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	end
+
+@ Ported from the CFRU version: purple Haze that poisons the target, then heals the user
+gBattleAnimMove_VenomVapor::
+	playsewithpan SE_M_HAZE, SOUND_PAN_MIDDLE
+	createvisualtask AnimTask_HazeScrollingFog, 5
+	createvisualtask AnimTask_BlendBackground, 6, 6, RGB(26, 0, 26)
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 12, RGB(30, 0, 31)
+	delay 16
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 56, 1
+	delay 2
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 15
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 15
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 15
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 15
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 15
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 15
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 12, 0, RGB(30, 0, 31)
+	waitforvisualfinish
+	call HealingEffect
+	waitforvisualfinish
+	end
+
+@ Ported from the CFRU version: yellow background, then Flash
+gBattleAnimMove_CardDestruction::
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 8, RGB(31, 29, 5)
+	delay 5
+	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_Flash, 2
+	waitforvisualfinish
+	end
+
+@ Ported from the CFRU version: Twister's storm of leaves and rocks, then three Gust tornados and hits
+gBattleAnimMove_HeavyStorm::
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_TWISTER, SOUND_PAN_TARGET
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=120, distance_y=70, wave_period=5, wave_amplitude=70, speed_up_on_frame=30
+	delay 1
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=115, distance_y=55, wave_period=6, wave_amplitude=60, speed_up_on_frame=25
+	delay 1
+	shake_mon_or_platform velocity=1, shake_timer=1, shake_duration=161, type=SHAKE_BG_Y
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=115, distance_y=60, wave_period=7, wave_amplitude=60, speed_up_on_frame=30
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=115, distance_y=55, wave_period=10, wave_amplitude=60, speed_up_on_frame=30
+	delay 3
+	createsprite gTwisterRockSpriteTemplate, ANIM_TARGET, 2, 100, 50, 4, 50, 26
+	delay 1
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=105, distance_y=25, wave_period=8, wave_amplitude=60, speed_up_on_frame=20
+	delay 1
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=115, distance_y=40, wave_period=10, wave_amplitude=48, speed_up_on_frame=30
+	delay 3
+	createsprite gTwisterRockSpriteTemplate, ANIM_TARGET, 2, 120, 30, 6, 45, 25
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=115, distance_y=35, wave_period=10, wave_amplitude=60, speed_up_on_frame=30
+	delay 3
+	createsprite gTwisterRockSpriteTemplate, ANIM_TARGET, 2, 105, 20, 8, 40, 0
+	delay 3
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=20, distance_y=255, wave_period=15, wave_amplitude=32, speed_up_on_frame=20
+	create_twister_leaf_sprite ANIM_TARGET, 2, duration=110, distance_y=10, wave_period=8, wave_amplitude=32, speed_up_on_frame=20
+	delay 20
+	playsewithpan SE_M_GUST, SOUND_PAN_TARGET
+	createsprite gEllipticalGustSpriteTemplate, ANIM_ATTACKER, 2, 0, -16
+	createvisualtask AnimTask_AnimateGustTornadoPalette, 5, 1, 70
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 1, 0, 48, 1
+	delay 16
+	createsprite gEllipticalGustSpriteTemplate, ANIM_ATTACKER, 2, 0, -16
+	createvisualtask AnimTask_AnimateGustTornadoPalette, 5, 1, 70
+	delay 16
+	createsprite gEllipticalGustSpriteTemplate, ANIM_ATTACKER, 2, 0, -16
+	createvisualtask AnimTask_AnimateGustTornadoPalette, 5, 1, 70
+	delay 48
+	playsewithpan SE_M_GUST2, SOUND_PAN_TARGET
+	delay 16
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=0, y=9, relative_to=ANIM_TARGET, animation=1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 16, 1
+	delay 2
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=9, y=-4, relative_to=ANIM_TARGET, animation=1
+	delay 2
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=-6, y=0, relative_to=ANIM_TARGET, animation=1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
