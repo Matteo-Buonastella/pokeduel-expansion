@@ -6605,3 +6605,27 @@ BattleScript_EffectFroggyForcefield::
 	printstring STRINGID_FROGGYFORCEFIELDSTARTS
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+@ Suppresses the target's Ability like Gastro Acid, then traps it like Mean Look
+BattleScript_EffectFiendishChain::
+	attackcanceler
+	jumpiffiendishchainfails BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	jumpifvolatile BS_TARGET, VOLATILE_GASTRO_ACID, BattleScript_FiendishChainTrap
+	setgastroacid BattleScript_FiendishChainTrap
+	printstring STRINGID_PKMNSABILITYSUPPRESSED
+	waitmessage B_WAIT_TIME_LONG
+	trytoclearprimalweather
+	call BattleScript_TryRevertWeatherform
+	flushtextbox
+	tryendneutralizinggas
+BattleScript_FiendishChainTrap:
+	jumpifvolatile BS_TARGET, VOLATILE_ESCAPE_PREVENTION, BattleScript_MoveEnd
+	jumpifgenconfiglowerthan CONFIG_B_GHOSTS_ESCAPE, GEN_6, BattleScript_FiendishChainTrapGen5
+	jumpiftype BS_TARGET, TYPE_GHOST, BattleScript_MoveEnd
+BattleScript_FiendishChainTrapGen5:
+	seteffectprimary BS_ATTACKER, BS_TARGET, MOVE_EFFECT_PREVENT_ESCAPE
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

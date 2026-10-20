@@ -24278,6 +24278,56 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .mirrorMoveBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_AquaRing,
     },
+
+    [MOVE_HUNGRY_BITE] =
+    {
+        .name = COMPOUND_STRING("Hungry Bite"),
+        .description = COMPOUND_STRING(
+            "The user is hungry\n"
+            "so bites the foe\n"
+            "hard. Restores HP\n"
+            "by half the damage\n"
+            "dealt."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .healingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ABSORB,
+            .argument.absorbPercentage = 50,
+        }),
+        .bitingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_VenomVapor,
+    },
+
+    [MOVE_FIENDISH_CHAIN] =
+    {
+        .name = COMPOUND_STRING("Fiendish Chain"),
+        .description = COMPOUND_STRING(
+            "Lock the foe in a\n"
+            "Fiendish Chain. The\n"
+            "foe has its ability\n"
+            "negated and cannot\n"
+            "escape."),
+        .effect = EFFECT_FIENDISH_CHAIN,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .magicCoatAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_AquaRing,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

@@ -301,6 +301,7 @@ enum  BattleMoveEffects
     EFFECT_GOAT_HEAL, // Restores 1/2 of the user's max HP, or 3/4 if the user is behind a Substitute
     EFFECT_DES_CROAKING, // Boosts the damage of Frogs on the user's side by 33% for 5 turns (8 with Light Clay)
     EFFECT_FROGGY_FORCEFIELD, // Boosts the Def and Sp. Def of Frogs on the user's side by 33% for 5 turns (8 with Light Clay)
+    EFFECT_FIENDISH_CHAIN, // Gastro Acid + Mean Look. Fails only if neither can apply
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

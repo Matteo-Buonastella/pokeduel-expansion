@@ -3073,6 +3073,7 @@ bool32 IsTrappingMove(enum Move move)
     switch (GetMoveEffect(move))
     {
     case EFFECT_MEAN_LOOK:
+    case EFFECT_FIENDISH_CHAIN:
     case EFFECT_FAIRY_LOCK:
     //case EFFECT_NO_RETREAT:   // TODO
         return TRUE;
@@ -4378,6 +4379,7 @@ static u32 GetAIEffectGroup(enum BattleMoveEffects effect)
     case EFFECT_DOODLE:
     case EFFECT_ENTRAINMENT:
     case EFFECT_GASTRO_ACID:
+    case EFFECT_FIENDISH_CHAIN:
     case EFFECT_ROLE_PLAY:
     case EFFECT_SKILL_SWAP:
     case EFFECT_OVERWRITE_ABILITY:
@@ -6008,7 +6010,8 @@ bool32 CanEffectChangeAbility(enum BattlerId battlerAtk, enum BattlerId battlerD
         break;
 
     case EFFECT_GASTRO_ACID:
-        if (gAbilitiesInfo[defAbility].cantBeSuppressed)
+    case EFFECT_FIENDISH_CHAIN:
+        if (gAbilitiesInfo[defAbility].cantBeSuppressed || gBattleMons[battlerDef].volatiles.gastroAcid)
             return FALSE;
         break;
 
@@ -6032,6 +6035,7 @@ bool32 CanEffectChangeAbility(enum BattlerId battlerAtk, enum BattlerId battlerD
         {
         case EFFECT_ENTRAINMENT:
         case EFFECT_GASTRO_ACID:
+        case EFFECT_FIENDISH_CHAIN:
         case EFFECT_ROLE_PLAY:
         case EFFECT_SKILL_SWAP:
         case EFFECT_OVERWRITE_ABILITY:
@@ -6063,6 +6067,7 @@ bool32 DoesEffectReplaceTargetAbility(u32 effect)
     {
     case EFFECT_ENTRAINMENT:
     case EFFECT_GASTRO_ACID:
+    case EFFECT_FIENDISH_CHAIN:
     case EFFECT_SKILL_SWAP:
     case EFFECT_OVERWRITE_ABILITY:
         return TRUE;
@@ -6089,7 +6094,7 @@ void AbilityChangeScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, en
             partnerHasBadAbility = TRUE;
     }
 
-    if (effect == EFFECT_GASTRO_ACID)
+    if (effect == EFFECT_GASTRO_ACID || effect == EFFECT_FIENDISH_CHAIN)
         abilityAtk = ABILITY_NONE;
     else if (effect == EFFECT_OVERWRITE_ABILITY)
         abilityAtk = GetMoveOverwriteAbility(move);

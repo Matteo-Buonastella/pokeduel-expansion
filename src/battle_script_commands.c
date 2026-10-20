@@ -12622,3 +12622,20 @@ void BS_SetFroggyForcefield(void)
     else
         gBattlescriptCurrInstr = cmd->failInstr;
 }
+
+// Fiendish Chain only fails if the target's Ability can't be suppressed and it can't be trapped either
+void BS_JumpIfFiendishChainFails(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    bool32 canSuppress = !gBattleMons[gBattlerTarget].volatiles.gastroAcid
+                      && !gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSuppressed
+                      && GetBattlerHoldEffectIgnoreAbility(gBattlerTarget) != HOLD_EFFECT_ABILITY_SHIELD;
+    bool32 canTrap = !gBattleMons[gBattlerTarget].volatiles.escapePrevention
+                  && !(GetConfig(B_GHOSTS_ESCAPE) >= GEN_6 && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_GHOST));
+
+    if (canSuppress || canTrap)
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    else
+        gBattlescriptCurrInstr = cmd->failInstr;
+}

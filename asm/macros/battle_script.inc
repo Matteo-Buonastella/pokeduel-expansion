@@ -1856,6 +1856,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro jumpiffiendishchainfails failInstr:req
+	callnative BS_JumpIfFiendishChainFails
+	.4byte \failInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr
