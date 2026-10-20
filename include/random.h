@@ -259,6 +259,7 @@ enum RandomTag
     RNG_DEXNAV_RANDOM_EGG_MOVE,
     RNG_RANDOM_BALL,
     RNG_CARD_DESTRUCTION,
+    RNG_STAT_PLUS_OR_MINUS,
 };
 
 #define RandomWeighted(tag, ...) \

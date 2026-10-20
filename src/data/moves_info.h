@@ -24404,6 +24404,59 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .moonMove = TRUE,
         .battleAnimScript = gBattleAnimMove_Withdraw,
     },
+
+    [MOVE_MICHIZURE] =
+    {
+        .name = COMPOUND_STRING("Michizure"),
+        .description = COMPOUND_STRING(
+            "If an ally fainted\n"
+            "on the previous\n"
+            "turn, this attack's\n"
+            "damage is doubled."),
+        .effect = EFFECT_RETALIATE,
+        .power = 65,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_Retaliate,
+    },
+
+    [MOVE_DIAMOND_BLADE_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Diamond Blade Strike"),
+        .description = COMPOUND_STRING(
+            "Strike the foe with\n"
+            "a blade made of\n"
+            "diamond. Chance all\n"
+            "stats are risen, or\n"
+            "dropped by 1 stage\n"
+            "(10%)."),
+        .effect = EFFECT_HIT,
+        .power = 95,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_PLUS_OR_MINUS,
+            .attack = 1,
+            .defense = 1,
+            .spDef = 1,
+            .spAtk = 1,
+            .speed = 1,
+            .self = TRUE,
+            .chance = 10,
+        }),
+        //Move Categories
+        .makesContact = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_AncientPower,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

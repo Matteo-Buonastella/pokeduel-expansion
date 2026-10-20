@@ -246,6 +246,28 @@ static void HandleSetEffectStatChange(struct BattleCalcValues *cv, struct SetEff
     gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
 }
 
+// Once the effect's chance triggers, a coin flip decides whether the stats are raised or lowered (Diamond Blade Strike)
+static void HandleSetEffectStatPlusOrMinus(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    s32 sign = RandomPercentage(RNG_STAT_PLUS_OR_MINUS, 50) ? -1 : 1;
+
+    for (enum Stat i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+    {
+        enum Stat stat = sAccurateStatOrder[i];
+        s32 stage = GetStatStage(stat, se->additionalEffect);
+
+        if (stage == 0)
+            continue;
+
+        SetStatChange(se->effectBattler, stat, sign * stage);
+        if (se->additionalEffect->onSide)
+            SetStatChange(GetPartnerBattler(se->effectBattler), stat, sign * stage);
+    }
+
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
+}
+
 static void HandleSetEffectLowerHigherAttack(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     SetStatChange(se->effectBattler, GetHigherAttackingStat(se->effectBattler), -1);
@@ -1432,6 +1454,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_ITEM_MESSAGE] = HandleSetEffectItemMessage,
     [MOVE_EFFECT_MOON_BLOCK] = HandleSetEffectMoonBlock,
     [MOVE_EFFECT_LOWER_HIGHER_ATTACK] = HandleSetEffectLowerHigherAttack,
+    [MOVE_EFFECT_STAT_PLUS_OR_MINUS] = HandleSetEffectStatPlusOrMinus,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,
