@@ -302,6 +302,7 @@ enum  BattleMoveEffects
     EFFECT_DES_CROAKING, // Boosts the damage of Frogs on the user's side by 33% for 5 turns (8 with Light Clay)
     EFFECT_FROGGY_FORCEFIELD, // Boosts the Def and Sp. Def of Frogs on the user's side by 33% for 5 turns (8 with Light Clay)
     EFFECT_FIENDISH_CHAIN, // Gastro Acid + Mean Look. Fails only if neither can apply
+    EFFECT_WRATH_OF_NEOS, // Photon Geyser + U-turn. Only usable by SPECIES_NEOS
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

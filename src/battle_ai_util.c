@@ -3151,6 +3151,7 @@ bool32 IsSwitchOutEffect(enum BattleMoveEffects effect)
     case EFFECT_TELEPORT:
         return (GetConfig(B_TELEPORT_BEHAVIOR) >= GEN_8);
     case EFFECT_HIT_ESCAPE:
+    case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
     case EFFECT_BATON_PASS:
     case EFFECT_WEATHER_AND_SWITCH:

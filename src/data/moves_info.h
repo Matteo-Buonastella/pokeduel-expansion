@@ -24353,6 +24353,28 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .soundMove = TRUE,
         .battleAnimScript = gBattleAnimMove_VenomVapor,
     },
+
+    [MOVE_WRATH_OF_NEOS] =
+    {
+        .name = COMPOUND_STRING("Wrath of Neos"),
+        .description = COMPOUND_STRING(
+            "This move can only be\n"
+            "used by base Neos.\n"
+            "Uses your highest Atk\n"
+            "stat and switches\n"
+            "out after attacking."),
+        .effect = EFFECT_WRATH_OF_NEOS,
+        .power = 130,
+        .type = TYPE_NORMAL,
+        .accuracy = 90,
+        .pp = 5,
+        .target = TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        //Move Categories
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_PhotonGeyser,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

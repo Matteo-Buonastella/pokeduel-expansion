@@ -3218,6 +3218,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (gBattleMons[battlerAtk].species != SPECIES_HOOPA_UNBOUND)
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_WRATH_OF_NEOS:
+        if (gBattleMons[battlerAtk].species != SPECIES_NEOS)
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_MEGAMORPH:
         {
             u8 leftFoe = GetBattlerLeftFoe(battlerAtk);
@@ -5008,6 +5012,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             break;
         //fallthrough
     case EFFECT_HIT_ESCAPE:
+    case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
     case EFFECT_WEATHER_AND_SWITCH:
         switch (ShouldPivot(battlerAtk, battlerDef, move))
@@ -6978,6 +6983,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
 
     case EFFECT_TELEPORT:
     case EFFECT_HIT_ESCAPE:
+    case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
     case EFFECT_WEATHER_AND_SWITCH:
     case EFFECT_BOLT_BEAK:

@@ -1223,6 +1223,10 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
          && gBattleMons[cv->battlerAtk].species != SPECIES_MORPEKO_HANGRY)
             battleScript = BattleScript_PokemonCantUseTheMove;
         break;
+    case EFFECT_WRATH_OF_NEOS:
+        if (gBattleMons[cv->battlerAtk].species != SPECIES_NEOS)
+            battleScript = BattleScript_PokemonCantUseTheMove;
+        break;
     case EFFECT_HYPERSPACE_FURY:
         if (gBattleMons[cv->battlerAtk].species == SPECIES_HOOPA_CONFINED)
             battleScript = BattleScript_ButHoopaCantUseIt;
@@ -4853,6 +4857,7 @@ static enum MoveEndResult MoveEndHitEscape(struct BattleCalcValues *cv)
     switch (GetMoveEffect(cv->move))
     {
     case EFFECT_HIT_ESCAPE:
+    case EFFECT_WRATH_OF_NEOS:
         if (!HasAnyBattlerQueuedSwitch()
          && gBattleStruct->battlerState[cv->battlerAtk].originalBattlerPartyId == PARTY_SIZE
          && !gBattleStruct->unableToUseMove

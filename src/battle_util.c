@@ -9410,6 +9410,7 @@ void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef
     switch (GetMoveEffect(move))
     {
     case EFFECT_PHOTON_GEYSER:
+    case EFFECT_WRATH_OF_NEOS:
         if (GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL)
             gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_PHYSICAL;
         else
