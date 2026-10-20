@@ -6199,6 +6199,10 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     ADJUST_SCORE(IncreaseStatDownScore(battlerAtk, battlerDef, stat));
                 }
                 break;
+            case MOVE_EFFECT_LOWER_HIGHER_ATTACK:
+                if (aiData->abilities[battlerDef] != ABILITY_CONTRARY)
+                    ADJUST_SCORE(IncreaseStatDownScore(battlerAtk, battlerDef, GetHigherAttackingStat(battlerDef)));
+                break;
             case MOVE_EFFECT_FLINCH:
                 if (ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move))
                     score += 2;

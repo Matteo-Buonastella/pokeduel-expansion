@@ -246,6 +246,13 @@ static void HandleSetEffectStatChange(struct BattleCalcValues *cv, struct SetEff
     gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
 }
 
+static void HandleSetEffectLowerHigherAttack(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    SetStatChange(se->effectBattler, GetHigherAttackingStat(se->effectBattler), -1);
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
+}
+
 static void HandleSetEffectRemoveArgType(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     enum Type type = GetMoveArgType(cv->move); // TODO use the arg field from move effects
@@ -1424,6 +1431,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_BEAT_UP_MESSAGE] = HandleSetEffectBeatUpMessage,
     [MOVE_EFFECT_ITEM_MESSAGE] = HandleSetEffectItemMessage,
     [MOVE_EFFECT_MOON_BLOCK] = HandleSetEffectMoonBlock,
+    [MOVE_EFFECT_LOWER_HIGHER_ATTACK] = HandleSetEffectLowerHigherAttack,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,

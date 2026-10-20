@@ -24328,6 +24328,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .magicCoatAffected = TRUE,
         .battleAnimScript = gBattleAnimMove_AquaRing,
     },
+
+    [MOVE_HONEST_CRYING] =
+    {
+        .name = COMPOUND_STRING("Honest Crying"),
+        .description = COMPOUND_STRING(
+            "The foe is attacked\n"
+            "by an honest cry,\n"
+            "lowering the targets\n"
+            "Attack or Sp.Attack,\n"
+            "whichever is higher."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_LOWER_HIGHER_ATTACK,
+            .chance = 100,
+        }),
+        .soundMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_VenomVapor,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

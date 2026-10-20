@@ -1162,6 +1162,12 @@ static bool32 AI_IsMoveEffectInPlus(enum BattlerId battlerAtk, enum BattlerId ba
                         return TRUE;
                 }
                 break;
+            case MOVE_EFFECT_LOWER_HIGHER_ATTACK:
+                if ((abilityDef != ABILITY_CONTRARY || DoesBattlerIgnoreAbilityChecks(battlerAtk, abilityAtk, move))
+                 && gBattleMons[battlerDef].statStages[GetHigherAttackingStat(battlerDef)] > MIN_STAT_STAGE
+                 && noOfHitsToKo > 1)
+                    return TRUE;
+                break;
             default:
                 break;
             }
@@ -1260,6 +1266,11 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
                     if (noOfHitsToKo > 1 && stage > 0)
                         return TRUE;
                 }
+                break;
+            case MOVE_EFFECT_LOWER_HIGHER_ATTACK:
+                // Contrary turns the drop into a boost for the target
+                if (noOfHitsToKo > 1 && abilityDef == ABILITY_CONTRARY && !DoesBattlerIgnoreAbilityChecks(battlerAtk, abilityAtk, move))
+                    return TRUE;
                 break;
             case MOVE_EFFECT_RECHARGE:
                 return additionalEffect->self;

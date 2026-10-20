@@ -9506,6 +9506,12 @@ enum DamageCategory GetCategoryBasedOnStats(enum BattlerId battler)
         return DAMAGE_CATEGORY_PHYSICAL;
 }
 
+// Attack or Sp. Atk, whichever is higher after stat stages (ties go to Sp. Atk, like Photon Geyser)
+enum Stat GetHigherAttackingStat(enum BattlerId battler)
+{
+    return GetCategoryBasedOnStats(battler) == DAMAGE_CATEGORY_PHYSICAL ? STAT_ATK : STAT_SPATK;
+}
+
 static u32 GetFlingPowerFromItemId(enum Item itemId)
 {
     if (gItemsInfo[itemId].pocket == POCKET_TM_HM)
