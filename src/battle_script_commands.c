@@ -12684,3 +12684,20 @@ void BS_TryEmergencyProvisions(void)
     gEffectBattler = gBattlerAttacker;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// The Warrior Returning Alive only works at 1/3 max HP or less, and heals 50% of max HP
+void BS_TryWarriorReturnAlive(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    u32 maxHP = GetNonDynamaxMaxHP(gBattlerAttacker);
+
+    gBattlerTarget = gBattlerAttacker;
+    if (gBattleMons[gBattlerAttacker].hp * 3 > maxHP)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    SetHealAmount(gBattlerAttacker, maxHP / 2);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}

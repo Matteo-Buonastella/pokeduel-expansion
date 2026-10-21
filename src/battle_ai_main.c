@@ -2438,6 +2438,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE))
             ADJUST_SCORE(-10);
         //fallthrough
+    case EFFECT_WARRIOR_RETURN_ALIVE:
+        if (gBattleMons[battlerAtk].hp * 3 > GetNonDynamaxMaxHP(battlerAtk))
+            ADJUST_SCORE(-10); // Fails above 1/3 HP
+        break;
     case EFFECT_POWER_BOND:
         // The recoil would knock the user out without taking the target down with it
         if (AI_IsDamagedByRecoil(battlerAtk)
@@ -4932,6 +4936,12 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_GOAT_HEAL:
         if (ShouldRecover(battlerAtk, battlerDef, move, gBattleMons[battlerAtk].volatiles.substitute ? 75 : 50))
             ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_WARRIOR_RETURN_ALIVE:
+        if (ShouldRecover(battlerAtk, battlerDef, move, 50))
+            ADJUST_SCORE(GOOD_EFFECT);
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
+            ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, 1));
         break;
     case EFFECT_EMERGENCY_PROVISIONS:
         if (ShouldRecover(battlerAtk, battlerDef, move, min(100, 25 * CountPositiveStatStagesTotal(battlerAtk))))

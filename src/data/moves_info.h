@@ -24587,6 +24587,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .mirrorMoveBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_SwordsDance,
     },
+
+    [MOVE_WARRIOR_RETURNING_ALIVE] =
+    {
+        .name = COMPOUND_STRING("Warrior Return Alive"),
+        .description = COMPOUND_STRING(
+            "The Warrior Returning\n"
+            "Alive recovers 50%\n"
+            "HP when user's HP is\n"
+            "<= 1/3 max HP. Atk\n"
+            "is also increased\n"
+            "by 1 stage."),
+        .pp = 5,
+        .effect = EFFECT_WARRIOR_RETURN_ALIVE,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .healingMove = TRUE,
+        .snatchAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_Recover,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

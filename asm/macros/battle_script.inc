@@ -1872,6 +1872,11 @@
 	.4byte \fullHpInstr
 	.endm
 
+	.macro trywarriorreturnalive failInstr:req
+	callnative BS_TryWarriorReturnAlive
+	.4byte \failInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

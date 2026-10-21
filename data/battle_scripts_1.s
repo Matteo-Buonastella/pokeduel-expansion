@@ -6661,3 +6661,16 @@ BattleScript_EffectEmergencyProvisions::
 	printstring STRINGID_RESETSTARGETSSTATLEVELS
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectWarriorReturnAlive::
+	attackcanceler
+	trywarriorreturnalive BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
+	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+	queuestatchange BS_ATTACKER, STAT_ATK, 1
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd

@@ -308,6 +308,7 @@ enum  BattleMoveEffects
     EFFECT_FLUTE_OF_D, // Parting Shot, but a Dragon type switching in gets +1 Atk and +1 Sp. Atk
     EFFECT_EMERGENCY_PROVISIONS, // Heals 25% per positive stat stage, then resets all of the user's stat stages
     EFFECT_POWER_BOND, // +2 Atk before hitting (pre-attack additional effect), then recoil equal to the user's Attack stat
+    EFFECT_WARRIOR_RETURN_ALIVE, // Only works at <= 1/3 max HP. Heals 50% and raises Atk by 1 stage
     NUM_BATTLE_MOVE_EFFECTS,
 };
 
