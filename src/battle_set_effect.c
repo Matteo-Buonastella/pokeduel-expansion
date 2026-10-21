@@ -314,6 +314,12 @@ static void HandleSetEffectRage(struct BattleCalcValues *cv, struct SetEffect *s
 
 static void HandleSetEffectPreventEscape(struct BattleCalcValues *cv, struct SetEffect *se)
 {
+    if (GetMoveEffect(cv->move) == EFFECT_DRAGON_CAPTURE_JAR && !IS_BATTLER_OF_TYPE(se->effectBattler, TYPE_DRAGON))
+    {
+        gBattlescriptCurrInstr = se->script;
+        return;
+    }
+
     if (!gBattleMons[se->effectBattler].volatiles.escapePrevention)
     {
         gBattleMons[se->effectBattler].volatiles.escapePrevention = TRUE;

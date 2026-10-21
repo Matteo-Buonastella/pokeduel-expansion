@@ -24664,6 +24664,38 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .magicCoatAffected = TRUE,
         .battleAnimScript = gBattleAnimMove_WillOWisp,
     },
+
+    [MOVE_DRAGON_CAPTURE_JAR] =
+    {
+        .name = COMPOUND_STRING("D Capture Jar"),
+        .description = COMPOUND_STRING(
+            "Lock the target in a\n"
+            "Dragons Capture Jar,\n"
+            "lowering its speed.\n"
+            "Power is doubled if\n"
+            "foe is a Dragon and\n"
+            "prevents escape."),
+        .effect = EFFECT_DRAGON_CAPTURE_JAR,
+        .power = 50,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .speed = 1,
+            .chance = 100,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_PREVENT_ESCAPE, // Only traps Dragon types
+            .chance = 100,
+        }),
+        //Move Categories
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_HeavyStorm,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

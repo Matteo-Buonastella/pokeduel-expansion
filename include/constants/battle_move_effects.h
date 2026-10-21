@@ -311,6 +311,7 @@ enum  BattleMoveEffects
     EFFECT_WARRIOR_RETURN_ALIVE, // Only works at <= 1/3 max HP. Heals 50% and raises Atk by 1 stage
     EFFECT_WINDSTORM, // Whirlwind, but the monster that gets dragged out has its Defense lowered by 1
     EFFECT_BURNING_LAND, // Burns the target (fails if it can't be), then the user, then removes any weather and terrain
+    EFFECT_DRAGON_CAPTURE_JAR, // Double power against Dragon types, and its MOVE_EFFECT_PREVENT_ESCAPE only traps Dragons
     NUM_BATTLE_MOVE_EFFECTS,
 };
 
