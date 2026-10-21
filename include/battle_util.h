@@ -188,6 +188,7 @@ bool32 HasEnoughHpToEatBerry(enum BattlerId battler, enum Ability ability, u32 h
 bool32 IsPartnerMonFromSameTrainer(enum BattlerId battler);
 enum DamageCategory GetCategoryBasedOnStats(enum BattlerId battler);
 enum Stat GetHigherAttackingStat(enum BattlerId battler);
+u32 CountPositiveStatStagesTotal(enum BattlerId battler);
 void SetShellSideArmCategory(void);
 bool32 MoveIsAffectedBySheerForce(enum Move move);
 bool32 IsSheerForceAffected(enum Move move, enum Ability ability);

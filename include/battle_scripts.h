@@ -764,5 +764,6 @@ extern const u8 BattleScript_EffectFroggyForcefield[];
 extern const u8 BattleScript_EffectFiendishChain[];
 extern const u8 BattleScript_EffectSkullDice[];
 extern const u8 BattleScript_FluteOfDEmpowers[];
+extern const u8 BattleScript_EffectEmergencyProvisions[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

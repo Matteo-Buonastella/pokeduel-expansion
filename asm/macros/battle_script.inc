@@ -1866,6 +1866,12 @@
 	.4byte \jackpotInstr
 	.endm
 
+	.macro tryemergencyprovisions failInstr:req, fullHpInstr:req
+	callnative BS_TryEmergencyProvisions
+	.4byte \failInstr
+	.4byte \fullHpInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

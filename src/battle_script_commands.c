@@ -12658,3 +12658,29 @@ void BS_RollSkullDice(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
+
+// Emergency Provisions heals 25% of max HP per positive stat stage, then resets the user's stat stages.
+// Fails without any boosts, and does nothing at full HP (the stats are only reset if the user healed)
+void BS_TryEmergencyProvisions(void)
+{
+    NATIVE_ARGS(const u8 *failInstr, const u8 *fullHpInstr);
+    u32 boosts = CountPositiveStatStagesTotal(gBattlerAttacker);
+
+    gBattlerTarget = gBattlerAttacker;
+    if (boosts == 0)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+    if (IsBattlerAtMaxHp(gBattlerAttacker))
+    {
+        gBattlescriptCurrInstr = cmd->fullHpInstr;
+        return;
+    }
+
+    u32 maxHP = GetNonDynamaxMaxHP(gBattlerAttacker);
+    SetHealAmount(gBattlerAttacker, min(maxHP, maxHP * boosts / 4));
+    TryResetBattlerStatChanges(gBattlerAttacker);
+    gEffectBattler = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}

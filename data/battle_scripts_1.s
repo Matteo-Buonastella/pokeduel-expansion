@@ -6648,3 +6648,16 @@ BattleScript_FluteOfDEmpowers::
 	waitmessage B_WAIT_TIME_LONG
 	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
 	return
+
+BattleScript_EffectEmergencyProvisions::
+	attackcanceler
+	tryemergencyprovisions BattleScript_ButItFailed, BattleScript_AlreadyAtFullHp
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
+	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_RESETSTARGETSSTATLEVELS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

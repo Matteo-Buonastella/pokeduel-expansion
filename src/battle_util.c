@@ -9507,6 +9507,18 @@ enum DamageCategory GetCategoryBasedOnStats(enum BattlerId battler)
         return DAMAGE_CATEGORY_PHYSICAL;
 }
 
+// Total number of positive stat stages, including accuracy and evasion
+u32 CountPositiveStatStagesTotal(enum BattlerId battler)
+{
+    u32 count = 0;
+    for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+    {
+        if (gBattleMons[battler].statStages[stat] > DEFAULT_STAT_STAGE)
+            count += gBattleMons[battler].statStages[stat] - DEFAULT_STAT_STAGE;
+    }
+    return count;
+}
+
 // Attack or Sp. Atk, whichever is higher after stat stages (ties go to Sp. Atk, like Photon Geyser)
 enum Stat GetHigherAttackingStat(enum BattlerId battler)
 {

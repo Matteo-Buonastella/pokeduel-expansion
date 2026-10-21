@@ -24533,6 +24533,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .soundMove = TRUE,
         .battleAnimScript = gBattleAnimMove_Withdraw,
     },
+
+     [MOVE_EMERGENCY_PROVISIONS] =
+    {
+        .name = COMPOUND_STRING("Emergency Provisions"),
+        .description = COMPOUND_STRING(
+            "Restore HP equal\n"
+            "to 25% x num of stat\n"
+            "increases. Attacker's\n"
+            "stat changes are\n"
+            "then reset."),
+        .pp = 5,
+        .effect = EFFECT_EMERGENCY_PROVISIONS,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .healingMove = TRUE,
+        .snatchAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_Recover,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

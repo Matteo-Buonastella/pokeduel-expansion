@@ -2438,6 +2438,28 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE))
             ADJUST_SCORE(-10);
         //fallthrough
+    case EFFECT_EMERGENCY_PROVISIONS:
+    {
+        if (AI_BattlerAtMaxHp(battlerAtk) || CountPositiveStatStagesTotal(battlerAtk) == 0)
+        {
+            ADJUST_SCORE(-10); // Fails or does nothing
+            break;
+        }
+
+        // Boosts to the stats the user actually relies on
+        u32 importantBoosts = 0;
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL) && gBattleMons[battlerAtk].statStages[STAT_ATK] > DEFAULT_STAT_STAGE)
+            importantBoosts += gBattleMons[battlerAtk].statStages[STAT_ATK] - DEFAULT_STAT_STAGE;
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL) && gBattleMons[battlerAtk].statStages[STAT_SPATK] > DEFAULT_STAT_STAGE)
+            importantBoosts += gBattleMons[battlerAtk].statStages[STAT_SPATK] - DEFAULT_STAT_STAGE;
+        if (gBattleMons[battlerAtk].statStages[STAT_SPEED] > DEFAULT_STAT_STAGE)
+            importantBoosts += gBattleMons[battlerAtk].statStages[STAT_SPEED] - DEFAULT_STAT_STAGE;
+
+        bool32 needsRecovery = aiData->hpPercents[battlerAtk] <= 40 || CanTargetFaintAi(battlerDef, battlerAtk);
+        if (importantBoosts >= 2 && !needsRecovery)
+            ADJUST_SCORE(-6); // Don't throw away a good setup unless the HP is needed
+        break;
+    }
     case EFFECT_RESTORE_HP:
     case EFFECT_SOFTBOILED:
     case EFFECT_ROOST:
@@ -4903,6 +4925,12 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_GOAT_HEAL:
         if (ShouldRecover(battlerAtk, battlerDef, move, gBattleMons[battlerAtk].volatiles.substitute ? 75 : 50))
             ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_EMERGENCY_PROVISIONS:
+        if (ShouldRecover(battlerAtk, battlerDef, move, min(100, 25 * CountPositiveStatStagesTotal(battlerAtk))))
+            ADJUST_SCORE(GOOD_EFFECT);
+        if (CountNegativeStatStages(battlerAtk) > 0)
+            ADJUST_SCORE(WEAK_EFFECT); // The reset also clears our stat drops
         break;
     case EFFECT_LIFE_DEW:
         if (ShouldRecover(battlerAtk, battlerDef, move, 25))
