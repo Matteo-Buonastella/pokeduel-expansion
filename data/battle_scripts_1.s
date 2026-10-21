@@ -6642,3 +6642,9 @@ BattleScript_SkullDiceJackpot:
 	printstring STRINGID_SKULLDICEJACKPOT
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_SkullDiceStatChange
+
+BattleScript_FluteOfDEmpowers::
+	printstring STRINGID_FLUTEOFDEMPOWERS
+	waitmessage B_WAIT_TIME_LONG
+	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
+	return

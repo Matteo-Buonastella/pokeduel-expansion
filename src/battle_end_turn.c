@@ -68,6 +68,8 @@ static bool32 HandleEndTurnVarious(enum BattlerId battler)
         if (gBattleMons[i].volatiles.moonBlockTimer > 0)
             gBattleMons[i].volatiles.moonBlockTimer--;
 
+        gBattleStruct->battlerState[i].storedFluteOfD = FALSE;
+
         if (gBattleMons[i].volatiles.lockOn > 0 && --gBattleMons[i].volatiles.lockOn == 0)
             gBattleMons[i].volatiles.battlerWithSureHit = 0;
 

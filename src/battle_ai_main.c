@@ -1341,6 +1341,25 @@ static bool32 IsFrogOnField(enum BattlerId battler)
     return IsBattlerAlive(battler) && gSpeciesInfo[gBattleMons[battler].species].isFrog;
 }
 
+static bool32 HasUsableDragonInParty(enum BattlerId battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        enum Species species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE
+         || species == SPECIES_EGG
+         || GetMonData(&party[i], MON_DATA_HP) == 0
+         || i == gBattlerPartyIndexes[battler]
+         || (HasPartner(battler) && i == gBattlerPartyIndexes[GetPartnerBattler(battler)]))
+            continue;
+        if (GetSpeciesType(species, 0) == TYPE_DRAGON || GetSpeciesType(species, 1) == TYPE_DRAGON)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static bool32 CanCardDestructionSwitchBattler(enum BattlerId battler)
 {
     return IsBattlerAlive(battler)
@@ -2231,6 +2250,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         break;
     case EFFECT_PARTING_SHOT:
         if (CountUsablePartyMons(battlerAtk) == 0)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_FLUTE_OF_D:
+        // Only does nothing if the Defense drop fails and there's no switch either
+        if (!CanLowerStat(battlerAtk, battlerDef, aiData, STAT_DEF)
+         && (GetConfig(B_PARTING_SHOT_SWITCH) >= GEN_7 || CountUsablePartyMons(battlerAtk) == 0))
             ADJUST_SCORE(-10);
         break;
     case EFFECT_BATON_PASS:
@@ -5032,7 +5057,14 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_HIT_ESCAPE:
     case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
+    case EFFECT_FLUTE_OF_D:
     case EFFECT_WEATHER_AND_SWITCH:
+        if (moveEffect == EFFECT_FLUTE_OF_D && CountUsablePartyMons(battlerAtk) == 0)
+        {
+            // No switch, so it's just a Defense drop
+            ADJUST_SCORE(IncreaseStatDownScore(battlerAtk, battlerDef, STAT_DEF));
+            break;
+        }
         switch (ShouldPivot(battlerAtk, battlerDef, move))
         {
         case DONT_PIVOT:
@@ -7008,6 +7040,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
     case EFFECT_HIT_ESCAPE:
     case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
+    case EFFECT_FLUTE_OF_D:
     case EFFECT_WEATHER_AND_SWITCH:
     case EFFECT_BOLT_BEAK:
     case EFFECT_LIGHT_SCREEN:

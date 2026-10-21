@@ -4870,6 +4870,10 @@ static enum MoveEndResult MoveEndHitEscape(struct BattleCalcValues *cv)
             BattleScriptCall(BattleScript_EffectHitEscape);
         }
         break;
+    case EFFECT_FLUTE_OF_D:
+        if (CanPartingShotTrigger(cv->battlerAtk) && CanBattlerSwitch(cv->battlerAtk))
+            gBattleStruct->battlerState[cv->battlerAtk].storedFluteOfD = TRUE;
+        // fallthrough
     case EFFECT_PARTING_SHOT:
         if (CanPartingShotTrigger(cv->battlerAtk))
         {
@@ -5087,7 +5091,7 @@ static inline bool32 TryEjectPack(enum BattlerId battlerAtk, enum BattlerId ejec
      || gBattleMons[ejectPackBattler].volatiles.semiInvulnerable == STATE_COMMANDER
      || gBattleStruct->battlerState[ejectPackBattler].commanderSpecies != SPECIES_NONE
      || !CanBattlerSwitch(ejectPackBattler)
-     || (GetMoveEffect(gCurrentMove) == EFFECT_PARTING_SHOT && CanBattlerSwitch(battlerAtk)))
+     || ((GetMoveEffect(gCurrentMove) == EFFECT_PARTING_SHOT || GetMoveEffect(gCurrentMove) == EFFECT_FLUTE_OF_D) && CanBattlerSwitch(battlerAtk)))
         return FALSE;
 
     gBattleScripting.battler = ejectPackBattler;
@@ -5732,6 +5736,7 @@ static enum MoveResult StatChangeBeforeChange(struct BattleCalcValues *cv)
         return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
         break;
     case EFFECT_PARTING_SHOT:
+    case EFFECT_FLUTE_OF_D:
         if ((GetConfig(B_PARTING_SHOT_SWITCH) < GEN_7 && CanBattlerSwitch(cv->battlerAtk))
          || WillAnyStatChange())
         {

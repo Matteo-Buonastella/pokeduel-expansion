@@ -2835,6 +2835,13 @@ static void SetBattlerStatStagesForSwitchin(enum BattlerId battler, enum Battler
         break;
     }
 
+    // Flute of D boosts a Dragon coming into this slot
+    if (gBattleStruct->battlerState[battler].storedFluteOfD && IS_BATTLER_OF_TYPE(battler, TYPE_DRAGON))
+    {
+        gBattleMons[battler].statStages[STAT_ATK] += 1;
+        gBattleMons[battler].statStages[STAT_SPATK] += 1;
+    }
+
     // Item stat changes
     switch(aiHoldEffect)
     {

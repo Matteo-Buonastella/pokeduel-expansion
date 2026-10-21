@@ -526,6 +526,7 @@ struct BattlerState
     u32 forcedSwitch:1;
     u32 storedHealingWish:1;
     u32 storedLunarDance:1;
+    u32 storedFluteOfD:1; // The next mon to switch into this slot gets +1 Atk/Sp. Atk if it's a Dragon
     u32 usedEjectItem:1;
     u32 sleepClauseEffectExempt:1; // Stores whether effect should be exempt from triggering Sleep Clause (Effect Spore)
     u32 usedMicleBerry:1;

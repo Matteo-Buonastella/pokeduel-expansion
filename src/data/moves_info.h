@@ -24479,6 +24479,60 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .battleAnimScript = gBattleAnimMove_Withdraw,
     },
+
+    [MOVE_EMERALD_FLAME] =
+    {
+        .name = COMPOUND_STRING("Emerald Flame"),
+        .description = COMPOUND_STRING(
+            "Attack the foe with\n"
+            "a combustible\n"
+            "emerald that may\n"
+            "burn the foe. This\n"
+            "move is both Rock\n"
+            "and Fire type."),
+        .effect = EFFECT_TWO_TYPED_MOVE,
+        .power = 85,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .type = TYPE_FIRE },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_FlyingPress,
+    },
+
+    [MOVE_FLUTE_OF_D] =
+    {
+        .name = COMPOUND_STRING("Flute of D"),
+        .description = COMPOUND_STRING(
+            "Lowers the targets\n"
+            "Defense, then switches\n"
+            "out. If the switched\n"
+            "in card is a Dragon,\n"
+            "its Atk & Sp.Atk is\n"
+            "increased."),
+        .effect = EFFECT_FLUTE_OF_D,
+        .power = 0,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_MINUS,
+            .defense = 1,
+        }),
+        //Move Categories
+        .magicCoatAffected = TRUE,
+        .soundMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_Withdraw,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

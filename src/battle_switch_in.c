@@ -277,6 +277,21 @@ static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
             effect = TRUE;
         gBattleStruct->eventState.battlerSwitchIn++;
         break;
+    case FIRST_EVENT_BLOCK_FLUTE_OF_D:
+        if (gBattleStruct->battlerState[battler].switchIn && gBattleStruct->battlerState[battler].storedFluteOfD)
+        {
+            gBattleStruct->battlerState[battler].storedFluteOfD = FALSE;
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_DRAGON))
+            {
+                gEffectBattler = battler;
+                SetStatChange(battler, STAT_ATK, 1);
+                SetStatChange(battler, STAT_SPATK, 1);
+                BattleScriptCall(BattleScript_FluteOfDEmpowers);
+                effect = TRUE;
+            }
+        }
+        gBattleStruct->eventState.battlerSwitchIn++;
+        break;
     case FIRST_EVENT_BLOCK_GENERAL_ABILITIES:
         if (TryPrimalReversion(battler)
          || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, calcValues->abilities[battler], MOVE_NONE, gBattleStruct->battlerState[battler].switchIn)
