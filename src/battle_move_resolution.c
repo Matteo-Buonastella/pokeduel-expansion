@@ -4186,6 +4186,7 @@ static enum MoveEndResult MoveEndMoveBlockRecoil(struct BattleCalcValues *cv)
             break;
         // fallthrough
     case EFFECT_CHLOROBLAST:
+    case EFFECT_POWER_BOND:
         if (IsBattlerTurnDamaged(cv->battlerDef, INCLUDING_SUBSTITUTES) && IsBattlerAlive(cv->battlerAtk))
         {
             if (IsAbilityAndRecord(cv->battlerAtk, cv->abilities[cv->battlerAtk], ABILITY_ROCK_HEAD)
@@ -4196,6 +4197,10 @@ static enum MoveEndResult MoveEndMoveBlockRecoil(struct BattleCalcValues *cv)
             {
                 s32 recoil = (GetNonDynamaxMaxHP(cv->battlerAtk) + 1) / 2; // Half of Max HP Rounded UP
                 SetPassiveDamageAmount(cv->battlerAtk, recoil);
+            }
+            else if (cv->moveEffect == EFFECT_POWER_BOND)
+            {
+                SetPassiveDamageAmount(cv->battlerAtk, gBattleMons[cv->battlerAtk].attack); // The Attack stat itself, ignoring stat stages
             }
             else
             {

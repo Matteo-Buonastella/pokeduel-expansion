@@ -307,6 +307,7 @@ enum  BattleMoveEffects
     EFFECT_SKULL_DICE, // Lowers a random stat of the target by 1-6 stages. 1% chance to lower all stats by 6 instead
     EFFECT_FLUTE_OF_D, // Parting Shot, but a Dragon type switching in gets +1 Atk and +1 Sp. Atk
     EFFECT_EMERGENCY_PROVISIONS, // Heals 25% per positive stat stage, then resets all of the user's stat stages
+    EFFECT_POWER_BOND, // +2 Atk before hitting (pre-attack additional effect), then recoil equal to the user's Attack stat
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

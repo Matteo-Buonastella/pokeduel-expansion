@@ -24534,7 +24534,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Withdraw,
     },
 
-     [MOVE_EMERGENCY_PROVISIONS] =
+    [MOVE_EMERGENCY_PROVISIONS] =
     {
         .name = COMPOUND_STRING("Emergency Provisions"),
         .description = COMPOUND_STRING(
@@ -24557,6 +24557,35 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .healingMove = TRUE,
         .snatchAffected = TRUE,
         .battleAnimScript = gBattleAnimMove_Recover,
+    },
+
+    [MOVE_POWER_BOND] =
+    {
+        .name = COMPOUND_STRING("Power Bond"),
+        .description = COMPOUND_STRING(
+            "Sharply raise the\n"
+            "user's Atk, then\n"
+            "attack the foe. After\n"
+            "attacking, user takes\n"
+            "damage equal to its\n"
+            "original Atk stat."),
+        .effect = EFFECT_POWER_BOND,
+        .power = 120,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_PLUS,
+            .self = TRUE,
+            .attack = 2,
+            .preAttackEffect = TRUE,
+        }),
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_SwordsDance,
     },
     
     // Z-Moves

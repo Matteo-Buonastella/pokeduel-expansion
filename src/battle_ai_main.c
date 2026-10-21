@@ -2438,6 +2438,13 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!CanBeSlept(battlerAtk, battlerAtk, aiData->abilities[battlerAtk], NOT_BLOCKED_BY_SLEEP_CLAUSE))
             ADJUST_SCORE(-10);
         //fallthrough
+    case EFFECT_POWER_BOND:
+        // The recoil would knock the user out without taking the target down with it
+        if (AI_IsDamagedByRecoil(battlerAtk)
+         && gBattleMons[battlerAtk].attack >= gBattleMons[battlerAtk].hp
+         && !CanIndexMoveFaintTarget(battlerAtk, battlerDef, gAiThinkingStruct->movesetIndex, AI_ATTACKING))
+            ADJUST_SCORE(-8);
+        break;
     case EFFECT_EMERGENCY_PROVISIONS:
     {
         if (AI_BattlerAtMaxHp(battlerAtk) || CountPositiveStatStagesTotal(battlerAtk) == 0)
@@ -6630,6 +6637,7 @@ static s32 AI_Risky(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum M
         break;
     case EFFECT_MAX_HP_50_RECOIL:
     case EFFECT_CHLOROBLAST:
+    case EFFECT_POWER_BOND:
     case EFFECT_SWAGGER:
     case EFFECT_ATTRACT:
     case EFFECT_OHKO:

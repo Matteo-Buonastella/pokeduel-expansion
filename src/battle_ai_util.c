@@ -942,6 +942,13 @@ struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId
     ctx.typeEffectivenessModifier = aiCalc->typeEffectiveness = CalcTypeEffectivenessMultiplier(&ctx);
 
     u32 movePower = GetMovePower(move);
+    s8 savedAtkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
+    
+    if (moveEffect == EFFECT_POWER_BOND)
+    {
+        s32 boostedStage = savedAtkStage + AI_GetAdjustedStatStage(battlerAtk, move, 2);
+        gBattleMons[battlerAtk].statStages[STAT_ATK] = max(MIN_STAT_STAGE, min(MAX_STAT_STAGE, boostedStage));
+    }
 
     if (movePower && !IsDamageMoveUnusable(&ctx))
     {
@@ -1006,6 +1013,7 @@ struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId
     }
 
     // Undo temporary settings
+    gBattleMons[battlerAtk].statStages[STAT_ATK] = savedAtkStage;
     if (toggledGimmickAtk)
         SetActiveGimmick(battlerAtk, GIMMICK_NONE);
     if (toggledGimmickDef)
@@ -1203,6 +1211,7 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
         return TRUE;
     case EFFECT_RECOIL:
     case EFFECT_RECOIL_IF_MISS:
+    case EFFECT_POWER_BOND:
         if (AI_IsDamagedByRecoil(battlerAtk))
             return TRUE;
         break;
@@ -3189,6 +3198,7 @@ bool32 IsRecoilDamageEffect(enum BattleMoveEffects effect)
     case EFFECT_RECOIL:
     case EFFECT_MAX_HP_50_RECOIL:
     case EFFECT_CHLOROBLAST:
+    case EFFECT_POWER_BOND:
         return TRUE;
     default:
         return FALSE;
