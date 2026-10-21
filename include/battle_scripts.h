@@ -767,5 +767,6 @@ extern const u8 BattleScript_FluteOfDEmpowers[];
 extern const u8 BattleScript_EffectEmergencyProvisions[];
 extern const u8 BattleScript_EffectWarriorReturnAlive[];
 extern const u8 BattleScript_WindstormSuccessSwitch[];
+extern const u8 BattleScript_EffectBurningLand[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

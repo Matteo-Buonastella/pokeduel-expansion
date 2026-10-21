@@ -24640,6 +24640,30 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .assistBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_Whirlwind,
     },
+
+    [MOVE_BURNING_LAND] =
+    {
+        .name = COMPOUND_STRING("Burning Land"),
+        .description = COMPOUND_STRING(
+            "Burns both the target\n"
+            "and the user. Any\n"
+            "weather/terrain is\n"
+            "also destroyed. Fails\n"
+            "if foe can't be\n"
+            "burned."),
+        .effect = EFFECT_BURNING_LAND,
+        .power = 0,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .nonVolatileStatus = MOVE_EFFECT_BURN },
+        .zMove = { .effect = Z_EFFECT_ATK_UP_1 },
+        .magicCoatAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_WillOWisp,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

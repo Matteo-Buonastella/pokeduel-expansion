@@ -4939,6 +4939,40 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         if (ShouldRecover(battlerAtk, battlerDef, move, gBattleMons[battlerAtk].volatiles.substitute ? 75 : 50))
             ADJUST_SCORE(GOOD_EFFECT);
         break;
+    case EFFECT_BURNING_LAND:
+    {
+        // Clearing the weather and terrain
+        u32 currWeather = AI_GetWeather();
+        enum BattleTerrain currTerrain = gFieldTimers.terrain;
+
+        if (currWeather & B_WEATHER_ANY)
+        {
+            if (ShouldClearWeather(battlerAtk, currWeather) || ShouldSetWeather(battlerDef, currWeather))
+                ADJUST_SCORE(GOOD_EFFECT);
+            else if (ShouldSetWeather(battlerAtk, currWeather))
+                ADJUST_SCORE(-3); // Our own weather
+        }
+        if (currTerrain != B_TERRAIN_NONE)
+        {
+            if (ShouldClearTerrain(battlerAtk, currTerrain) || ShouldSetTerrain(battlerDef, currTerrain))
+                ADJUST_SCORE(GOOD_EFFECT);
+            else if (ShouldSetTerrain(battlerAtk, currTerrain))
+                ADJUST_SCORE(-3); // Our own terrain
+        }
+
+        // Burning ourselves
+        bool32 curedByBerry = (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_CURE_BRN || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_CURE_STATUS)
+                           && !IsUnnerveBlocked(battlerAtk, aiData->items[battlerAtk]);
+        // A Rawst/Lum Berry cures the self-burn right away, so there's no downside (or upside) to it
+        if (CanBeBurned(battlerAtk, battlerAtk, aiData->abilities[battlerAtk]) && !curedByBerry)
+        {
+            if (ShouldSelfInflictBurnForBenefit(battlerAtk, aiData->abilities[battlerAtk]))
+                ADJUST_SCORE(DECENT_EFFECT); // Guts, Flare Boost, Marvel Scale, Quick Feet, Facade...
+            else if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
+                ADJUST_SCORE(-2); // Burning ourselves halves our physical damage
+        }
+        break;
+    }
     case EFFECT_WARRIOR_RETURN_ALIVE:
         if (ShouldRecover(battlerAtk, battlerDef, move, 50))
             ADJUST_SCORE(GOOD_EFFECT);

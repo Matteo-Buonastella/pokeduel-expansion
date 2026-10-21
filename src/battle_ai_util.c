@@ -2701,7 +2701,7 @@ bool32 ShouldBeatUpForRageFist(enum BattlerId battlerAtk, enum BattlerId battler
          && CanMoveIndexHitAnyOpponent(battlerAtkPartner, rageFistMoveIndex, aiData));
 }
 
-static bool32 ShouldSelfInflictBurnForBenefit(enum BattlerId battler, enum Ability ability)
+bool32 ShouldSelfInflictBurnForBenefit(enum BattlerId battler, enum Ability ability)
 {
     if (!CanBeBurned(battler, battler, ability))
         return FALSE;

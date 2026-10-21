@@ -6692,3 +6692,24 @@ BattleScript_WindstormSuccessSwitch::
 	queuestatchange BS_TARGET, STAT_DEF, -1
 	trystatchanges BS_ATTACKER, STAT_CHANGE_IGNORE_SELF
 	goto BattleScript_MoveEnd
+
+@ Will-O-Wisp on the target (fails if it can't be burned), then burns the user too and clears the weather and terrain
+BattleScript_EffectBurningLand::
+	attackcanceler
+	trynonvolatilestatus
+	attackanimation
+	waitanimation
+	setnonvolatilestatus TRIGGER_ON_MOVE
+	clearmoveresultflags MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_MOSTLY_INEFFECTIVE | MOVE_RESULT_EXTREMELY_EFFECTIVE
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectprimary BS_ATTACKER, BS_ATTACKER, MOVE_EFFECT_BURN
+	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, B_WEATHER_ANY, BattleScript_BurningLandTerrain
+	removeweather
+	printfromtable gWeatherEndsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_ActivateWeatherAbilities
+BattleScript_BurningLandTerrain:
+	jumpifterrain CMP_EQUAL, B_TERRAIN_NONE, BattleScript_MoveEnd
+	call BattleScript_RemoveTerrain
+	goto BattleScript_MoveEnd

@@ -310,6 +310,7 @@ enum  BattleMoveEffects
     EFFECT_POWER_BOND, // +2 Atk before hitting (pre-attack additional effect), then recoil equal to the user's Attack stat
     EFFECT_WARRIOR_RETURN_ALIVE, // Only works at <= 1/3 max HP. Heals 50% and raises Atk by 1 stage
     EFFECT_WINDSTORM, // Whirlwind, but the monster that gets dragged out has its Defense lowered by 1
+    EFFECT_BURNING_LAND, // Burns the target (fails if it can't be), then the user, then removes any weather and terrain
     NUM_BATTLE_MOVE_EFFECTS,
 };
 
