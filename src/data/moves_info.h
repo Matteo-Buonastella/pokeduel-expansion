@@ -24457,6 +24457,28 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .slicingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_AncientPower,
     },
+
+    [MOVE_SKULL_DICE] =
+    {
+        .name = COMPOUND_STRING("Skull Dice"),
+        .description = COMPOUND_STRING(
+            "Lower a random stat\n"
+            "from the target by\n"
+            "1 to 6 stages. If\n"
+            "you're super lucky,\n"
+            "something special\n"
+            "might happen."),
+        .effect = EFFECT_SKULL_DICE,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        //Move Categories
+        .battleAnimScript = gBattleAnimMove_Withdraw,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

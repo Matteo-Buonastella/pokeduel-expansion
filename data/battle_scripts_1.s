@@ -6629,3 +6629,16 @@ BattleScript_FiendishChainTrapGen5:
 	printstring STRINGID_TARGETCANTESCAPENOW
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectSkullDice::
+	attackcanceler
+	attackanimation
+	waitanimation
+	rollskulldice BattleScript_SkullDiceJackpot
+BattleScript_SkullDiceStatChange:
+	trystatchanges BS_ATTACKER, STAT_CHANGE_IGNORE_SELF
+	goto BattleScript_MoveEnd
+BattleScript_SkullDiceJackpot:
+	printstring STRINGID_SKULLDICEJACKPOT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_SkullDiceStatChange

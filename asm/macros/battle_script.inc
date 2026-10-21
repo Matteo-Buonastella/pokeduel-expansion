@@ -1861,6 +1861,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro rollskulldice jackpotInstr:req
+	callnative BS_RollSkullDice
+	.4byte \jackpotInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

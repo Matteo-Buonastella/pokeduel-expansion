@@ -12639,3 +12639,22 @@ void BS_JumpIfFiendishChainFails(void)
     else
         gBattlescriptCurrInstr = cmd->failInstr;
 }
+
+// Skull Dice: 1% chance to lower all of the target's stats by 6, otherwise lowers one random stat by 1-6
+void BS_RollSkullDice(void)
+{
+    NATIVE_ARGS(const u8 *jackpotInstr);
+
+    if (RandomPercentage(RNG_SKULL_DICE_JACKPOT, 1))
+    {
+        for (enum Stat stat = STAT_ATK; stat <= STAT_SPDEF; stat++)
+            SetStatChange(gBattlerTarget, stat, -6);
+        gBattlescriptCurrInstr = cmd->jackpotInstr;
+    }
+    else
+    {
+        enum Stat stat = RandomUniform(RNG_SKULL_DICE_STAT, STAT_ATK, STAT_SPDEF);
+        SetStatChange(gBattlerTarget, stat, -1 * (s32)RandomUniform(RNG_SKULL_DICE_STAGES, 1, 6));
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}

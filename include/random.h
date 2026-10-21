@@ -260,6 +260,9 @@ enum RandomTag
     RNG_RANDOM_BALL,
     RNG_CARD_DESTRUCTION,
     RNG_STAT_PLUS_OR_MINUS,
+    RNG_SKULL_DICE_JACKPOT,
+    RNG_SKULL_DICE_STAT,
+    RNG_SKULL_DICE_STAGES,
 };
 
 #define RandomWeighted(tag, ...) \

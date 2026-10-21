@@ -3180,6 +3180,19 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     }
+    case EFFECT_SKULL_DICE:
+    {
+        // Covers stats already at -6, Clear Body, Clear Amulet, Mist, Contrary, etc.
+        bool32 canDrop = FALSE;
+        for (enum Stat stat = STAT_ATK; stat <= STAT_SPDEF; stat++)
+        {
+            if (CanLowerStat(battlerAtk, battlerDef, aiData, stat))
+                canDrop = TRUE;
+        }
+        if (!canDrop)
+            ADJUST_SCORE(-10);
+        break;
+    }
     case EFFECT_BOOK_OF_MOON:
         if (!(gBattleMons[battlerAtk].status1 & STATUS1_ANY)
          && !AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
