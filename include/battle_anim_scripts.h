@@ -1100,6 +1100,7 @@ extern const u8 gBattleAnimMove_MeltedIce[];
 extern const u8 gBattleAnimMove_FakeHero[];
 extern const u8 gBattleAnimMove_ManaBreak[];
 extern const u8 gBattleAnimMove_CemetaryOfFire[];
+extern const u8 gBattleAnimMove_RockCrushSword[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

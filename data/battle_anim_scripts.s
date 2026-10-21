@@ -37294,3 +37294,23 @@ CemetaryOfFireAttack:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
+
+@ Ported from the CFRU version: Cut, then Rock Smash's rock fragments
+gBattleAnimMove_RockCrushSword::
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_CUT, SOUND_PAN_TARGET
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 10, 1
+	delay 13
+	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
+	createsprite gRockFragmentSpriteTemplate, ANIM_TARGET, 2, 0, 0, 20, 24, 14, 2
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createsprite gRockFragmentSpriteTemplate, ANIM_TARGET, 2, 5, 0, -20, 24, 14, 1
+	createsprite gRockFragmentSpriteTemplate, ANIM_TARGET, 2, 0, 5, 20, -24, 14, 2
+	createsprite gRockFragmentSpriteTemplate, ANIM_TARGET, 2, -5, 0, -20, -24, 14, 2
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end

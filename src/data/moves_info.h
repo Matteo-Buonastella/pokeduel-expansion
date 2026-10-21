@@ -22142,7 +22142,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_CemetaryOfFire,
+        .battleAnimScript = gBattleAnimMove_RockCrushSword,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -24226,7 +24226,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         //Move Categories
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_HeavyStorm,
+        .battleAnimScript = gBattleAnimMove_RockCrushSword,
     },
 
     [MOVE_DES_CROAKING] =
