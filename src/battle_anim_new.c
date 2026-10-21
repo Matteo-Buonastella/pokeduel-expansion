@@ -1429,6 +1429,16 @@ const struct SpriteTemplate gManaBreakOrbRaiseTemplate =
     .callback = AnimRaiseSprite,
 };
 
+// Des Croaking: music notes rising from the user, like Ancient Power's rocks
+const struct SpriteTemplate gDesCroakingMusicNoteRaiseTemplate =
+{
+    .tileTag = ANIM_TAG_MUSIC_NOTES,
+    .paletteTag = ANIM_TAG_MUSIC_NOTES,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gMusicNotesAnimTable,
+    .callback = AnimRaiseSprite,
+};
+
 const struct SpriteTemplate gGeomancyRedCellRaiseTemplate =
 {
     .tileTag = ANIM_TAG_ZYGARDE_HEXES,

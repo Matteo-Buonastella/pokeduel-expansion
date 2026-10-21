@@ -922,10 +922,8 @@ void AnimThunderWave(struct Sprite *sprite)
 
     sprite->x += gBattleAnimArgs[0];
     sprite->y += gBattleAnimArgs[1];
-    if (gAnimMoveIndex != MOVE_ANCHOR_SHOT)
-        spriteId = CreateSprite(&gThunderWaveSpriteTemplate, sprite->x + 32, sprite->y, sprite->subpriority);
-    else
-        spriteId = CreateSprite(&gAnchorShotChainTemplate, sprite->x + 32, sprite->y, sprite->subpriority);
+    // The right half uses the same template, so any move using Thunder Wave or Anchor Shot's sprite works
+    spriteId = CreateSprite(sprite->template, sprite->x + 32, sprite->y, sprite->subpriority);
 
     gSprites[spriteId].oam.tileNum += 8;
     gAnimVisualTaskCount++;

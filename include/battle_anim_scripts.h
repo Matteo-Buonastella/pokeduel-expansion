@@ -1101,6 +1101,9 @@ extern const u8 gBattleAnimMove_FakeHero[];
 extern const u8 gBattleAnimMove_ManaBreak[];
 extern const u8 gBattleAnimMove_CemetaryOfFire[];
 extern const u8 gBattleAnimMove_RockCrushSword[];
+extern const u8 gBattleAnimMove_DesCroaking[];
+extern const u8 gBattleAnimMove_HungryBite[];
+extern const u8 gBattleAnimMove_FiendishChain[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

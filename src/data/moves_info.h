@@ -22142,7 +22142,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_RockCrushSword,
+        .battleAnimScript = gBattleAnimMove_FiendishChain,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -24251,7 +24251,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .soundMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_AquaRing,
+        .battleAnimScript = gBattleAnimMove_DesCroaking,
     },
 
     [MOVE_FROGGY_FORCEFIELD] =
@@ -24302,7 +24302,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .argument.absorbPercentage = 50,
         }),
         .bitingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_VenomVapor,
+        .battleAnimScript = gBattleAnimMove_HungryBite,
     },
 
     [MOVE_FIENDISH_CHAIN] =
@@ -24326,7 +24326,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .magicCoatAffected = TRUE,
-        .battleAnimScript = gBattleAnimMove_AquaRing,
+        .battleAnimScript = gBattleAnimMove_FiendishChain,
     },
 
     [MOVE_HONEST_CRYING] =

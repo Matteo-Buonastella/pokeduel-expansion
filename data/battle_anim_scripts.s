@@ -37314,3 +37314,67 @@ gBattleAnimMove_RockCrushSword::
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
+
+@ Ported from the CFRU version: the user sways while music notes rise from it, then lets out a growl
+gBattleAnimMove_DesCroaking::
+	createvisualtask AnimTask_SwayMon, 3, 0, 6, 1280, 5, ANIM_ATTACKER
+	panse SE_M_GRASSWHISTLE, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	delay 3
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 20, 20, -48, 64, 0
+	delay 4
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 0, 20, -38, 56, 1
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 32, 20, -28, 55, 2
+	delay 5
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, -20, 20, -48, 65, 3
+	delay 25
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 6, 5, -48, 64, 0
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, -14, 5, -42, 64, 1
+	delay 21
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 4, 7, -42, 57, 3
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 23, 7, -48, 56, 0
+	delay 16
+	createsprite gDesCroakingMusicNoteRaiseTemplate, ANIM_ATTACKER, 2, 20, 20, -48, 55, 0
+	waitforvisualfinish
+	delay 19
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, ANIM_ATTACKER, 1
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_GROWL
+	waitforvisualfinish
+	end
+
+@ Ported from the CFRU version: Crunch without the dark background, then heals the user
+gBattleAnimMove_HungryBite::
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	call CreateCrunch1
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=-8, y=0, relative_to=ANIM_TARGET, animation=1
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 7, 5, 2
+	waitforvisualfinish
+	call CreateCrunch2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=8, y=0, relative_to=ANIM_TARGET, animation=1
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 8, 4, 2
+	waitforvisualfinish
+	call HealingEffect
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+
+@ Ported from the CFRU version: Anchor Shot's chains on a darkened background
+gBattleAnimMove_FiendishChain::
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	loopsewithpan SE_SHINY, SOUND_PAN_ATTACKER, 28, 2
+	createsprite gAnchorShotChainTemplate, ANIM_TARGET, 2, -16, -16
+	delay 4
+	createsprite gAnchorShotChainTemplate, ANIM_TARGET, 2, -16, 0
+	delay 4
+	createsprite gAnchorShotChainTemplate, ANIM_TARGET, 2, -16, 16
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 16, 0, RGB_BLACK
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
