@@ -5609,7 +5609,10 @@ static void Cmd_forcerandomswitch(void)
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
                 gBattleMons[battler].volatiles.tryEjectPack = FALSE; // Disable Eject Pack activations
             gBattleStruct->battlerPartyIndexes[gBattlerTarget] = gBattlerPartyIndexes[gBattlerTarget];
-            gBattlescriptCurrInstr = BattleScript_RoarSuccessSwitch;
+            if (GetMoveEffect(gCurrentMove) == EFFECT_WINDSTORM && gBattleScripting.switchCase == B_SWITCH_NORMAL)
+                gBattlescriptCurrInstr = BattleScript_WindstormSuccessSwitch;
+            else
+                gBattlescriptCurrInstr = BattleScript_RoarSuccessSwitch;
             gProtectStructs[gBattlerTarget].forcedSwitch = TRUE;
             gBattleStruct->monToSwitchIntoId[gBattlerTarget] = validMons[RandomUniform(RNG_FORCE_RANDOM_SWITCH, 0, validMonsCount - 1)];
             if (!IsMultiBattle())

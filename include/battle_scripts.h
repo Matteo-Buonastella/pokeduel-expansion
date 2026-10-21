@@ -766,5 +766,6 @@ extern const u8 BattleScript_EffectSkullDice[];
 extern const u8 BattleScript_FluteOfDEmpowers[];
 extern const u8 BattleScript_EffectEmergencyProvisions[];
 extern const u8 BattleScript_EffectWarriorReturnAlive[];
+extern const u8 BattleScript_WindstormSuccessSwitch[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

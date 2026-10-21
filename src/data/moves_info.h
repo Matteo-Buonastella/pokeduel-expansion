@@ -24588,7 +24588,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_SwordsDance,
     },
 
-    [MOVE_WARRIOR_RETURNING_ALIVE] =
+    [MOVE_WARRIOR_RETURN_ALIVE] =
     {
         .name = COMPOUND_STRING("Warrior Return Alive"),
         .description = COMPOUND_STRING(
@@ -24612,6 +24612,33 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .healingMove = TRUE,
         .snatchAffected = TRUE,
         .battleAnimScript = gBattleAnimMove_Recover,
+    },
+
+    [MOVE_WINDSTORM] =
+    {
+        .name = COMPOUND_STRING("Windstorm"),
+        .description = COMPOUND_STRING(
+            "The foe is made to\n"
+            "switch out with an\n"
+            "ally. The switched\n"
+            "in monster has its\n"
+            "defense lowered."),
+        .effect = EFFECT_WINDSTORM,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .priority = -6,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
+        .windMove = TRUE,
+        .ignoresProtect = TRUE,
+        .ignoresSubstitute = TRUE,
+        .magicCoatAffected = TRUE,
+        .copycatBanned = TRUE,
+        .assistBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Whirlwind,
     },
     
     // Z-Moves

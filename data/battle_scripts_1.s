@@ -6674,3 +6674,21 @@ BattleScript_EffectWarriorReturnAlive::
 	queuestatchange BS_ATTACKER, STAT_ATK, 1
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
+
+@ Same as BattleScript_RoarSuccessSwitch, then lowers the dragged out monster's Defense
+BattleScript_WindstormSuccessSwitch::
+	call BattleScript_RoarSuccessRet
+	getswitchedmondata BS_TARGET
+	switchindataupdate BS_TARGET
+	trytoclearprimalweather
+	flushtextbox
+	switchinanim BS_TARGET, FALSE, FALSE
+	waitstate
+	printstring STRINGID_PKMNWASDRAGGEDOUT
+	switchineffects BS_TARGET
+	switchinevents
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	jumpifhasnohp BS_TARGET, BattleScript_MoveEnd
+	queuestatchange BS_TARGET, STAT_DEF, -1
+	trystatchanges BS_ATTACKER, STAT_CHANGE_IGNORE_SELF
+	goto BattleScript_MoveEnd

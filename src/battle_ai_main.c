@@ -1998,6 +1998,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-6); // Just KO the target instead
         break;
     case EFFECT_ROAR:
+    case EFFECT_WINDSTORM:
         if (CountUsablePartyMons(battlerDef) == 0)
             ADJUST_SCORE(-10);
         else if (aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS)
@@ -4874,6 +4875,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         score += AI_TryToClearStats(battlerAtk, battlerDef, moveTargetsBothOpponents);
         break;
     case EFFECT_ROAR:
+    case EFFECT_WINDSTORM:
         if ((IsSoundMove(move) && aiData->abilities[battlerDef] == ABILITY_SOUNDPROOF)
           || aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS)
             break;
@@ -7113,6 +7115,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_ROAR:
+    case EFFECT_WINDSTORM:
         if (opposingHazardFlags)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
