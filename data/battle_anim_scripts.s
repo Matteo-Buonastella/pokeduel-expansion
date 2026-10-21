@@ -37132,3 +37132,165 @@ gBattleAnimMove_HeavyStorm::
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
+
+@ Ported from the CFRU version: an Ice Ball chunk that shatters on the target and melts into water droplets
+gBattleAnimMove_MeltedIce::
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_ATTACKER
+	createsprite gIceBallChunkSpriteTemplate, ANIM_TARGET, 2, 15, 0, -12, -16, 30, -40
+	delay 28
+	playsewithpan SE_M_BRICK_BREAK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 6, 0, 10, 1
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 0, -15, 0, 15, 55
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, 15, -20, 0, 15, 50
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	delay 10
+	createsprite gWaterGunDropletSpriteTemplate, ANIM_ATTACKER, 2, -15, -10, 0, 10, 45
+	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+
+@ Ported from the CFRU version: Amnesia's question mark, then U-turn
+gBattleAnimMove_FakeHero::
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gQuestionMarkSpriteTemplate, ANIM_ATTACKER, 20
+	playsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	invisible ANIM_ATTACKER
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER
+	createsprite gUTurnBallSpriteTemplate, ANIM_TARGET, 2, 0, 0, 21
+	waitforvisualfinish
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=0, y=0, relative_to=ANIM_TARGET, animation=2
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createsprite gUTurnBallBackSpriteTemplate, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	waitforvisualfinish
+	visible ANIM_ATTACKER
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+
+@ Ported from the CFRU version: red orbs rise from the user, then four purple hits on the target
+gBattleAnimMove_ManaBreak::
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	createsprite gManaBreakOrbRaiseTemplate, ANIM_ATTACKER, 2, 20, 32, -48, 50, 0
+	createsprite gManaBreakOrbRaiseTemplate, ANIM_ATTACKER, 2, 0, 32, -38, 25, 0
+	createsprite gManaBreakOrbRaiseTemplate, ANIM_ATTACKER, 2, 32, 32, -28, 40, 0
+	createsprite gManaBreakOrbRaiseTemplate, ANIM_ATTACKER, 2, -20, 32, -48, 50, 0
+	createsprite gManaBreakOrbRaiseTemplate, ANIM_ATTACKER, 2, 20, 32, -28, 60, 0
+	createsprite gManaBreakOrbRaiseTemplate, ANIM_ATTACKER, 2, 0, 32, -28, 30, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 26, 1
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	delay 10
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT, 0, 12, 12, RGB_PURPLE
+	create_basic_hitsplat_sprite ANIM_TARGET, 2, x=-10, y=-10, relative_to=ANIM_TARGET, animation=0
+	call ManaBreakHit
+	create_basic_hitsplat_sprite ANIM_TARGET, 2, x=10, y=20, relative_to=ANIM_TARGET, animation=0
+	call ManaBreakHit
+	create_basic_hitsplat_sprite ANIM_TARGET, 2, x=-5, y=10, relative_to=ANIM_TARGET, animation=0
+	call ManaBreakHit
+	create_basic_hitsplat_sprite ANIM_TARGET, 2, x=17, y=-12, relative_to=ANIM_TARGET, animation=0
+	call ManaBreakHit
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+
+@ Stand-in for CFRU's PAYBACK_MOVE
+ManaBreakHit:
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 4, 1
+	delay 5
+	return
+
+@ Ported from the CFRU version: Focus Energy on the charging turn, then Frenzy Plant-style flames and Tectonic Rage's Blast Burn on the Fire background
+gBattleAnimMove_CemetaryOfFire::
+	choosetwoturnanim CemetaryOfFirePrep, CemetaryOfFireAttack
+	end
+
+CemetaryOfFirePrep:
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_ATTACKER, 0, 2, 42, 1
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=8, color=RGB_RED
+	call EndureEffect
+	delay 8
+	call EndureEffect
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=8, color=RGB_RED
+	delay 4
+	call EndureEffect
+	waitforvisualfinish
+	end
+
+CemetaryOfFireAttack:
+	monbg ANIM_TARGET
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 10, 8, 2, 0, 0, 100
+	playsewithpan SE_M_FLAME_WHEEL, -64
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 20, -8, -2, 0, 0, 95
+	playsewithpan SE_M_FLAME_WHEEL, -43
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 30, 8, -4, 0, 0, 90
+	playsewithpan SE_M_FLAME_WHEEL, -22
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 40, -8, 4, 0, 0, 85
+	playsewithpan SE_M_FLAME_WHEEL, 0
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 50, 8, 0, 0, 0, 85
+	playsewithpan SE_M_FLAME_WHEEL, +21
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 60, -8, -2, 0, 0, 85
+	playsewithpan SE_M_FLAME_WHEEL, +42
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 75, 8, 0, 0, 0, 85
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 85, 16, 6, 0, 0, 80
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	delay 5
+	createsprite gCemetaryOfFireFlameSpriteTemplate, ANIM_ATTACKER, 2, 85, -16, -6, 0, 0, 75
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	fadetobg BG_FIRE
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, 768, 0, 1, -1
+	waitbgfadein
+	delay 13
+	createvisualtask AnimTask_ShakeMon, 3, ANIM_TARGET, 7, 0, 34, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 9, RGB_RED
+	playsewithpan SE_M_SACRED_FIRE, SOUND_PAN_ATTACKER
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, -32, 0, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, -20, -10, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0, -16, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 20, -10, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 32, 0, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 20, 10, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0, 16, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, -20, 10, 24, 0, 0, 0
+	delay 20
+	playsewithpan SE_M_FLAME_WHEEL2, SOUND_PAN_ATTACKER
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, -64, 0, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 6, -40, -20, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 70, 0, -32, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 70, 40, -20, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 64, 0, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 40, 20, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, 24, 0, 0, 0
+	createsprite gTectonicRageBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, -40, 20, 24, 0, 0, 0
+	delay 8
+	call TectonicRageExplosion
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 9, 0, RGB_RED
+	call UnsetBackground
+	clearmonbg ANIM_TARGET
+	blendoff
+	end

@@ -1096,6 +1096,10 @@ extern const u8 gBattleAnimMove_SpellbindingCircle[];
 extern const u8 gBattleAnimMove_VenomVapor[];
 extern const u8 gBattleAnimMove_CardDestruction[];
 extern const u8 gBattleAnimMove_HeavyStorm[];
+extern const u8 gBattleAnimMove_MeltedIce[];
+extern const u8 gBattleAnimMove_FakeHero[];
+extern const u8 gBattleAnimMove_ManaBreak[];
+extern const u8 gBattleAnimMove_CemetaryOfFire[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_
  

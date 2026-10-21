@@ -1419,6 +1419,16 @@ const struct SpriteTemplate gGeomancyBlueCellVortexTemplate =
     .callback = AnimParticleInVortex,
 };
 
+// Mana Break: red orbs rising from the user, like Ancient Power's rocks
+const struct SpriteTemplate gManaBreakOrbRaiseTemplate =
+{
+    .tileTag = ANIM_TAG_RED_ORB,
+    .paletteTag = ANIM_TAG_RED_ORB,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_BasicRock,
+    .callback = AnimRaiseSprite,
+};
+
 const struct SpriteTemplate gGeomancyRedCellRaiseTemplate =
 {
     .tileTag = ANIM_TAG_ZYGARDE_HEXES,

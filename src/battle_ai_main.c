@@ -1341,25 +1341,6 @@ static bool32 IsFrogOnField(enum BattlerId battler)
     return IsBattlerAlive(battler) && gSpeciesInfo[gBattleMons[battler].species].isFrog;
 }
 
-static bool32 HasUsableDragonInParty(enum BattlerId battler)
-{
-    struct Pokemon *party = GetBattlerParty(battler);
-
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        enum Species species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE
-         || species == SPECIES_EGG
-         || GetMonData(&party[i], MON_DATA_HP) == 0
-         || i == gBattlerPartyIndexes[battler]
-         || (HasPartner(battler) && i == gBattlerPartyIndexes[GetPartnerBattler(battler)]))
-            continue;
-        if (GetSpeciesType(species, 0) == TYPE_DRAGON || GetSpeciesType(species, 1) == TYPE_DRAGON)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 static bool32 CanCardDestructionSwitchBattler(enum BattlerId battler)
 {
     return IsBattlerAlive(battler)

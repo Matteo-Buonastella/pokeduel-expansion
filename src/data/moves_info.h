@@ -22142,7 +22142,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .spDef = 1,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_HeavyStorm,
+        .battleAnimScript = gBattleAnimMove_CemetaryOfFire,
     },
 
     [MOVE_WHITE_LIGHTNING] =
@@ -24097,7 +24097,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_FreezeDry,
+        .battleAnimScript = gBattleAnimMove_MeltedIce,
     },
 
     [MOVE_GOAT_HEAL] =
@@ -24143,7 +24143,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_UTurn,
+        .battleAnimScript = gBattleAnimMove_FakeHero,
     },
 
     [MOVE_MANA_BREAK] =
@@ -24165,7 +24165,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .argument = { .type = TYPE_BUG },
-        .battleAnimScript = gBattleAnimMove_FreezeDry,
+        .battleAnimScript = gBattleAnimMove_ManaBreak,
     },
 
     [MOVE_CEMETARY_OF_FIRE] =
@@ -24190,7 +24190,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 50,
         }),
-        .battleAnimScript = gBattleAnimMove_IceBurn,
+        .battleAnimScript = gBattleAnimMove_CemetaryOfFire,
         //Move Categories
         .metronomeBanned = TRUE,
         .sleepTalkBanned = TRUE,
