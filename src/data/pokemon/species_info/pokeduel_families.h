@@ -8757,7 +8757,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_CockroachKnight,
     .shinyPalette = gMonShinyPalette_CockroachKnight,
     .iconSprite = gMonIcon_CockroachKnight,
-    .iconPalIndex = 0,
+    .iconPalIndex = 1,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -10087,7 +10087,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_CrimsonResonator,
     .shinyPalette = gMonShinyPalette_CrimsonResonator,
     .iconSprite = gMonIcon_CrimsonResonator,
-    .iconPalIndex = 0,
+    .iconPalIndex = 2,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
@@ -17169,7 +17169,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .natDexNum = NATIONAL_DEX_SLOT_MACHINE,
     .categoryName = _("Machine"),
     .height = 16,
-    .weight = 900,
+    .weight = 1900,
     .description = COMPOUND_STRING(
         "A portable Slot Machine. If you\n"
         "can't pay back your debts,\n"
@@ -33373,7 +33373,7 @@ const struct SpeciesInfo gSpeciesInfoPokeduel[] =
     .palette = gMonPalette_ReptilianneServant,
     .shinyPalette = gMonShinyPalette_ReptilianneServant,
     .iconSprite = gMonIcon_ReptilianneServant,
-    .iconPalIndex = 0,
+    .iconPalIndex = 2,
     .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
     SHADOW(1, 1, SHADOW_SIZE_S)
     FOOTPRINT(Mudkip)
