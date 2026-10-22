@@ -938,6 +938,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_FROGGYFORCEFIELDSTARTS]               = COMPOUND_STRING("A Froggy Forcefield is protecting the Frogs on {B_ATK_TEAM2} team!"),
     [STRINGID_SKULLDICEJACKPOT]                     = COMPOUND_STRING("Jackpot hit!"),
     [STRINGID_FLUTEOFDEMPOWERS]                     = COMPOUND_STRING("The Flute of D empowered {B_EFF_NAME_WITH_PREFIX2}!"),
+    [STRINGID_TARGETWILLPERISHIN3TURNS]             = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} will faint in three turns!"),
 
 };
 

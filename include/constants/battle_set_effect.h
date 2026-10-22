@@ -63,6 +63,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_STAT_PLUS_OR_MINUS, // Like MOVE_EFFECT_STAT_PLUS, but has a 50% chance to lower the stats instead
     MOVE_EFFECT_TAUNT_THIS_TURN, // Taunts the target until the end of the current turn
     MOVE_EFFECT_SUPPRESS_ABILITY, // Suppresses the target's ability like Gastro Acid
+    MOVE_EFFECT_PERISH_SONG, // Gives the target a perish count, like Perish Song but only on the target
 
     // Max move effects happen earlier in the execution chain.
     // For example stealth rock from G-Max Stonesurge is set up before abilities but from Stone Axe after.

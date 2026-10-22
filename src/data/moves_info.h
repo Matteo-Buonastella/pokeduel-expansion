@@ -24954,6 +24954,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ballisticMove = TRUE,
         .battleAnimScript = gBattleAnimMove_PinMissile,
     },
+
+    [MOVE_DEVILS_CLAW] =
+    {
+        .name = COMPOUND_STRING("Devil's Claw"),
+        .description = COMPOUND_STRING(
+            "Dip your claws in\n"
+            "the fountain of evil\n"
+            "and swipe the foe.\n"
+            "A perish counter is\n"
+            "added to the\ntarget."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_DARK,
+        .accuracy = 90,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PERISH_SONG,
+            .chance = 100,
+        }),
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_AerialAce,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

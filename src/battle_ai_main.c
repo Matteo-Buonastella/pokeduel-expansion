@@ -6423,6 +6423,20 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     }
                 }
                 break;
+            case MOVE_EFFECT_PERISH_SONG:
+                if (gBattleMons[battlerDef].volatiles.perishSong || DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
+                    break;
+                // The target can reset the count by switching out, so it's only really good if it's trapped
+                if (IsBattlerTrapped(battlerAtk, battlerDef) && !AI_CanBattlerEscape(battlerDef))
+                    ADJUST_SCORE(GOOD_EFFECT);
+                else if (CountUsablePartyMons(battlerDef) == 0)
+                    ADJUST_SCORE(GOOD_EFFECT); // No switch-in left to escape the count
+                // Target walls us (can't be KO'd before the count runs out), so it either faints or is forced out
+                else if (GetBestNoOfHitsToKO(battlerAtk, battlerDef, AI_ATTACKING) > B_PERISH_SONG_TIMER + 1)
+                    ADJUST_SCORE(DECENT_EFFECT);
+                else
+                    ADJUST_SCORE(WEAK_EFFECT);
+                break;
             case MOVE_EFFECT_SUPPRESS_ABILITY:
             {
                 enum Ability abilityDef = aiData->abilities[battlerDef];

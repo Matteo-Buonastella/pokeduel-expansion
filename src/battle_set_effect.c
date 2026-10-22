@@ -512,6 +512,18 @@ static void HandleSetEffectSuppressAbility(struct BattleCalcValues *cv, struct S
     }
 }
 
+static void HandleSetEffectPerishSong(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (!gBattleMons[se->effectBattler].volatiles.perishSong
+     && gBattleMons[se->effectBattler].volatiles.semiInvulnerable != STATE_COMMANDER)
+    {
+        gBattleMons[se->effectBattler].volatiles.perishSong = TRUE;
+        gBattleMons[se->effectBattler].volatiles.perishSongTimer = B_PERISH_SONG_TIMER;
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectPerishSong;
+    }
+}
+
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -1484,6 +1496,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_STAT_PLUS_OR_MINUS] = HandleSetEffectStatPlusOrMinus,
     [MOVE_EFFECT_TAUNT_THIS_TURN] = HandleSetEffectTauntThisTurn,
     [MOVE_EFFECT_SUPPRESS_ABILITY] = HandleSetEffectSuppressAbility,
+    [MOVE_EFFECT_PERISH_SONG] = HandleSetEffectPerishSong,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,
