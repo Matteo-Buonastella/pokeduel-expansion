@@ -503,6 +503,15 @@ static void HandleSetEffectTauntThisTurn(struct BattleCalcValues *cv, struct Set
     }
 }
 
+static void HandleSetEffectSuppressAbility(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (GetBattlerAbilityIgnoreMoldBreaker(se->effectBattler) != ABILITY_NONE && !NoAliveMonsForEitherParty())
+    {
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectCoreEnforcer;
+    }
+}
+
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -1474,6 +1483,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_LOWER_HIGHER_ATTACK] = HandleSetEffectLowerHigherAttack,
     [MOVE_EFFECT_STAT_PLUS_OR_MINUS] = HandleSetEffectStatPlusOrMinus,
     [MOVE_EFFECT_TAUNT_THIS_TURN] = HandleSetEffectTauntThisTurn,
+    [MOVE_EFFECT_SUPPRESS_ABILITY] = HandleSetEffectSuppressAbility,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,

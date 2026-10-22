@@ -6411,6 +6411,20 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     }
                 }
                 break;
+            case MOVE_EFFECT_SUPPRESS_ABILITY:
+            {
+                enum Ability abilityDef = aiData->abilities[battlerDef];
+                if (abilityDef == ABILITY_NONE
+                 || gAbilitiesInfo[abilityDef].cantBeSuppressed
+                 || gBattleMons[battlerDef].volatiles.gastroAcid
+                 || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
+                    break;
+                if (gAbilitiesInfo[abilityDef].aiRating >= 7)
+                    ADJUST_SCORE(DECENT_EFFECT);
+                else if (gAbilitiesInfo[abilityDef].aiRating > 0)
+                    ADJUST_SCORE(WEAK_EFFECT);
+                break;
+            }
             case MOVE_EFFECT_TAUNT_THIS_TURN:
             {
                 // Only useful if the target hasn't moved yet this turn

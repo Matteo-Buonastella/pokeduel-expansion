@@ -6730,9 +6730,13 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_DRAGON))
             modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
         break;
-    case EFFECT_DUST_TORNADO:
+    case EFFECT_DOUBLE_POWER_IN_SANDSTORM:
         if (GetAttackerWeather(ctx->holdEffects[ctx->battlerAtk], ctx->abilities[ctx->battlerAtk], ctx->weather) & B_WEATHER_SANDSTORM)
             modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+        break;
+    case EFFECT_SKILL_DRAIN:
+        if (GetBattlerAbilityIgnoreMoldBreaker(battlerDef) != ABILITY_NONE)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
         break;
     case EFFECT_RETALIATE:
     {

@@ -24732,7 +24732,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "lower accuracy (10%)\n"
             "Power is doubled in\n"
             "a sandstorm."),
-        .effect = EFFECT_DUST_TORNADO,
+        .effect = EFFECT_DOUBLE_POWER_IN_SANDSTORM,
         .power = 60,
         .type = TYPE_FLYING,
         .accuracy = 100,
@@ -24747,6 +24747,37 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         //Move Categories
         .windMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_MudSlap,
+    },
+
+    [MOVE_SKILL_DRAIN] =
+    {
+        .name = COMPOUND_STRING("Skill Drain"),
+        .description = COMPOUND_STRING(
+            "Restores HP by half\n"
+            "the damage. If foe\n"
+            "has an ability, power\n"
+            "is doubled, also the\n"
+            "foe has its ability\n"
+            "negated."),
+        .effect = EFFECT_SKILL_DRAIN,
+        .power = 60,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ABSORB,
+            .argument.absorbPercentage = 50,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_SUPPRESS_ABILITY,
+            .chance = 100,
+        }),
+        //Move Categories
+        .healingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_MudSlap,
     },
     

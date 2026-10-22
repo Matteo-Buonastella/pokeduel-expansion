@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_DUST_TORNADO) == EFFECT_DUST_TORNADO);
+    ASSUME(GetMoveEffect(MOVE_DUST_TORNADO) == EFFECT_DOUBLE_POWER_IN_SANDSTORM);
 }
 
 SINGLE_BATTLE_TEST("Dust Tornado doubles in power in a sandstorm", s16 damage)
