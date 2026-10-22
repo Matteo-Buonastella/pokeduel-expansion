@@ -3272,10 +3272,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Inflicts severe damage but\n"
             "makes the user faint."),
         .effect = EFFECT_HIT,
-        .power = B_UPDATED_MOVE_DATA >= GEN_2 ? 200 : 130,
+        .power = 200,
         .type = TYPE_NORMAL,
         .accuracy = 100,
-        .pp = 5,
+        .pp = 1,
         .target = TARGET_FOES_AND_ALLY,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -4190,10 +4190,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Inflicts severe damage but\n"
             "makes the user faint."),
         .effect = EFFECT_HIT,
-        .power = B_UPDATED_MOVE_DATA >= GEN_2 ? 250 : 170,
+        .power = 250,
         .type = TYPE_NORMAL,
         .accuracy = 100,
-        .pp = 5,
+        .pp = 1,
         .target = TARGET_FOES_AND_ALLY,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
@@ -24837,6 +24837,71 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .healingMove = TRUE,
         .slicingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_OblivionWing,
+    },
+
+    [MOVE_DARK_HOLE] =
+    {
+        .name = COMPOUND_STRING("Dark Hole"),
+        .description = COMPOUND_STRING(
+            "The user sacrifices\n"
+            "itself to activate\n"
+            "Dark Hole, anhilating\n"
+            "the entire field."),
+        .effect = EFFECT_HIT,
+        .power = 250,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 1,
+        .target = TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .explosion = TRUE,
+        .parentalBondBanned = TRUE,
+        .dampBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Explosion,
+        .validApprenticeMove = TRUE,
+    },
+    
+    // Z-Moves
+    [MOVE_BREAKNECK_BLITZ] =
+    {
+        .name = COMPOUND_STRING("Breakneck Blitz"),
+        .description = COMPOUND_STRING(
+            "Builds momentum and crashes\n"
+            "into the foe. Power varies."),
+        .effect = EFFECT_HIT,
+        .power = 1,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,    //determined from move type
+        .battleAnimScript = gBattleAnimMove_BreakneckBlitz,
+    },
+    [MOVE_ALL_OUT_PUMMELING] =
+    {
+        .name = COMPOUND_STRING("All-Out Pummeling"),
+        .description = COMPOUND_STRING(
+            "Rams an energy orb into\n"
+            "the target. Power varies."),
+        .effect = EFFECT_HIT,
+        .power = 1,
+        .type = TYPE_FIGHTING,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .explosion = TRUE,
+        .parentalBondBanned = TRUE,
+        .dampBanned = TRUE,
+        .contestEffect = CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_MEAN_LOOK, COMBO_STARTER_BLOCK},
+        .battleAnimScript = gBattleAnimMove_Explosion,
+        .validApprenticeMove = TRUE,
     },
     
     // Z-Moves
