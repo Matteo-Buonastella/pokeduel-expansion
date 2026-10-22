@@ -25004,6 +25004,27 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_CalmMind,
         .validApprenticeMove = TRUE,
     },
+
+    [MOVE_TWIN_TWISTER] =
+    {
+        .name = COMPOUND_STRING("Twin Twisters"),
+        .description = COMPOUND_STRING(
+            "The user hits the\n"
+            "target with a gust\n"
+            "of wind. The target\n"
+            "is hit twice in a row."),
+        .effect = EFFECT_HIT,
+        .power = 40,
+        .type = TYPE_FLYING,
+        .accuracy = 90,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .windMove = TRUE,
+        .strikeCount = 2,
+        .battleAnimScript = gBattleAnimMove_DualWingbeat,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
