@@ -24928,6 +24928,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .battleAnimScript = gBattleAnimMove_AerialAce,
     },
+
+    [MOVE_SHOCK_ROCKET_ATTACK] =
+    {
+        .name = COMPOUND_STRING("Shock Rocket"),
+        .description = COMPOUND_STRING(
+            "Launch 2-5 fiery\n"
+            "rockets at the\n"
+            "target. Each rocket\n"
+            "has a 10% chance\n"
+            "to burn."),
+        .effect = EFFECT_HIT,
+        .power = 25,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 10,
+        }),
+        .multiHit = TRUE,
+        .ballisticMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_PinMissile,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
