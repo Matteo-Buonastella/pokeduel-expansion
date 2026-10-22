@@ -314,6 +314,7 @@ enum  BattleMoveEffects
     EFFECT_DRAGON_CAPTURE_JAR, // Double power against Dragon types, and its MOVE_EFFECT_PREVENT_ESCAPE only traps Dragons
     EFFECT_DOUBLE_POWER_IN_SANDSTORM, // Double power in a sandstorm
     EFFECT_SKILL_DRAIN, // Double power if the target has an active ability
+    EFFECT_DARK_RULER_NO_MORE, // Gastro Acid + lowers Speed by 1 (2 for Dark types). Fails only if neither can apply
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

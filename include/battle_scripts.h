@@ -764,6 +764,7 @@ extern const u8 BattleScript_EffectDesCroaking[];
 extern const u8 BattleScript_EffectFroggyForcefield[];
 extern const u8 BattleScript_EffectFiendishChain[];
 extern const u8 BattleScript_EffectSkullDice[];
+extern const u8 BattleScript_EffectDarkRulerNoMore[];
 extern const u8 BattleScript_FluteOfDEmpowers[];
 extern const u8 BattleScript_EffectEmergencyProvisions[];
 extern const u8 BattleScript_EffectWarriorReturnAlive[];

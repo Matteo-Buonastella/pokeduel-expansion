@@ -6635,6 +6635,23 @@ BattleScript_FiendishChainTrapGen5:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectDarkRulerNoMore::
+	attackcanceler
+	trydarkrulernomore BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	jumpifvolatile BS_TARGET, VOLATILE_GASTRO_ACID, BattleScript_DarkRulerNoMoreSpeed
+	setgastroacid BattleScript_DarkRulerNoMoreSpeed
+	printstring STRINGID_PKMNSABILITYSUPPRESSED
+	waitmessage B_WAIT_TIME_LONG
+	trytoclearprimalweather
+	call BattleScript_TryRevertWeatherform
+	flushtextbox
+	tryendneutralizinggas
+BattleScript_DarkRulerNoMoreSpeed:
+	trystatchanges BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectSkullDice::
 	attackcanceler
 	attackanimation

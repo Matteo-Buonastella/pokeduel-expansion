@@ -2116,6 +2116,13 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
               && (AI_CanBattlerEscape(battlerDef) || IsBattlerTrapped(battlerAtk, battlerDef)))
             ADJUST_SCORE(-10); // Neither half of the move would do anything
         break;
+    case EFFECT_DARK_RULER_NO_MORE:
+        if (DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
+            ADJUST_SCORE(-10);
+        else if (!CanEffectChangeAbility(battlerAtk, battlerDef, move, aiData)
+              && gBattleMons[battlerDef].statStages[STAT_SPEED] == MIN_STAT_STAGE)
+            ADJUST_SCORE(-10); // Neither half of the move would do anything
+        break;
     case EFFECT_NIGHTMARE:
         if (gBattleMons[battlerDef].volatiles.nightmare)
             ADJUST_SCORE(-10);
@@ -5059,6 +5066,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_MEAN_LOOK:
         if (ShouldTrap(battlerAtk, battlerDef, move, DONT_CONSIDER_WRAP_DAMAGE))
             ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_DARK_RULER_NO_MORE:
+        if (CanEffectChangeAbility(battlerAtk, battlerDef, move, aiData))
+            AbilityChangeScore(battlerAtk, battlerDef, move, &score, aiData);
+        ADJUST_SCORE(IncreaseStatDownScore(battlerAtk, battlerDef, STAT_SPEED));
         break;
     case EFFECT_FIENDISH_CHAIN:
         if (CanEffectChangeAbility(battlerAtk, battlerDef, move, aiData))

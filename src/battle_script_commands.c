@@ -12643,6 +12643,29 @@ void BS_JumpIfFiendishChainFails(void)
         gBattlescriptCurrInstr = cmd->failInstr;
 }
 
+// Dark Ruler No More only fails if the target's Ability can't be suppressed and its Speed can't be lowered either.
+// Queues the Speed drop: 1 stage, or 2 stages for Dark types
+void BS_TryDarkRulerNoMore(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    bool32 canSuppress = !gBattleMons[gBattlerTarget].volatiles.gastroAcid
+                      && !gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSuppressed
+                      && GetBattlerHoldEffectIgnoreAbility(gBattlerTarget) != HOLD_EFFECT_ABILITY_SHIELD;
+    bool32 canLowerSpeed = gBattleMons[gBattlerTarget].statStages[STAT_SPEED] > MIN_STAT_STAGE;
+
+    if (canSuppress || canLowerSpeed)
+    {
+        if (canLowerSpeed)
+            SetStatChange(gBattlerTarget, STAT_SPEED, IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK) ? -2 : -1);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+}
+
 // Skull Dice: 1% chance to lower all of the target's stats by 6, otherwise lowers one random stat by 1-6
 void BS_RollSkullDice(void)
 {

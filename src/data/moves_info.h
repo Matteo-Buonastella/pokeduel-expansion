@@ -24861,6 +24861,29 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Explosion,
         .validApprenticeMove = TRUE,
     },
+
+    [MOVE_DARK_RULER_NO_MORE] =
+    {
+        .name = COMPOUND_STRING("DarkRuler NoMore"),
+        .description = COMPOUND_STRING(
+            "Dark Ruler No More\n"
+            "negates the abilities\n"
+            "of the foe and\n"
+            "lowers their speed.\n"
+            "Dark monsters have\n"
+            "spd sharply lowered."),
+        .effect = EFFECT_DARK_RULER_NO_MORE,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_SPD_UP_1 },
+        .magicCoatAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_GastroAcid,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
