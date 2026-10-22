@@ -24884,6 +24884,25 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .magicCoatAffected = TRUE,
         .battleAnimScript = gBattleAnimMove_GastroAcid,
     },
+
+    [MOVE_THOUSAND_KNIVES] =
+    {
+        .name = COMPOUND_STRING("1000 Knives"),
+        .description = COMPOUND_STRING(
+            "Throw a thousand\n"
+            "knives at the foe.\n"
+            "This move can't miss."),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_STEEL,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .stabbingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_AerialAce,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
