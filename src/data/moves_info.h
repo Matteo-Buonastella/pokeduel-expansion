@@ -24979,6 +24979,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .battleAnimScript = gBattleAnimMove_AerialAce,
     },
+
+    [MOVE_MAGIC_FORMULA] =
+    {
+        .name = COMPOUND_STRING("Magic Formula"),
+        .description = COMPOUND_STRING(
+            "Magic Formula raises\n"
+            "your Sp.Atk by 1\n"
+            "stage and recovers\n"
+            "1/4 of your max HP."),
+        .effect = EFFECT_MAGIC_FORMULA,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .healingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_CalmMind,
+        .validApprenticeMove = TRUE,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

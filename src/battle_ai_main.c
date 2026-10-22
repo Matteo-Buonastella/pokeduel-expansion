@@ -2431,6 +2431,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (gBattleMons[battlerAtk].hp * 3 > GetNonDynamaxMaxHP(battlerAtk))
             ADJUST_SCORE(-10); // Fails above 1/3 HP
         break;
+    case EFFECT_MAGIC_FORMULA:
+        if (AI_BattlerAtMaxHp(battlerAtk) && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK))
+            ADJUST_SCORE(-10); // Neither half of the move would do anything
+        break;
     case EFFECT_POWER_BOND:
         // The recoil would knock the user out without taking the target down with it
         if (AI_IsDamagedByRecoil(battlerAtk)
@@ -4966,6 +4970,12 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(GOOD_EFFECT);
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
             ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, 1));
+        break;
+    case EFFECT_MAGIC_FORMULA:
+        if (ShouldRecover(battlerAtk, battlerDef, move, 25))
+            ADJUST_SCORE(GOOD_EFFECT);
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL))
+            ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, 1));
         break;
     case EFFECT_EMERGENCY_PROVISIONS:
         if (ShouldRecover(battlerAtk, battlerDef, move, min(100, 25 * CountPositiveStatStagesTotal(battlerAtk))))

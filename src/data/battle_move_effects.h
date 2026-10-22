@@ -1999,6 +1999,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+    [EFFECT_MAGIC_FORMULA] =
+    {
+        .battleScript = BattleScript_EffectMagicFormula,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
     [EFFECT_STONE_AXE] =
     {
         .battleScript = BattleScript_EffectHit,

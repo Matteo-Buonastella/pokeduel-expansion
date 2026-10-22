@@ -6702,6 +6702,22 @@ BattleScript_EffectWarriorReturnAlive::
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectMagicFormula::
+	attackcanceler
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_MagicFormulaWorks
+	jumpiffullhp BS_ATTACKER, BattleScript_ButItFailed
+BattleScript_MagicFormulaWorks:
+	attackanimation
+	waitanimation
+	queuestatchange BS_ATTACKER, STAT_SPATK, 1
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	tryhealquarterhealth BS_ATTACKER, BattleScript_MoveEnd
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
+	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 @ Same as BattleScript_RoarSuccessSwitch, then lowers the dragged out monster's Defense
 BattleScript_WindstormSuccessSwitch::
 	call BattleScript_RoarSuccessRet
