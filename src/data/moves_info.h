@@ -24780,6 +24780,64 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .healingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_MudSlap,
     },
+
+    [MOVE_MIND_DRAIN] =
+    {
+        .name = COMPOUND_STRING("Mind Drain"),
+        .description = COMPOUND_STRING(
+            "Drain the foe of its\n"
+            "mental energy.\n"
+            "50% of damage is\n"
+            "recovered as HP.\n"
+            "May confuse foe\n"
+            "(10%)."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ABSORB,
+            .argument.absorbPercentage = 50,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_CONFUSION,
+            .chance = 10,
+        }),
+        //Move Categories
+        .healingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_MudSlap,
+    },
+
+    [MOVE_SKYRIP_WING] =
+    {
+        .name = COMPOUND_STRING("Skyrip Wing"),
+        .description = COMPOUND_STRING(
+            "The foe is sliced by\n"
+            "a sharp wing,\n"
+            "restoring half the\n"
+            "damage inflicted as\n"
+            "HP."),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ABSORB,
+            .argument.absorbPercentage = 50,
+        }),
+        .makesContact = TRUE,
+        .healingMove = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_OblivionWing,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
