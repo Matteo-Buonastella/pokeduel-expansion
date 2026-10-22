@@ -3341,6 +3341,12 @@ static enum MoveEndResult MoveEndProtectLikeEffect(struct BattleCalcValues *cv)
         BattleScriptCall(BattleScript_KingsShieldEffect);
         result = MOVEEND_RESULT_RUN_SCRIPT;
         break;
+    case PROTECT_D_SHIELD:
+        gEffectBattler = cv->battlerDef;
+        SetStatChange(gEffectBattler, STAT_DEF, 1);
+        BattleScriptCall(BattleScript_KingsShieldEffect);
+        result = MOVEEND_RESULT_RUN_SCRIPT;
+        break;
     default:
         break;
     }

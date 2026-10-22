@@ -6111,6 +6111,8 @@ bool32 IsBattlerProtected(struct BattleCalcValues *cv)
         isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_SPIKY_SHIELD)
         isProtected = TRUE;
+    else if (gProtectStructs[cv->battlerDef].protected == PROTECT_D_SHIELD)
+        isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_MAX_GUARD)
         isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_BANEFUL_BUNKER)
@@ -6141,6 +6143,7 @@ enum ProtectType GetProtectType(enum ProtectMethod method)
         return PROTECT_TYPE_NONE;
     case PROTECT_NORMAL:
     case PROTECT_SPIKY_SHIELD:
+    case PROTECT_D_SHIELD:
     case PROTECT_KINGS_SHIELD:
     case PROTECT_BANEFUL_BUNKER:
     case PROTECT_BURNING_BULWARK:

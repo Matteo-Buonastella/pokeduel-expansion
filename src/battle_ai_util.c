@@ -2145,6 +2145,7 @@ bool32 IsAllyProtectingFromMove(enum BattlerId battlerAtk, enum Move attackerMov
         return IsSpreadMove(GetBattlerMoveTargetType(battlerAtk, attackerMove));
     case PROTECT_NORMAL:
     case PROTECT_SPIKY_SHIELD:
+    case PROTECT_D_SHIELD:
     case PROTECT_MAX_GUARD:
     case PROTECT_BANEFUL_BUNKER:
     case PROTECT_BURNING_BULWARK:

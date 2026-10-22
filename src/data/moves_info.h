@@ -25025,6 +25025,35 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .strikeCount = 2,
         .battleAnimScript = gBattleAnimMove_DualWingbeat,
     },
+
+    [MOVE_D_SHIELD] =
+    {
+        .name = COMPOUND_STRING("D - Shield"),
+        .description = COMPOUND_STRING(
+            "Aside from protecting\n"
+            "the user from attacks,\n"
+            "this move raises the\n"
+            "users D if the attack\n"
+            "makes contact."),
+        .effect = EFFECT_PROTECT,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_USER,
+        .priority = 4,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .protectMethod = PROTECT_D_SHIELD },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .instructBanned = TRUE,
+        .contestEffect = CONTEST_EFFECT_AVOID_STARTLE,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_Obstruct,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

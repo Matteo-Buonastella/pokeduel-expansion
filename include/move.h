@@ -85,6 +85,7 @@ enum ProtectMethod
     PROTECT_QUICK_GUARD,
     PROTECT_CRAFTY_SHIELD,
     PROTECT_MAT_BLOCK,
+    PROTECT_D_SHIELD, // Protect + raises the user's Defense by 1 stage if the blocked move makes contact
 };
 
 enum TerrainGroundCheck
