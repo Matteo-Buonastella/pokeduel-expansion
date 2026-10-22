@@ -24722,6 +24722,33 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .windMove = TRUE,
         .battleAnimScript = gBattleAnimMove_HeavyStorm,
     },
+
+    [MOVE_DUST_TORNADO] =
+    {
+        .name = COMPOUND_STRING("Dust Tornado"),
+        .description = COMPOUND_STRING(
+            "The foe is blinded by\n"
+            "a Dust Tornado. May\n"
+            "lower accuracy (10%)\n"
+            "Power is doubled in\n"
+            "a sandstorm."),
+        .effect = EFFECT_DUST_TORNADO,
+        .power = 60,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .accuracy = 1,
+            .chance = 10,
+        }),
+        //Move Categories
+        .windMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_MudSlap,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
