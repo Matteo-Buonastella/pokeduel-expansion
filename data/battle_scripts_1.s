@@ -438,6 +438,11 @@ BattleScript_TheSwampDisappeared::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_MoveEffectTauntThisTurn::
+	printstring STRINGID_PKMNFELLFORTAUNT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_MoveEffectSaltCure::
 	printstring STRINGID_TARGETISBEINGSALTCURED
 	waitmessage B_WAIT_TIME_LONG

@@ -491,6 +491,18 @@ static void HandleSetEffectMoonBlock(struct BattleCalcValues *cv, struct SetEffe
     }
 }
 
+static void HandleSetEffectTauntThisTurn(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (gBattleMons[se->effectBattler].volatiles.tauntTimer == 0
+     && !(GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && GetBattlerAbility(se->effectBattler) == ABILITY_OBLIVIOUS)
+     && !IsAbilityOnSide(se->effectBattler, ABILITY_AROMA_VEIL))
+    {
+        gBattleMons[se->effectBattler].volatiles.tauntTimer = 1; // Wears off at the end of this turn
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectTauntThisTurn;
+    }
+}
+
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -1461,6 +1473,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_MOON_BLOCK] = HandleSetEffectMoonBlock,
     [MOVE_EFFECT_LOWER_HIGHER_ATTACK] = HandleSetEffectLowerHigherAttack,
     [MOVE_EFFECT_STAT_PLUS_OR_MINUS] = HandleSetEffectStatPlusOrMinus,
+    [MOVE_EFFECT_TAUNT_THIS_TURN] = HandleSetEffectTauntThisTurn,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,

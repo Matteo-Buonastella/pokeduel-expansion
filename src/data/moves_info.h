@@ -24696,6 +24696,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .battleAnimScript = gBattleAnimMove_HeavyStorm,
     },
+
+    [MOVE_COLD_WAVE] =
+    {
+        .name = COMPOUND_STRING("Cold Wave"),
+        .description = COMPOUND_STRING(
+            "Ice cold air consumes\n"
+            "the foe, preventing\n"
+            "the target from using\n"
+            "status moves for the\n"
+            "rest of this turn."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_ICE,
+        .accuracy = 90,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_TAUNT_THIS_TURN,
+            .chance = 100,
+        }),
+        //Move Categories
+        .windMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_HeavyStorm,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

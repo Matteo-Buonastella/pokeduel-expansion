@@ -6411,6 +6411,19 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     }
                 }
                 break;
+            case MOVE_EFFECT_TAUNT_THIS_TURN:
+            {
+                // Only useful if the target hasn't moved yet this turn
+                enum Move predictedMove = GetPredictedMove(battlerAtk, battlerDef, aiData);
+                if (gBattleMons[battlerDef].volatiles.tauntTimer > 0
+                 || !AI_IsFaster(battlerAtk, battlerDef, move, predictedMove, CONSIDER_PRIORITY))
+                    break;
+                if (IsBattleMoveStatus(predictedMove))
+                    ADJUST_SCORE(GOOD_EFFECT);
+                else if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_STATUS))
+                    ADJUST_SCORE(WEAK_EFFECT);
+                break;
+            }
             case MOVE_EFFECT_WRAP:
                 if (!HasMoveWithEffect(battlerDef, EFFECT_RAPID_SPIN) && ShouldTrap(battlerAtk, battlerDef, move, CONSIDER_WRAP_DAMAGE))
                     ADJUST_SCORE(BEST_EFFECT);

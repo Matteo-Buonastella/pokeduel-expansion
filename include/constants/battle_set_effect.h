@@ -61,6 +61,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_MOON_BLOCK, // Prevents the target from using moon moves for B_MOON_BLOCK_TIMER turns, like Throat Chop
     MOVE_EFFECT_LOWER_HIGHER_ATTACK, // Lowers the target's Attack or Sp. Atk by 1 stage, whichever is higher
     MOVE_EFFECT_STAT_PLUS_OR_MINUS, // Like MOVE_EFFECT_STAT_PLUS, but has a 50% chance to lower the stats instead
+    MOVE_EFFECT_TAUNT_THIS_TURN, // Taunts the target until the end of the current turn
 
     // Max move effects happen earlier in the execution chain.
     // For example stealth rock from G-Max Stonesurge is set up before abilities but from Stone Axe after.

@@ -730,6 +730,7 @@ extern const u8 BattleScript_ShellTrapFailed[];
 extern const u8 BattleScript_EffectRevivalBlessing[];
 extern const u8 BattleScript_EffectCorrosiveGas[];
 extern const u8 BattleScript_MoveEffectSaltCure[];
+extern const u8 BattleScript_MoveEffectTauntThisTurn[];
 extern const u8 BattleScript_ChillyReceptionMessage[];
 extern const u8 BattleScript_EffectWeatherAndSwitch[];
 extern const u8 BattleScript_EffectDoodle[];
