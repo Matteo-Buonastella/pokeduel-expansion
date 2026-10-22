@@ -455,6 +455,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_DIAMOND_BLADE_STRIKE:
         case MOVE_DRAGON_RUSH:
         case MOVE_DRAGON_BREATH:
+        case MOVE_DOOM_GAZE:
         case MOVE_DUST_TORNADO:
         case MOVE_DYNAMIC_PUNCH:
         case MOVE_EARTH_POWER:

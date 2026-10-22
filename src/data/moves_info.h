@@ -24903,6 +24903,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .stabbingMove = TRUE,
         .battleAnimScript = gBattleAnimMove_AerialAce,
     },
+
+    [MOVE_DOOM_GAZE] =
+    {
+        .name = COMPOUND_STRING("Doom Gaze"),
+        .description = COMPOUND_STRING(
+            "The foe is scared\n"
+            "sensless by the\n"
+            "death stare of Dark\n"
+            "Necrofear. The foe\n"
+            "may pass out and\n"
+            "fall asleep (10%)"),
+        .effect = EFFECT_HIT,
+        .power = 85,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SLEEP,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_AerialAce,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
