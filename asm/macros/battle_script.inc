@@ -1893,6 +1893,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro rollcupoface tailsInstr:req
+	callnative BS_RollCupOfAce
+	.4byte \tailsInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

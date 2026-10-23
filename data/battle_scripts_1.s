@@ -6784,6 +6784,21 @@ BattleScript_StimPackEndTurn::
 	trystatchanges BS_ATTACKER, STAT_CHANGE_IGNORE_MIRROR_ARMOR
 	return
 
+BattleScript_EffectCupOfAce::
+	attackcanceler
+	attackanimation
+	waitanimation
+	rollcupoface BattleScript_CupOfAceTails
+	printstring STRINGID_CUPOFACEHEADS
+	waitmessage B_WAIT_TIME_LONG
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+BattleScript_CupOfAceTails:
+	printstring STRINGID_CUPOFACETAILS
+	waitmessage B_WAIT_TIME_LONG
+	trybattlerstatchange BS_TARGET, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
 @ Same as BattleScript_RoarSuccessSwitch, then lowers the dragged out monster's Defense
 BattleScript_WindstormSuccessSwitch::
 	call BattleScript_RoarSuccessRet

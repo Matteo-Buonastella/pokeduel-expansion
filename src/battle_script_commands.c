@@ -12754,6 +12754,23 @@ void BS_TryCallOfTheHaunted(void)
     }
 }
 
+// Cup of Ace: heads raises the user's Sp. Atk by 2 stages, tails raises the target's instead
+void BS_RollCupOfAce(void)
+{
+    NATIVE_ARGS(const u8 *tailsInstr);
+
+    if (RandomPercentage(RNG_CUP_OF_ACE, 50))
+    {
+        SetStatChange(gBattlerAttacker, STAT_SPATK, 2);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        SetStatChange(gBattlerTarget, STAT_SPATK, 2);
+        gBattlescriptCurrInstr = cmd->tailsInstr;
+    }
+}
+
 // Ivy Shackles only fails if the target is already ingrained and its Speed can't be lowered either.
 // Queues the 2 stage Speed drop
 void BS_TryIvyShackles(void)

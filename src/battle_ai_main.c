@@ -1851,6 +1851,13 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_CUP_OF_ACE:
+        // Never fails, but there's no upside if only the target could end up with the boost
+        if (!IsTargetingPartner(battlerAtk, battlerDef)
+         && (!HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL)
+          || !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK)))
+            ADJUST_SCORE(-8);
+        break;
     case EFFECT_STAT_CHANGE_HALF_HP:
     case EFFECT_BELLY_DRUM:
         if (AI_IsAbilityOnSide(battlerDef, ABILITY_UNAWARE))
@@ -4049,6 +4056,23 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                     break;
                 }
                 break;
+            case EFFECT_CUP_OF_ACE:
+            {
+                // Either side of the coin boosts an ally, so it's safe when aimed at the partner.
+                // Each outcome only happens half the time, so it's best when both use special moves
+                bool32 atkIsSpecial = HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL)
+                                   && BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK);
+                bool32 partnerIsSpecial = HasMoveWithCategory(battlerAtkPartner, DAMAGE_CATEGORY_SPECIAL)
+                                       && BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_SPATK);
+
+                if (atkIsSpecial && partnerIsSpecial)
+                    ADJUST_SCORE(IncreaseStatUpScore(battlerAtkPartner, GetOppositeBattler(battlerAtkPartner), STAT_SPATK, 2));
+                else if (partnerIsSpecial)
+                    ADJUST_SCORE(IncreaseStatUpScore(battlerAtkPartner, GetOppositeBattler(battlerAtkPartner), STAT_SPATK, 1));
+                else if (atkIsSpecial)
+                    ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, GetOppositeBattler(battlerAtk), STAT_SPATK, 1));
+                break;
+            }
             case EFFECT_ACUPRESSURE: // probably not good AI but just kept the same
             {
                 ADJUST_SCORE(IncreaseStatUpScore(battlerAtkPartner, GetOppositeBattler(battlerAtkPartner), STAT_ATK, 2));
@@ -4769,6 +4793,14 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         // The foe gets a free turn while the user recharges, so it has to be able to take two hits
         if (HasHPForDamagingSetup(battlerAtk, battlerDef, 33))
             ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        break;
+    case EFFECT_CUP_OF_ACE:
+        // Half the time the target gets the boost instead, so don't hand it to a special attacker.
+        // Scored as +1 since the +2 only happens half the time
+        if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL))
+            break;
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL))
+            ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, 1));
         break;
     case EFFECT_STUFF_CHEEKS:
     case EFFECT_STAT_CHANGE_MAGNETIC:
@@ -6784,6 +6816,10 @@ static s32 AI_Risky(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum M
         break;
     case EFFECT_STIM_PACK:
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
+            ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
+        break;
+    case EFFECT_CUP_OF_ACE:
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL))
             ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
         break;
     case EFFECT_MAX_HP_50_RECOIL:

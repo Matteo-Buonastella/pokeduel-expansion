@@ -263,6 +263,7 @@ enum RandomTag
     RNG_SKULL_DICE_JACKPOT,
     RNG_SKULL_DICE_STAT,
     RNG_SKULL_DICE_STAGES,
+    RNG_CUP_OF_ACE,
 };
 
 #define RandomWeighted(tag, ...) \

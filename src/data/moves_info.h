@@ -25321,6 +25321,26 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .battleAnimScript = gBattleAnimMove_ClangorousSoul,
     },
+
+    [MOVE_CUP_OF_ACE] =
+    {
+        .name = COMPOUND_STRING("Cup of Ace"),
+        .description = COMPOUND_STRING(
+            "The user tosses a\n"
+            "coin which may\n"
+            "sharply raise the\n"
+            "user's Special Atk,\n"
+            "or the foe's. (50/50)."),
+        .effect = EFFECT_CUP_OF_ACE,
+        .power = 0,
+        .type = TYPE_FAIRY,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_ClangorousSoul,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

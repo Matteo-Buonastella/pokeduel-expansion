@@ -942,6 +942,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_TARGETINGRAINEDBYIVY]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} was ingrained by the ivy shackles!"),
     [STRINGID_STIMPACKWEARINGOFF]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s Stim-Pack is wearing off!"),
     [STRINGID_THIRDTYPEADDEDEFFECT]                 = COMPOUND_STRING("{B_BUFF1} type was added to {B_EFF_NAME_WITH_PREFIX2}!"),
+    [STRINGID_CUPOFACEHEADS]                        = COMPOUND_STRING("The coin landed on heads!"),
+    [STRINGID_CUPOFACETAILS]                        = COMPOUND_STRING("The coin landed on tails!"),
 
 };
 

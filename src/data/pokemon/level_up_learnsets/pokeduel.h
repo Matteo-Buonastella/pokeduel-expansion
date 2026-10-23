@@ -473,7 +473,7 @@ static const struct LevelUpMove sBeaverWLevelUpLearnset[] = {
 
 //Dark Magician Girl
 static const struct LevelUpMove sDMGirlLevelUpLearnset[] = {
-// 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(1, MOVE_DRAINING_KISS),
 	LEVEL_UP_MOVE(1, MOVE_DISABLE),
 	LEVEL_UP_MOVE(1, MOVE_CHARM),
@@ -499,7 +499,7 @@ static const struct LevelUpMove sMysticElfLevelUpLearnset[] = {
 // 	LEVEL_UP_MOVE(1, MOVE_UMI),
 	LEVEL_UP_MOVE(7, MOVE_WATER_GUN),
 	LEVEL_UP_MOVE(11, MOVE_MUD_SLAP),
-// 	LEVEL_UP_MOVE(13, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(13, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(16, MOVE_ATTRACT),
 	LEVEL_UP_MOVE(19, MOVE_PURIFY),
 	LEVEL_UP_MOVE(22, MOVE_PSYBEAM),
@@ -5804,7 +5804,7 @@ static const struct LevelUpMove sSnowmanEaterLevelUpLearnset[] = {
 
 //Arkana Force the Fiend
 static const struct LevelUpMove sAFTheFiendLevelUpLearnset[] = {
-// 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(1, MOVE_TELEPORT),
 	LEVEL_UP_MOVE(1, MOVE_ASTONISH),
 	LEVEL_UP_MOVE(7, MOVE_PSYBEAM),
@@ -5829,7 +5829,7 @@ static const struct LevelUpMove sAFTheFiendLevelUpLearnset[] = {
 
 //Arkana Force the Dark Ruler
 static const struct LevelUpMove sAFTheDarkRulerLevelUpLearnset[] = {
-// 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(1, MOVE_CRUSH_CLAW),
 	LEVEL_UP_MOVE(1, MOVE_TELEPORT),
 	LEVEL_UP_MOVE(1, MOVE_TRICK_ROOM),
@@ -5856,7 +5856,7 @@ static const struct LevelUpMove sAFTheDarkRulerLevelUpLearnset[] = {
 
 //Arkana Force the Light Ruler
 static const struct LevelUpMove sAFTheLightRulerLevelUpLearnset[] = {
-// 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(1, MOVE_CRUSH_CLAW),
 	LEVEL_UP_MOVE(1, MOVE_TELEPORT),
 	LEVEL_UP_MOVE(1, MOVE_TRICK_ROOM),
@@ -7721,7 +7721,7 @@ static const struct LevelUpMove sHappyLoverLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(1, MOVE_BABY_DOLL_EYES),
 	LEVEL_UP_MOVE(8, MOVE_GUST),
 	LEVEL_UP_MOVE(12, MOVE_DRAINING_KISS),
-// 	LEVEL_UP_MOVE(14, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(14, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(15, MOVE_SWEET_KISS),
 	LEVEL_UP_MOVE(17, MOVE_ATTRACT),
 	LEVEL_UP_MOVE(19, MOVE_SWIFT),
@@ -7747,7 +7747,7 @@ static const struct LevelUpMove sShiningFriendshipLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(1, MOVE_BABY_DOLL_EYES),
 	LEVEL_UP_MOVE(8, MOVE_GUST),
 	LEVEL_UP_MOVE(12, MOVE_DRAINING_KISS),
-// 	LEVEL_UP_MOVE(14, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(14, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(15, MOVE_SWEET_KISS),
 	LEVEL_UP_MOVE(17, MOVE_ATTRACT),
 	LEVEL_UP_MOVE(19, MOVE_SWIFT),
@@ -9019,7 +9019,7 @@ static const struct LevelUpMove sNibiruLearnset[] = {
 //Dark Magician Girl the Dragon Knight
 static const struct LevelUpMove sDarkMagicianGirlTheDragonKnightLearnset[] = {
 	LEVEL_UP_MOVE(0, MOVE_DRAGONBREATH),
-// 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(1, MOVE_CONFUSION),
 	LEVEL_UP_MOVE(1, MOVE_DRAINING_KISS),
 	LEVEL_UP_MOVE(1, MOVE_DISABLE),
@@ -9821,7 +9821,7 @@ static const struct LevelUpMove sObnoxiousCelticGuardianLearnset[] = {
 static const struct LevelUpMove sGracefulDiceLearnset[] = {
 	LEVEL_UP_MOVE(1, MOVE_LUCKY_CHANT),
 	LEVEL_UP_MOVE(1, MOVE_FURY_SWIPES),
-// 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
+ 	LEVEL_UP_MOVE(1, MOVE_CUP_OF_ACE),
 	LEVEL_UP_MOVE(5, MOVE_FAIRY_WIND),
 	LEVEL_UP_MOVE(10, MOVE_MISTY_TERRAIN),
 	LEVEL_UP_MOVE(15, MOVE_FAKE_OUT),

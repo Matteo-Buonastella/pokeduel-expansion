@@ -320,6 +320,7 @@ enum  BattleMoveEffects
     EFFECT_IVY_SHACKLES, // Ingrains the target and lowers its Speed by 2. Fails only if neither can apply. Fails in Wasteland Terrain
     EFFECT_STIM_PACK, // Raises Attack by 3 stages, then the user's Attack drops by 1 stage at the end of every turn until it leaves the field
     EFFECT_RECKLESS_GREED, // Stat change move (argument via additionalEffects), but the user must recharge on the next turn
+    EFFECT_CUP_OF_ACE, // Coin toss: raises either the user's or the target's Sp. Atk by 2 stages (50/50)
     NUM_BATTLE_MOVE_EFFECTS,
 };
 
