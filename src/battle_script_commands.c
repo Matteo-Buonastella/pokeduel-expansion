@@ -12753,3 +12753,24 @@ void BS_TryCallOfTheHaunted(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
+
+// Ivy Shackles only fails if the target is already ingrained and its Speed can't be lowered either.
+// Queues the 2 stage Speed drop
+void BS_TryIvyShackles(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    bool32 canIngrain = !gBattleMons[gBattlerTarget].volatiles.root;
+    bool32 canLowerSpeed = gBattleMons[gBattlerTarget].statStages[STAT_SPEED] > MIN_STAT_STAGE;
+
+    if (canIngrain || canLowerSpeed)
+    {
+        if (canLowerSpeed)
+            SetStatChange(gBattlerTarget, STAT_SPEED, -2);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+}

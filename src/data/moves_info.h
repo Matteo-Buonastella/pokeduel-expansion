@@ -25106,6 +25106,29 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .thawsUser = TRUE,
         .battleAnimScript = gBattleAnimMove_DoubleEdge,
     },
+
+    [MOVE_IVY_SHACKLES] =
+    {
+        .name = COMPOUND_STRING("Ivy Shackles"),
+        .description = COMPOUND_STRING(
+            "Pin the foe down with\n"
+            "ivy shackles, harshly\n"
+            "lowering its Speed\n"
+            "and ingraining it,\n"
+            "preventing escape."),
+        .effect = EFFECT_IVY_SHACKLES,
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_SPDEF_UP_1 },
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Ingrain,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

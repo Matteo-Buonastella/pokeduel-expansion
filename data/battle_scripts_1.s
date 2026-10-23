@@ -6751,6 +6751,18 @@ BattleScript_CallOfTheHauntedGhost:
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectIvyShackles::
+	attackcanceler
+	tryivyshackles BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	trysetvolatile BS_TARGET, VOLATILE_ROOT, BattleScript_IvyShacklesSpeed
+	printstring STRINGID_TARGETINGRAINEDBYIVY
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_IvyShacklesSpeed:
+	trystatchanges BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
 @ Same as BattleScript_RoarSuccessSwitch, then lowers the dragged out monster's Defense
 BattleScript_WindstormSuccessSwitch::
 	call BattleScript_RoarSuccessRet

@@ -317,6 +317,7 @@ enum  BattleMoveEffects
     EFFECT_DARK_RULER_NO_MORE, // Gastro Acid + lowers Speed by 1 (2 for Dark types). Fails only if neither can apply
     EFFECT_MAGIC_FORMULA, // Raises Sp. Atk by 1 stage and heals 1/4 max HP. Fails only if neither can apply
     EFFECT_CALL_OF_THE_HAUNTED, // Baton Pass without passing anything. The switched-in mon becomes pure Ghost, or gets +1 Def if already part Ghost
+    EFFECT_IVY_SHACKLES, // Ingrains the target and lowers its Speed by 2. Fails only if neither can apply. Fails in Wasteland Terrain
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

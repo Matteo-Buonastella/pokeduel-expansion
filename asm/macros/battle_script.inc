@@ -1888,6 +1888,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro tryivyshackles failInstr:req
+	callnative BS_TryIvyShackles
+	.4byte \failInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

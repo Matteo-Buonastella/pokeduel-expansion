@@ -461,7 +461,8 @@ static bool32 HasMoveBlockedByWasteland(enum BattlerId battler)
 {
     return HasMoveWithEffect(battler, EFFECT_GROWTH)
         || HasMoveWithEffect(battler, EFFECT_LEECH_SEED)
-        || HasMoveWithEffect(battler, EFFECT_INGRAIN);
+        || HasMoveWithEffect(battler, EFFECT_INGRAIN)
+        || HasMoveWithEffect(battler, EFFECT_IVY_SHACKLES);
 }
 
 static enum FieldEffectOutcome BenefitsFromWastelandTerrain(enum BattlerId battler)

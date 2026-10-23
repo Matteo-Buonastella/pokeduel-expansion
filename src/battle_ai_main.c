@@ -2123,6 +2123,16 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
               && gBattleMons[battlerDef].statStages[STAT_SPEED] == MIN_STAT_STAGE)
             ADJUST_SCORE(-10); // Neither half of the move would do anything
         break;
+    case EFFECT_IVY_SHACKLES:
+        if (DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
+            ADJUST_SCORE(-10);
+        else if (gBattleMons[battlerDef].volatiles.root)
+        {
+            if (gBattleMons[battlerDef].statStages[STAT_SPEED] == MIN_STAT_STAGE
+                || !CanLowerStat(battlerAtk, battlerDef, aiData, STAT_SPEED))
+                ADJUST_SCORE(-10); // Fails
+        }
+        break;
     case EFFECT_NIGHTMARE:
         if (gBattleMons[battlerDef].volatiles.nightmare)
             ADJUST_SCORE(-10);
@@ -5083,6 +5093,14 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             AbilityChangeScore(battlerAtk, battlerDef, move, &score, aiData);
         ADJUST_SCORE(IncreaseStatDownScore(battlerAtk, battlerDef, STAT_SPEED));
         break;
+    case EFFECT_IVY_SHACKLES:
+        ADJUST_SCORE(IncreaseStatDownScore(battlerAtk, battlerDef, STAT_SPEED));
+        if (!gBattleMons[battlerDef].volatiles.root
+         && !AI_CanBattlerEscape(battlerDef)
+         && !IsBattlerTrapped(battlerAtk, battlerDef)
+         && ShouldTrap(battlerAtk, battlerDef, move, DONT_CONSIDER_WRAP_DAMAGE))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
     case EFFECT_FIENDISH_CHAIN:
         if (CanEffectChangeAbility(battlerAtk, battlerDef, move, aiData))
             AbilityChangeScore(battlerAtk, battlerDef, move, &score, aiData);
@@ -7248,6 +7266,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
     case EFFECT_NO_RETREAT:
     case EFFECT_MEAN_LOOK:
     case EFFECT_FIENDISH_CHAIN:
+    case EFFECT_IVY_SHACKLES:
         ADJUST_SCORE(AWFUL_EFFECT);
         break;
 

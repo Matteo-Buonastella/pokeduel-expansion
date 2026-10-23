@@ -3096,6 +3096,7 @@ bool32 IsTrappingMove(enum Move move)
     {
     case EFFECT_MEAN_LOOK:
     case EFFECT_FIENDISH_CHAIN:
+    case EFFECT_IVY_SHACKLES:
     case EFFECT_FAIRY_LOCK:
     //case EFFECT_NO_RETREAT:   // TODO
         return TRUE;

@@ -1475,6 +1475,7 @@ bool32 IsWastelandPreventingMove(enum Move move)
     case EFFECT_GROWTH:
     case EFFECT_LEECH_SEED:
     case EFFECT_INGRAIN:
+    case EFFECT_IVY_SHACKLES:
         return TRUE;
     default:
         return FALSE;
