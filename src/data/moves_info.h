@@ -25078,6 +25078,34 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .mirrorMoveBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_Teleport,
     },
+
+    [MOVE_RED_EYES_BURN] =
+    {
+        .name = COMPOUND_STRING("Red Eyes Burn"),
+        .description = COMPOUND_STRING(
+            "Deal massive damage\n"
+            "to the foe, burning\n"
+            "them in the process.\n"
+            "The user takes 100%\n"
+            "of the damage as\n"
+            "recoil."),
+        .effect = EFFECT_RECOIL,
+        .power = 120,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .recoilPercentage = 100 },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 100,
+        }),
+        //Move Categories
+        .thawsUser = TRUE,
+        .battleAnimScript = gBattleAnimMove_DoubleEdge,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
