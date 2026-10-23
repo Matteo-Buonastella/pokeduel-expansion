@@ -25364,6 +25364,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .mirrorMoveBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_ClangorousSoul,
     },
+
+    [MOVE_ORDER_TO_SMASH] =
+    {
+        .name = COMPOUND_STRING("Order to Smash"),
+        .description = COMPOUND_STRING(
+            "Force a token to\n"
+            "blindly attack the\n"
+            "foe, smashing any\n"
+            "screens or held item\n"
+            "that the target is\n"
+            "holding."),
+        .effect = EFFECT_ORDER_TO_SMASH,
+        .power = 75,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BREAK_SCREEN,
+            .preAttackEffect = TRUE,
+        }),
+        .battleAnimScript = gBattleAnimMove_KnockOff,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

@@ -322,6 +322,7 @@ enum  BattleMoveEffects
     EFFECT_RECKLESS_GREED, // Stat change move (argument via additionalEffects), but the user must recharge on the next turn
     EFFECT_CUP_OF_ACE, // Coin toss: raises either the user's or the target's Sp. Atk by 2 stages (50/50)
     EFFECT_BAD_REACTION_TO_SIMOCHI, // 5-turn field effect: draining moves hurt instead of heal, like Liquid Ooze (stacks with it)
+    EFFECT_ORDER_TO_SMASH, // Knocks off the target's item like Knock Off, but without the power boost. Screen breaking is via MOVE_EFFECT_BREAK_SCREEN
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

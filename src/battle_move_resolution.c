@@ -4296,6 +4296,7 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
             }
             break;
         case EFFECT_KNOCK_OFF:
+        case EFFECT_ORDER_TO_SMASH:
             if (gBattleMons[battlerDef].item != ITEM_NONE
              && IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
              && !(B_KNOCK_OFF_REMOVAL >= GEN_5 && side == B_SIDE_PLAYER && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))

@@ -6227,6 +6227,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_KNOCK_OFF:
+    case EFFECT_ORDER_TO_SMASH:
         if (CanKnockOffItem(battlerDef, battlerAtk, aiData->items[battlerDef]))
         {
             switch (aiData->holdEffects[battlerDef])
