@@ -6328,6 +6328,20 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, stat, 1));
                 break;
             }
+            case MOVE_EFFECT_ADD_DRAGON_TYPE:
+                if (IS_BATTLER_OF_TYPE(battlerAtk, TYPE_DRAGON) || GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
+                    break;
+                // Dragon is weak to Ice, Dragon and Fairy, but resists Fire, Water, Grass and Electric
+                if (HasDamagingMoveOfType(battlerDef, TYPE_ICE)
+                 || HasDamagingMoveOfType(battlerDef, TYPE_DRAGON)
+                 || HasDamagingMoveOfType(battlerDef, TYPE_FAIRY))
+                    break;
+                if (HasDamagingMoveOfType(battlerDef, TYPE_FIRE)
+                 || HasDamagingMoveOfType(battlerDef, TYPE_WATER)
+                 || HasDamagingMoveOfType(battlerDef, TYPE_GRASS)
+                 || HasDamagingMoveOfType(battlerDef, TYPE_ELECTRIC))
+                    ADJUST_SCORE(WEAK_EFFECT);
+                break;
             default:
                 break;
             }

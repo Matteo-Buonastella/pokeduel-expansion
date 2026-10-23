@@ -25253,6 +25253,45 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .mirrorMoveBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_ClangorousSoul,
     },
+
+    [MOVE_DRAGONIC_ATTACK] =
+    {
+        .name = COMPOUND_STRING("Dragonic Attack"),
+        .description = COMPOUND_STRING(
+            "The Warrior that uses\n"
+            "this move has its\n"
+            "Attack and Defense\n"
+            "raised. The Dragon\n"
+            "type is also added\n"
+            "to the user."),
+        .effect = EFFECT_HIT,
+        .power = 20,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_PLUS,
+            .attack = 1,
+            .self = TRUE,
+            .chance = 100,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_STAT_PLUS,
+            .defense = 1,
+            .self = TRUE,
+            .chance = 100,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_ADD_DRAGON_TYPE,
+            .self = TRUE,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_PowerUpPunch,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

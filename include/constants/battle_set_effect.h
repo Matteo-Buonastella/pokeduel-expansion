@@ -64,6 +64,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_TAUNT_THIS_TURN, // Taunts the target until the end of the current turn
     MOVE_EFFECT_SUPPRESS_ABILITY, // Suppresses the target's ability like Gastro Acid
     MOVE_EFFECT_PERISH_SONG, // Gives the target a perish count, like Perish Song but only on the target
+    MOVE_EFFECT_ADD_DRAGON_TYPE, // Adds Dragon as a third type, like Trick-or-Treat / Forest's Curse
 
     // Max move effects happen earlier in the execution chain.
     // For example stealth rock from G-Max Stonesurge is set up before abilities but from Stone Axe after.

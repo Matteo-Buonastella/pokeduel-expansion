@@ -443,6 +443,11 @@ BattleScript_MoveEffectPerishSong::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_MoveEffectThirdType::
+	printstring STRINGID_THIRDTYPEADDEDEFFECT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_MoveEffectTauntThisTurn::
 	printstring STRINGID_PKMNFELLFORTAUNT
 	waitmessage B_WAIT_TIME_LONG

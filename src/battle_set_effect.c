@@ -524,6 +524,17 @@ static void HandleSetEffectPerishSong(struct BattleCalcValues *cv, struct SetEff
     }
 }
 
+static void HandleSetEffectAddDragonType(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (!IS_BATTLER_OF_TYPE(se->effectBattler, TYPE_DRAGON) && GetActiveGimmick(se->effectBattler) != GIMMICK_TERA)
+    {
+        gBattleMons[se->effectBattler].types[2] = TYPE_DRAGON;
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_DRAGON);
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectThirdType;
+    }
+}
+
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -1497,6 +1508,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_TAUNT_THIS_TURN] = HandleSetEffectTauntThisTurn,
     [MOVE_EFFECT_SUPPRESS_ABILITY] = HandleSetEffectSuppressAbility,
     [MOVE_EFFECT_PERISH_SONG] = HandleSetEffectPerishSong,
+    [MOVE_EFFECT_ADD_DRAGON_TYPE] = HandleSetEffectAddDragonType,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_SPD_MINUS_1] = HandleSetEffectNone,
