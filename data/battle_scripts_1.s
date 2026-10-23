@@ -1599,6 +1599,10 @@ BattleScript_EffectAbsorbLiquidOoze::
 	jumpifability BS_EFFECT_BATTLER, ABILITY_MAGIC_GUARD, BattleScript_EffectAbsorbRet
 	goto BattleScript_EffectAbsorb
 
+BattleScript_EffectAbsorbBadSimochi::
+	jumpifability BS_EFFECT_BATTLER, ABILITY_MAGIC_GUARD, BattleScript_EffectAbsorbRet
+	goto BattleScript_EffectAbsorb
+
 BattleScript_EffectAbsorb::
 	healthbarupdate BS_EFFECT_BATTLER
 	datahpupdate BS_EFFECT_BATTLER, ASSURANCE_DOUBLE
@@ -3356,6 +3360,12 @@ BattleScript_SafeguardEnds::
 BattleScript_LeechSeedTurnDrainLiquidOoze::
 	call BattleScript_LeechSeedTurnDrain
 	call BattleScript_AbilityPopUp
+	copybyte gEffectBattler, gBattlerAttacker @gEffectBattler is overwritten so general usage not possible
+	jumpifability BS_EFFECT_BATTLER, ABILITY_MAGIC_GUARD, BattleScript_LeechSeedTurnDrainHealBlockRet
+	goto BattleScript_LeechSeedTurnDrainGainHp
+
+BattleScript_LeechSeedTurnDrainBadSimochi::
+	call BattleScript_LeechSeedTurnDrain
 	copybyte gEffectBattler, gBattlerAttacker @gEffectBattler is overwritten so general usage not possible
 	jumpifability BS_EFFECT_BATTLER, ABILITY_MAGIC_GUARD, BattleScript_LeechSeedTurnDrainHealBlockRet
 	goto BattleScript_LeechSeedTurnDrainGainHp
@@ -6782,6 +6792,20 @@ BattleScript_StimPackEndTurn::
 	printstring STRINGID_STIMPACKWEARINGOFF
 	waitmessage B_WAIT_TIME_LONG
 	trystatchanges BS_ATTACKER, STAT_CHANGE_IGNORE_MIRROR_ARMOR
+	return
+
+BattleScript_EffectBadReactionToSimochi::
+	attackcanceler
+	trysetbadreactiontosimochi BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_BADSIMOCHISTARTS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_BadReactionToSimochiEnds::
+	printstring STRINGID_BADSIMOCHIENDS
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_EffectCupOfAce::

@@ -3384,12 +3384,24 @@ static enum MoveEndResult MoveEndAbsorb(struct BattleCalcValues *cv)
             healAmount = GetDrainedBigRootHp(cv->battlerAtk, healAmount);
             gEffectBattler = cv->battlerAtk;
 
-            if (cv->abilities[cv->battlerDef] == ABILITY_LIQUID_OOZE)
+            bool32 liquidOoze = cv->abilities[cv->battlerDef] == ABILITY_LIQUID_OOZE;
+            bool32 badSimochi = gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI;
+
+            if (liquidOoze || badSimochi)
             {
-                SetPassiveDamageAmount(cv->battlerAtk, healAmount);
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_OOZE;
-                gBattlerAbility = gBattleScripting.battler = cv->battlerDef;
-                BattleScriptCall(BattleScript_EffectAbsorbLiquidOoze);
+                // Liquid Ooze and Bad Reaction to Simochi stack
+                SetPassiveDamageAmount(cv->battlerAtk, (liquidOoze && badSimochi) ? healAmount * 2 : healAmount);
+                if (liquidOoze)
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_OOZE;
+                    gBattlerAbility = gBattleScripting.battler = cv->battlerDef;
+                    BattleScriptCall(BattleScript_EffectAbsorbLiquidOoze);
+                }
+                else
+                {
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_BAD_SIMOCHI;
+                    BattleScriptCall(BattleScript_EffectAbsorbBadSimochi);
+                }
                 result = MOVEEND_RESULT_RUN_SCRIPT;
             }
             else if (!IsBattlerAtMaxHp(cv->battlerAtk) || GetConfig(B_ABSORB_MESSAGE) < GEN_5)

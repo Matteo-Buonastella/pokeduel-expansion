@@ -118,13 +118,25 @@ static void HandleSetEffectAbsorb(struct BattleCalcValues *cv, struct SetEffect 
         gEffectBattler = cv->battlerAtk;
         gBattlerAbility = gBattleScripting.battler = cv->battlerDef;
 
-        if (cv->abilities[cv->battlerDef] == ABILITY_LIQUID_OOZE
-         && (GetMoveEffect(cv->move)!= EFFECT_DREAM_EATER || GetConfig(B_DREAM_EATER_LIQUID_OOZE) >= GEN_5))
+        bool32 liquidOoze = cv->abilities[cv->battlerDef] == ABILITY_LIQUID_OOZE
+                         && (GetMoveEffect(cv->move)!= EFFECT_DREAM_EATER || GetConfig(B_DREAM_EATER_LIQUID_OOZE) >= GEN_5);
+        bool32 badSimochi = gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI;
+
+        if (liquidOoze || badSimochi)
         {
-            SetPassiveDamageAmount(cv->battlerAtk, healAmount);
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_OOZE;
+            // Liquid Ooze and Bad Reaction to Simochi stack
+            SetPassiveDamageAmount(cv->battlerAtk, (liquidOoze && badSimochi) ? healAmount * 2 : healAmount);
             BattleScriptPush(se->script);
-            gBattlescriptCurrInstr = BattleScript_EffectAbsorbLiquidOoze;
+            if (liquidOoze)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_OOZE;
+                gBattlescriptCurrInstr = BattleScript_EffectAbsorbLiquidOoze;
+            }
+            else
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_BAD_SIMOCHI;
+                gBattlescriptCurrInstr = BattleScript_EffectAbsorbBadSimochi;
+            }
         }
         else if (!IsBattlerAtMaxHp(cv->battlerAtk) || GetConfig(B_ABSORB_MESSAGE) < GEN_5)
         {

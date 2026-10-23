@@ -321,6 +321,7 @@ enum  BattleMoveEffects
     EFFECT_STIM_PACK, // Raises Attack by 3 stages, then the user's Attack drops by 1 stage at the end of every turn until it leaves the field
     EFFECT_RECKLESS_GREED, // Stat change move (argument via additionalEffects), but the user must recharge on the next turn
     EFFECT_CUP_OF_ACE, // Coin toss: raises either the user's or the target's Sp. Atk by 2 stages (50/50)
+    EFFECT_BAD_REACTION_TO_SIMOCHI, // 5-turn field effect: draining moves hurt instead of heal, like Liquid Ooze (stacks with it)
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

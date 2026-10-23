@@ -526,12 +526,24 @@ static bool32 HandleEndTurnLeechSeed(enum BattlerId battler)
         s32 drainAmount = GetNonDynamaxMaxHP(drainedBattler) / 8;
         s32 healAmount = GetDrainedBigRootHp(receiverBattler, drainAmount);
 
-        if (GetBattlerAbility(drainedBattler) == ABILITY_LIQUID_OOZE)
+        bool32 liquidOoze = GetBattlerAbility(drainedBattler) == ABILITY_LIQUID_OOZE;
+        bool32 badSimochi = gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI;
+
+        if (liquidOoze || badSimochi)
         {
+            // Liquid Ooze and Bad Reaction to Simochi stack
             SetPassiveDamageAmount(drainedBattler, drainAmount);
-            SetPassiveDamageAmount(receiverBattler, healAmount);
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_LEECH_SEED_OOZE;
-            BattleScriptCall(BattleScript_LeechSeedTurnDrainLiquidOoze);
+            SetPassiveDamageAmount(receiverBattler, (liquidOoze && badSimochi) ? healAmount * 2 : healAmount);
+            if (liquidOoze)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_LEECH_SEED_OOZE;
+                BattleScriptCall(BattleScript_LeechSeedTurnDrainLiquidOoze);
+            }
+            else
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_LEECH_SEED_BAD_SIMOCHI;
+                BattleScriptCall(BattleScript_LeechSeedTurnDrainBadSimochi);
+            }
         }
         else if (gBattleMons[receiverBattler].volatiles.healBlockTimer)
         {
@@ -1383,6 +1395,22 @@ static bool32 HandleEndTurnMagicRoom(enum BattlerId battler)
     return effect;
 }
 
+static bool32 HandleEndTurnBadSimochi(enum BattlerId battler)
+{
+    bool32 effect = FALSE;
+
+    gBattleStruct->eventState.endTurn++;
+
+    if (gFieldTimers.badSimochiTimer > 0 && --gFieldTimers.badSimochiTimer == 0)
+    {
+        gFieldStatuses &= ~STATUS_FIELD_BAD_SIMOCHI;
+        BattleScriptCall(BattleScript_BadReactionToSimochiEnds);
+        effect = TRUE;
+    }
+
+    return effect;
+}
+
 static bool32 HandleEndTurnTerrain(enum BattlerId battler)
 {
     gBattleStruct->eventState.endTurn++;
@@ -1737,6 +1765,7 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
     [ENDTURN_MUD_SPORT] = HandleEndTurnMudSport,
     [ENDTURN_WONDER_ROOM] = HandleEndTurnWonderRoom,
     [ENDTURN_MAGIC_ROOM] = HandleEndTurnMagicRoom,
+    [ENDTURN_BAD_SIMOCHI] = HandleEndTurnBadSimochi,
     [ENDTURN_TERRAIN] = HandleEndTurnTerrain,
     [ENDTURN_THIRD_EVENT_BLOCK] = HandleEndTurnThirdEventBlock,
     [ENDTURN_OPPORTUNIST] = HandleEndTurnOpportunist,

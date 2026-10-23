@@ -456,6 +456,7 @@ enum BattleTerrain
 #define STATUS_FIELD_GRAVITY                        (1 << 5)
 #define STATUS_FIELD_ION_DELUGE                     (1 << 6)
 #define STATUS_FIELD_FAIRY_LOCK                     (1 << 7)
+#define STATUS_FIELD_BAD_SIMOCHI                    (1 << 8) // Bad Reaction to Simochi: draining moves hurt instead of heal
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED                 (1 << 0)

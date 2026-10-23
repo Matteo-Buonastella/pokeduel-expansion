@@ -1224,7 +1224,8 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
         }
         break;
     case EFFECT_DREAM_EATER:
-        if (abilityDef == ABILITY_LIQUID_OOZE && GetConfig(B_DREAM_EATER_LIQUID_OOZE) >= GEN_5)
+        if ((abilityDef == ABILITY_LIQUID_OOZE && GetConfig(B_DREAM_EATER_LIQUID_OOZE) >= GEN_5)
+         || gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI)
             return TRUE;
         break;
     case EFFECT_LEVIA_STREAM:
@@ -1241,7 +1242,7 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
             switch (additionalEffect->moveEffect)
             {
             case MOVE_EFFECT_ABSORB:
-                if (abilityDef == ABILITY_LIQUID_OOZE)
+                if (abilityDef == ABILITY_LIQUID_OOZE || gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI)
                     return TRUE;
                 break;
             case MOVE_EFFECT_STAT_PLUS:
@@ -4119,7 +4120,7 @@ bool32 ShouldAbsorb(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum M
     if (gBattleMons[battlerAtk].volatiles.healBlockTimer)
         healAmount = 0;
 
-    if (gAiLogicData->abilities[battlerDef] == ABILITY_LIQUID_OOZE)
+    if (gAiLogicData->abilities[battlerDef] == ABILITY_LIQUID_OOZE || gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI)
         return FALSE;
     if (IsBattlerAtMaxHp(battlerAtk) && (aiIsFaster || GetMoveCategory(GetIncomingMove(battlerAtk, battlerDef, gAiLogicData)) == DAMAGE_CATEGORY_STATUS))
         return FALSE;

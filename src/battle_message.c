@@ -939,6 +939,9 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_SKULLDICEJACKPOT]                     = COMPOUND_STRING("Jackpot hit!"),
     [STRINGID_FLUTEOFDEMPOWERS]                     = COMPOUND_STRING("The Flute of D empowered {B_EFF_NAME_WITH_PREFIX2}!"),
     [STRINGID_TARGETWILLPERISHIN3TURNS]             = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} will faint in three turns!"),
+    [STRINGID_BADSIMOCHISTARTS]                     = COMPOUND_STRING("Draining moves will hurt\ninstead of heal!"),
+    [STRINGID_BADSIMOCHIENDS]                       = COMPOUND_STRING("Bad Reaction to Simochi has worn off!"),
+    [STRINGID_BADSIMOCHIHURT]                       = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} had a bad reaction to Simochi!"),
     [STRINGID_TARGETINGRAINEDBYIVY]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} was ingrained by the ivy shackles!"),
     [STRINGID_STIMPACKWEARINGOFF]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s Stim-Pack is wearing off!"),
     [STRINGID_THIRDTYPEADDEDEFFECT]                 = COMPOUND_STRING("{B_BUFF1} type was added to {B_EFF_NAME_WITH_PREFIX2}!"),
@@ -1165,6 +1168,7 @@ const u16 gLeechSeedStringIds[] =
     [B_MSG_LEECH_SEED_FAIL]  = STRINGID_ITDOESNTAFFECT,
     [B_MSG_LEECH_SEED_DRAIN] = STRINGID_PKMNSAPPEDBYLEECHSEED,
     [B_MSG_LEECH_SEED_OOZE]  = STRINGID_ITSUCKEDLIQUIDOOZE,
+    [B_MSG_LEECH_SEED_BAD_SIMOCHI] = STRINGID_BADSIMOCHIHURT,
 };
 
 const u16 gRestUsedStringIds[] =
@@ -1317,7 +1321,8 @@ const u16 gAttractUsedStringIds[] =
 const u16 gAbsorbDrainStringIds[] =
 {
     [B_MSG_ABSORB]      = STRINGID_PKMNENERGYDRAINED,
-    [B_MSG_ABSORB_OOZE] = STRINGID_ITSUCKEDLIQUIDOOZE
+    [B_MSG_ABSORB_OOZE] = STRINGID_ITSUCKEDLIQUIDOOZE,
+    [B_MSG_ABSORB_BAD_SIMOCHI] = STRINGID_BADSIMOCHIHURT,
 };
 
 const u16 gSportsUsedStringIds[] =

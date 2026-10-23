@@ -1866,6 +1866,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro trysetbadreactiontosimochi failInstr:req
+	callnative BS_TrySetBadReactionToSimochi
+	.4byte \failInstr
+	.endm
+
 	.macro rollskulldice jackpotInstr:req
 	callnative BS_RollSkullDice
 	.4byte \jackpotInstr

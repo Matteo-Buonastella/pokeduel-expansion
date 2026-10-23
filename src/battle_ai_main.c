@@ -1393,6 +1393,28 @@ static s32 GetCardDestructionScore(enum BattlerId battlerAtk)
     return score;
 }
 
+// Whether the battler's side has draining moves, or is currently draining a foe with Leech Seed
+static bool32 SideBenefitsFromDraining(enum BattlerId battler)
+{
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+    {
+        if (!IsBattlerAlive(i))
+            continue;
+
+        if (IsBattlerAlly(battler, i)
+         && (HasMoveWithAdditionalEffect(i, MOVE_EFFECT_ABSORB)
+          || HasMoveWithEffect(i, EFFECT_DREAM_EATER)
+          || HasMoveWithEffect(i, EFFECT_STRENGTH_SAP)
+          || HasMoveWithEffect(i, EFFECT_LEECH_SEED)))
+            return TRUE;
+
+        u32 leechSeedReceiver = gBattleMons[i].volatiles.leechSeed;
+        if (leechSeedReceiver != 0 && IsBattlerAlly(battler, leechSeedReceiver - 1))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 // AI_FLAG_CHECK_BAD_MOVE - decreases move scores
 static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {
@@ -2062,7 +2084,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
          || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS)
          || DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
             ADJUST_SCORE(-10);
-        else if (aiData->abilities[battlerDef] == ABILITY_LIQUID_OOZE)
+        else if (aiData->abilities[battlerDef] == ABILITY_LIQUID_OOZE || gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI)
             ADJUST_SCORE(-3);
         break;
     case EFFECT_DISABLE:
@@ -3117,6 +3139,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     case EFFECT_FAIRY_LOCK:
         if ((gFieldStatuses & STATUS_FIELD_FAIRY_LOCK) || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove))
             ADJUST_SCORE(-10);
+        break;
+    case EFFECT_BAD_REACTION_TO_SIMOCHI:
+        if ((gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI) || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove))
+            ADJUST_SCORE(-10);
+        else if (SideBenefitsFromDraining(battlerAtk) && !SideBenefitsFromDraining(battlerDef))
+            ADJUST_SCORE(-8); // Would only hurt our own side
         break;
     case EFFECT_DO_NOTHING:
     case EFFECT_HOLD_HANDS:
@@ -4751,7 +4779,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         atkStat *= gStatStageRatios[atkStage][0];
         atkStat /= gStatStageRatios[atkStage][1];
         u32 healPercent = atkStat * 100 / gBattleMons[battlerAtk].maxHP;
-        if (ShouldRecover(battlerAtk, battlerDef, move, healPercent))
+        if (!(gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI) && ShouldRecover(battlerAtk, battlerDef, move, healPercent))
         {
             ADJUST_SCORE(GOOD_EFFECT);
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_BIG_ROOT)
@@ -5191,7 +5219,8 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
           || gBattleMons[battlerDef].volatiles.leechSeed
           || HasMoveWithEffect(battlerDef, EFFECT_RAPID_SPIN)
           || aiData->abilities[battlerDef] == ABILITY_LIQUID_OOZE
-          || aiData->abilities[battlerDef] == ABILITY_MAGIC_GUARD)
+          || aiData->abilities[battlerDef] == ABILITY_MAGIC_GUARD
+          || gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI)
             break;
         ADJUST_SCORE(GOOD_EFFECT);
         if (!HasDamagingMove(battlerDef)
@@ -5941,6 +5970,10 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_WONDER_ROOM:
         if ((HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL) && gBattleMons[battlerAtk].defense < gBattleMons[battlerAtk].spDefense)
           || (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL) && gBattleMons[battlerAtk].spDefense < gBattleMons[battlerAtk].defense))
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_BAD_REACTION_TO_SIMOCHI:
+        if (SideBenefitsFromDraining(battlerDef) && !SideBenefitsFromDraining(battlerAtk))
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_GRAVITY:

@@ -25341,6 +25341,29 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_STATUS,
         .battleAnimScript = gBattleAnimMove_ClangorousSoul,
     },
+
+    [MOVE_BAD_REACTION_TO_SIMOCHI] =
+    {
+        .name = COMPOUND_STRING("Bad Simochi"),
+        .description = COMPOUND_STRING(
+            "For 5 turns, Bad\n"
+            "Reaction to Simochi\n"
+            "causes any draining\n"
+            "move to hurt the\n"
+            "user instead of\n"
+            "heal."),
+        .effect = EFFECT_BAD_REACTION_TO_SIMOCHI,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_ClangorousSoul,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

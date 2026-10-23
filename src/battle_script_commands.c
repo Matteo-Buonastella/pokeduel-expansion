@@ -12643,6 +12643,23 @@ void BS_JumpIfFiendishChainFails(void)
         gBattlescriptCurrInstr = cmd->failInstr;
 }
 
+// Bad Reaction to Simochi: 5-turn field effect, fails if already active
+void BS_TrySetBadReactionToSimochi(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (gFieldStatuses & STATUS_FIELD_BAD_SIMOCHI)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gFieldStatuses |= STATUS_FIELD_BAD_SIMOCHI;
+        gFieldTimers.badSimochiTimer = 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
 // Dark Ruler No More only fails if the target's Ability can't be suppressed and its Speed can't be lowered either.
 // Queues the Speed drop: 1 stage, or 2 stages for Dark types
 void BS_TryDarkRulerNoMore(void)
