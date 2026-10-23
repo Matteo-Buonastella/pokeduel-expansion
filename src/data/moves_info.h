@@ -25129,6 +25129,34 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .skyBattleBanned = TRUE,
         .battleAnimScript = gBattleAnimMove_Ingrain,
     },
+
+    [MOVE_YAMI_BLOW] =
+    {
+        .name = COMPOUND_STRING("Yami Blow"),
+        .description = COMPOUND_STRING(
+            "Concentrate the power\n"
+            "of darkness into your\n"
+            "fist and blow the\n"
+            "foe. Power doubled\n"
+            "in Yami terrain."),
+        .effect = EFFECT_TERRAIN_BOOST,
+        .power = 70,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument.terrainBoost = {
+            .terrain = B_TERRAIN_YAMI,
+            .percent = 100,
+            .groundCheck = GROUND_CHECK_NONE, // Yami Terrain ignores grounding
+        },
+        //Move Categories
+        .punchingMove = TRUE,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_MudSlap,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
