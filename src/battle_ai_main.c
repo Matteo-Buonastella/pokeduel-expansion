@@ -2446,6 +2446,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (AI_BattlerAtMaxHp(battlerAtk) && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK))
             ADJUST_SCORE(-10); // Neither half of the move would do anything
         break;
+    case EFFECT_STIM_PACK:
+        if (!BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_ATK))
+            ADJUST_SCORE(-10);
+        else if (!HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
+            ADJUST_SCORE(-8); // Only the Attack drops would matter
+        break;
     case EFFECT_POWER_BOND:
         // The recoil would knock the user out without taking the target down with it
         if (AI_IsDamagedByRecoil(battlerAtk)
@@ -4988,6 +4994,13 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_SPECIAL))
             ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, 1));
         break;
+    case EFFECT_STIM_PACK:
+        // The boost wears off a stage per turn, so it's only worth it to attack right away.
+        // Scored as +2 since the first drop happens at the end of the turn it's used
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL)
+         && !(aiData->shouldSwitch & (1u << battlerAtk)))
+            ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, 2));
+        break;
     case EFFECT_EMERGENCY_PROVISIONS:
         if (ShouldRecover(battlerAtk, battlerDef, move, min(100, 25 * CountPositiveStatStagesTotal(battlerAtk))))
             ADJUST_SCORE(GOOD_EFFECT);
@@ -6744,6 +6757,10 @@ static s32 AI_Risky(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum M
         break;
     case EFFECT_CLANGOROUS_SOUL:
         if (aiData->hpPercents[battlerAtk] >= 70)
+            ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
+        break;
+    case EFFECT_STIM_PACK:
+        if (HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
             ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
         break;
     case EFFECT_MAX_HP_50_RECOIL:

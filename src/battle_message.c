@@ -940,6 +940,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_FLUTEOFDEMPOWERS]                     = COMPOUND_STRING("The Flute of D empowered {B_EFF_NAME_WITH_PREFIX2}!"),
     [STRINGID_TARGETWILLPERISHIN3TURNS]             = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} will faint in three turns!"),
     [STRINGID_TARGETINGRAINEDBYIVY]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} was ingrained by the ivy shackles!"),
+    [STRINGID_STIMPACKWEARINGOFF]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s Stim-Pack is wearing off!"),
 
 };
 

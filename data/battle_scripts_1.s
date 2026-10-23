@@ -6763,6 +6763,22 @@ BattleScript_IvyShacklesSpeed:
 	trystatchanges BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectStimPack::
+	attackcanceler
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, MAX_STAT_STAGE, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	setvolatile BS_ATTACKER, VOLATILE_STIM_PACK
+	queuestatchange BS_ATTACKER, STAT_ATK, 3
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
+BattleScript_StimPackEndTurn::
+	printstring STRINGID_STIMPACKWEARINGOFF
+	waitmessage B_WAIT_TIME_LONG
+	trystatchanges BS_ATTACKER, STAT_CHANGE_IGNORE_MIRROR_ARMOR
+	return
+
 @ Same as BattleScript_RoarSuccessSwitch, then lowers the dragged out monster's Defense
 BattleScript_WindstormSuccessSwitch::
 	call BattleScript_RoarSuccessRet

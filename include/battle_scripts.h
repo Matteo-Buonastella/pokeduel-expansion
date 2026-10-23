@@ -769,6 +769,8 @@ extern const u8 BattleScript_EffectDarkRulerNoMore[];
 extern const u8 BattleScript_EffectMagicFormula[];
 extern const u8 BattleScript_EffectCallOfTheHaunted[];
 extern const u8 BattleScript_EffectIvyShackles[];
+extern const u8 BattleScript_EffectStimPack[];
+extern const u8 BattleScript_StimPackEndTurn[];
 extern const u8 BattleScript_FluteOfDEmpowers[];
 extern const u8 BattleScript_EffectEmergencyProvisions[];
 extern const u8 BattleScript_EffectWarriorReturnAlive[];

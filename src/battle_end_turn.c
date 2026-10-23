@@ -832,6 +832,27 @@ static bool32 HandleEndTurnOctolock(enum BattlerId battler)
     return effect;
 }
 
+// Stim-Pack lowers the user's Attack by 1 stage every turn until it leaves the field
+static bool32 HandleEndTurnStimPack(enum BattlerId battler)
+{
+    bool32 effect = FALSE;
+
+    gBattleStruct->eventState.endTurnBattler++;
+
+    if (gBattleMons[battler].volatiles.stimPack
+     && IsBattlerAlive(battler)
+     && gBattleMons[battler].statStages[STAT_ATK] > MIN_STAT_STAGE)
+    {
+        // Self-inflicted, so abilities like Clear Body don't prevent it
+        gBattlerAttacker = gBattlerTarget = battler;
+        SetStatChange(battler, STAT_ATK, -1);
+        BattleScriptCall(BattleScript_StimPackEndTurn);
+        effect = TRUE;
+    }
+
+    return effect;
+}
+
 static bool32 HandleEndTurnSyrupBomb(enum BattlerId battler)
 {
     bool32 effect = FALSE;
@@ -1696,6 +1717,7 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
     [ENDTURN_SALT_CURE] = HandleEndTurnSaltCure,
     [ENDTURN_OCTOLOCK] = HandleEndTurnOctolock,
     [ENDTURN_SYRUP_BOMB] = HandleEndTurnSyrupBomb,
+    [ENDTURN_STIM_PACK] = HandleEndTurnStimPack,
     [ENDTURN_TAUNT] = HandleEndTurnTaunt,
     [ENDTURN_TORMENT] = HandleEndTurnTorment,
     [ENDTURN_ENCORE] = HandleEndTurnEncore,

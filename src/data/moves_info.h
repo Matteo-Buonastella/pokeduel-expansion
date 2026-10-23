@@ -25190,6 +25190,69 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_ClangorousSoul,
     },
     
+    [MOVE_BEAST_FANGS] =
+    {
+        .name = COMPOUND_STRING("Beast Fangs"),
+        .description = COMPOUND_STRING(
+            "The user bites the\n"
+            "foe. It may also\n"
+            "make the foe flinch,\n"
+            "increase the user's\n"
+            "Atk, and increase\n"
+            "Def (10% each)."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_NORMAL,
+        .accuracy = 95,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_PLUS,
+            .attack = 1,
+            .self = TRUE,
+            .chance = 10,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_STAT_PLUS,
+            .defense = 1,
+            .self = TRUE,
+            .chance = 10,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_FLINCH,
+            .chance = 10,
+        }),
+        //Move Categories
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_FireFang,
+    },
+
+    [MOVE_STIM_PACK] =
+    {
+        .name = COMPOUND_STRING("Stim-Pack"),
+        .description = COMPOUND_STRING(
+            "Take a drink of a\n"
+            "Stim-Pack, drastically\n"
+            "raising your Attack.\n"
+            "At the end of each\n"
+            "turn, your Attack is\n"
+            "lowered by 1 stage."),
+        .effect = EFFECT_STIM_PACK,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 15,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_ClangorousSoul,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
