@@ -25157,6 +25157,39 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .makesContact = TRUE,
         .battleAnimScript = gBattleAnimMove_MudSlap,
     },
+
+    [MOVE_WHITE_ELEPHANTS_GIFT] =
+    {
+        .name = COMPOUND_STRING("Elephants Gift"),
+        .description = COMPOUND_STRING(
+            "The user offers its\n"
+            "bone as a White\n"
+            "Elephants Gift,\n"
+            "lowering its HP by\n"
+            "1/3, but increasing\n"
+            "all of its stats."),
+        .effect = EFFECT_CLANGOROUS_SOUL,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
+            .attack = 1,
+            .defense = 1,
+            .spAtk = 1,
+            .spDef = 1,
+            .speed = 1,
+        }),
+        .battleAnimScript = gBattleAnimMove_ClangorousSoul,
+    },
+    
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
