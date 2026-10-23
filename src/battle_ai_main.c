@@ -2238,6 +2238,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_PARTING_SHOT:
+    case EFFECT_CALL_OF_THE_HAUNTED:
         if (CountUsablePartyMons(battlerAtk) == 0)
             ADJUST_SCORE(-10);
         break;
@@ -5142,6 +5143,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
     case EFFECT_FLUTE_OF_D:
+    case EFFECT_CALL_OF_THE_HAUNTED:
     case EFFECT_WEATHER_AND_SWITCH:
         if (moveEffect == EFFECT_FLUTE_OF_D && CountUsablePartyMons(battlerAtk) == 0)
         {
@@ -7168,6 +7170,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
     case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
     case EFFECT_FLUTE_OF_D:
+    case EFFECT_CALL_OF_THE_HAUNTED:
     case EFFECT_WEATHER_AND_SWITCH:
     case EFFECT_BOLT_BEAK:
     case EFFECT_LIGHT_SCREEN:

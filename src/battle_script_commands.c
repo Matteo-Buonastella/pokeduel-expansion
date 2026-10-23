@@ -12727,3 +12727,29 @@ void BS_TryWarriorReturnAlive(void)
     SetHealAmount(gBattlerAttacker, maxHP / 2);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// Call of the Haunted turns the monster that switched in into a pure Ghost type.
+// If it's already part Ghost, its Defense is raised instead. Does nothing if its type can't be changed
+void BS_TryCallOfTheHaunted(void)
+{
+    NATIVE_ARGS(const u8 *ghostInstr, const u8 *failInstr);
+    enum Ability ability = GetBattlerAbility(gBattlerAttacker);
+
+    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+    {
+        gBattlescriptCurrInstr = cmd->ghostInstr;
+    }
+    else if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA
+          || ability == ABILITY_MULTITYPE
+          || ability == ABILITY_EVERY_TYPE
+          || ability == ABILITY_RKS_SYSTEM)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        SET_BATTLER_TYPE(gBattlerAttacker, TYPE_GHOST);
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_GHOST);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}

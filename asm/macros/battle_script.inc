@@ -1882,6 +1882,12 @@
 	.4byte \failInstr
 	.endm
 
+	.macro trycallofthehaunted ghostInstr:req, failInstr:req
+	callnative BS_TryCallOfTheHaunted
+	.4byte \ghostInstr
+	.4byte \failInstr
+	.endm
+
 	.macro tryentrainment failInstr:req
 	callnative BS_TryEntrainment
 	.4byte \failInstr

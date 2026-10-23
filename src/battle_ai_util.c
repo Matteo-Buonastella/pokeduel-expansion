@@ -3165,6 +3165,7 @@ bool32 IsSwitchOutEffect(enum BattleMoveEffects effect)
     case EFFECT_WRATH_OF_NEOS:
     case EFFECT_PARTING_SHOT:
     case EFFECT_FLUTE_OF_D:
+    case EFFECT_CALL_OF_THE_HAUNTED:
     case EFFECT_BATON_PASS:
     case EFFECT_WEATHER_AND_SWITCH:
     case EFFECT_SHED_TAIL:

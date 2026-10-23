@@ -6718,6 +6718,39 @@ BattleScript_MagicFormulaWorks:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+@ Same as BattleScript_EffectBatonPass, then the switched-in monster becomes a pure Ghost type (+1 Def if it's already part Ghost)
+BattleScript_EffectCallOfTheHaunted::
+	attackcanceler
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
+	jumpifcommanderactive BS_ATTACKER, BattleScript_ButItFailed
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	returntoball BS_ATTACKER, FALSE
+	switchoutabilities BS_ATTACKER
+	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	flushtextbox
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, FALSE, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+	switchinevents
+	jumpifhasnohp BS_ATTACKER, BattleScript_MoveEnd
+	trycallofthehaunted BattleScript_CallOfTheHauntedGhost, BattleScript_MoveEnd
+	printstring STRINGID_PKMNCHANGEDTYPE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_CallOfTheHauntedGhost:
+	queuestatchange BS_ATTACKER, STAT_DEF, 1
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
 @ Same as BattleScript_RoarSuccessSwitch, then lowers the dragged out monster's Defense
 BattleScript_WindstormSuccessSwitch::
 	call BattleScript_RoarSuccessRet

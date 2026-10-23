@@ -25054,6 +25054,30 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboMoves = {0},
         .battleAnimScript = gBattleAnimMove_Obstruct,
     },
+
+    [MOVE_CALL_OF_THE_HAUNTED] =
+    {
+        .name = COMPOUND_STRING("Call OT Haunted"),
+        .description = COMPOUND_STRING(
+            "Call of the Haunted\n"
+            "switches the user\n"
+            "with a party member.\n"
+            "It becomes a Ghost\n"
+            "type. If already a\n"
+            "Ghost, Def is raised."),
+        .effect = EFFECT_CALL_OF_THE_HAUNTED,
+        .power = 0,
+        .type = TYPE_GHOST,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RECOVER_HP },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Teleport,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
