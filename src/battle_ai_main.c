@@ -1847,6 +1847,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         else if (!AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_RECKLESS_GREED:
+        if (!AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_STAT_CHANGE_HALF_HP:
     case EFFECT_BELLY_DRUM:
         if (AI_IsAbilityOnSide(battlerDef, ABILITY_UNAWARE))
@@ -4758,6 +4762,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
     case EFFECT_CLANGOROUS_SOUL:
+        if (HasHPForDamagingSetup(battlerAtk, battlerDef, 33))
+            ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
+        break;
+    case EFFECT_RECKLESS_GREED:
+        // The foe gets a free turn while the user recharges, so it has to be able to take two hits
         if (HasHPForDamagingSetup(battlerAtk, battlerDef, 33))
             ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;

@@ -319,6 +319,7 @@ enum  BattleMoveEffects
     EFFECT_CALL_OF_THE_HAUNTED, // Baton Pass without passing anything. The switched-in mon becomes pure Ghost, or gets +1 Def if already part Ghost
     EFFECT_IVY_SHACKLES, // Ingrains the target and lowers its Speed by 2. Fails only if neither can apply. Fails in Wasteland Terrain
     EFFECT_STIM_PACK, // Raises Attack by 3 stages, then the user's Attack drops by 1 stage at the end of every turn until it leaves the field
+    EFFECT_RECKLESS_GREED, // Stat change move (argument via additionalEffects), but the user must recharge on the next turn
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

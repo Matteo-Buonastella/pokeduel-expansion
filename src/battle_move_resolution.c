@@ -5677,6 +5677,16 @@ static enum MoveResult StatChangeBeforeChange(struct BattleCalcValues *cv)
         PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gBattleMons[cv->battlerAtk].volatiles.stockpileCounter);
         BattleScriptCall(BattleScript_Stockpile);
         return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
+    case EFFECT_RECKLESS_GREED:
+        // Only has to recharge if any stat actually rises
+        if (WillAnyStatChange())
+        {
+            gBattleMons[cv->battlerAtk].volatiles.rechargeTimer = 2;
+            gLockedMoves[cv->battlerAtk] = cv->move;
+            BattleScriptCall(BattleScript_PlayMoveAnim);
+            return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
+        }
+        break;
     case EFFECT_DEFOG:
         if (WillAnyStatChange() || TryDefogClear(gBattlerAttacker, FALSE))
         {

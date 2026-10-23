@@ -25292,6 +25292,35 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .battleAnimScript = gBattleAnimMove_PowerUpPunch,
     },
+
+    [MOVE_RECKLESS_GREED] =
+    {
+        .name = COMPOUND_STRING("Reckless Greed"),
+        .description = COMPOUND_STRING(
+            "The user is greedy,\n"
+            "sharply raising its\n"
+            "Attack and Sp.Attack.\n"
+            "User must recharge\n"
+            "on the next turn."),
+        .effect = EFFECT_RECKLESS_GREED,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_PLUS,
+            .attack = 2,
+            .spAtk = 2,
+        }),
+        .battleAnimScript = gBattleAnimMove_ClangorousSoul,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

@@ -2023,6 +2023,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+    [EFFECT_RECKLESS_GREED] =
+    {
+        .battleScript = BattleScript_EffectStatChange,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
     [EFFECT_STONE_AXE] =
     {
         .battleScript = BattleScript_EffectHit,
