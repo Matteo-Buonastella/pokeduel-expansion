@@ -6378,6 +6378,28 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, stat, stage));
                 }
                 break;
+            case MOVE_EFFECT_RANDOM_STAT_PLUS:
+            {
+                // Only one of the listed stats is raised, so use the average value of the possible boosts
+                s32 totalScore = 0;
+                u32 statCount = 0;
+                for (enum Stat i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+                {
+                    enum Stat stat = sAccurateStatOrder[i];
+                    s32 stage = GetStatStage(stat, additionalEffect);
+
+                    if (stage == 0)
+                        continue;
+
+                    statCount++;
+                    stage = AI_GetAdjustedStatStage(battlerAtk, move, stage);
+                    if (stage > 0)
+                        totalScore += IncreaseStatUpScore(battlerAtk, battlerDef, stat, stage);
+                }
+                if (statCount != 0)
+                    ADJUST_SCORE(totalScore / (s32)statCount);
+                break;
+            }
             case MOVE_EFFECT_ORDER_UP:
             {
                 enum Stat stat = STAT_ATK;

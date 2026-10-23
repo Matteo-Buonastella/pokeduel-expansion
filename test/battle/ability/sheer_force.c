@@ -619,6 +619,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_LUNGE:
         case MOVE_LUSTER_PURGE:
         case MOVE_MAGICAL_TORQUE:
+        case MOVE_MAJESTIC_SLASH:
         case MOVE_MALIGNANT_CHAIN:
         case MOVE_MATCHA_GOTCHA:
         case MOVE_MELTED_ICE:

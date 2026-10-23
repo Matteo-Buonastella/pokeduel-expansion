@@ -25389,6 +25389,37 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .battleAnimScript = gBattleAnimMove_KnockOff,
     },
+
+    [MOVE_MAJESTIC_SLASH] =
+    {
+        .name = COMPOUND_STRING("Majestic Slash"),
+        .description = COMPOUND_STRING(
+            "Slash the foe with\n"
+            "your royal sword.\n"
+            "Afterwards, either\n"
+            "your Attack, Defense\n"
+            "or Speed will raise."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_RANDOM_STAT_PLUS,
+            .self = TRUE,
+            .attack = 1,
+            .defense = 1,
+            .speed = 1,
+            .chance = 100,
+        }),
+        //Move Categories
+        .makesContact = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_KnockOff,
+    },
     
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

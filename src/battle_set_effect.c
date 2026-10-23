@@ -280,6 +280,39 @@ static void HandleSetEffectStatPlusOrMinus(struct BattleCalcValues *cv, struct S
     gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
 }
 
+// Raises one random stat out of the ones listed in the effect (Majestic Slash). Stats that are already maxed are skipped if possible
+static void HandleSetEffectRandomStatPlus(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    enum Stat stats[NUM_BATTLE_STATS];
+    enum Stat raisableStats[NUM_BATTLE_STATS];
+    u32 statCount = 0, raisableCount = 0;
+
+    for (enum Stat i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+    {
+        enum Stat stat = sAccurateStatOrder[i];
+
+        if (GetStatStage(stat, se->additionalEffect) == 0)
+            continue;
+
+        stats[statCount++] = stat;
+        if (gBattleMons[se->effectBattler].statStages[stat] < MAX_STAT_STAGE)
+            raisableStats[raisableCount++] = stat;
+    }
+
+    if (statCount == 0)
+        return;
+
+    enum Stat stat;
+    if (raisableCount != 0)
+        stat = raisableStats[RandomUniform(RNG_RANDOM_STAT_PLUS, 0, raisableCount - 1)];
+    else
+        stat = stats[RandomUniform(RNG_RANDOM_STAT_PLUS, 0, statCount - 1)];
+
+    SetStatChange(se->effectBattler, stat, GetStatStage(stat, se->additionalEffect));
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
+}
+
 static void HandleSetEffectLowerHigherAttack(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     SetStatChange(se->effectBattler, GetHigherAttackingStat(se->effectBattler), -1);
@@ -1520,6 +1553,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_TAUNT_THIS_TURN] = HandleSetEffectTauntThisTurn,
     [MOVE_EFFECT_SUPPRESS_ABILITY] = HandleSetEffectSuppressAbility,
     [MOVE_EFFECT_PERISH_SONG] = HandleSetEffectPerishSong,
+    [MOVE_EFFECT_RANDOM_STAT_PLUS] = HandleSetEffectRandomStatPlus,
     [MOVE_EFFECT_ADD_DRAGON_TYPE] = HandleSetEffectAddDragonType,
     [SECRET_POWER_ATK_MINUS_1] = HandleSetEffectNone,
     [SECRET_POWER_DEF_MINUS_1] = HandleSetEffectNone,
